@@ -1,0 +1,56 @@
+--==[Data file format]==--
+
+WWP data file is used to transfer data from cgi 
+script to special utility which send it to wwp-socket
+
+----------------------------------------
+ 1st str:  target uin-number  (6218895)
+ 2nd str:  from Email	      (AVShutko@mail.khstu.ru)
+ 3rd str:  from Name	      (Regressor)
+ 4th str:  from ip address    (10.10.10.2)
+ 5th+ str: message body	      (texttexttext...)
+----------------------------------------
+
+--==[Packet in wwp-socket format]==--
+
+utility, called webpager get information from cgi script thru 
+data-file, convert it to this format and then send to iserverd 
+wwp-socket
+
+----------------------------------------
+ 09 07 02 01		(signature)
+ xx xx xx xx		(from ip addr)
+ xx xx xx xx		(target uin number)
+ xx xx  		(email length + 1)
+ xx xx .. 00		(email string)
+ xx xx 			(name length + 1)
+ xx xx .. 00		(name string)
+ xx xx 			(message length + 1) 
+ xx xx .. 00 		(message text)
+----------------------------------------
+
+After receiving packet from wwp-socket socket-processor generate 
+special, non-standart v3-packet and send it to IPC pipe. Then 
+it processed by packet-processor.
+
+----------------------------------------
+03 00
+22 06
+00 00
+00 00
+01 00 00 00
+00 00 00 00
+xx xx xx xx		(target uin number)
+xx xx			(name str length + 1)
+xx xx .. 00		(name string)
+xx xx			(email str length + 1)
+xx xx .. 00		(email string)
+xx xx			(message str len + 1)
+xx xx .. 00		(message text)
+----------------------------------------
+
+WWP message path:
+
+user -> http -> cgi-script -> datafile -> 
+     -> webpager -> wwp-sock -> sock-processor -> 
+     -> packet-processor -> client

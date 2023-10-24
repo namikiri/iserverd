@@ -1,0 +1,104 @@
+.\" Process this file with
+.\" groff -mandoc -Tascii iserverd.8 # on GNU/Linux systems
+.\" 
+.\"
+.TH ISERVERD 8 "JANUARY 2001" "User Manuals"
+.Dd JANUARY 2001
+.Dt ISERVERD 8
+.Os "User Manuals"
+.SH NAME
+iserverd \- groupware ICQ server clone.
+.SH SYNOPSIS
+.B iserverd
+.RB [ -oh?V ]
+.RB [ -d
+.IR dbg_name ]
+.RB [ -p
+.IR port ]
+.RB [ -c
+.IR config ]
+.SH DESCRIPTION
+.B iserverd
+is an ICQ-compatible server designed to provide client-to-client messaging
+service to any size of network or any number of clients.  Clients will be
+setup by
+.B iserverd
+to send messages between online "buddies" and will be given the ability to send
+messages to "buddies" who are currently offline for later retrieval.
+
+This program and the author are in no way affiliated with Mirabilis (AOL).
+This program is designed as unix Groupware ICQ server since there is no
+Groupware ICQ server on a unix box. No reverse engineering or decompilation
+of any Mirabilis code took place to make this program.
+
+This is alpha version, so it sometimes work slow and buggy (it worked on yet).
+.Pp
+.br
+.B iserverd
+run as a standalone daemon process.
+.Pp
+.br
+For details on the directives used to configure
+.B iserverd
+and the configuration file in general, refer to the User's Guide accompanying
+the distribution or browse them online at the project website (see
+.I WEBSITE
+below).
+.Pp
+.br
+If you have currently worked ICQGroupwareServer/NT and want to keep your users
+database you can convert it with M$Access to text mode and than convert to
+postgres with
+.BR db_convert (1)
+utility.
+.SH OPTIONS
+.TP
+.B \-o,
+Overwrite log file, don't append
+.TP
+.B \-h, \-?
+Print a usage summary, list of options; exit.
+.TP
+.B \-V,
+Print version
+.TP
+.B \-d <debug logname>
+Set the debug filename
+.TP
+.B \-c <config name>
+Set the config filename
+.TP
+.B \-p <port>
+Listen on the specified port
+.SH FILES
+.PD 0
+.B /etc/iserverd/iserv.conf
+.br
+.B /var/run/iserverd/iserverd.pid
+.br
+.B /var/log/iserverd/debug.log
+.PD
+.SH SIGNALS
+iserverd will catch SIGHUP signal and  reopen  the
+config and log files.
+.SH SEE ALSO
+.BR iserv.conf (5),
+.BR db_convert (1).
+.SH WEBSITE
+The iserverd website should be consulted often and can be found at
+http://iserverd.khstu.ru.
+.SH BUGS
+Should you find any bugs, please report them to the author.
+.SH COPYING
+.Pp
+Copyright (C) 2000-2005 by Alexandr Shutko.
+.Pp
+.br
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted, provided that
+the above copyright notice appear in all copies and that both that copyright
+notice and this permission notice appear in supporting documentation.
+.SH AUTHORS
+Alexandr Shutko <AVShutko@mail.khstu.ru> - program
+.br
+Andy Shevchenko <andy@smile.org.ua> - man page

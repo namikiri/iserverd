@@ -1,0 +1,8 @@
+Registration complete!
+
+Your uin:	%U%
+Your password:	%P%
+
+Remeber or write down 
+this information and keep 
+it secure.

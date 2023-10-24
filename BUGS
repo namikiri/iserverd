@@ -1,0 +1,74 @@
+1. HOW TO MAKE A GOOD BUG REPORT.
+-----------------------------------------------------------
+
+I need some information about your machine to fix bug, 
+you found...
+
+=========>Example:<==========
+
+Machine platform:   i386 (PII-600)
+OS name/version:    FreeBSD 4.3-RC
+Compiler n/v:	    gcc version 2.95.2 19991024 (release)
+IServerd version:   IServerd-1.6.2 (01.12.2000)
+PostgreSQL version: 7.1
+Error type:	    reproduceable
+Short description:  segmentation fault in event-processor
+Trigger:	    after login (or logoff) event processor exit on signal 11
+Fix:		    -
+
+=============================
+
+Also I need your config.cache and config.log files
+If you have changed config file - send it to me 
+(don't forget to remove your passwords - I have too much my own)
+Also you can set loglevel and debuglevel to 200 and send me result log files.
+
+!!! On segmentation fault check for /tmp/isd-crashdump.txt file with additional 
+crash information.
+
+
+2. HOW TO GET INFORMATION FROM CORE
+---------------------------------------------------------
+
+You may also find that a core file appeared in a server root directory 
+This file is the most useful tool for tracking down the bug. But is it 
+usefull only if have compiled iserverd with debug information 
+(./configure ... --with-debug ). To use it you do this:
+
+gdb iserverd core
+
+adding appropriate paths to iserverd and core so gdb can find them. If you
+don't have gdb then try "dbx". Then within the debugger use the
+command "where" to give a stack trace of where the problem
+occurred. Include this in your mail. Also you can try "backtrace" 
+command.
+
+If you known any assembly language then do a "disass" of the routine
+where the problem occurred (if its in a library routine then
+disassemble the routine that called it) and try to work out exactly
+where the problem is by looking at the surrounding code. Even if you
+don't know assembly then incuding this info in the bug report can be
+useful. 
+
+
+3. ATTACHING TO A RUNNING PROCESS
+---------------------------------------------------------
+
+Unfortunately some unixes (in particular some recent linux kernels)
+refuse to dump a core file if the task has changed uid. To debug 
+with this sort of system you could try to attach to the running 
+process using "gdb iserverd PID" where you get PID from
+pid-file. Then use "c" to continue and try to cause the core dump. 
+The debugger should catch the fault and tell you where it occurred.
+Also you can get information about iserverd hung using this technicue.
+
+
+4. PATCHES
+---------------------------------------------------------
+
+The best sort of bug report is one that includes a fix! If you send us
+patches please use "diff -u" format if your version of diff supports
+it, otherwise use "diff -c4". Make sure your do the diff against a
+clean version (make distclean) of the source and let me know exactly 
+what version you used. 
+

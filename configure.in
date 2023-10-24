@@ -1,0 +1,539 @@
+dnl Process this file with autoconf to produce a configure script.
+dnl -------------------------------------------------------------
+AC_INIT(IServerd, 2.5.5-20080609, BUGS on http://sourceforge.net/projects/iserverd)
+AC_PREREQ(2.52)
+AC_CANONICAL_HOST
+AC_UNAME_SYS
+AM_INIT_AUTOMAKE(IServerd, 2.5.5-20080609)
+AC_CONFIG_HEADER(include/config.h) 
+
+MAJOR_VERSION=2
+MINOR_VERSION=5
+PATCH_LEVEL=5-20080609
+
+VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_LEVEL}"
+
+AC_DEFINE_UNQUOTED(Iversion, "$VERSION", [Version number of package.])
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+AC_PROG_YACC
+AC_PROG_LEX
+
+AC_COMPILE_CHECK_SIZEOF(char)
+AC_COMPILE_CHECK_SIZEOF(long)
+AC_COMPILE_CHECK_SIZEOF(unsigned long)
+AC_COMPILE_CHECK_SIZEOF(int)
+AC_COMPILE_CHECK_SIZEOF(unsigned int)
+AC_COMPILE_CHECK_SIZEOF(short)
+AC_COMPILE_CHECK_SIZEOF(unsigned short)
+
+PETI_PATH_SENDMAIL
+
+MKPATH=$PATH:/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin
+AC_PATH_PROG(MKTEMP,mktemp,,$MKPATH)
+
+CFLAGS="$CFLAGS -Iinclude -I/usr/include -I/usr/local/include"
+CPPFLAGS="$CPPFLAGS -Iinclude -I/usr/include -I/usr/local/include"
+LDFLAGS="$LDFLAGS -L/usr/lib -L/usr/local/lib"
+
+dnl Checks for libraries.
+AC_CHECK_LIB(m, main)
+AC_CHECK_LIB(cygipc, semop, [LIBS="$LIBS -lcygipc"])
+AC_CHECK_LIB(epoll, epoll_create, [LIBS="$LIBS -lepoll"])
+
+
+dnl Check for prefix directory
+if test "$prefix" = "NONE"; then
+    prefix=$ac_default_prefix
+    VAR_DIR="/var/run/iserverd"
+    ETC_DIR="/etc/iserverd"
+    BIN_DIR="/usr/bin"
+    SBIN_DIR="/usr/sbin"
+    LOG_DIR="/var/log/iserverd"
+    MAN_DIR="/usr/share/man"
+    SBIN_RULE='$(SBIN_DIR): $(BIN_DIR)'
+    SBIN_ACT='	$(mkinstalldirs) $(SBIN_DIR);'
+else
+    AC_DEFINE([ENABLE_SWITCH], 1, [Check if iserverd can switch into prefix directory])
+    VAR_DIR="$prefix/var"
+    ETC_DIR="$prefix/etc"
+    BIN_DIR="$prefix/bin"
+    SBIN_DIR="$prefix/bin"
+    LOG_DIR="$prefix/log"
+    MAN_DIR="$prefix/man"
+    SBIN_RULE=""
+    SBIN_ACT=""
+fi
+
+dnl ##### Now we should check if user set fixed directories #####
+
+dnl check if user specified ETC directory path
+AC_ARG_WITH(etcdir,
+[  --with-etcdir=DIR     Where to put config files (/etc/$pr_name/)],
+[ case "$withval" in
+  yes|no)
+    AC_MSG_WARN([--with-etcdir called without argument - will use default])
+    ;;
+  * )
+    ETC_DIR="$withval"
+    ;;
+  esac
+]
+)
+
+dnl check if user specified VAR directory path
+AC_ARG_WITH(vardir,
+[  --with-vardir=DIR     Where to put runtime and pid files (/var/run/$pr_name/)],
+[ case "$withval" in
+  yes|no)
+    AC_MSG_WARN([--with-vardir called without argument - will use default])
+    ;;
+  * )
+    VAR_DIR="$withval"
+    ;;
+  esac
+]
+)
+
+dnl check if user specified LOG directory path
+AC_ARG_WITH(logdir,
+[  --with-logdir=DIR     Where to put log files (/var/log/$pr_name/)],
+[ case "$withval" in
+  yes|no)
+    AC_MSG_WARN([--with-logdir called without argument - will use default])
+    ;;
+  * )
+    LOG_DIR="$withval"
+    ;;
+  esac
+]
+)
+
+dnl check if user specified BIN directory path
+AC_ARG_WITH(bindir,
+[  --with-bindir=DIR     Where to put executable files (/usr/bin/)],
+[ case "$withval" in
+  yes|no)
+    AC_MSG_WARN([--with-bindir called without argument - will use default])
+    ;;
+  * )
+    BIN_DIR="$withval"
+    ;;
+  esac
+]
+)
+
+dnl check if user specified SBIN directory path
+AC_ARG_WITH(sbindir,
+[  --with-sbindir=DIR     Where to put daemons files (/usr/bin/)],
+[ case "$withval" in
+  yes|no)
+    AC_MSG_WARN([--with-sbindir called without argument - will use default])
+    ;;
+  * )
+    SBIN_DIR="$withval"
+    ;;
+  esac
+]
+)
+
+
+dnl check if user specified MAN directory path
+AC_ARG_WITH(mandir,
+[  --with-mandir=DIR     Where to put manuals (/usr/share/man)],
+[ case "$withval" in
+  yes|no)
+    AC_MSG_WARN([--with-mandir called without argument - will use default])
+    ;;
+  * )
+    MAN_DIR="$withval"
+    ;;
+  esac
+]
+)
+
+if test "$exec_prefix" = "NONE"; then
+    exec_prefix=$prefix
+fi
+
+SERVROOT="$prefix"
+AC_SUBST(SERVROOT)
+AC_DEFINE_UNQUOTED(SERVER_ROOT, "$prefix", [Server root])
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS(sys/types.h stdio.h stddef.h sys/wait.h)
+AC_CHECK_HEADERS(fcntl.h)
+AC_CHECK_HEADERS(strings.h)
+AC_CHECK_HEADERS(sys/sockio.h)
+AC_CHECK_HEADERS(term.h)
+AC_CHECK_HEADERS(sys/int_types.h)
+AC_CHECK_HEADERS(sys/file.h)
+AC_CHECK_HEADERS(sys/ioctl.h)
+AC_CHECK_HEADERS(unistd.h)
+AC_CHECK_HEADERS(sys/epoll.h)
+AC_CHECK_HEADERS(sys/event.h)
+AC_CHECK_HEADERS(sys/time.h)
+AC_CHECK_HEADERS(time.h)
+AC_CHECK_HEADERS(sys/pstat.h endian.h)
+AC_CHECK_HEADERS(sys/poll.h poll.h)
+AC_CHECK_HEADERS(sys/fcntl.h sys/stat.h sys/file.h stdarg.h errno.h) 
+AC_CHECK_HEADERS(unistd.h sys/ipc.h sys/sem.h sys/msg.h sys/shm.h)
+AC_CHECK_HEADERS(stdlib.h string.h ctype.h sys/resource.h)
+AC_CHECK_HEADERS(sys/param.h sys/ioctl.h sys/socket.h arpa/inet.h)
+AC_CHECK_HEADERS(netinet/in.h netdb.h sys/un.h syslog.h)
+AC_CHECK_HEADERS(machine/endian.h signal.h)
+AC_CHECK_HEADERS([net/if.h], [], [],
+[
+#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+#if HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#endif
+])
+
+AC_CHECK_LIB(gd, gdImageCreate,
+[
+ AC_CHECK_HEADERS([gd.h],
+ [
+  AC_CHECK_HEADERS([gdfontg.h],
+  [
+   GD_LIBS=" -lgd "
+   AC_SUBST(GD_LIBS)
+   AC_DEFINE([HAVE_GD], 1, [If we have gd.])
+  ])
+ ])
+])
+
+AC_CHECK_LIB(iconv, iconv,
+[
+ AC_CHECK_HEADERS([iconv.h],
+ [
+   LIBS="$LIBS -liconv"
+   AC_DEFINE([HAVE_ICONV], 1, [If we have iconv.])
+ ])
+])
+
+AC_CHECK_FUNCS(atexit)
+if test "$ac_cv_func_atexit" != yes; then
+    AC_CHECK_FUNCS(on_exit)
+    if test "$ac_cv_func_on_exit" != yes; then
+        echo "no capability to register termination functions found."
+    fi
+fi
+
+AC_CHECK_FUNCS(srandomdev)
+if test "$ac_cv_func_srandomdev" = yes; then
+    AC_DEFINE(HAVE_SRANDOMDEV)
+fi
+
+AC_CHECK_FUNCS([vsyslog])
+AC_CHECK_FUNCS([strerror pstat setproctitle mktemp mkstemp])
+AC_CHECK_FUNCS([ualarm sigaction sigprocmask sigaddset])
+AC_CHECK_FUNCS([setsid seteuid setegid setpgid])
+CHECK_BACKTRACE
+
+if test "$ac_cv_check_backtrace" = "yes"; then
+    LIBS="$LIBS -lexecinfo";
+fi
+
+AC_CHECK_FUNCS(fcntl)
+if test "$ac_cv_func_fcntl" != yes; then
+    AC_CHECK_FUNCS(flock)
+    if test "$ac_cv_func_flock" != yes; then
+        AC_CHECK_FUNCS(lockf)
+        if test "$ac_cv_func_lockf" != "yes"; then
+            AC_CHECK_FUNCS(flockfile)
+            if test "$ac_cv_func_flockfile" != "yes"; then
+                echo "No native file locking capabilities found."
+            fi
+        fi
+    fi 
+fi
+
+AC_CHECK_FUNCS(memcpy, AC_DEFINE(HAVE_MEMCPY))
+AC_FUNC_FORK
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_UID_T
+AC_TYPE_SOCKLEN_T
+if test "$ac_cv_type_socklen_t" = no; then
+   AC_RECVFROM_WITH_INT
+fi
+
+ETR_SYSV_IPC
+ETR_STRUCT_SEMUN
+AC_FUNC_SETPGRP
+
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_HEADER_TIME
+AC_STRUCT_TM
+AC_TYPE_SIGNAL
+
+dnl Check for u_int64_t
+AC_CHECK_TYPE(u_int64_t, unsigned long long)
+if test "$ac_cv_type_u_int64_t" = "yes"; then
+   AC_DEFINE([HAVE_TYPE_U_INT64_T], 1, [Have u_int64_t])
+fi
+
+
+
+AC_PATH_PG_INC
+if test "$have_pg_inc" = "no"; then
+    AC_MSG_ERROR([
+
+I can't find the Postgress DB header files.
+
+Install the Postgress C frontend library, or if you have them installed, 
+override this check with the --with-postgresdb argument.
+])
+
+fi
+
+AC_PATH_PG_LIB
+if test "$have_pg_lib" = "yes"; then
+	AC_DEFINE([HAVE_POSTGRESDB], 1, [If we have postgresql libs.])
+    else
+        AC_MSG_ERROR([
+
+I found PostgresDB header files but can't find proper libraries.
+
+Check path for library files - they should be placed in ${postgresdb}/lib 
+directory or in public library directory.
+        ])
+fi
+
+AC_PATH_PG_BIN
+if test "$have_pg_bin" = yes; then
+	AC_DEFINE([HAVE_POSTGRESBIN], 1, [If we have postgresql bins.])
+    else
+        AC_MSG_ERROR([
+
+I found PostgresDB headers and libraries but can't find binaries (psql, 
+createdb, dropdb, dropuser, createuser, pg_dump, pg_passwd, vacuumdb).
+
+Check path for binaries - they should be placed in ${postgresdb}/bin 
+directory or in public binaries directory.
+        ])
+fi
+
+AC_CACHE_CHECK([for PS_STRINGS], [pgac_cv_var_PS_STRINGS],
+[AC_TRY_LINK(
+[#include <machine/vmparam.h>
+#include <sys/exec.h>
+],
+[PS_STRINGS->ps_nargvstr = 1;
+PS_STRINGS->ps_argvstr = "foo";],
+[pgac_cv_var_PS_STRINGS=yes],
+[pgac_cv_var_PS_STRINGS=no])])
+if test "$pgac_cv_var_PS_STRINGS" = yes ; then
+  AC_DEFINE([HAVE_PS_STRINGS], [], [Define if the PS_STRINGS thing exists.])
+fi
+
+AC_CHECK_FUNCS(socket)
+if test $ac_cv_func_socket = no; then
+  # socket is not in the default libraries.  See if it's in some other.
+  for lib in socket inet bsd; do
+    AC_CHECK_LIB($lib, socket, [AC_DEFINE(HAVE_SOCKET)
+      LIBS="$LIBS -l$lib"; break])
+  done
+fi
+
+AC_CHECK_FUNCS(gethostname)
+if test $ac_cv_func_gethostname = no; then
+  # gethostname is not in the default libraries.  See if it's in some other.
+  for lib in socket nsl inet; do
+    AC_CHECK_LIB($lib, gethostname, [AC_DEFINE(HAVE_GETHOSTNAME)
+      LIBS="$LIBS -l$lib"; break])
+  done
+fi
+
+AC_CHECK_FUNCS(gethostbyname)
+if test $ac_cv_func_gethostbyname = no; then
+  # gethostbyname is not in the default libraries.  See if it's in some other.
+  for lib in socket nsl inet; do
+    AC_CHECK_LIB($lib, gethostbyname, [AC_DEFINE(HAVE_GETHOSTBYNAME)
+      LIBS="$LIBS -l$lib"; break])
+  done
+fi
+
+AC_CHECK_FUNCS(gethostbyaddr)
+if test $ac_cv_func_gethostbyaddr = no; then
+  # gethostbyaddr is not in the default libraries.  See if it's in some other.
+  for lib in socket nsl inet; do
+    AC_CHECK_LIB($lib, gethostbyaddr, [AC_DEFINE(HAVE_GETHOSTBYADDR)
+      LIBS="$LIBS -l$lib"; break])
+  done
+fi
+
+AC_CHECK_FUNCS(getprotobyname)
+if test $ac_cv_func_getprotobyname = no; then
+  # getprotobyname is not in the default libraries.  See if it's in some other.
+  for lib in socket nsl inet; do
+    AC_CHECK_LIB($lib, getprotobyname, [AC_DEFINE(HAVE_GETPROTOBYNAME)
+      LIBS="$LIBS -l$lib"; break])
+  done
+fi
+
+AC_CHECK_FUNCS(inet_aton)
+if test $ac_cv_func_inet_aton = no; then
+  # inet_aton is not in the default libraries.  See if it's in some other.
+  for lib in socket nsl inet; do
+    AC_CHECK_LIB($lib, inet_aton, [AC_DEFINE(HAVE_INET_ATON)
+      LIBS="$LIBS -l$lib"; break])
+  done
+fi
+
+dnl Not ready yet....
+dnl AC_NEED_STDINT_H(include/mystdint.h)
+dnl Various enable/disable checks.
+
+AC_MSG_CHECKING(if server should be compiled with debug symbols)
+AC_ARG_WITH(debug,
+  [  --with-debug           enable debug symbols], [
+  if test x$withval = xyes; 
+  then
+        AC_MSG_RESULT(yes)
+	DBG="-g -ggdb3 -Wall"
+	STRIPKEY=""
+	AC_SUBST(DBG)
+	
+  fi ], [
+        AC_MSG_RESULT(no)
+	STRIPKEY="-s"
+])
+
+dnl Priority - kqueue, epoll, poll
+AC_MSG_CHECKING(if user wants poll() support)
+AC_ARG_WITH(poll,
+  [  --with-poll           enable default poll support], [
+  if test x$withval = xyes; 
+  then
+       AC_MSG_RESULT(yes)
+       AC_DEFINE([USE_POLL], 1, [Define to use poll interface])
+	
+  fi ], [
+       AC_MSG_RESULT(no)
+
+       AC_MSG_CHECKING(if user wants kqueue support)
+       AC_ARG_WITH(kqueue,
+          [  --with-kqueue           enable kqueue support], [
+          if test x$withval = xyes;
+          then
+                AC_MSG_RESULT(yes)
+                AC_CHECK_FUNCS(kqueue)
+
+                if test "$ac_cv_func_kqueue" = "yes" ; then
+                   AC_CHECK_FUNCS(kevent, [ kqueue_func="yes" ], )
+                   if test "X$kqueue_func" = "X" ; then
+                      AC_MSG_WARN(**** kevent() not found - kqueue support disabled ****)
+                      AC_DEFINE(USE_POLL)
+		   else
+		      AC_DEFINE([USE_KQUEUE], 1, [Define to use kqueue interface])
+                   fi
+		else
+                   AC_MSG_WARN(**** kqueue() not found - kqueue support disabled ****)
+                   AC_DEFINE(USE_POLL)
+                fi
+		
+          fi ], [
+                AC_MSG_RESULT(no)
+
+                AC_MSG_CHECKING(if user wants epoll support)
+                AC_ARG_WITH(epoll,
+                  [  --with-epoll           enable epoll support], [
+                  if test x$withval = xyes;
+                  then
+                        AC_MSG_RESULT(yes)
+
+                        dnl Check for the Linux epoll interface; epoll* may be available in libc
+                        dnl but return ENOSYS on a pre-2.6 kernel, so do a run-time check.
+                        AC_CACHE_CHECK([for working epoll_create() function], [apr_cv_epoll],
+                        [AC_TRY_RUN([
+#ifdef HAVE_STDINT_H
+#include <stdint.h>
+#endif
+
+#ifdef HAVE_STDDEF_H
+#include <stddef.h>
+#endif
+
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+#ifdef HAVE_SYS_EPOLL_H
+#include <sys/epoll.h>
+#endif
+
+int main() { return epoll_create(5) == -1; }
+
+                        ], [apr_cv_epoll=yes], [apr_cv_epoll=no], [apr_cv_epoll=no])])
+
+                        if test "$apr_cv_epoll" = "yes"; then
+                           AC_DEFINE([HAVE_EPOLL], 1, [Define if the epoll interface is supported])
+			   AC_DEFINE([USE_EPOLL], 1, [Define to use epoll interface])
+			else
+			   AC_MSG_WARN(**** epoll_create() not found - epoll support disabled ****)
+			   AC_DEFINE(USE_POLL)
+                        fi
+                        
+                  fi ], [
+                        AC_MSG_RESULT(no)
+			
+			dnl This currently enabled by default 
+   		        AC_DEFINE(USE_POLL)
+                ])
+        ])
+
+])
+
+														
+
+AC_NEED_STDINT_H(include/mystdint.h)
+PETI_ENABLED_DYNAMIC_LINKING
+
+AC_SUBST(VAR_DIR)
+AC_SUBST(ETC_DIR)
+AC_SUBST(BIN_DIR)
+AC_SUBST(LOG_DIR)
+AC_SUBST(MAN_DIR)
+AC_SUBST(SBIN_DIR)
+AC_SUBST(STRIPKEY)
+AC_SUBST(SBIN_RULE)
+AC_SUBST(SBIN_ACT)
+
+SYS_MKTMP="yes"
+
+if test x$MKTEMP = x ; then 
+   MKTEMP="$BIN_DIR/mktemp"
+   SYS_MKTMP="no"
+   AC_MSG_WARN([I can't find mktemp utility, i'll use my own mktemp...])
+fi
+
+AC_SUBST(SYS_MKTMP)
+
+dnl Now we can setup Makefiles and scripts with includes
+AC_OUTPUT(Makefile data/Makefile script/Makefile 
+          IServerd.spec
+	  script/icquser script/db_manage.sh include/defaults.h
+	  script/iserverd.sh script/iserverd.sh.asp 
+	  script/post_mess.cgi man/Makefile 
+	  script/convert_db.sh
+	  data/etc/iserv.conf.default 
+	  data/etc/v3_proto.conf.default 
+	  data/etc/v5_proto.conf.default
+	  data/etc/v7_proto.conf.default
+	  data/etc/actions.conf.default)
+

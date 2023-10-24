@@ -1,0 +1,74 @@
+# This is a sample actions config file. 
+
+# -[ System variables ]-------------------------------------
+
+# mail by sendmail program (slow but it does aliasing)
+var MAIL_PROGRAM	"/usr/lib/sendmail -FIServerd -odi -oem -oi -t";
+
+# mail by mail program (very fast but lack aliasing)
+#var MAIL_PROGRAM	"/bin/mail";
+
+var ENABLE_DB_LOOKUPS	 True;
+var MSG_SENDER_UIN	 1001;
+
+# ----------------------------------------------------------
+
+# first of all we should declare necessary variables
+var ADMIN_EMAIL    "AVShutko@mail.khstu.ru";
+var ONLINE_PROG    "/usr/local/bin/ipfw_online.sh";
+var OFFLINE_PROG   "/usr/local/bin/ipfw_offline.sh";
+var REG_PROGRAM    "/usr/local/bin/reg_sendsms.sh";
+var main_log	   "/var/log/icq.log";
+var ADMIN_UIN       6218895;
+var ADMIN_UIN_LIST [6218895, 6213949, 1024];
+var INTRUDERS      [1029-1031,12318,1234,6213949,6251723];
+
+# if user moved online IServerd will execute this rules list
+event Online {
+
+    # i want to know when this user move online
+    for 6213949 message to $ADMIN_UIN using "/etc/iserverd/texts/mess.ptt";
+    for 1001 msg @ADMIN_UIN_LIST using "/etc/iserverd/texts/mess.ptt";
+    for [1012-1017] log to "/var/log/iserverd/1012-1017.log";
+    for [1012-1017] stop;
+    for 1623929 mail to $ADMIN_EMAIL using "/etc/iserverd/texts/mess.ptt";
+    for [1002,1004-1010, 6252137] message to 1001 using "/etc/iserverd/texts/mess.ptt";
+    for @INTRUDERS mail to $ADMIN_EMAIL using "/etc/iserverd/texts/intrude.ptt";
+    for any run $ONLINE_PROG;
+    log $main_log;
+
+};
+
+# for "user moved offline" event
+event Offline {
+
+    for [1012-1017] log "/var/log/iserverd/1012-1017.log";
+    for [1012-1017] stop;
+    for any run $OFFLINE_PROG;
+};
+
+# if you want to track info changing for any user
+event SaveBasicInfo {
+
+    for [6213949,$ADMIN_UIN,1017,1023-1110] stop;
+    for any log to "/var/log/iserverd/info_change.log";
+
+};
+
+# I'm using this to gather statistic information
+event Search {
+
+    for any log to "/var/log/iserverd/search_use.log";
+
+};
+
+include "astatus.conf";
+
+# and of course we need notification on new register_requests
+event Registration {
+
+    message to $ADMIN_UIN "/etc/iserverd/texts/reg_mess.ptt";
+    mail to $ADMIN_EMAIL using "/etc/iserverd/texts/reg_mess.ptt";
+    run $REG_PROGRAM;
+    
+};

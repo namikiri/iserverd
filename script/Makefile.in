@@ -1,0 +1,100 @@
+
+prefix	 = $(DESTDIR)@prefix@
+SERVROOT = $(DESTDIR)@SERVROOT@
+BIN_DIR  = $(DESTDIR)@BIN_DIR@
+ETC_DIR  = $(DESTDIR)@ETC_DIR@
+SHELL = /bin/sh
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+mkinstalldirs = $(SHELL) ../mkinstalldirs
+
+BIN_SCRIPT  =  db_manage.sh \
+	       convert_db.sh \
+	       post_mess.cgi
+
+DB_SCRIPT   =  icquser
+DB_SUPP     =  icquser.sql
+
+ALL_SCRIPT  =  iserverd.sh \
+	       iserverd.sh.asp 
+
+all: 
+	@echo "Nothing to do in scripts"
+
+clean:
+	@echo "Cleaning in scripts"
+
+distclean: 
+	@list='$(ALL_SCRIPT)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "Deleting script $$p"; \
+	    rm -rf $$p ; \
+	  else :; fi ; \
+	done
+	@list='$(BIN_SCRIPT)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "Deleting script $$p"; \
+	    rm -rf $$p ; \
+	  else :; fi ; \
+	done
+	@list='$(DB_SCRIPT)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "Deleting script $$p"; \
+	    rm -rf $$p ; \
+	  else :; fi ; \
+	done
+	@echo "Deleting Makefile"; rm -rf Makefile
+
+install: 
+	@list='$(ALL_SCRIPT)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_SCRIPT) $$p $(ETC_DIR)/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_SCRIPT) $$p $(ETC_DIR)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+	$(mkinstalldirs) $(BIN_DIR);
+	@list='$(BIN_SCRIPT)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_SCRIPT) $$p $(BIN_DIR)/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_SCRIPT) $$p $(BIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+	$(mkinstalldirs) $(ETC_DIR)/db;
+	@list='$(DB_SCRIPT)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_SCRIPT) $$p $(ETC_DIR)/db/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_SCRIPT) $$p $(ETC_DIR)/db/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+	@list='$(DB_SUPP)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_DATA) $$p $(ETC_DIR)/db/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_DATA) $$p $(ETC_DIR)/db/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall:
+	@list='$(ALL_SCRIPT)'; for p in $$list; do \
+	  rm -f $(ETC_DIR)/`echo $$p|sed '$(transform)'`; \
+	  echo "  rm -f $(ETC_DIR)/$$p"; \
+	done;
+	@list='$(BIN_SCRIPT)'; for p in $$list; do \
+	  rm -f $(BIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	  echo "  rm -f $(BIN_DIR)/$$p"; \
+	done;
+	@list='$(DB_SUPP)'; for p in $$list; do \
+	  rm -f $(ETC_DIR)/db/`echo $$p|sed '$(transform)'`; \
+	  echo "  rm -f $(ETC_DIR)/db/$$p"; \
+	done;
+	@list='$(DB_SCRIPT)'; for p in $$list; do \
+	  rm -f $(ETC_DIR)/db/`echo $$p|sed '$(transform)'`; \
+	  echo "  rm -f $(ETC_DIR)/db/$$p"; \
+	done;
+	 rm -df $(ETC_DIR)/db;
+	 rm -df $(ETC_DIR);
+

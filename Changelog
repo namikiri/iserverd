@@ -1,0 +1,257 @@
+---Version 2.5.X-svn-------------------------------------
+
++  Added handler for snac(17,0C)/snac(17,0D)
++  Fixed "big dead accounts" bug
++  Added martial field in info
++  Fixed Miranda's secure MD5 login
+
+---Version 2.5.5-----------------------------------------
+
++  Added reliable pipe_send_pack() to eluminate drops
++  Fixed typo bug in config parser ("V7 enable ssi import")
++  Named pipes replaced by unnamed socketpair()
++  Fixed infinity lock in pipe_receive_pack function
++  Fixed bug in kqueue code
++  Added handler for snac(02,05)/snac(02,15)
++  Added workaround for QIP Search_By_UIN_Request
+-  Watchdog commented out because of bugs :(
+
+---Version 2.5.1-----------------------------------------
+
+*  Fixed multiple you_were_added messages bug
++  Added support for AIM profile/away data upload
++  Added new config parameter: "V7 enable ssi import"
+*  Some fixes/changes for you_were_added messages
+*  Fixed possible server hung on overload
+*  Fixed icquser script gender bug
+*  Fixed server contacts loss on 2003 relogin. Again.
+*  Fixed v7 home/work info zip code problem
+*  Fixed v7 filetransfer/direct connection issue
+*  Fixed info saving (workaround for ICQ2003b bug)
++  Linux epoll code now tested and recommended for use
+*  Fixed v7 broadcast messages truncating
++  New config parameter "V7 max ssi avatars = num"
+*  Fixed search "closing socket on send error" problem
+*  Aplied patches from Andy Shevchenko <andriy@asplinux.ru>
+*  Fixed Trillian SecureIM issue
+*  Fixed search bug (appeared at 25.01.2005)
+*  Fixed ICQLite 5-beta search issue
+*  Reduced number of level0 debug printings (only errors now)
+*  Fixed ICQLite/2003+ server-side contact problems
+*  Fixed v7 broadcast messages issue
+*  Fixed ipc variables corruption issue
+*  Added checks to eluminate packet drops
+*  Fixed epoll code hung possible bug
+*  Fixed massive v7 users disconnection bug
+*  Fixed kqueue code bug causing server to hung on heavy load
++  Added support of Linux epoll [experimental]
+*  Fixed empty tcp_version field in v7 online notices
+*  Config option "V5 max msgsize" changed to 450 from 420
++  New config option: "V7 direct V5 connect = True/False"
+*  Fixed "Can't send message because of channel" bug
+*  Fixed BIG_ENDIAN byteorder problem
+*  Fixed actions\run event zombies bug
++  Added support of FreeBSD kqueue [experimental]
+
+===Version 2.4.14========================================
+
+*  Yacc/Lex files now pregenerated to avoid questions
++  ICQ2003b/ICQLite4.1 now hide their banners after login
+*  Fixed SSI missed revision date issue (SIM login problem)
+*  Changed rate-limit options to speed up clients login
++  Added support for ICQ2000+ xml variables (aim_proto.conf)
++  Added system tuning recomendations (README, README.rus)
+*  Fixed channel=1 messages issue
+*  Fixed SSI null revision date bug
++  Removed database reconnect on aborted transaction
+*  'Detect invisible' messages from ISee now ignored
++  Fixed ISee miranda protocol unicode messages bug
++  IServerd now clears online_contacts table on startup
++  New config option: "V7 create default groups = True/False"
++  Ability to create default ssi groups for stupid miranda
+*  Reduced number of object files for utils compilation
+*  Linux hung fixed (look for PIPE_SEND_PACK errors in log)
++  New config option - "Max tcp connections"
++  Server_status utility now prints num of connected users
+*  Much optimizations to reduce cpu load
+*  Fixed system broadcast message permission check
+*  Fixed usage print for utilities
++  Added utility to disconnect any connected user
+*  Fixed close_connection function bug 
+*  Fixed SIM 0.9.3 login failed issue
+*  Fixed v7 flap sequence bug
+*  Fixed v7 auth cookie bug (garbage in last bytes)
+-  IControl & tvision removed from source tree
++  Added broadcast utility [ icontrol function ]
++  Added server_status utility [ icontrol function ]
+*  Changed wwp "Sender IP:" string because of miranda plugin
++  Added autosubsts for default actions.conf file
+*  Fixed high socket processor load on broken connections
+*  Fixed search by uin/wp by uin issue
+*  Fixed "enum ExecStatusType" compile bug in error_db.cpp
+*  Fixed Channel 4 message bug (for system messages)
+
+===Version 2.4.11========================================
+
+*  Applied some patches i got in my mailbox:
+   + Added new-style search by uin ability - tlv(0x136)
+   * Some database queries improovements
+   * Database error handling improovements
+   * Fixed bison-1875 compile bug
+   * Some fixes in db_convert migration tool code 
++  Preparations to replace UDS by shared memory
++  Action processing message/mail/run rules ready
+*  Changes in actions.conf format: added "stop" keyword
+*  Changes in actions.conf format: added system variables
+*  Changes in actions.conf format: target uin ranges removed
+
+===Version 2.4.10========================================
+
+*  Fixed several server side information bugs
++  Added processing of SecureID reply (for test)
+
+===Version 2.4.9=========================================
+
+*  Fixed info saving security problems in V5 code
+*  Fixed idle time issue (thanks to Ryczard Haase)
+*  Fixed FreeBSD 5 bugs (thanks to Alexander Cherevko)
+*  Fixed icq2k info saving issue (garbage in fields)
+*  Fixed trillian SecureIM issue (who said again ? :)
+*  Fixed miranda dropped messages issue
++  Added handler for new ICQLite saveinfo request (0x0C3A)
+*  Fixed ssi authorization. Now it work with old clients
+*  Disabled presense notices for non-authorized contacts
+*  Added check if MTN is supported by ICQ client
+*  Fixed ICQLite message confirming problem
++  Added full support of SSI (now it is enabled by default)
+*  Fixed bug in selfinfo reply (ICQLite connection issue)
++  Added mini typing notifications (MTN) support
++  Added table "users_perms" to keep SSI authorizations
+*  Online_contacts format changed (added "rid" field)
+*  Fixed ICQ2003/ICQLite rate limit issue
+*  Fixed gcc 3.2 multistring literals issue
+
+===Version 2.4.8=========================================
+
+*  Added ukrainian recode file UKRAINIAN_WIN [ Andy ]
+*  Applied Andy Shevchenko patch (scripts, makefiles)
+*  Removed ^M symbols from all files.
+*  Large code cleanups to fix -Wall warnings
++  Added SSI storage code
+*  Fixed almost all gcc 3.2 issues
+*  Fixed password decrypting (deroasting) bug
+*  Broadcast DB queries was rewritten (3-27 times faster)
+*  Fixed bug in defragmenter db code (+optimization)
+*  Fixed packet drop detection state restore bug
+
+===Version 2.4.7=========================================
+
+*  Added workaround for miranda you_were_added message
++  Added initial code for SSI service
+*  Optimization: epacket code rewritten from scratch
++  Added handler for service request SNAC(01,04)
++  Added check to allow winaim full login
+*  V7 contact list processing optimizations
+*  Fixed trillian SecureIM issue (type-2 messages)
+*  Perfomance improvements in contact db functions
+*  Fixed v3/v5 user expiration bug
+*  Fixed bug in Realtime online db code
+*  Improved v3/v5 stability on heavy loaded server
+*  Removed delay in v7 registration code (much faster)
+*  Fixed message limitations (full icbm params support)
+*  Fixed type-2 message confirm (miranda issue)
++  Added ability to start without database server
+*  Fixed potencial packet expire problem in epacket
+*  Fixed wwp security bug
+*  Fixed ipc stats bug after processes restart
+*  Fixed v7 status broadcast bug (dc info)
+*  Fixed v5 manual registration (garbage in fields)
+*  Large code & log/debug messages cleanups
+*  Fixed type-4 messages parsing
+*  Fixed bug with v7 type-2 messages parsing (TLV 0x2711)
+*  Fixed bug with v7 type-1 messages parsing (TLV 0x0101)
+*  Fixed bug in TLV memory allocation during parsing
+*  Fixed bug with childs processes restarting
+*  Fixed ps_status cosmetic bug after process restart
+*  Fixed errors in contacts processing causing coredumps
++  Added ability to generate stack backtrace automaticaly
+
+===Version 2.4.6=========================================
+
+*  V7 autoregistration code finished
+*  V7 auth cookie now have size=256 bytes because some 
+   badly written clients (like gaim and kxicq) use hardcoded 
+   cookie length=256 bytes
+*  Fixed coredump bug in epacket processor (shm_iget_user())
+*  Fixed WWP script bug and example html form typo bug
++  Added v7 autoregistration code [not tested yet]
++  Added "v7 registration enabled" parameter
++  Added handler for Oscar md5 authorization (family 0x17)
+*  Fixed V5 msglen check off-by-one bug
+*  Fixed V3/V5/V7 wwp bug
+*  Fixed Watchdog issue
+*  "V7 BOS address" parameter returned [cvs desync bug]
+*  Fixed bug in v7 unregistration code
+*  Fixed motd SNAC bug causing GAIM to hung
+*  Fixed user info SNAC(01,0F) bug
+*  Fixed type-4 messages bug.
++  Added support for V7 type-2 messages thru server
++  Added code for migrations sequence. This is just beginning 
+   of new great scheme :). Also this will helps to create 
+   run-time cluster load-balancing for v7 clients.
+
+===Version 2.4.5R2=======================================
+
+*  Fixed bugs causing IServerd coredump on V3/V5 contacts.
+*  Fixed some of gcc-3.2 issues (not all)
++  Added postgres includes search path "/usr/local/include"
++  Added ./configure flag --without-icontrol
+
+===Version 2.4.5=========================================
+
+*  Changed online_users table format (field shm_index "ishm")
+*  Made a lot of optimizations in v3/v5/oscar code.
+*  Improved v3 protocol security.
+*  Improved v3/v5 protocol support (proxy connections)
+*  Fixed major security bug in v5 code (buffer overflow)
+*  Fixed some small cosmetic bugs in v3/v5 code
+*  Fixed V7 watchdog issue
+*  Fixed bug in defragmentation code
+*  Fixed small sequrity bug in v3/v5 messages code
+*  Fixed V7/V8 keep_alive flaps issue
++  Added config paramter "V7 BOS address" as a temporal solution
+   to allow admin setup BOS server address
++  Added config parameter "V7 direct V3 connect = True|False"
+   to enable or disable direct connection v7 <--> v3 
++  Added code for V7 online messages
++  Added code for V7 login/logoff
++  Added code for V7 status change
++  Added code for V7 info requests
++  Added code for V7 info/pass modification
++  Added config parameter: "V7 max search = number"
++  Added code for V7 search/white pages search
++  Added code for V7 unregister user
++  Finished aim config parser
+
+===Version 2.4.3=========================================
+
++  Added shared memory database to speedup processing
+-  Removed most of online database queries
+*  Server sequence control code moved to epacket processor
+   and all online rowlocks removed
+*  Fixed broadcast messages
+*  Fixed v3 (ICQCorp) client hung
+-  Removed config parameter "Validate-cache timeout" because
+   online cache code was replaced by shared memory db code
+*  Added config parameter "Shared memory size" which also 
+   limit max online users count (IServerd log this number)
+*  Fixed race conditions with pid file. 
+*  Fixed segmentation fault after start on Linux/FreeBSD
+*  Fixed permissions on ipc semaphores
++  Added config parameter "Realtime online db = True/False" 
+   True value mean that user last update time (online_users 
+   table) tracked in realtime mode.
++  Added config parameter "Online db check period = 30". 
+   This mean that IServerd checks online_users table every 30 
+   seconds to ensure that is ok.
+   

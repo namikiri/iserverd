@@ -1,0 +1,39 @@
+/var/log/iserverd/system.log {
+    notifempty
+    missingok
+    create 644 iserverd iserverd
+    compress
+    postrotate
+     /bin/kill -HUP `cat /var/run/iserverd/iserverd.pid
+    endscript
+}
+
+/var/log/iserverd/users.log {
+    notifempty
+    missingok
+    create 644 iserverd iserverd
+    compress
+    postrotate
+     /bin/kill -HUP `cat /var/run/iserverd/iserverd.pid
+    endscript
+}
+
+/var/log/iserverd/alarm.log {
+    notifempty
+    missingok
+    create 644 iserverd iserverd
+    compress
+    postrotate
+     /bin/kill -HUP `cat /var/run/iserverd/iserverd.pid
+    endscript
+}
+
+/var/log/iserverd/debug.log {
+    notifempty
+    missingok
+    create 644 iserverd iserverd
+    compress
+    postrotate
+     /bin/kill -HUP `cat /var/run/iserverd/iserverd.pid
+    endscript
+}

@@ -1,0 +1,43 @@
+This is a html form example - you need only edit server name and path to 
+post_mess.cgi script. You'll need File::MkTemp package for perl to get this 
+script working. This is only example - you can make your own form with 
+input fields: "uin", "name", "email" and control button "send".
+
+----------------------------------------------------------------------------
+<FORM action=http://your.server.name/cgi-bin/post_mess.cgi method=post>
+<table width="490" border="1" cellspacing="1" cellpadding="1" bgcolor="#b1b1b1">
+
+<tr>
+   <td width="50%" height="30" style="PADDING-LEFT: 3px">
+   &nbsp;UIN: &nbsp;&nbsp;&nbsp;<INPUT maxLength=32 name=uin style="HEIGHT: 22px; WIDTH: 150px">
+   </td>      
+   <td height="30" style="PADDING-LEFT: 3px">
+    &nbsp;Status not read
+   </td>
+</tr>
+
+<tr>
+   <td width="50%" height="30" style="PADDING-LEFT: 3px">
+   &nbsp;Name:&nbsp;&nbsp;&nbsp;<INPUT maxLength=32 name=name style="HEIGHT: 22px; WIDTH: 150px">
+   </td>      
+   <td height="30" style="PADDING-LEFT: 3px">
+   &nbsp;E-mail:&nbsp;&nbsp;&nbsp;<INPUT maxLength=32 name=email style="HEIGHT: 22px; WIDTH: 150px">  
+   </td>
+</tr>
+<tr>
+   <td colspan="2" valign="center" align="center">
+   <IMG alt="" border=0 height=2 align="left" src="../Pictures/pol.gif" width=15><textarea name=msg wrap="VIRTUAL" style="HEIGHT: 120px; WIDTH: 425px; font-weight: bold;" value=""></textarea>
+   </td>
+</tr>    
+<tr>
+   <td valign="center" align="right">
+   <input type="submit" name="push" value="Save ">
+   </td>      
+   <td valign="center">
+   <input type="reset" name="reset" value="Clear" width="50">
+   </td>
+</tr>
+</table>
+</form>
+
+----------------------------------------------------------------------------

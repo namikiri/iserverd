@@ -1,0 +1,67 @@
+.\" Process this file with
+.\" groff -mandoc -Tascii v5_proto.conf.5 # on GNU/Linux systems
+.\"
+.TH V5_PROTO.CONF 5 "JANUARY 2001" "User Manuals"
+.Dd JANUARY 2001
+.Dt V5_PROTO.CONF 5
+.Os "User Manuals"
+.SH NAME
+v5_proto.conf \- config files for V5 proto modules.
+.SH DESCRIPTION
+.SS
+.B V5 proto enabled = Yes
+This option disable or enable V5 proto module.
+.SS
+.B V5 max retries = 3
+Maximum number of tries to retransmit packet if it lost.
+Server will try to retransmit packet specified times 
+and then delete it from confirm queue
+.SS
+.B V5 max timeout = 2
+Timeout between retransmit packets. If packet is lost 
+server wait specified time and then resend expired packet 
+.SS
+.B V5 ping time = 165
+Time between keep-alive client packets. This (165) is
+standart value and you should remeber that if you increase 
+this - clone clients will not work - they often don't extract
+ping time from login reply packet
+.SS
+.B V5 max search = 100
+Maximum records for search result. V5 protocol haven't 
+internal limit in search, user can request search by name 
+doesn't containing 'sWERWW@#1' and he possibly receive 
+information about all server users. This search can easily 
+overload slow network (~300Kb/100 found users).
+.SS
+.B V5 max msgsize = 450
+Maximum message size (protocol top limit = 510 bytes).
+.SS
+.B V3 msg split order = backward
+V3 clients can send messages thru server up to 2025 bytes
+but V5 only 450 bytes. So IServerd split V3 message when 
+send it to V5 client. ICQ99 show last message first, 
+centerIcq first message first so you can write here 
+backward split order or forward
+.SH SEE ALSO
+.BR v3_proto.conf (5),
+.BR iserv.conf (5),
+.BR iserverd (8).
+.SH WEBSITE
+The iserverd website should be consulted often and can be found at
+http://iserverd.khstu.ru.
+.SH BUGS
+Should you find any bugs, please report them to the author.
+.SH COPYING
+.Pp
+Copyright (C) 2000-2005 by Alexandr Shutko.
+.Pp
+.br
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted, provided that
+the above copyright notice appear in all copies and that both that copyright
+notice and this permission notice appear in supporting documentation.
+.SH AUTHORS
+Alexandr Shutko <AVShutko@mail.khstu.ru> - program
+.br
+Andy Shevchenko <andy@smile.org.ua> - man page

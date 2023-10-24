@@ -1,0 +1,8 @@
+
+# rules for status changing event 
+event StatusChange {
+
+    for 6213949 with S_OCCUPIED message to 6218895 using "/etc/iserverd/texts/mess.ptt";
+    for any with S_ANY log to "/var/log/iserverd/status_change.log";
+
+};

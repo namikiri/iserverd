@@ -1,0 +1,25 @@
+-----------------------------------------------------------
+ TODO list for IServerd [updated 03.02.2005]
+-----------------------------------------------------------
+
+- Rate limit technology on tcp connections (for V7+ protocols)
+- Implementation of "actions config" file for all events
+  + implementation of actions (log)
+
+- Access control for IServerd
+
+- Links between servers, working on same database
+  + expand online database - add field with server signature 
+  + implement config file with list of neighbour servers
+  + implement TCP channel support (between neighbours)
+  + user status change notifications between neighbours
+
+- Add ability to link global icq server with local
+  + client-side part of protocol for ICQGate future
+  + multiple personal links to AOL server to catch notifications
+  + another system link to AOL server to request info
+  + Access control for IWrapperd
+  + ability to switch between local info and global info for users
+  + new daemon - TCP wrapper from local TCP ports to external
+  + ability for user to disconnect from global network
+  + ability for user to edit global uin and password

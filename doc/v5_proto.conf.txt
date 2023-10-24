@@ -1,0 +1,43 @@
+!==
+!== v5_proto.conf.txt for IServerd snapshot 23 Apr 2001
+!==
+Contributor:	Alexandr V. Shutko <AVShutko@mail.khstu.ru>
+Date:		23 April 2001
+
+Subject:	IServerd config file (for V5 proto module)
+============================================================================
+
+# This option disable or enable V5 proto module.
+V5 proto enabled	= 	Yes
+
+# Maximum number of tries to retransmit packet if it lost.
+# Server will try to retransmit packet specified times 
+# and then delete it from confirm queue
+V5 max retries		= 	3
+
+# Timeout between retransmit packets. If packet is lost 
+# server wait specified time and then resend expired packet 
+V5 max timeout		=	2
+
+# Time between keep-alive client packets. This (165) is
+# standart value and you should remeber that if you increase 
+# this - clone clients will not work - they often don't extract
+# ping time from login reply packet
+V5 ping time		=	165
+
+# Maximum records for search result. V5 protocol haven't 
+# internal limit in search, user can request search by name 
+# doesn't containing 'sWERWW@#1' and he possibly receive 
+# information about all server users. This search can easily 
+# overload slow network (~300Kb/100 found users).
+V5 max search		=	100
+
+# Maximum message size (protocol top limit = 510 bytes).
+V5 max msgsize		=	450
+
+# V3 clients can send messages thru server up to 2025 bytes
+# but V5 only 450 bytes. So IServerd split V3 message when 
+# send it to V5 client. ICQ99 show last message first, 
+# centerIcq first message first so you can select here 
+# backward split order or forward
+V3 msg split order	= backward

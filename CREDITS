@@ -1,0 +1,28 @@
+Credits for IServerd
+=======================
+
+This my favourite file in sources tree :)
+
+First of all I want to thanks Governing an Informatization department of 
+Khabarovsk State Technical Univercity for web hosting and work station(s).
+
+Also I should express thanks to my co-workers for their patience to my 
+incoherent outcries and walking around table during work on IServerd.. :)
+
+Thanks to Dmitry Panov for his immeasurable help with licence, documentation, 
+time zones and other...
+
+Thanks to Alaric Dailey (Destroyer) for his help with databases and Postgres.
+He was the man, who push me to start make this project real :)
+
+Thanks to Samba team for their excellent config parser!
+Thanks to Andy Shevchenko for helping with documentation and linux rpm building.
+Thanks to Maxim Shaposhnikov (Shapa) for his help in porting and moral support
+Thanks to Valentin Nechaev for his help with networking and bugs
+Thanks to Schelstraete Bart for scripting.
+Thanks to Egor Schegolkov for IServerd code improovements
+Thanks to Elias Shtift for oscar protocol module addons
+Thanks to Roman Kuzmenkov for high-load testing & bugreports
+
+Thanks to all men who show (will show) me my mistakes and bugs :)...
+

@@ -1,0 +1,151 @@
+.\" Process this file with
+.\" groff -mandoc -Tascii iserv.conf.5 # on GNU/Linux systems
+.\"
+.TH ISERV.CONF 5 "JULY 2002" "User Manuals"
+.Dd JULY 2002
+.Dt ISERV.CONF 5
+.Os "User Manuals"
+.SH NAME
+iserv.conf \- iserverd config file.
+.SH DESCRIPTION
+.RE
+.Va 1.
+Server parameters.
+.SS
+.B Bind interface = 0.0.0.0/32
+Bind active interface. Server will listen specified port on this address.
+It is important to write here one interface if your server have several 
+ip addresses
+.SS
+.B Bind on all interfaces = Yes
+Tell server to listen on all interfaces/aliases. Use this carefully with v3/v5 protocols because multihomed server sends reply from interface which closest to client. 
+.SS
+.B Listen port = 4000
+Port for listening clients. Default = 4000
+.SS
+.B Pid file path = /var/run/iserverd/iserverd.pid
+.SS
+.B Translate path = /etc/iserverd/translate
+.SS
+.B Var dir path = /var/run/iserverd
+Describe paths for daemon pidfile, translation tables and var directory.
+.SS
+.B Translate table = RUSSIAN_WIN
+Name of translation table, located in 
+.B Translate path.
+.SS
+.B Server mode = daemon
+Server mode. Possible variables: daemon, standalone.
+.SS
+.B Admin email = root@localhost
+Server administartor email address 
+.SS
+.B Min childs = 4
+Minimum limit of child process = number of packet processors - 1
+if one of childs die server and result number of childs become 
+less than this option value server will fork new one
+.SS
+.B Max childs = 100
+Top limit of child processes. When server interprocess pipe overload 
+server fork new packet-processor if result number of processes less than 
+this parameter. In another case it fork special Busy-processor to purge 
+pipe and alert clients that server is too busy...
+.SS
+.B Default ping time = 120
+Time for keep alive between client packets.
+.SS
+.B Depart list version = 1
+Version of the table USERS_DEPS containing list of company departaments.
+V3 Clients keep this number in its databases and request this list from
+server, if this version greater than clients version.
+.SS
+.B Externals number = 0
+Reserved for future use. Used in v3_proto module to alert clients on new
+external programs. 
+.SS
+.B Enable watchdog = Yes
+This option enable software watchdog to detect and kill frozen server 
+child processes. This future doesn't detect socket processor hung.   
+.SS
+.B Watchdog timeout = 10
+Time in seconds for watchdog to detect process hung. If process didn't 
+process at least one packet (if they exist) during this time it will be 
+killed. 
+.SS
+.B Info Password = DEFAULT
+Password for utilities to request info from server. 
+Default value is rejected ;)
+
+.RE
+.Va 2.
+Parameters for database system. 
+.SS
+.B database user = iserverd
+.SS
+.B database password = sicq
+.SS
+.B database addr = 127.0.0.1
+If database addr = unix server will use local Postgres socket
+in /tmp directory
+.SS
+.B database port = 5432
+.SS
+.B users db name = users_db
+Users database name
+
+.RE
+.Va 3.
+Parameters for log/debug system.
+.SS
+.B Maxlog size = 500
+Maximum log size in kilobytes for debug.log
+.SS
+.B Log umask = 022
+.SS
+.B Log level = 50
+.SS
+.B Debug level = 10
+.SS
+.B Timestamp logs = True
+If iserverd should insert time with log records
+.SS
+.B Append logs = False
+If iserverd should append to log afetr restart
+.SS
+.B Log process pid = False
+For syslog records only - to write pid with records
+
+.RE
+.Va 4.
+Config files for Vxx proto modules.
+.SS
+.B Include = /etc/iserverd/v3_proto.conf
+.SS
+.B Include = /etc/iserverd/v5_proto.conf
+Protocols special options configs
+.SH FILES
+.B /etc/iserverd/v3_proto.conf
+.br
+.B /etc/iserverd/v5_proto.conf
+.SH SEE ALSO
+.BR v3_proto.conf (5),
+.BR v5_proto.conf (5),
+.BR iserverd (8).
+.SH WEBSITE
+The iserverd website should be consulted often and can be found at
+http://iserverd.khstu.ru.
+.SH BUGS
+Should you find any bugs, please report them to the author.
+.SH COPYING
+.Pp
+Copyright (C) 2000-2005 by Alexandr Shutko.
+.Pp
+.br
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted, provided that
+the above copyright notice appear in all copies and that both that copyright
+notice and this permission notice appear in supporting documentation.
+.SH AUTHORS
+Alexandr Shutko <AVShutko@mail.khstu.ru> - program
+.br
+Andy Shevchenko <andy@smile.org.ua> - man page

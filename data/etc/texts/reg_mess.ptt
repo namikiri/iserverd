@@ -1,0 +1,25 @@
+subject: New ICQ registration request
+
+Here is parameters for ICQ registration request:
+----------------------------------------------------------------------
+
+* Autoassigned uin:             %uin%
+* Client IP address:            %ips%
+* Username:                     %rfn%
+* Lastname:                     %rln%
+* Nickname:                     %rnn%
+* User email address:           %rem%
+
+ICQ server information:
+----------------------------------------------------------------------
+
+* Server version:               %isv%
+* Operating system:             %osv%
+* Connected users:              %oun%
+* System name:                  %snm%
+* Start time/date:              %sst%
+
+
+With respect - yours ICQ server....
+Server web manager: http://host.domain.org/cgi-bin/isdwm.cgi
+

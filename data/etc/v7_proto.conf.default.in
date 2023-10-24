@@ -1,0 +1,70 @@
+# ---Parameters for AIM/V7 proto module----
+# This configuration is default.
+# There is also one config file for AIM protocol module, 
+# that declares protocol rate-limits, snac groups and etc
+
+Enable AIM port		 =      5190
+V7 proto enabled	 = 	Yes
+V7 connection timeout	 =	20
+V7 cookie timeout	 =	240
+V7 accept concurent	 =	True
+V7 max search		 =	100
+V7 max contact size	 =	600
+V7 max watchers size     =	750
+V7 max visible size      =	200
+V7 max invisible size	 =	200
+
+# Direct connection to v3 is disabled by default
+# because v3 client crashes on contact_list and 
+# file_abort messages, enable this only if you 
+# know what are you doing
+
+V7 direct V3 connect     =      False
+V7 direct V5 connect     =      True
+
+# This is just temp solution to allow iserverd
+# administrator to setup bos server address 
+# returned to client after authorization 
+# IT SHOULD BE REAL ADDRESS OF YOUR SERVER OR V7 WILL NOT WORK
+
+V7 BOS address		 =	127.0.0.1:5190
+V7 proto config		 =	@ETC_DIR@/aim_proto.conf
+
+# WARN: V7 clients doesn't provide enough information 
+# for manual registration, so there is only autoregistration
+# And it is disabled by default
+
+V7 registration enabled  =	No
+
+# Default icbm subsystem parameters for V7 proto
+# Client can change this params via SNAC(04,02)
+
+V7 default max channel   =	2
+V7 default max msgsize	 =	512
+V7 default max sevil	 =	999
+V7 default max revil	 =	999
+V7 default mm interval	 =	0
+
+# Maximum groups in ServerStoredInformation
+V7 max ssi groups	 =	61
+
+# Maximum ingnore records in ServerStoredInformation
+V7 max ssi ignore	 =	128
+
+# Maximum non-icq contacts in ServerStoredInformation
+V7 max ssi non-icq	 =	200
+
+# Create SSI Master/General groups for stupid miranda client
+V7 create default groups =	True
+
+# Avatars not ready yet - service disabled
+V7 max ssi avatars	 =	0
+
+# Enable SSI import mode to upload BLM contacts without authorization
+V7 enable ssi import	 =	True
+
+# Maximum length of AIM mime type/profile
+V7 max profile length	 =	1024
+
+# Default table charset
+V7 table charset	 =	"cp1251"

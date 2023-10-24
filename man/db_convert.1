@@ -1,0 +1,72 @@
+.\" Process this file with
+.\" groff -mandoc -Tascii db_convert.1 # on GNU/Linux systems
+.\"
+.TH DB_CONVERT 1 "JANUARY 2001" "User Manuals"
+.Dd JANUARY 2001
+.Dt DB_CONVERT 1
+.Os "User Manuals"
+.SH NAME
+db_convert \- convert users database from text mode to postgres.
+.SH SYNOPSIS
+.B db_convert
+.RB -d
+.IR db_file
+.RB [ -x
+.IR tblname ]
+.RB [ -p
+.IR prt ]
+.RB [ -u
+.IR user ]
+.RB [ -w
+.IR pass ]
+.SH DESCRIPTION
+I've made utility called
+.B db_convert.
+This program will convert your Micro$oft Access database to Postgress sql
+users database. First of all you'll need export Access database to text file
+with symbol ';' as delimiter. Open ICQSDB.mdb, highlight icqusers_tb table, 
+then select menu file/export. In appeared window choose save as text file after
+that you can copy it on your Unix machine and start converting.
+.Pp
+.br
+.I NOTE:
+Before converting you can choose apropriate translate file from translate
+directory to have databases in native unix codepage...
+.Pp
+.br
+.I WARNING:
+You should run iserverd before convertation at least one time to 
+create all neccessary tables.
+.SH OPTIONS
+.TP
+.B \-x <tblname>
+Locale translate table name
+.TP
+.B \-p <prt>
+Database server port
+.TP
+.B \-u <user>
+Database user name
+.TP
+.B \-w <pass>
+Database user password
+.SH SEE ALSO
+.BR iserverd (8).
+.SH WEBSITE
+The iserverd website should be consulted often and can be found at
+http://iserverd.khstu.ru.
+.SH BUGS
+Should you find any bugs, please report them to the author.
+.SH COPYING
+.Pp
+Copyright (C) 2000-2005 by Alexandr Shutko.
+.Pp
+.br
+Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee is hereby granted, provided that
+the above copyright notice appear in all copies and that both that copyright
+notice and this permission notice appear in supporting documentation.
+.SH AUTHORS
+Alexandr Shutko <AVShutko@mail.khstu.ru> - program
+.br
+Andy Shevchenko <andy@smile.org.ua> - man page

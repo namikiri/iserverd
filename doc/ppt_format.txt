@@ -1,0 +1,39 @@
+Template file .ppt is just a text file with message 
+iserverd should send when event happened. In this message 
+you can use following codes (they will be substituted by 
+real data):
+
+01. %uin%  - user id number (uin)
+02. %ips%  - client ip address
+03. %eec%  - error code (for RDBMS_Err)
+04. %atp%  - action type string
+05. %cst%  - current user status
+06. %nst%  - new user status
+07. %scd%  - search function code
+08. %atm%  - action time string
+09. %ost%  - optional string
+10. %isv%  - iserverd version
+11. %cmp%  - compiler name
+12. %osv%  - operating system and version
+13. %oun%  - number of connected users
+14. %snm%  - system name
+15. %sst%  - time when server was started
+-----------------------------------------------
+16. %dfn%  - firstname string
+17. %dln%  - lastname string
+18. %dnn%  - nickname string
+19. %em1%  - email1
+20. %em2%  - email2
+21. %em3%  - email3
+22. %dbd%  - birth date string
+23. %dcd%  - account creation time string
+24. %dll%  - last login time string
+-----------------------------------------------
+25. %rfn%  - registration firstname string
+26. %rln%  - registration lastname string
+27. %rnn%  - registration nickname string
+28. %rem%  - registration email string
+
+The size of .ppt file after substitution should be less 
+than 10000 bytes for mail and less than 1024 bytes for 
+message or it will be truncated.

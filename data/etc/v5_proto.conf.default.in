@@ -1,0 +1,24 @@
+# ---Parameters for V5 proto module----
+# This configuration is default. You can ajust ping 
+# time to decrease network traffic or to decrease 
+# autologoff time. For heavy loaded server you can 
+# decrease "V5 max search" option. 
+
+V5 proto enabled	= 	Yes
+V5 max retries		= 	5
+V5 max timeout		=	10
+V5 ping time		=	120
+
+# V5 protocol search limit
+V5 max search		=	100
+
+# Max V5 message size (don't increase)
+V5 max msgsize          =       450
+
+# IServerd will split large V3 messages and you can 
+# setup order for splitted messages
+V3 msg split order	= 	backward
+
+# V5 Manual registration works badly because of clients
+V5 registration enabled =	No
+V5 auto registration    =	No

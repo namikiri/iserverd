@@ -1,0 +1,102 @@
+!==
+!== iserv.conf.txt for IServerd snapshot 23 Apr 2001
+!==
+Contributor:	Dmitry A. Panov <redfox@mail.khstu.ru>
+Date:		04 November 2000
+Updated:	23 Apr 2001 by Regressor <AVShutko@mail.khstu.ru>
+
+Subject:	IServerd config file 
+============================================================================
+
+[Globals]
+
+# ------server parameters ----------------------
+
+# Bind active interface. Server will listen specified port on this address.
+# It is important to write here one interface if your server have several 
+# ip addresses
+Bind interface		=	0.0.0.0/32
+
+# Port for listening clients. Default = 4000
+Listen port	 	=	4000
+
+# Paths for daemon pidfile, translation tables and var directory.
+# All paths are relative from server root directory.
+Pid file path		=	var/iserv.pid
+Translate path		=	etc/translate
+Var dir path		=	var/
+
+# Name of translation table, located in [Translate path]. 
+# Translate table	=	RUSSIAN_WIN
+
+# Server mode. Possible variables: daemon, standalone.
+Server mode		=	daemon
+
+# Server administartor email address 
+Admin email		=	root@localhost
+
+# Minimum limit of child process = number of packet processors - 1
+# if one of childs die server and result number of childs become 
+# less than this option value server will fork new one
+Min childs 		= 	4
+
+# Top limit of child processes. When server interprocess pipe overload 
+# server fork new packet-processor if result number of processes less than 
+# this parameter. In another case it fork special Busy-processor to purge 
+# pipe and alert clients that server is too busy...
+Max childs 		=	100
+
+# Time for keep alive between client packets.
+Default ping time	=	120
+
+# Version of the table USERS_DEPS containing list of company departaments.
+# V3 Clients keep this number in its databases and request this list from
+# server, if this version greater than clients version.
+Depart list version	=	1
+
+# Reserved for future use. Used in v3_proto module to alert clients on new
+# external programs. 
+Externals number	=	0
+
+# Password for utils to request info from server. 
+# Default value is rejected ;)
+Info Password		=	DEFAULT
+
+
+# -----parameters for database system ----------
+# If database addr = unix server will use local Postgres socket
+# in /tmp directory
+
+database user		=	iserver
+database password	=	password
+database addr		=	127.0.0.1
+database port		=	5432
+users db name		=	users_db
+
+# scheduler time counters (in seconds)
+vacuumdb timeout	=	1800
+validate-cache timeout  =	43200
+defrag db check period  =	43200
+
+# -----parameters for log/debug system----------
+
+# Maximum log size in kilobytes for debug.log
+Maxlog size		=	500
+Log umask		=	022
+Log level		=	50
+Debug level		=	1
+
+# If iserverd should insert time with log records
+Timestamp logs		=	True
+
+# if iserverd should append to log afetr restart
+Append logs		= 	False
+
+# for syslog records only - to write pid with records
+Log process pid		=	False
+
+# -----Config files for Vxx proto modules--------
+
+# Protocols special options configs
+Include			=	etc/v3_proto.conf
+Include 		=	etc/v5_proto.conf
