@@ -10389,11 +10389,6 @@ _ACEOF
         fi
 
 
-if test "$ac_cv_check_backtrace" = "yes"; then
-    LIBS="$LIBS -lexecinfo";
-fi
-
-
 for ac_func in fcntl
 do
 as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
@@ -12660,6 +12655,8 @@ else
         /usr/local/lib/pgsql \
         /usr/local/pgsql/lib"
 
+      echo $pg_library_dirs
+
       if test "x$PGDIR" != x; then
         pg_library_dirs="$pg_library_dirs $PGDIR/lib"
       fi
@@ -12670,6 +12667,15 @@ else
 
       for pg_dir in $pg_library_dirs; do
         for pg_check_lib in $pg_dir/libpq.a; do
+          if test -r $pg_check_lib; then
+            ac_pg_libraries=$pg_dir
+            break 2
+          fi
+        done
+      done
+
+      for pg_dir in $pg_library_dirs; do
+        for pg_check_lib in $pg_dir/$build_cpu-$build_os/libpq.a; do
           if test -r $pg_check_lib; then
             ac_pg_libraries=$pg_dir
             break 2
@@ -15471,7 +15477,8 @@ $debug ||
 if test -n "$CONFIG_FILES"; then
 
 
-ac_cr=''
+ac_cr='
+'
 ac_cs_awk_cr=`$AWK 'BEGIN { print "a\rb" }' </dev/null 2>/dev/null`
 if test "$ac_cs_awk_cr" = "a${ac_cr}b"; then
   ac_cs_awk_cr='\\r'
