@@ -1,0 +1,283 @@
+#!/bin/sh
+# icquser -- manipulate of icq users database
+# Andy Shevchenko <andy@smile.org.ua>
+# Adjusted by Schelstraete Bart - mailto bart@schelstraete.org
+# 14/04/2001
+##User Configuration
+
+name="`basename $0`"
+tmp="`/usr/bin/mktemp /tmp/sqlXXXXXX`"
+tpl="/etc/iserverd/db/${name}.sql"
+PSQL="/usr/bin/psql"
+
+# Source iserverd configuration.
+DATABASE="users_db"
+if [ -f /etc/sysconfig/iserverd ] ; then
+        . /etc/sysconfig/iserverd
+fi
+users_db="$DATABASE"
+
+##################
+
+if [ -f "$PSQL" ] && [ -x "$PSQL" ]
+	then
+# Program
+# delete user from database
+# del_user <uin> <tmp_file>
+trap 'rm -f $tmp; echo " " ; stty echo ; echo "** Aborting ** " ; exit 1' 15 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+	## Ok, let's look if postgres reponses, and is the users_db exists
+        errmsg=`$PSQL -l $users_db 2>&1`
+        status=$?
+		if [ "$status" = "0" ]
+		then
+			##Everything must work,so go on
+del_user()
+{
+    echo "DELETE FROM Users_Info_Ext WHERE uin=$1" > $2
+delete_user_email1=`$PSQL -q -t -c "SELECT email1 FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+delete_user_first=`$PSQL -q -t -c "SELECT frst FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+delete_user_last=`$PSQL -q -t -c "SELECT last FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+
+	if [ "$delete_user_email1" = "" ] && [ "$delete_user_first" = "" ] && [ "$delete_user_last" = "" ]
+		then
+			echo "****> ERROR, user doesn't seems to exist <****"
+		else
+cat <<EOF
+    -------------------------------------
+    UIN:           $1
+    First name:   $delete_user_first
+    Last name:    $delete_user_last
+    e-mail:       $delete_user_email1
+    --------------------------------------
+EOF
+echo -n "Are you sure you want to delete this user? (y/n) "
+read confirm
+if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]
+	then
+		echo "***> Deleting UIN: $1 <***"
+		$PSQL -q -f "$2" $users_db || echo "*ERROR DELETING $1" && echo "***> Done! <***"
+	else 
+		echo "***> ABORTING <***"
+fi
+    rm -f $2
+	fi
+}
+
+# to_file <type> <value> <file>
+to_file()
+{
+    case $1 in
+	n) echo "$2," >> $3 ;;
+	s) echo "'$2'," >> $3 ;;
+    esac
+}
+
+
+# add user to database
+# add_user <uin> <tmp_file>
+
+add_user()
+{
+uin_already_exists=`$PSQL -q -t -c "SELECT * FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+
+if [ "$uin_already_exists" != "" ]
+		then
+			echo "***> ERROR, UIN $1 already exists <***"
+			rm -f $tmp 2>/dev/null
+		else
+    cat /dev/null > $2
+    echo "INSERT INTO Users_Info_Ext VALUES" >> $2
+    echo "(" >> $2
+	    
+    echo -n "Please, input passwd: " ; stty -echo ; read passwd ; echo " " ; stty echo
+	while [ "$passwd" = "" ]
+		do
+    echo -n "Please, input passwd: " ; stty -echo ; read passwd ; echo " " ; stty echo
+	done
+  echo -n "Please, retype the passwd: " ; stty -echo ; read passwd2 ; echo " " ; stty echo
+	if [ "$passwd" != "$passwd2" ]
+		then
+			echo "****> Sorry, passwords doesn't match!! <****"
+		 	echo " "
+		else	
+    echo -n "Please, input nick: " ; read nick
+	while [ "$nick" = "" ]
+		do   
+		echo -n "Please, input nick: " ; read nick
+	done
+    echo -n "Please, input firstname: " ; read first
+        while [ "$first" = "" ]
+                do   
+		    echo -n "Please, input firstname: " ; read first
+       done
+    echo -n "Please, input lastname: " ; read last
+        while [ "$last" = "" ]
+			do
+		    echo -n "Please, input lastname: " ; read last
+        done
+
+    echo -n "Please, input gender: " ; read gender2
+	while [ "$gender2" != "M" ] && [ "$gender2" != "m" ] && [ "$gender2" != "f" ] && [ "$gender2" != "F" ]
+			do
+			 echo -n "Please, use M(ale) of F(emale):" ; read gender2
+	done
+
+	if [ "$gender2" = "M" ] || [ "$gender2" = "m" ]
+			then
+				gender="2"
+	fi	
+    
+	if [ "$gender2" = "F" ] || [ "$gender2" = "f" ]
+                        then
+                                gender="1"
+
+	fi
+		
+    echo -n "Please, input e-mail: " ; read email1
+    if [ "$email1" = "" ]
+		then
+			email1="unpublished"
+    fi
+    echo -n "*> Processing."
+    cat $tpl | while read x
+    do
+	echo -n "."
+	type=`echo $x | awk '{print $1}'`
+	def=`echo $x | awk '{print $2}'`
+	descr=`echo $x | awk '{print $3}'`
+	case $descr in
+	    uin)	to_file $type $1 $2 ;;
+	    passwd)	to_file $type "$passwd" $2 ;;
+	    nick)	to_file $type "$nick"   $2 ;;
+	    first)	to_file $type "$first"  $2 ;;
+	    last)	to_file $type "$last"   $2 ;;
+	    email1)	to_file $type "$email1" $2 ;;
+	    gender)	to_file $type  $gender  $2 ;;
+	    *)		to_file $type  $def     $2 ;;
+	esac
+    done
+    echo "0" >> $2
+    echo ");" >> $2
+    echo "..Done!"
+    echo -n "*> Creating.."
+    $PSQL -f "$2" $users_db 2>/dev/null 1>/dev/null 
+    echo "...Done!"
+if [ "$email1" != "unpublished" -a "`echo $email1 | tr -d '\@'`" != "$email1" ]
+		then
+    			echo -n "*> Sending confirmation e-mail.."
+    			cat <<EOF | mail -s "Your new ICQ account is created" $email1 
+Hello $first,
+
+We created an ICQ account for you.
+
+Please connect to our server with the following UIN and password:
+               Your UIN     :       $1
+               Your password:       $passwd
+
+Your details:               
+               First name:       $first
+               Last name :       $last
+               Nick name :       $nick
+               Gender    :       $gender
+               E-mail    :       $email1
+
+If there's something wrong, don't hestitate to contact us!
+
+		Your ICQ manager.
+EOF
+		echo "..Done!"
+fi
+    rm -f $2 2>/dev/null
+	fi
+	fi
+}
+
+search_user()
+{
+	echo "***> Searching UIN: $1 <***"
+	
+uin_exist=`$PSQL -q -t -c "SELECT * FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+if [ "$uin_exist" = "" ]
+	then
+		echo "***> UIN $1 doesn't seems to exist <***"
+		rm -f $tmp
+	else
+first_name=`$PSQL -q -t -c "SELECT frst FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+uin_mail=`$PSQL -q -t -c "SELECT email1 FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+uin_last=`$PSQL -q -t -c "SELECT last FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+uin_gender=`$PSQL -q -t -c "SELECT sex FROM Users_Info_Ext WHERE uin=$1" $users_db 2>/dev/null`
+if [ "$uin_gender" != "" ]
+	then
+		uin_gender2=`echo $uin_gender | sed -e 's/ //g'`
+
+			if [ "$uin_gender2" = "1" ]
+				then
+					uin_real_gender="male"
+			elif [ "$uin_gender2" = "0" ]
+				then	
+					uin_real_gender="female"
+			else
+					uin_real_gender="unknown"
+			fi
+	else
+			uin_real_gender="unknown"
+fi
+online=`$PSQL -q -t -c "SELECT * FROM online_users WHERE uin=$1" $users_db 2>/dev/null`
+if [ "$online" = "" ]
+		then
+			online="no"
+		else
+			online="yes"
+fi
+cat <<EOF
+-----------------------------------------
+UIN:             $1
+Online:          $online
+First name:     $first_name
+Last name:      $uin_last
+Gender:	         $uin_real_gender
+e-mail:         $uin_mail
+------------------------------------------	
+EOF
+	fi
+}
+case "$1" in
+    add) shift ; add_user $1 $tmp ;;
+    del) shift ; del_user $1 $tmp ;;
+    search) shift ; search_user $1 $tmp ;;
+    *)	echo "Usage: $name {add|del|search} <UIN> " ;;
+	
+esac							    					    
+	else
+		####Hmmmm......error with postgres?
+
+				echo " "
+				echo "Error!"
+				echo "Possible cause of error:"
+				echo "PostgreSQL isn't running?"
+				echo "Error message:"
+				echo $errmsg
+				echo " "
+				exit 1
+fi
+	else
+		echo "*** ERROR : Cannot run this script "
+		echo "*> Running diagnostics...please wait"
+		if [ -f "$PSQL" ] && [ ! -x "$PSQL" ]
+			then
+				echo " "
+				echo "Possible cause of error:"	
+				echo " - incorrect file permissions on postgres binary"
+				echo " - postgres binary corrupt "
+				echo " "
+		elif [ ! -f "$PSQL" ] 
+			then
+				echo " "
+				echo "Possible cause of error:"
+				echo " - postgres is not installed "
+				echo " - do you have permissions to read/execute the postgres binary?"
+				echo " - did you delete the postgres binary?"
+				echo " - is the path '$PSQL' incorrect?"
+				echo " "
+		fi
+fi

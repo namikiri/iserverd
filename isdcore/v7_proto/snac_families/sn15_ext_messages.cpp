@@ -6582,5 +6582,5 @@ void mr_utf8_set_req(Packet &pack, struct online_user *user,
    {
       mr_send_set_ack(pack, user, snac, req_seq, META_INFO_SET_RESULT, True, 0);
    }
-   test_for_dummies();
+   // test_for_dummies();
 }

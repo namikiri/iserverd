@@ -104,7 +104,7 @@ int v5_send_user_message(struct msg_header &msg_hdr, struct online_user &to_user
       if (lp_v3_split_order() == ORDER_FORWARD)
       {
          /* first of all we should prepare message token    */
-         if (abs(strlen(nmessage) - position) <= lp_v5_max_msgsize())
+         if (abs(static_cast<int>(strlen(nmessage) - position)) <= lp_v5_max_msgsize())
          {
             /* this is the end of main message string */
 	   last_part = strlen(nmessage) - position;
@@ -210,7 +210,7 @@ int v5_send_user_sysmsg(struct msg_header &msg_hdr, struct online_user &to_user,
       if (lp_v3_split_order() == ORDER_FORWARD)
       {
          /* first of all we should prepare message token    */
-         if (abs(strlen(nmessage) - position) <= lp_v5_max_msgsize())
+         if (abs(static_cast<int>(strlen(nmessage) - position)) <= lp_v5_max_msgsize())
          {
             /* this is the end of main message string */
 	   last_part = strlen(nmessage) - position;

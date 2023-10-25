@@ -708,7 +708,7 @@ char *StrnCpy(char *dest,const char *src,size_t n)
 /* terminates. Returns a pointer to the character marker in the source 	  */
 /* string (src).							  */
 /**************************************************************************/
-char *strncpyn(char *dest, const char *src,size_t n, char c)
+char *strncpyn(char *dest, char *src,size_t n, char c)
 {
    char *p;
    size_t str_len;

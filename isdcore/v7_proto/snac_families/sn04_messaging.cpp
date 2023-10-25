@@ -438,7 +438,7 @@ void process_txt_message(Packet &pack, struct snac_header &snac,
       }
 
       /* check for user message rate limit */
-      if (to_user->mopt[MCH1].min_interval > abs(time(NULL) - to_user->mopt[MCH1].last_msg))
+      if (to_user->mopt[MCH1].min_interval > abs(static_cast<int>(time(NULL) - to_user->mopt[MCH1].last_msg)))
       {
          DEBUG(10, ("Error: Ch1 msg (%lu-->%lu) - rate limit hit\n", 
 	            user->uin, to_user->uin));
@@ -582,7 +582,7 @@ void process_adv_message(Packet &pack, struct snac_header &snac,
    }
 
    /* check for user message rate limit */
-   if (to_user->mopt[MCH2].min_interval > abs((time(NULL) - to_user->mopt[MCH2].last_msg)))
+   if (to_user->mopt[MCH2].min_interval > abs(static_cast<int>(time(NULL) - to_user->mopt[MCH2].last_msg)))
    {
       DEBUG(10, ("Can't send type2 (%lu-->%lu) - receiver rate limit\n", 
                  user->uin, to_user->uin));
@@ -766,7 +766,7 @@ void process_sys_message(Packet &pack, struct snac_header &snac,
       }
 
       /* check for user message rate limit */
-      if (to_user->mopt[MCH4].min_interval > abs(time(NULL) - to_user->mopt[MCH4].last_msg))
+      if (to_user->mopt[MCH4].min_interval > abs(static_cast<int>(time(NULL) - to_user->mopt[MCH4].last_msg)))
       {
          send_snac_error(snac.family, ERR_CLI_RATE_LIMIT, snac.id, user);
          return;

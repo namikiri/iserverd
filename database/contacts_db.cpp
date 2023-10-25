@@ -253,7 +253,7 @@ int db_contact_lookup(unsigned long uin, int type, unsigned long **contact)
       *contact = (unsigned long *)malloc(sizeof(unsigned long)*number);
       DEBUG(200, ("Trying to malloc %d bytes for %d records (result: %06X)\n",
                   (sizeof(unsigned long)*number), number, 
-		  (unsigned int)*contact));
+		  (unsigned long)*contact));
 		
       for (int i=0;i<number;i++) (*contact)[i] = atoul(PQgetvalue(res, i, 0));	
 
