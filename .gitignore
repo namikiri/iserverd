@@ -1,0 +1,16 @@
+/bin
+/data/etc/*.default
+/include/config.h
+/include/defaults.h
+/include/mystdint.h
+/script/convert_db.sh
+/script/db_manage.sh
+/script/icquser
+/script/iserverd.sh
+/script/iserverd.sh.asp
+/script/post_mess.cgi
+*.o
+*.so
+config.log
+IServerd.spec
+Makefile
