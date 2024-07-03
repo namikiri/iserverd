@@ -67,7 +67,7 @@ EXAMPLE: ./configure --prefix=/usr/local --with-name=ICQ_Server \
 Before you start db initialization and convertation you should start postgres 
 postmaster. After that go $prefix/bin/. 
 
-postgres>db_manage.sh create users_db 
+postgres>iserver_db_manage.sh create users_db 
 
 and press enter - script will ask you about new user password and will create server 
 database and server database user. IServerd will create all neccessary tables at first 
@@ -75,7 +75,7 @@ run.
 
 If you have currently worked ICQGroupwareServer/NT and want to keep your users 
 database you can convert it with M$Access to text mode and than convert to 
-postgres with bin/db_convert utility.
+postgres with bin/iserver_db_convert utility.
 
 Creating new user:
 In iserverd etc directory you'll find icquser script. With this script you can 
@@ -100,7 +100,7 @@ NOTE:    You can specify apropriate translate file from translate directory
 WARNING: You should run iserverd before convertation at least one time to 
          create all neccessary tables.
 
-Example: ./db_convert -d icqusers_tb.txt -x RUSSIAN_WIN
+Example: ./iserver_db_convert -d icqusers_tb.txt -x RUSSIAN_WIN
 
 
 --------=======AUTO REGISTRATION========--------

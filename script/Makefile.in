@@ -13,11 +13,11 @@ transform = @program_transform_name@
 
 mkinstalldirs = $(SHELL) ../mkinstalldirs
 
-BIN_SCRIPT  =  db_manage.sh \
-	       convert_db.sh \
+BIN_SCRIPT  =  iserver_db_manage.sh \
+	       iserver_convert_db.sh \
 	       post_mess.cgi
 
-DB_SCRIPT   =  icquser
+DB_SCRIPT   =  iserver_icquser
 DB_SUPP     =  icquser.sql
 
 ALL_SCRIPT  =  iserverd.sh \
