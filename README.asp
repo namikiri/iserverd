@@ -17,21 +17,21 @@ postgresql-server.
 
 Создать, удалить, сохранить или восстановить базу можно
 используя скрипт (от postgres) db_manage.sh:
-    /usr/bin/db_manage.sh create <DB_NAME>
-    /usr/bin/db_manage.sh drop <DB_NAME>
-    /usr/bin/db_manage.sh dump <DB_NAME> <TEMPFILE>
-    /usr/bin/db_manage.sh restore <DB_NAME> <TEMPFILE>
+    /usr/bin/iserver_db_manage.sh create <DB_NAME>
+    /usr/bin/iserver_db_manage.sh drop <DB_NAME>
+    /usr/bin/iserver_db_manage.sh dump <DB_NAME> <TEMPFILE>
+    /usr/bin/iserver_db_manage.sh restore <DB_NAME> <TEMPFILE>
 
 Поскольку база поменяла свой формат, необходимо при обновлении пакета 
 обновить и базу (от postgres)
-    /usr/bin/convert_db.sh
+    /usr/bin/iserver_convert_db.sh
 
 Добавить или удалить пользователя (от iserverd):
-   /etc/iserverd/db/icquser add <UIN>
-   /etc/iserverd/db/icquser del <UIN>
+   /etc/iserverd/db/iserver_icquser add <UIN>
+   /etc/iserverd/db/iserver_icquser del <UIN>
 
 Также добавлен поиск пользователя в базе (от iserverd):
-   /etc/iserverd/db/icquser search <UIN>
+   /etc/iserverd/db/iserver_icquser search <UIN>
 
 Andy Shevchenko <andriy@asplinux.ru>
 ASPLinux Developers Team.

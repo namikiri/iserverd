@@ -95,9 +95,9 @@ i386, а под <ver> -- версия программного продукта, например, 1.9.4-1.asp.)
 необходимых полей.
 Далее необходимо завести хотя бы одного пользователя ICQ. Делается это
 следующим образом (необходимо следовать подсказкам):
-  /etc/iserverd/db/icquser add
+  /etc/iserverd/db/iserver_icquser add
 Можно и удалить его
-  /etc/iserverd/db/icquser del
+  /etc/iserverd/db/iserver_icquser del
 
 Почитать некоторую информацию по поводу работы можно в файлике
   /usr/share/doc/IServerd-*/README.asp
