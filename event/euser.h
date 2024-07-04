@@ -39,7 +39,7 @@ typedef struct online_cache_record
    unsigned long   ip;
    unsigned short ttl;
    struct online_cache_record *next;
-  
+
 } online_cache_record;
 
 

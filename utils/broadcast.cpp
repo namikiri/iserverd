@@ -31,8 +31,8 @@
 
 #include "includes.h"
 
-extern pstring debugf; 
-extern pstring systemf; 
+extern pstring debugf;
+extern pstring systemf;
 extern pstring alarmf;
 extern pstring usersf;
 extern BOOL append_log;
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
   unsigned short pvers, pcomm;
   unsigned short online_only;
   char bc_full_message[1023];
-  
+
   init_globals();
   process_command_line_opt(argc, argv);
   pstring configf;
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
   slprintf(debugf,  sizeof(debugf), "/dev/null");
   setup_alrlogging( "", True );
   setup_syslogging( "", True );
-  
+
   /* Loading configuration file */
   if (!lp_load(configf,False,False,True))
   {
@@ -67,28 +67,28 @@ int main(int argc, char **argv)
     exit(EXIT_ERROR_CONFIG_OPEN);
   }
 
-  /* open listening socket */  
+  /* open listening socket */
   init_bindinterface();
   init_translate();
   server_addr = bind_interface;
- 
+
   bind_interface.s_addr = INADDR_ANY;
   udpserver_start(0, 1000);
   setNonBlocking(msockfd);
-  
+
   /* -[ Get message from user ]-------------------------------------- */
   char flag[16];
   char subject[64];
   char message[350];
-  
+
   fgets(flag, sizeof(flag)-1, stdin);
   online_only = atoi(flag);
   fgets(subject, sizeof(subject)-1, stdin);
   fread(message, sizeof(message)-1, 1, stdin);
 
-  snprintf(bc_full_message, sizeof(bc_full_message)-1, "%s%s%s", 
+  snprintf(bc_full_message, sizeof(bc_full_message)-1, "%s%s%s",
            subject, CLUE_CHAR, message);
-  
+
   /* ---------------------------------------------------------------- */
   /* prepare standart system header with password */
   reply_pack.clearPacket();
@@ -96,20 +96,20 @@ int main(int argc, char **argv)
              << (unsigned short)ICQ_SYSxRCV_SYSBCAST_REQ
              << (unsigned short)(strlen(lp_info_passwd())+1)
              << lp_info_passwd();
-		      
+
   /* now time to put bcast message to packet */
   reply_pack << (unsigned short)online_only
 	     << (unsigned  long)0x00
 	     << (unsigned short)0x14
 	     << (unsigned short)(strlen(bc_full_message)+1)
 	     << bc_full_message;
-	   
+
   /* And send packet to server */
   reply_pack.from_ip   = server_addr;
   reply_pack.from_port = lp_udp_port();
-  udp_send_direct_packet(reply_pack); 
+  udp_send_direct_packet(reply_pack);
   msleep(50);
-  
+
   /* Now time to check response - timeout 7 secs */
   for (int j=0; j<35; j++)
   {
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
      if (udp_recv_pack(pack))
      {
          pack >> (pvers)
-              >> (pcomm);	      
+              >> (pcomm);
 
          if ((pvers == SYS_PROTO) &&
              (pcomm == ICQ_SYSxSND_SYSBCAST_REP))
@@ -142,9 +142,9 @@ int main(int argc, char **argv)
 
    printf("Timeout. No response from server..\n");
    printf("Message not sent, check server and try again\n");
-   
+
    /* save message to file to send again later */
-   
+
    exit(2);
 }
 

@@ -66,10 +66,10 @@ ITranslator ITrans;		  /* locale translate utility             */
 char temp_str[128];		  /* temp string for term_write           */
 
 char  db_fname[128];		  /* src database filename                */
-char  mdb_port[32];		  /* mutable postgres db port             */
-char  mdb_user[32];		  /* mutable postgres db username         */
-char  mdb_addr[128];		  /* mutable postgres db ipaddr           */
-char  mdb_pass[32];		  /* mutable postgres db password         */
+char  mdb_port[32] = "\0";		  /* mutable postgres db port             */
+char  mdb_user[32] = "\0";		  /* mutable postgres db username         */
+char  mdb_addr[128] = "\0";		  /* mutable postgres db ipaddr           */
+char  mdb_pass[32] = "\0";		  /* mutable postgres db password         */
 
 char parse_str[255];		  /* string for parser                    */
 char fbuffer[513];		  /* buffer for file parser               */
@@ -105,7 +105,7 @@ void term_field_error(int num)
 /**************************************************************************/
 /* This function write stat number to status window			  */
 /**************************************************************************/
-void write_status(int plines, int pfound, int dead_usr, int new_usr, 
+void write_status(int plines, int pfound, int dead_usr, int new_usr,
 		  int fullness)
 {
  printf("--------------------------------------------------\n");
@@ -124,14 +124,14 @@ void write_status(int plines, int pfound, int dead_usr, int new_usr,
 int user_confirm()
 {
    printf("Are you sure ?: ");
-   
+
    for(;;)
    {
      tchar = getchar();
      if ((tchar == 'Y') | (tchar == 'y')) return(1);
      if ((tchar == 'N') | (tchar == 'n')) return(0);
    }
-   
+
    return(1);
 }
 
@@ -165,13 +165,13 @@ int is_valid_user(struct full_user_info &full_user)
 {
   long temp_l;
   char **valid;
-  
+
   /* user's uin number */
   if ( strcmp(dmb_usr[0],"") == 0 )
   {
     term_field_error(1);
     return (0);
-  } 
+  }
   else
   {
     valid = NULL;
@@ -182,7 +182,7 @@ int is_valid_user(struct full_user_info &full_user)
       return (0);
     }
   }
-  
+
   /* user's last ip_addr (number) */
   if ( strcmp(dmb_usr[1], "") != 0 )
   {
@@ -205,7 +205,7 @@ int is_valid_user(struct full_user_info &full_user)
   {
     term_field_error(3);
     return 0;
-  } 
+  }
   else
   {
     full_user.can_broadcast = atoi(dmb_usr[2]);
@@ -215,13 +215,13 @@ int is_valid_user(struct full_user_info &full_user)
       return (0);
     }
   }
-  
+
   /* if user should change password (0/1) */
   if ( strcmp(dmb_usr[3],"") == 0)
   {
     term_field_error(4);
     return 0;
-  } 
+  }
   else
   {
     full_user.ch_password = atoi(dmb_usr[3]);
@@ -237,7 +237,7 @@ int is_valid_user(struct full_user_info &full_user)
   {
     term_field_error(5);
     return 0;
-  } 
+  }
   else
   {
     full_user.disabled = atoi(dmb_usr[4]);
@@ -247,7 +247,7 @@ int is_valid_user(struct full_user_info &full_user)
       return (0);
     }
   }
-  
+
   /* lastlogin time */
   if (strcmp(dmb_usr[5],"") != 0)
   {
@@ -262,8 +262,8 @@ int is_valid_user(struct full_user_info &full_user)
   else
   {
     full_user.lastlogin = -1;
-  }    
-  
+  }
+
   /* create date & time */
   if (strcmp(dmb_usr[6],"") != 0)
   {
@@ -280,7 +280,7 @@ int is_valid_user(struct full_user_info &full_user)
     full_user.cr_date = -1;
   }
 
-  /* text fields */  
+  /* text fields */
   strncpy(full_user.passwd, dmb_usr[7], 32);
   ITrans.translateToServer(full_user.passwd);   /* bad idea ?? */
   strncpy(full_user.nick, dmb_usr[8], 32);
@@ -299,7 +299,7 @@ int is_valid_user(struct full_user_info &full_user)
   {
     term_field_error(13);
     return 0;
-  } 
+  }
   else
   {
     full_user.auth = atoi(dmb_usr[12]);
@@ -315,12 +315,12 @@ int is_valid_user(struct full_user_info &full_user)
   {
     term_field_error(14);
     return 0;
-  } 
+  }
   else
   {
     full_user.gender = atoi(dmb_usr[13]);
-        if (!is_bool(full_user.gender) & (full_user.gender != -1) & 
-	   (full_user.gender != 2)) 
+        if (!is_bool(full_user.gender) & (full_user.gender != -1) &
+	   (full_user.gender != 2))
     {
       term_field_error(14);
       return(0);
@@ -374,7 +374,7 @@ int is_valid_user(struct full_user_info &full_user)
   {
     full_user.bmonth = -1;
   }
-  
+
   /* user's birth year */
   if (strcmp(dmb_usr[17],"") != 0)
   {
@@ -390,15 +390,15 @@ int is_valid_user(struct full_user_info &full_user)
   {
     full_user.byear = -1;
   }
-  
-   /* work company details */  
+
+   /* work company details */
   strncpy(full_user.waddr, dmb_usr[18], 64);
   ITrans.translateToServer(full_user.waddr);
   strncpy(full_user.wcity, dmb_usr[19], 32);
   ITrans.translateToServer(full_user.wcity);
   strncpy(full_user.wstate, dmb_usr[20], 32);
   ITrans.translateToServer(full_user.wstate);
-  
+
   if (strcmp(dmb_usr[21],"") != 0)
   {
     valid = NULL;
@@ -430,7 +430,7 @@ int is_valid_user(struct full_user_info &full_user)
   ITrans.translateToServer(full_user.wzip);
   strncpy(full_user.wpage,     dmb_usr[29], 128);
   ITrans.translateToServer(full_user.wpage);
-  
+
   /* home details */
   strncpy(full_user.haddr,  dmb_usr[31], 64);
   ITrans.translateToServer(full_user.haddr);
@@ -484,13 +484,13 @@ int is_valid_user(struct full_user_info &full_user)
   {
     full_user.nupdate = 0;
   }
- 
-  strncpy(full_user.email3, "", 128);
+
+  strncpy(full_user.email3, "", 64);
   full_user.pemail1 = 0;
   full_user.gmt_offset = 0;
   full_user.wocup = -1;
- 
-  return (1); 
+
+  return (1);
 }
 
 
@@ -499,7 +499,7 @@ int is_valid_user(struct full_user_info &full_user)
 /**************************************************************************/
 int insert_new_user(struct full_user_info &user)
 {
-  PGresult *res;  
+  PGresult *res;
 
   typedef char ins_string[60000];
   ins_string insert_str;
@@ -515,15 +515,15 @@ int insert_new_user(struct full_user_info &user)
  )"
 
   /* now prepare sql command string */
-  snprintf(insert_str, 60000, ADD_CVA352, 
-        user.uin, user.passwd, user.disabled, user.lastlogin, user.ip_addr, 
-	user.can_broadcast, user.cr_date, user.ch_password, user.nick, 
+  snprintf(insert_str, 60000, ADD_CVA352,
+        user.uin, user.passwd, user.disabled, user.lastlogin, user.ip_addr,
+	user.can_broadcast, user.cr_date, user.ch_password, user.nick,
 	user.first, user.last, user.email1, user.email2, user.email3,
 	user.pemail1, user.gmt_offset, user.auth, user.gender, user.age,
-	user.bday, user.bmonth, user.byear, user.waddr, user.wcity, 
-	user.wstate, user.wcountry, user.wcompany, user.wtitle, user.wocup, 
-	user.wdepart, user.wphone, user.wfax, user.wpager, user.wzip, 
-	user.wpage, user.notes, user.haddr, user.hcity, user.hstate, 
+	user.bday, user.bmonth, user.byear, user.waddr, user.wcity,
+	user.wstate, user.wcountry, user.wcompany, user.wtitle, user.wocup,
+	user.wdepart, user.wphone, user.wfax, user.wpager, user.wzip,
+	user.wpage, user.notes, user.haddr, user.hcity, user.hstate,
 	user.hcountry, user.hphone, user.hfax, user.hcell, user.hzip,
 	user.hpage, user.nupdate);
 
@@ -554,14 +554,14 @@ int insert_new_user(struct full_user_info &user)
 void move_tbl2old()
 {
    PGresult *res;
-      
+
    cmd_string dbcomm_str;
    snprintf(dbcomm_str, 255, "DROP TABLE old_users_info_ext");
    res = PQexec(users_dbconn, dbcomm_str); PQclear(res);
 
    snprintf(dbcomm_str, 255, "SELECT * INTO TABLE Old_Users_Info FROM Users_Info_Ext");
-   res = PQexec(users_dbconn, dbcomm_str); 
-   
+   res = PQexec(users_dbconn, dbcomm_str);
+
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
       term_write_mess("Can't copy old records to 'old_users_info'...\n");
@@ -569,12 +569,12 @@ void move_tbl2old()
       term_write_mess("Press Q, Enter or Space to exit...");
       PQclear(res);
       conv_exit();
-   } 
+   }
    else PQclear(res);
 
    snprintf(dbcomm_str, 255, "DELETE FROM Users_Info_Ext");
-   res = PQexec(users_dbconn, dbcomm_str); 
-   
+   res = PQexec(users_dbconn, dbcomm_str);
+
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
       term_write_mess("Can't delete old records from 'users_info'...\n");
@@ -582,10 +582,10 @@ void move_tbl2old()
       term_write_mess("Press Q, Enter or Space to exit...");
       PQclear(res);
       conv_exit();
-   } 
-   else 
+   }
+   else
    {
-      snprintf(temp_str, 128, "Moved %s records to 'old_users_info'...", 
+      snprintf(temp_str, 128, "Moved %s records to 'old_users_info'...",
       PQcmdTuples(res));
       PQclear(res);
    }
@@ -602,7 +602,7 @@ int is_table_filled()
 {
    PGresult *res;
    int number;
-      
+
    cmd_string dbcomm_str;
    snprintf(dbcomm_str, sizeof(dbcomm_str)-1, "SELECT uin FROM Users_Info_Ext");
 
@@ -616,12 +616,12 @@ int is_table_filled()
    }
 
    number = PQntuples(res);
-   if (number != 0) 
+   if (number != 0)
    {
-     snprintf(temp_str, 128, "Warning: Target table contain %d records.", 
+     snprintf(temp_str, 128, "Warning: Target table contain %d records.",
               number);
      term_write_mess(temp_str);
-   }     
+   }
    PQclear(res);
    return(number);
 }
@@ -633,20 +633,20 @@ int is_table_filled()
 void usersdb_connect()
 {
    char	    *pghost, *pgport,  *pgoptions, *pgtty;
-   char	    *dbName, *dblogin, *dbpassw;	    
+   char	    *dbName, *dblogin, *dbpassw;
 
    pghost  = mdb_addr;		/* address of db server if NULL - unix */
    pgport  = mdb_port;		/* port of the backend */
-   dbName  = db_users_db;	/* online database name */
+   dbName  = "ICQ";			/* online database name */
    dblogin = mdb_user;		/* database user */
    dbpassw = mdb_pass;		/* database password */
-   
+
    pgoptions = NULL;		/* special options for backend server */
    pgtty     = NULL;		/* debugging tty for the backend server */
 
 
 				/* make a connection to the database */
-   users_dbconn = PQsetdbLogin(pghost, pgport, pgoptions, pgtty, dbName, 
+   users_dbconn = PQsetdbLogin(pghost, pgport, pgoptions, pgtty, dbName,
                                dblogin, dbpassw);
 
    if (PQstatus(users_dbconn) == CONNECTION_BAD)
@@ -654,9 +654,9 @@ void usersdb_connect()
       term_write_mess("Connection to users database failed.");
       term_write_mess(PQerrorMessage(users_dbconn));
       conv_exit();
-      
-   } 
-   else 
+
+   }
+   else
    {
       term_write_mess("Successfully connected to postgres users db.");
    }
@@ -668,7 +668,7 @@ void usersdb_connect()
 /**************************************************************************/
 void parse_db_file(int fdbh)
 {
-  /* now we should determine file size */ 
+  /* now we should determine file size */
   if (fstat(fdbh, &dbstat) == -1)  {
     term_write_mess("ERROR: Can't stat src database file.");
     snprintf(temp_str, 128, "Returned error: %s", strerror(errno));
@@ -677,16 +677,16 @@ void parse_db_file(int fdbh)
   }
 
   /* print terminal message for user */
-  snprintf(temp_str, 128, "Info: Opened file size = %d bytes", 
+  snprintf(temp_str, 128, "Info: Opened file size = %d bytes",
           (int)(dbstat.st_size));
   term_write_mess(temp_str);
-  
+
   for (;;)
   {
     readcnt = read(fdbh, fbuffer, 513);	/* read first portion of file. */
     if (readcnt == 1) break;		/* we are using seek(-1) :) */
     if (readcnt < 513) readcnt++;	/* correct counter for last block */
-    lseek(fdbh, -1, SEEK_CUR); 
+    lseek(fdbh, -1, SEEK_CUR);
 
     /* i don't want waist time on error handling */
     if (readcnt == -1)
@@ -695,17 +695,17 @@ void parse_db_file(int fdbh)
       snprintf(temp_str, 128, "Error: \'%s\'", strerror(errno));
       term_write_mess("Press any key to exit...");
       conv_exit();
-    } 
-    
+    }
+
     readcnt--;
-    
+
     /* Now we should parse ready block */
     for (int i=0; i<readcnt; i++, bytes_processed++)
     {
        /* increment number of processed lines */
        if (fbuffer[i] == 0x0a) lines++;
 
-       /* i've split all parse function into two parts - text mode and */	
+       /* i've split all parse function into two parts - text mode and */
        /* non-text mode. Text mode - if we are located between quotes, */
        /* and non-text mode if we are out. In text mode we can skip ';'*/
        /* 0x0a, 0x0d handling, we only should handle ", "" and \\      */
@@ -718,46 +718,46 @@ void parse_db_file(int fdbh)
 	    was_text_mode = 1;
 	    continue;
 	  }
-	  
+
 	  /* is it covered dual quote ? */
 	  if ((fbuffer[i] == '"') & (fbuffer[i+1] == '"'))
 	  {
 	    dmb_usr[fld_number][curr_fld_idx] = '"';
-	    if (curr_fld_idx+1 < 255) {curr_fld_idx++; } else 
+	    if (curr_fld_idx+1 < 255) {curr_fld_idx++; } else
 	    {
 	       term_write_mess("Error: field too big or db structure error");
 	       conv_exit();
 	    }
 
-	    if (i+1 == readcnt) { lseek(fdbh, 1, SEEK_CUR); } else i+=1; 
-	    
+	    if (i+1 == readcnt) { lseek(fdbh, 1, SEEK_CUR); } else i+=1;
+
 	    continue;
 	  }
-	  
+
 	  /* it is only data char */
 	  dmb_usr[fld_number][curr_fld_idx] = fbuffer[i];
-	  
+
 	  /* we should cover single quote with another one */
-	  if (fbuffer[i] == 0x27) 
-	  { 
+	  if (fbuffer[i] == 0x27)
+	  {
  	     curr_fld_idx++;
 	     dmb_usr[fld_number][curr_fld_idx] = 0x27;;
 	  }
 
 	  /* we also should cover backslash */
-	  if (fbuffer[i] == 0x5C) 
-	  { 
+	  if (fbuffer[i] == 0x5C)
+	  {
  	     curr_fld_idx++;
 	     dmb_usr[fld_number][curr_fld_idx] = 0x5C;;
 	  }
-	  
+
 	  /* sanity checks */
-	  if (curr_fld_idx < 255) {curr_fld_idx++; continue; } else 
+	  if (curr_fld_idx < 255) {curr_fld_idx++; continue; } else
 	  {
 	     term_write_mess("Error: field too big or db structure error");
 	     conv_exit();
 	  }
-	  
+
        } else {		/* we are in non-text mode */
 
 	 /* is it single quote ? */
@@ -769,14 +769,14 @@ void parse_db_file(int fdbh)
 	     term_write_mess(temp_str);
 	     term_write_mess("Press any key to exit...");
 	     conv_exit();
-	   
-	   } 
-	   is_txt_fld = 1; 
+
+	   }
+	   is_txt_fld = 1;
 	   continue;
 	 }
-	 
+
 	 if (fbuffer[i] == 0x0d) continue;  /* we don't need this char */
-	 
+
 	 /* is it delimiter ? */
 	 if (fbuffer[i] == ';')
 	 {
@@ -786,21 +786,21 @@ void parse_db_file(int fdbh)
 	   /* check if this field is filled */
 	   if (strlen(dmb_usr[fld_number]) > 1) fields_filled++;
 	   fld_number++;
-	   
+
 	   /* sanity check */
 	   if (fld_number > FIELDS_NUMBER)
 	   {
-	     snprintf(temp_str, 128, "Too many fields in record [str: %d, byte: %d]", 
+	     snprintf(temp_str, 128, "Too many fields in record [str: %d, byte: %d]",
 	             lines, bytes_processed);
 	     term_write_mess(temp_str);
 	     term_write_mess("Press any key to exit...");
 	     conv_exit();
-	   } 
+	   }
 
 	   curr_fld_idx = 0;
 	   continue;
 	 }
-	 
+
 	 /* is it end-user delimiter ? */
 	 if (fbuffer[i] == 0x0a)
 	 {
@@ -808,41 +808,41 @@ void parse_db_file(int fdbh)
 
 	   /* if this user never login (ip_addr field == 0) */
 	   if (strlen(dmb_usr[1]) < 1) newusers++;
-	   
+
 	   /* write to term uin, nick, name and lname */
-	   
-           snprintf(temp_str, 128, "Found user: %s [%s %s]", 
+
+           snprintf(temp_str, 128, "Found user: %s [%s %s]",
 	                     dmb_usr[0], dmb_usr[9], dmb_usr[10]);
 
 	   ITrans.translateToServer(temp_str);
 	   term_write_mess(temp_str);
 
 	   if (is_valid_user(valid_user)) insert_new_user(valid_user);
-	   
+
 	   /* we should clear fields array for next user data */
 	   for (int is=0;is<FIELDS_NUMBER;is++) memset(dmb_usr[is], 0, 255);
 
-	 
+
 	   fld_number = 0;
 	   curr_fld_idx = 0;
 	   was_text_mode = 0;
-	   
+
 	   continue;
 	 }
-	 
+
 	 /*in sert char in non-text mode - usually numbers */
 	 dmb_usr[fld_number][curr_fld_idx] = fbuffer[i];
-	 
+
 	 /* sanity check */
-	 if (curr_fld_idx+1 < 255) {curr_fld_idx++; continue; } else 
+	 if (curr_fld_idx+1 < 255) {curr_fld_idx++; continue; } else
 	 {
 	    term_write_mess("Error: field too big or db structure error");
 	    conv_exit();
 	 }
        } /* else !txt_mode */
     } /* block for end bracket */
-  }   /* read for end bracket */   
-}	 
+  }   /* read for end bracket */
+}
 
 
 /**************************************************************************/
@@ -850,8 +850,10 @@ void parse_db_file(int fdbh)
 /**************************************************************************/
 void usage_info_print()
 {
-    printf("Usage:    db_convert -d db_file [options] \n");
+    printf("Usage:    iserver_db_convert -d db_file [options] \n");
+    printf("Please set port, user, address and password for DB\n");
     printf("Options:  -x <tblname> [ locale translate table name ]\n");
+    printf("          -a <addr>    [ database server address ]\n");
     printf("          -p <prt>     [ database server port ]\n");
     printf("          -u <user>    [ database user name ]\n");
     printf("          -w <pass>    [ database user password ]\n");
@@ -868,12 +870,7 @@ int main(int argc, char **argv, char **envp)
   extern char  *optarg;
   int 	       no_db_name = 1;
 
-  strncpy(mdb_port, db_port, 32);
-  strncpy(mdb_user, db_user, 32);
-  strncpy(mdb_addr, db_addr, 128);
-  strncpy(mdb_pass, db_pass, 32);
-    
-   /* OPTSTR  "d:x:p:u:a:w:" */
+  /* OPTSTR  "d:x:p:u:a:w:" */
   while ((flag = getopt(argc, argv, OPTSTR)) != (int)EOF)
   {
      switch (flag)
@@ -882,18 +879,18 @@ int main(int argc, char **argv, char **envp)
          case 'x':
 	    snprintf(trans_map_name, sizeof(trans_map_name), optarg);
             break;
-	    
+
 	 /* database filename name option */
 	 case 'd':
 	    no_db_name = 0;
 	    snprintf(db_fname, sizeof(db_fname), optarg);
 	    break;
-		
-	 /* database port number option */	
+
+	 /* database port number option */
          case 'p':
 	    snprintf(mdb_port, sizeof(mdb_port), optarg);
             break;
-	    
+
 	 /* database username option */
          case 'u':
 	    snprintf(mdb_user, sizeof(mdb_user), optarg);
@@ -903,7 +900,7 @@ int main(int argc, char **argv, char **envp)
          case 'a':
             snprintf(mdb_addr, sizeof(mdb_addr), optarg);
 	    break;
-		
+
 	 case 'w':
 	    snprintf(mdb_pass, sizeof(mdb_pass), optarg);
 	    break;
@@ -913,10 +910,14 @@ int main(int argc, char **argv, char **envp)
          default:  usage_info_print();
 
      }
-  }   
+  }
 
   /* Check for database filename */
-  if (no_db_name) usage_info_print();  
+  if (no_db_name ||
+    (mdb_port == NULL) || (mdb_port[0] == '\0') ||
+    (mdb_user == NULL) || (mdb_user[0] == '\0') ||
+    (mdb_addr == NULL) || (mdb_addr[0] == '\0') ||
+    (mdb_pass == NULL) || (mdb_pass[0] == '\0')) usage_info_print();
 
   term_write_mess("IServerd database converter started");
   term_write_mess("--------------------------------------------------");
@@ -927,34 +928,34 @@ int main(int argc, char **argv, char **envp)
 
   snprintf(temp_str, 128, TRANSLATE_FILE, trans_map_name);
   ITrans.setTranslationMap(temp_str);
-  
+
   /* Now it is time to open db file... :) */
   fdbtxt = open(db_fname, O_RDONLY);
   if (fdbtxt == -1) {
-     term_write_mess("Error: Can't open database file. "); 
+     term_write_mess("Error: Can't open database file. ");
      snprintf(temp_str, 128, "Error: \'%s\'", strerror(errno));
      term_write_mess(temp_str);
      term_write_mess("Press any key to finish.");
-     conv_exit();     
+     conv_exit();
   }
   else
   {
      term_write_mess("Successfully opened database file...");
   }
 
-  /* trying to connect to database */  
+  /* trying to connect to database */
   usersdb_connect();
-  if (is_table_filled()) 
+  if (is_table_filled())
   {
-    if (!user_confirm()) 
+    if (!user_confirm())
     {
       term_write_mess("Press space or enter to exit...");
       conv_exit();
-    }  
-    
+    }
+
     term_write_mess("Moving records to old_users...");
     move_tbl2old();
-    
+
   }
   else
   {
@@ -962,10 +963,10 @@ int main(int argc, char **argv, char **envp)
   }
 
   parse_db_file(fdbtxt);
-  
+
   term_write_mess("Convertation successfully finished.");
   term_write_mess("Press any key to exit.");
-  
+
   /* Now we should close all windows */
   conv_exit();
 }

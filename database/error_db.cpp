@@ -65,18 +65,18 @@ int handle_database_error(PGresult *res, char where[40])
       if (PQstatus(users_dbconn) == CONNECTION_BAD)
       {
          LOG_SYS(0, ("RDBMS Reconnection failed. PPs are shuting down...\n"));
-	 
+
 	 /* send signal to actions processor */
 	 send_event2ap(papack, ACT_RDBMSFAIL, 0, 0, 0, 0, longToTime(time(NULL)), "");
 	 sleep(2);
          exit(EXIT_ERROR_DB_CONNECT);
       }
-      
+
       /* if reconnect is ok this was only small RDBMS error */
       send_event2ap(papack, ACT_RDBMSERR, ErrorType, 0, 0, 0, longToTime(time(NULL)), where);
       return(0);
    }
-   
+
    return(1);
 }
 
@@ -103,17 +103,17 @@ void uNoticeStub(void * arg, const char * message)
       LOG_SYS(50, ("ERROR: Database IPC corrupted, exiting...\n"));
       exit(EXIT_ERROR_DB_FAILURE);
    }
-   
+
    /* There are problem occupied inside transaction. And postgres   */
    /* move it to abort state. We should abort current transaction   */
    if ((strequal(stripped, "NOTICE:  current transaction")) &&
        (block_nprocessor != True))
    {
       LOG_ALARM(10, ("ERROR: Transaction aborted... Reconnecting...\n"));
-      
+
       block_nprocessor = True;
       PQclear( PQexec( users_dbconn, "ABORT" ) );
-      
+
 /* COMMENTED_OUT: don't reconnect to save cpu time */
 #if 0
       PQreset( users_dbconn );
@@ -124,7 +124,7 @@ void uNoticeStub(void * arg, const char * message)
       }
 #endif
    }
-      
+
    block_nprocessor = False;
    return;
 }
@@ -136,23 +136,23 @@ void uNoticeStub(void * arg, const char * message)
 void  wait_for_database()
 {
    PGconn   *temp_dbconn  = NULL;  /* database connection structure	  */
-   
+
    char	    *t_pghost, *t_pgport,  *t_pgoptions, *t_pgtty;
-   char	    *t_dbName, *t_dblogin, *t_dbpassw;	    
+   char	    *t_dbName, *t_dblogin, *t_dbpassw;
 
    t_pghost  = lp_db_addr();
    t_pgport  = lp_db_port();
    t_dbName  = lp_db_users();
    t_dblogin = lp_db_user();
    t_dbpassw = lp_db_pass();
-   
+
    t_pgoptions = NULL;
    t_pgtty     = NULL;
 
 
-   temp_dbconn = PQsetdbLogin(t_pghost, t_pgport, t_pgoptions, t_pgtty, 
+   temp_dbconn = PQsetdbLogin(t_pghost, t_pgport, t_pgoptions, t_pgtty,
                                t_dbName, t_dblogin, t_dbpassw);
-   
+
    /* Well, if there is problem - we should check db in cycle every 5 sec */
    if (PQstatus(temp_dbconn) == CONNECTION_BAD)
    {
@@ -164,7 +164,7 @@ void  wait_for_database()
          if (PQstatus(temp_dbconn) == CONNECTION_BAD) sleep(5);
       }
    }
-      
+
    LOG_SYS(0, ("Init: RDBMS is online. Firing up processing...\n"));
    set_ps_display(ROLE_SOCKET, "");
 

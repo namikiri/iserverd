@@ -1,0 +1,15 @@
+[Unit]
+Description=Iserver - ICQ compatible server for groups of users
+Documentation=https://web.archive.org/web/20211127054413/http://iserverd.khstu.ru/
+Requires=postgresql.service
+After=postgresql.service 
+
+[Service]
+Type=simple
+User=iserver
+WorkingDirectory=/etc/iserver
+ExecStart=/sbin/iserverd
+#Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target

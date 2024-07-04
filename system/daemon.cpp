@@ -44,32 +44,32 @@ pid_t pidfile_pid()
    unsigned int ret;
 
    fd = fopen(lp_pid_path(), "r");
-   if (fd == NULL) 
+   if (fd == NULL)
    {
       return 0;
    }
 
    ZERO_ARRAY(pidstr);
 
-   fread(pidstr, sizeof(pidstr)-1, 1, fd ); 
+   fread(pidstr, sizeof(pidstr)-1, 1, fd );
    ret = atoi(pidstr);
-	
-   if (!process_exists((pid_t)ret)) 
+
+   if (!process_exists((pid_t)ret))
    {
       goto noproc;
    }
 
-   if (Lock(fd) == 0) 
+   if (Lock(fd) == 0)
    {
       /* we could get the lock - it can't be a IServerd process */
       goto noproc;
    }
-   
+
    fclose(fd);
    return (pid_t)ret;
 
  noproc:
-   
+
    fclose(fd);
    return 0;
 }
@@ -84,25 +84,25 @@ BOOL write_pid()
    pid_t   pid;
 
    pid = pidfile_pid();
-   
-   if (pid != 0) 
+
+   if (pid != 0)
    {
       LOG_SYS(0,("ERROR: IServerd running. Pidfile & process %d exists.\n", (int)pid));
       return(False);
    }
 
    unlink(lp_pid_path()); /* We can do this.. WE SHOULD DO THIS TO AVOID SYMLINKS */
-   
+
    fd = fopen(lp_pid_path(), "w");
-   if (fd == NULL) 
+   if (fd == NULL)
    {
       LOG_SYS(0,("ERROR: can't open %s.\n", lp_pid_path()));
       LOG_SYS(0,("ERROR: %s\n", strerror(errno)));
       return(False);
    }
 
-   
-   if (Lock(fd)!=0) 
+
+   if (Lock(fd)!=0)
    {
       LOG_SYS(0,("ERROR: can't get lock on pidfile. Error was %s\n", strerror(errno)));
       return(False);
@@ -131,7 +131,7 @@ int become_daemon(void)
 
    if (sys_fork()) _exit(EXIT_FORK);
 
-   LOG_SYS(4, ("Init: Detaching from control terminal\n"));    
+   LOG_SYS(4, ("Init: Detaching from control terminal\n"));
 #ifdef HAVE_SETSID
   /* setsid() is the preferred way to disassociate from the */
   /* controlling terminal                                   */
@@ -140,17 +140,17 @@ int become_daemon(void)
   /* Open /dev/tty to access our controlling tty (if any) */
   if( (ttyfd = open("/dev/tty",O_RDWR)) != -1)
   {
-    if(ioctl(ttyfd,TIOCNOTTY,NULL) == -1) 
+    if(ioctl(ttyfd,TIOCNOTTY,NULL) == -1)
     {
-      LOG_SYS(0, ("Can't detach from controling terminal (ioctl error).\n")); 
+      LOG_SYS(0, ("Can't detach from controling terminal (ioctl error).\n"));
       exit(EXIT_CONFIG);
     }
 
     close(ttyfd);
   }
 #endif /* HAVE_SETSID */
-   
-   /* we don't need signals from terminal and pipes */    
+
+   /* we don't need signals from terminal and pipes */
    if (getppid() != 1)	   /* check if we are running by init */
    {
       signal(SIGTTOU, SIG_IGN);
@@ -158,13 +158,13 @@ int become_daemon(void)
       signal(SIGTSTP, SIG_IGN);
       signal(SIGPIPE, SIG_IGN);
    }
-    
+
    /* close stdio streams */
    close(fileno(stdin));
    close(fileno(stdout));
    close(fileno(stderr));
-    
-   if (write_pid() != True) 
+
+   if (write_pid() != True)
    {
       exit(EXIT_ERROR_ANOTHER_PROCESS);
    }

@@ -76,17 +76,17 @@ BPFX            = bin
 SUBDIRS         = data script man
 
 ISERVER_BIN     = iserverd
-DBCONV_BIN      = db_convert
-USR_CNT	        = users_cnt.cgi
-WEBPAGER        = webpager
-CHECKER	        = db_check
-ACHK	        = chk_actions
-ICHK		= chk_aim_cfg
-ONLINE_CNT      = online_cnt.cgi
+DBCONV_BIN      = iserver_db_convert
+USR_CNT	        = iserver_users_cnt.cgi
+WEBPAGER        = iserver_webpager
+CHECKER	        = iserver_db_check
+ACHK	        = iserver_chk_actions
+ICHK		    = iserver_chk_aim_cfg
+ONLINE_CNT      = iserver_online_cnt.cgi
 MKTEMP          = mktemp
-STATUS		= server_status
-BROADCAST       = broadcast
-DISCONNECT	= disconnect
+STATUS		    = iserver_server_status
+BROADCAST       = iserver_broadcast
+DISCONNECT	    = iserver_disconnect
 
 MKTMP_FLAG      = @SYS_MKTMP@
 

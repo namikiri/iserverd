@@ -2,8 +2,8 @@
 
 name="`basename $0`"
 PSQL="@PSQL_BIN@/psql"
-users_db="users_db"
-db_check="@BIN_DIR@/db_check"
+users_db="ICQ"
+db_check="@BIN_DIR@/iserver_db_check"
 users_info1_file=`@MKTEMP@ /tmp/tbl1XXXXXX`;
 users_info2_file=`@MKTEMP@ /tmp/tbl2XXXXXX`;
 users_mess_file=`@MKTEMP@ /tmp/tbl3XXXXXX`;

@@ -145,7 +145,7 @@
 #define LOGC_TBL_NAME     "login_cookies"
 #define LOGC_TBL_CREATE   "CREATE TABLE login_cookies (uin float8, cdate float8, cookie text, used int2, type int2); \
 			   CREATE UNIQUE INDEX cookie_uin ON login_cookies (uin);"
-			   
+
 
 /* user ssi table initialization data */
 #define USSI_TBL_OK      10

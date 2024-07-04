@@ -53,10 +53,10 @@ int handle_database_error(PGresult *res, char where[40])
          printf("Database connection terminated\n");
          exit(EXIT_ERROR_DB_CONNECT);
       }
-      
+
       return(0);
    }
-   
+
    return(1);
 }
 
@@ -75,7 +75,7 @@ void uNoticeStub(void * arg, const char * message)
       printf("ERROR: Database IPC corrupted, exiting...\n");
       exit(EXIT_ERROR_DB_FAILURE);
    }
-   
+
    return;
 }
 

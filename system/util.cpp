@@ -49,7 +49,7 @@ typedef union bo_test
 /**************************************************************************/
 FILE * dpopen(char *program, char *type)
 {
-   register char *cp;
+   char *cp;
    FILE *iop = NULL;
    pid_t pid;
    int argc, pdes[2];
@@ -63,10 +63,10 @@ FILE * dpopen(char *program, char *type)
    {
       if (!(argv[argc++] = strtok(cp, " \t\n"))) break;
    }
-	
+
    argv[MAX_ARGS] = NULL;
 
-   switch(pid = vfork()) 
+   switch(pid = vfork())
    {
       case -1:			/* error */
           close(pdes[0]);
@@ -74,7 +74,7 @@ FILE * dpopen(char *program, char *type)
 	  goto pfree;
 
       case 0:			/* child */
-      
+
 #ifdef HAVE_SETSID
          /* setsid() is the preferred way to disassociate from the */
          /* controlling terminal                                   */
@@ -84,9 +84,9 @@ FILE * dpopen(char *program, char *type)
          /* Open /dev/tty to access our controlling tty (if any) */
          if( (ttyfd = open("/dev/tty",O_RDWR)) != -1)
          {
-            if(ioctl(ttyfd,TIOCNOTTY,NULL) == -1) 
+            if(ioctl(ttyfd,TIOCNOTTY,NULL) == -1)
             {
-               LOG_SYS(0, ("Can't detach from controling terminal (ioctl error).\n")); 
+               LOG_SYS(0, ("Can't detach from controling terminal (ioctl error).\n"));
                exit(EXIT_CONFIG);
             }
 
@@ -94,22 +94,22 @@ FILE * dpopen(char *program, char *type)
          }
 #endif /* HAVE_SETSID */
 
-	 if (*type == 'r') 
+	 if (*type == 'r')
 	 {
 	     /* Do not share our parent's stdin */
 	     close(fileno(stdin));
-	     if (pdes[1] != 1) 
+	     if (pdes[1] != 1)
 	     {
 	        dup2(pdes[1], 1);
 		dup2(pdes[1], 2);	/* stderr, too! */
 		close(pdes[1]);
 	     }
-	
+
 	     close(pdes[0]);
-         } 
-	 else 
+         }
+	 else
 	 {
-	    if (pdes[0] != 0) 
+	    if (pdes[0] != 0)
 	    {
 	       dup2(pdes[0], 0);
 	       close(pdes[0]);
@@ -125,17 +125,17 @@ FILE * dpopen(char *program, char *type)
       }
 
       /* parent; assume fdopen can't fail...  */
-      if (*type == 'r') 
+      if (*type == 'r')
       {
          iop = fdopen(pdes[0], type);
 	 close(pdes[1]);
-      } 
-      else 
+      }
+      else
       {
          iop = fdopen(pdes[1], type);
 	 close(pdes[0]);
       }
-      
+
 pfree:
       return(iop);
 }
@@ -149,13 +149,13 @@ BOOL setNonBlocking(int fd)
    int flags;
    int blank = 0;
 
-   if ((flags = fcntl(fd, F_GETFL, blank)) < 0) 
+   if ((flags = fcntl(fd, F_GETFL, blank)) < 0)
    {
       DEBUG(10, ("Error: fd=%d (fcntl F_GETFL err=%s)\n", fd, strerror(errno)));
       return(False);
    }
 
-   if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) < 0) 
+   if (fcntl(fd, F_SETFL, flags | O_NONBLOCK) < 0)
    {
       DEBUG(10, ("Error: fd=%d (fcntl F_SETFL err=%s)\n", fd, strerror(errno)));
       return(False);
@@ -174,7 +174,7 @@ int setup_byteorder()
 
    bt_order.complex = 0x11223344;
 
-   if ((bt_order.simplex[0] == 0x44) && 
+   if ((bt_order.simplex[0] == 0x44) &&
        (bt_order.simplex[1] == 0x33))
    {
       LOG_SYS(0, ("Init: checking byteorder... LITTLE_ENDIAN\n"));
@@ -182,13 +182,13 @@ int setup_byteorder()
    }
 
 
-   if ((bt_order.simplex[0] == 0x11) && 
+   if ((bt_order.simplex[0] == 0x11) &&
        (bt_order.simplex[1] == 0x22))
    {
       LOG_SYS(0, ("Init: checking byteorder... BIG_ENDIAN\n"));
       return(1);
    }
- 
+
    LOG_SYS(0, ("Init: checking byteorder... PDP_ENDIAN\n"));
    LOG_SYS(0, ("Init: sorry, I can't work with such byteorder\n"));
    exit(EXIT_ERROR_BYTEORDER);
@@ -271,10 +271,10 @@ int sys_select(int maxfd, fd_set *fds,struct timeval *tval)
 void vsyslog(int priority, const char *message, va_list args)
 {
    char sl_message[1024];
-   
+
    vsnprintf(sl_message, 1023, message, args);
-   
-   /* BUGBUG: I think I should strip % from this string before    */ 
+
+   /* BUGBUG: I think I should strip % from this string before    */
    /* passing it to syslog - this can cause format bufer overflow */
    /* I'll add this later                                         */
    syslog(priority, sl_message);
@@ -290,7 +290,7 @@ void init_random()
    srandomdev();
 #else
    srandom((unsigned long)(time(NULL)+sys_getpid()));
-#endif   
+#endif
 }
 
 
@@ -360,11 +360,11 @@ BOOL in_group(gid_t group, gid_t current_gid, int ngroups, gid_t * groups)
 static pid_t mypid = (pid_t)-1;
 
 
-pid_t sys_getpid(void)           
-{                                
+pid_t sys_getpid(void)
+{
    if (mypid == (pid_t)-1)  mypid = getpid();
-   return mypid;            
-}                                
+   return mypid;
+}
 
 
 /**************************************************************************/
@@ -674,7 +674,7 @@ int str_checksum(const char *s)
    }
 
    return (res);
-}  
+}
 
 
 /**************************************************************************/
@@ -813,7 +813,7 @@ void msleep(int t)
 void random_check()
 {
    FILE *urand;
-   
+
    if ((urand = fopen("/dev/urandom","r")) != NULL)
    {
       fclose(urand);
@@ -836,7 +836,7 @@ void random_fill(char *buffer, int size)
    FILE *urand;
    int i, dsize;
    unsigned short *sbuff = (unsigned short *)buffer;
-   
+
    if (drandom)
    {
       /* fill buffer from /dev/urandom   */
@@ -855,10 +855,10 @@ void random_fill(char *buffer, int size)
 
    /* fill buffer via rand() function */
    init_random();
-      
+
    dsize = size / sizeof(unsigned short);
 
-   for (i=0; i<dsize; i++) 
+   for (i=0; i<dsize; i++)
    {
       sbuff[i] = (unsigned short)rand();
    }

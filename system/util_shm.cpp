@@ -37,40 +37,40 @@
 BOOL shm_add(struct online_user &user)
 {
    lock_ushm();
-   
+
    /* Check if we have space for new user record */
    if (ipc_vars->online_usr_num < (unsigned long)abs(max_user_cnt))
    {
       ipc_vars->online_usr_num++;
-      
-      /* let's find free space */      
+
+      /* let's find free space */
       for (int i=0; i<max_user_cnt; i++)
       {
          if (usr_shm[i].uin == 0)
-	 {	 
-            memcpy((void *)&(usr_shm[i]), (const void *)&user, 
+	 {
+            memcpy((void *)&(usr_shm[i]), (const void *)&user,
                     sizeof(struct online_user));
-		    
+
 	    usr_shm[i].shm_index = i;
-	    
+
 	    /* for db_online_insert() */
 	    user.shm_index = i;
-	 
+
 	    unlock_ushm();
 	    return(True);
 	 }
       }
-      
+
       LOG_SYS(0, ("WARN: usr_num < max_user_num, but i can't find empty record, internal err ?\n"));
-      
+
       unlock_ushm();
-      return(False);    
+      return(False);
    }
    else
    {
       LOG_SYS(10, ("Warning: shm segment full... Can't accept new user...\n"));
    }
-  
+
    unlock_ushm();
    return(False);
 }
@@ -82,21 +82,21 @@ BOOL shm_add(struct online_user &user)
 BOOL shm_lookup(unsigned long to_uin, struct online_user &temp_user)
 {
    lock_ushm();
-   
+
    for (int i=0; i<max_user_cnt; i++)
    {
       if (usr_shm[i].uin == to_uin)
       {
-         memcpy((void *)&temp_user, (const void *)&(usr_shm[i]), 
+         memcpy((void *)&temp_user, (const void *)&(usr_shm[i]),
 	         sizeof(struct online_user));
 
          unlock_ushm();
          return(False);
       }
    }
-   
+
    unlock_ushm();
-  
+
    return(True);
 }
 
@@ -107,7 +107,7 @@ BOOL shm_lookup(unsigned long to_uin, struct online_user &temp_user)
 BOOL shm_delete(unsigned long to_uin)
 {
    lock_ushm();
-   
+
    for (int i=0; i<max_user_cnt; i++)
    {
       if (usr_shm[i].uin == to_uin)
@@ -119,9 +119,9 @@ BOOL shm_delete(unsigned long to_uin)
          return(True);
       }
    }
-   
+
    unlock_ushm();
-  
+
    return(False);
 }
 
@@ -145,9 +145,9 @@ BOOL shm_setstatus(struct online_user &temp_user)
          return(False);
       }
    }
-   
+
    unlock_ushm();
-  
+
    return(True);
 
 }
@@ -168,7 +168,7 @@ BOOL shm_setstate(struct online_user &temp_user, int state)
          return(False);
       }
    }
-   
+
    return(True);
 
 }
@@ -179,7 +179,7 @@ BOOL shm_setstate(struct online_user &temp_user, int state)
 /**************************************************************************/
 BOOL shm_touch(struct online_user &temp_user)
 {
-   
+
    for (int i=0; i<max_user_cnt; i++)
    {
       if (usr_shm[i].uin == temp_user.uin)
@@ -189,7 +189,7 @@ BOOL shm_touch(struct online_user &temp_user)
          return(False);
       }
    }
-   
+
    return(True);
 
 }
@@ -201,7 +201,7 @@ BOOL shm_touch(struct online_user &temp_user)
 struct online_user *shm_iget_user(unsigned long uin, unsigned long shm_index)
 {
    /* first try index search (check index value first) */
-   if ((shm_index < (unsigned long)abs(max_user_cnt)) && 
+   if ((shm_index < (unsigned long)abs(max_user_cnt)) &&
        (usr_shm[shm_index].uin == uin ))
    {
       return(&(usr_shm[shm_index]));

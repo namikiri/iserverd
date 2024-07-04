@@ -11,7 +11,7 @@ tpl="@ETC_DIR@/db/${name}.sql"
 PSQL="@PSQL_BIN@/psql"
 
 # Source iserverd configuration.
-DATABASE="users_db"
+DATABASE=$(cat /etc/iserverd/iserv.conf | grep 'users db name' | cut -f 2 -d '=' | xargs echo -n)
 if [ -f /etc/sysconfig/iserverd ] ; then
         . /etc/sysconfig/iserverd
 fi

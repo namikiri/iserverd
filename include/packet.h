@@ -40,7 +40,7 @@ public:
    Packet(char *newBuff, unsigned long buffSize);
    ~Packet(void);
    char *print(void);
-   
+
    void clearPacket(void);
    void reset(void) { asciiz = 1; net_order = 0; nextData = buff; };
    void append(void) { asciiz = 1; net_order = 0; nextData = buff + sizeVal; };
@@ -59,10 +59,10 @@ public:
    Packet& operator >> (unsigned long &in);
    Packet& operator >> (short &in);
    unsigned long size(void) { return(sizeVal);};
-   
+
    char *nextData;
    long sock_hdl;
-    
+
    unsigned short from_local;
    unsigned long  sock_rnd;
    unsigned long  seq_number;

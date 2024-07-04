@@ -1,0 +1,66 @@
+# This is the main IServerd config file. Don't forget to 
+# change database and info passwords. Probably you'll need 
+# to change admin email (it is used in broadcast and 
+# error messages). 
+
+[Globals]
+
+# ------server parameters ----------------------
+
+ Bind on all interfaces  =	No
+ Bind interface		 =	0.0.0.0/32
+ Listen port	 	 =	4000
+ Pid file path		 =	/var/run/iserverd/iserverd.pid
+ Translate path		 =	/etc/iserverd/translate
+ Translate table	 =	RUSSIAN_WIN
+ Var dir path		 =	/var/run/iserverd
+ Server mode		 =	daemon
+ Min childs 		 = 	4
+ Max childs 		 =	100
+ Shared memory size	 =	512000
+ Default ping time	 =	120
+ Depart list version	 =	1
+ Externals number	 =	0
+ Admin email		 =	root@localhost
+ Info Password		 =	DEFAULT
+ Enable actions          =      True
+ Enable watchdog	 =	True
+ Start without RDBMS	 =	True
+ Watchdog timeout	 =	10
+ WWP socket filename	 =	/tmp/wwp_sock
+ Actions config file     =      /etc/iserverd/actions.conf
+ Realtime online db      =	False
+ Max tcp connections     =      512
+ 
+# Restrict access for all users to last used IP address
+ Restrict access to LUIP =      False
+
+# -----parameters for database system ----------
+
+ database user		 =	iserverd
+ database password	 =	sicq
+ 
+# Leave addr blank if you have local PostgreSQL
+ database addr		 =	
+ database port		 =	5432
+ users db name		 =	users_db
+
+ vacuumdb timeout	 =	1800
+ Defrag db check period  =	43200
+ Online db check period  =	3600
+
+# -----parameters for log/debug system----------
+
+ Maxlog size		 =	500
+ Log umask		 =	022
+ Log level		 =	10
+ Debug level		 =	10
+ Timestamp logs		 =	True
+ Append logs		 = 	False
+ Log process pid	 =	False
+
+# -----Config files for Vxx proto modules--------
+
+ Include		 =	/etc/iserverd/v3_proto.conf
+ Include 		 =	/etc/iserverd/v5_proto.conf
+ Include 		 =	/etc/iserverd/v7_proto.conf

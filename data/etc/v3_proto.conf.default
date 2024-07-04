@@ -1,0 +1,20 @@
+# ---Parameters for V3 proto module----
+# This configuration is default. You can ajust ping 
+# time to decrease network traffic or to decrease 
+# autologoff time.
+
+V3 proto enabled	= 	Yes
+V3 max retries		= 	3
+V3 max timeout		=	10
+V3 ping time		=	55
+V3 max search		=	100
+V3 max msgsize		=	2025
+V3 packet mtu		=	500
+V3 registration enabled =	Yes
+V3 auto registration    =	No
+
+# Don't forget to change "V3 post-register info" if 
+# you changed "V3 auto registration" option 
+
+V3 admin notes		=	/etc/iserverd/texts/adm_notes.txt
+V3 post-register info	=	/etc/iserverd/texts/post_reg_man.txt

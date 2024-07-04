@@ -1,0 +1,29 @@
+$InputBGColor = "#D4D0C8";
+$InputMouseOver = "#DEDFDF";
+$TableBorderColor = "#2f2f4f";
+$TableColor = "#C6C6C6";
+$RightTablesCellPadding = "2";
+$MainTableColor="#A6A6A6";
+$MainTableCellPadding = "0";
+$TableColorStrip = "#969696";
+$TextColor = "#000000";
+$BGColor = "#C6C6C6";
+$MenuSelectedColor="#3A6EA5";
+$MenuOverColor="#DEDFDF";
+$MenuCellPadding = "3";
+$BodyTDStyle = qq|
+    font-family : Verdana, Arial, sans-serif;
+    font-size : 9pt;
+    scrollbar-face-color       : #D4D0C8;
+    scrollbar-highlight-color  : #D4D0C8;
+    scrollbar-shadow-color     : #959689;
+    scrollbar-3dlight-color    : #000000;
+    scrollbar-arrow-color      : #000000;
+    scrollbar-track-color      : #A4A098;
+    scrollbar-darkshadow-color : #333c67|;
+$ALink=qq|
+    color : #000000;
+    text-decoration: underline|;
+$AHover=qq|
+    text-decoration: none;
+    color : #555555|;

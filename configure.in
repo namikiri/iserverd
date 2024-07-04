@@ -527,10 +527,10 @@ AC_SUBST(SYS_MKTMP)
 dnl Now we can setup Makefiles and scripts with includes
 AC_OUTPUT(Makefile data/Makefile script/Makefile 
           IServerd.spec
-	  script/icquser script/db_manage.sh include/defaults.h
+	  script/iserver_icquser script/db_manage.sh include/defaults.h
 	  script/iserverd.sh script/iserverd.sh.asp 
-	  script/post_mess.cgi man/Makefile 
-	  script/convert_db.sh
+	  script/iserver_post_mess.cgi man/Makefile 
+	  script/iserver_convert_db.sh
 	  data/etc/iserv.conf.default 
 	  data/etc/v3_proto.conf.default 
 	  data/etc/v5_proto.conf.default

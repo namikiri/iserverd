@@ -13,7 +13,7 @@ postgresql-server.
 
 Проконтролировать работу сервера можно запустив программу
 (от root или пользователей группы iserverd)
-    /usr/bin/server_status
+    /usr/bin/iserver_server_status
 
 Создать, удалить, сохранить или восстановить базу можно
 используя скрипт (от postgres) db_manage.sh:

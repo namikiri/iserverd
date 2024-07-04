@@ -35,8 +35,8 @@ static char *last_ptr=NULL;
 /**************************************************************************/
 /* Encode raw data buffer into string (binhex algorihm)                   */
 /**************************************************************************/
-int hexencode(char *rstr, char *buf, int buf_size) 
-{ 
+int hexencode(char *rstr, char *buf, int buf_size)
+{
    int sind, rind;
    int slen = buf_size;
    char *hexchars = "0123456789ABCDEF";
@@ -44,19 +44,19 @@ int hexencode(char *rstr, char *buf, int buf_size)
    for (sind=0,rind=0;sind<slen;sind++)
    {
       rstr[rind++] = hexchars[(buf[sind] & 0xF0) >> 4];
-      rstr[rind++] = hexchars[buf[sind] & 0x0F];      
+      rstr[rind++] = hexchars[buf[sind] & 0x0F];
    }
-   
+
    rstr[rind] = 0;
    return(0);
-} 
+}
 
 
 /**************************************************************************/
 /* Decode string coded by hexencode() into raw data buffer                */
 /**************************************************************************/
-int hexdecode(char *buf, char *sstr, int buflen) 
-{ 
+int hexdecode(char *buf, char *sstr, int buflen)
+{
    int sind, rind;
    int slen = strlen(sstr);
    char tstr[5];
@@ -67,28 +67,28 @@ int hexdecode(char *buf, char *sstr, int buflen)
    for (rind=0,sind=0;sind<slen;sind++)
    {
       tstr[2] = sstr[sind++];
-      tstr[3] = sstr[sind];      
+      tstr[3] = sstr[sind];
       buf[rind++] = ahextoul(tstr);
       if (rind > buflen) break;
    }
-   
+
    return(rind);
-} 
+}
 
 
 /**************************************************************************/
 /* This func compare strlen with given value and send alarm if it greater */
 /**************************************************************************/
-BOOL islen_valid(int str_len, int limit, char *fname, 
+BOOL islen_valid(int str_len, int limit, char *fname,
 		 struct online_user &user)
 {
-  if (str_len > limit) 
-  { 
-     LOG_ALARM(0, ("Warning: User %lu from %s:%ld sent too big %s (%d)...\n", 
+  if (str_len > limit)
+  {
+     LOG_ALARM(0, ("Warning: User %lu from %s:%ld sent too big %s (%d)...\n",
               user.uin, inet_ntoa(user.ip), user.udp_port, fname, str_len));
      return(False);
   }
-  
+
   return(True);
 }
 
@@ -126,7 +126,7 @@ unsigned long ahextoul(char *string)
       resnum  = resnum << 4;
       resnum += lonybble;
    }
-   
+
    return(resnum);
 }
 
@@ -136,13 +136,13 @@ unsigned long ahextoul(char *string)
 /**************************************************************************/
 BOOL islen_valid(int str_len, int limit, char *fname, Packet &pack)
 {
-  if (str_len > limit) 
-  { 
-     LOG_ALARM(0, ("Warning: New user from %s:%d sent too big %s (%d)...\n", 
+  if (str_len > limit)
+  {
+     LOG_ALARM(0, ("Warning: New user from %s:%d sent too big %s (%d)...\n",
                  inet_ntoa(pack.from_ip), pack.from_port, fname, str_len));
      return(False);
   }
-  
+
   return(True);
 }
 
@@ -153,23 +153,23 @@ BOOL islen_valid(int str_len, int limit, char *fname, Packet &pack)
 void convert_to_postgres(char *string, int tsize)
 {
    if (strlen(string) > 2048) return;
-   
+
    for (unsigned int i=0, t=0; i<strlen(string)+1; i++, t++)
    {
      tempst3[t]   = string[i];
-   
-     if ((string[i] == '\\') | 
+
+     if ((string[i] == '\\') |
          (string[i] == '\'') )
      {
-       t++; 
+       t++;
        tempst3[t] = string[i];
        if (t > 2047) return;
      }
    }
-   
+
    ITrans.translateToServer(tempst3);
    strncpy(string, tempst3, tsize-1);
-   
+
    return;
 }
 
@@ -179,20 +179,20 @@ void convert_to_postgres(char *string, int tsize)
 /*************************************************************************/
 void convert_to_postgres(char *target_string, int tsize, char *string)
 {
-   
+
    for (unsigned int i=0, t=0; i<strlen(string)+1; i++, t++)
    {
      target_string[t]   = string[i];
-   
-     if ((string[i] == '\\') | 
+
+     if ((string[i] == '\\') |
          (string[i] == '\'') )
      {
        t++; target_string[t] = string[i];
      }
    }
-   
+
    ITrans.translateToServer(target_string);
-   
+
    return;
 }
 
@@ -202,18 +202,18 @@ void convert_to_postgres(char *target_string, int tsize, char *string)
 /*************************************************************************/
 void convert_to_postgres2(char *target_string, int tsize, char *string)
 {
-   
+
    for (unsigned int i=0, t=0; i<strlen(string)+1; i++, t++)
    {
      target_string[t]   = string[i];
-   
-     if ((string[i] == '\\') | 
+
+     if ((string[i] == '\\') |
          (string[i] == '\'') )
      {
        t++; target_string[t] = string[i];
      }
    }
-   
+
    return;
 }
 
@@ -259,7 +259,7 @@ BOOL next_token(char **ptr,char *buff,char *sep, size_t bufsize)
 	    }
     }
 
-  *ptr = (*s) ? s+1 : s;  
+  *ptr = (*s) ? s+1 : s;
   *buff = 0;
   last_ptr = *ptr;
 
@@ -294,8 +294,8 @@ char **toktocliplist(int *ctok, char *sep)
   s=last_ptr;
 
   if (!(ret=iret=(char **)malloc(ictok*sizeof(char *)))) return NULL;
-  
-  while(ictok--) {    
+
+  while(ictok--) {
     *iret++=s;
     while(*s++);
     while(!*s) s++;
@@ -334,7 +334,7 @@ int StrnCaseCmp(const char *s, const char *t, size_t n)
       n--;
     }
 
-    if (n) 
+    if (n)
       return(toupper(*s) - toupper(*t));
 
     return(0);
@@ -349,7 +349,7 @@ BOOL strequal(const char *s1, const char *s2)
 {
   if (s1 == s2) return(True);
   if (!s1 || !s2) return(False);
-  
+
   return(StrCaseCmp(s1,s2)==0);
 }
 
@@ -361,7 +361,7 @@ BOOL strnequal(const char *s1,const char *s2,size_t n)
 {
   if (s1 == s2) return(True);
   if (!s1 || !s2 || !n) return(False);
-  
+
   return(StrnCaseCmp(s1,s2,n)==0);
 }
 
@@ -373,7 +373,7 @@ BOOL strcsequal(const char *s1,const char *s2)
 {
   if (s1 == s2) return(True);
   if (!s1 || !s2) return(False);
-  
+
   return(strcmp(s1,s2)==0);
 }
 
@@ -498,8 +498,8 @@ BOOL trim_string(char *s,const char *front,const char *back)
   if(back_len)
   {
       s_len = strlen(s);
-      while ((s_len >= back_len) && 
-             (strncmp(s + s_len - back_len, back, back_len)==0))  
+      while ((s_len >= back_len) &&
+             (strncmp(s + s_len - back_len, back, back_len)==0))
       {
         ret = True;
         s[s_len - back_len] = '\0';
@@ -516,7 +516,7 @@ BOOL trim_string(char *s,const char *front,const char *back)
 /**************************************************************************/
 BOOL strhasupper(const char *s)
 {
-  while (*s) 
+  while (*s)
   {
      size_t skip = 0;
      if( skip != 0 ) s += skip;
@@ -535,7 +535,7 @@ BOOL strhasupper(const char *s)
 /**************************************************************************/
 BOOL strhaslower(const char *s)
 {
-  while (*s) 
+  while (*s)
   {
      size_t skip = 0;
      if( skip != 0 )  s += skip;
@@ -556,7 +556,7 @@ BOOL strhaslower(const char *s)
 size_t count_chars(const char *s,char c)
 {
    size_t count=0;
-   while (*s) 
+   while (*s)
    {
       size_t skip = 0;
       if( skip != 0 )  s += skip;
@@ -607,16 +607,16 @@ char *safe_strcpy(char *dest,const char *src, size_t maxlength)
     {
        *dest = 0;
        return dest;
-    }  
+    }
 
     len = strlen(src);
 
     if (len > maxlength) len = maxlength;
-      
+
     memcpy(dest, src, len);
     dest[len] = 0;
     return dest;
-}  
+}
 
 
 /**************************************************************************/
@@ -637,7 +637,7 @@ char *safe_strcat(char *dest, const char *src, size_t maxlength)
     {
        src_len = maxlength - dest_len;
     }
-      
+
     memcpy(&dest[dest_len], src, src_len);
     dest[dest_len + src_len] = 0;
     return dest;
@@ -804,7 +804,7 @@ void strhex_to_arr(char *p, int len, const char *strhex)
 
       p[num_chars] = (hinybble << 4) | lonybble;
       num_chars++;
-      
+
       if (num_chars > 7) return;
 
       p1 = NULL;
@@ -969,7 +969,7 @@ int count_subs(char *s,const char *pattern)
       s = p + lp;
       ls -= lp;
    }
-   
+
    DEBUG(450, ("subs: ptt=\"%s\", cnt=%d\n", pattern, subs_count));
    return(subs_count);
 }
@@ -1002,7 +1002,7 @@ void all_string_sub(char *s,const char *pattern,const char *insert, size_t len)
    li = (ssize_t)strlen(insert);
 
    if (!*pattern) return;
-	
+
    while (lp <= ls && (p = strstr(s,pattern)))
    {
       if (len && (ls + (li-lp) >= (int)len))
@@ -1095,7 +1095,7 @@ void split_at_last_component(char *path, char *front, char sep, char *back)
 /**************************************************************************/
 char *string_truncate(char *s, int length)
 {
-   if (s && ((int)strlen(s) > length))  s[length] = 0; 
+   if (s && ((int)strlen(s) > length))  s[length] = 0;
    return s;
 }
 
@@ -1108,7 +1108,7 @@ char *n2str(unsigned long num)
    static cstring result;
 
    snprintf(result, sizeof(cstring)-1, "%lu", num);
-   return(result);       
+   return(result);
 }
 
 

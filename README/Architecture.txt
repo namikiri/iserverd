@@ -8,22 +8,7 @@ Updated:	14 May 2001 by Regressor <AVShutko@mail.khstu.ru>
 Subject:	IServerd architecture 
 ============================================================================
 
-
-  ‚€€€€€€€€€€€€€€<€€€€€€€€€€€€€€€€€€€€€<€€€€€€ƒ                          
-  V                                                                     
-‚€‰€€ƒ     ‚€ ƒ    ‚€€€€€€ƒ   ‚€€€€€€ƒ    ‚€€€‰€€€€€ƒ          ¥         ¨
- MS †€€€€€€€€€€€€>‡   SP †==>‡ PP1 +†===>‡    + EP           ¡      DB ¡
-„ˆ€€€…     poll()           „€€€€€½…    „€ˆˆ€½€€ˆ€…          ¡         ¡
-  ‚€€€€ƒ        daemon   ‚€€€€€½ƒ       ¡              ¡  Online ¡
-   US †€€€€€€€€€>‡      †==>‡ PP2 +†===>€€… «  ¼        < > µ         ¡
-  „€ˆ€€…  „ €…    „€ˆ€ˆ€€…   „€€€€€½…                       ¡  Users  ¡
-                                ¡                        ¡         ¡
-    „<€ wwp,info...          ... ±        ¼    ¼        < > µ  Msgs   ¡
-                                 ¡                        ¡         ¡
-     ‚€€€€€€ƒ              ‚€€€€€½ƒ        ‚€€‰€€ƒ         ¡         ¡
- „€<<€‡  BP  †<======… „=====>‡ PPn +†===>€€€… Timer         «         ®
-      „€€€€€€…                „€€€€€€…         „€€€€€…
-
+See Architecture.gif
 
  MS  --  Main socket		 (UDP socket for clients)
  US  --  Webpager socket	 (unix domain socket for wwp messages)

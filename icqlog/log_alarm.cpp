@@ -62,7 +62,7 @@ Write an alarm message on the alarm log file.
 
 int alrDebug1( char *format_str, ... )
 {
-   va_list ap;  
+   va_list ap;
    int old_errno = errno;
 
    if( stdout_logging )
@@ -74,7 +74,7 @@ int alrDebug1( char *format_str, ... )
       errno = old_errno;
       return( 0 );
    }
-  
+
    va_start( ap, format_str );
    (void)vsyslog( LOG_ALERT, format_str, ap );
    va_end( ap );
@@ -126,7 +126,7 @@ BOOL alrtext( char *format_str, ... )
 {
    va_list ap;
    pstring msgbuf;
-   va_start( ap, format_str ); 
+   va_start( ap, format_str );
    vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
    va_end( ap );
 

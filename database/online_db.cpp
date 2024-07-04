@@ -26,7 +26,7 @@
 /* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.			  */
 /*									  */
 /* This unit implements online database calls (lookup, sseq control, 	  */
-/* touch, vacuum, setstatus, transaction control, etc) for packet 	  */ 
+/* touch, vacuum, setstatus, transaction control, etc) for packet 	  */
 /* processors 								  */
 /*                                                                        */
 /**************************************************************************/
@@ -56,7 +56,7 @@ int check_online_table()
       PQclear(res);
    }
 
-   /* Check every user in table */        
+   /* Check every user in table */
    for (;;)
    {
       res = PQexec(users_dbconn, "FETCH IN uportal");
@@ -65,7 +65,7 @@ int check_online_table()
          handle_database_error(res, "[ODB CHECK FETCH FROM PORTAL]");
          break;
       }
-  	 
+
       if (PQntuples(res) == 0)
       {
          PQclear(res);
@@ -81,8 +81,8 @@ int check_online_table()
       PQclear(res);
    }
 
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "UPDATE Online_Users SET lutm=%d", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "UPDATE Online_Users SET lutm=%d",
    	    timeToLong(time(NULL)));
 
    PQclear(PQexec(users_dbconn, dbcomm_str));
@@ -103,9 +103,9 @@ int vacuum_online_tables()
    PQclear(PQexec(users_dbconn, "VACUUM ANALYZE Online_Users"));
    PQclear(PQexec(users_dbconn, "VACUUM ANALYZE Fragment_Storage"));
    PQclear(PQexec(users_dbconn, "VACUUM ANALYZE Users_Messages"));
-   
+
    LOG_SYS(50, ("Scheduled vacuuming server tables completed...\n"));
-   
+
    return (0);
 }
 
@@ -138,12 +138,12 @@ int db_online_setstatus(struct online_user &temp_user)
    PGresult *res;
    cstring dbcomm_str;
    int      nRet;
-   
+
    shm_setstatus(temp_user);
-   
+
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "UPDATE Online_Users SET stat=%d, estat=%d WHERE uin=%lu", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "UPDATE Online_Users SET stat=%d, estat=%d WHERE uin=%lu",
 	    temp_user.status, temp_user.estat, temp_user.uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -152,7 +152,7 @@ int db_online_setstatus(struct online_user &temp_user)
       handle_database_error(res, "[SET STATUS]");
     nRet = -1;
    }
-   else 
+   else
    {
     nRet = ( (strcmp(PQcmdTuples(res),"") != 0) ? 0 : -1 );
       PQclear(res);
@@ -167,7 +167,7 @@ int db_online_setstatus(struct online_user &temp_user)
 int db_online_clear()
 {
    PGresult *res;
-   
+
    res = PQexec(users_dbconn, "DELETE FROM Online_Users");
 
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -176,7 +176,7 @@ int db_online_clear()
       return(-1);
    }
 
-      PQclear(res);  
+      PQclear(res);
       return(0);
 }
 
@@ -189,12 +189,12 @@ int db_online_setstate(struct online_user &temp_user, int state)
    PGresult *res;
    cstring dbcomm_str;
    int      nRet;
-   
+
    shm_setstate(temp_user, state);
-   
+
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "UPDATE Online_Users SET state=%d WHERE uin=%lu", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "UPDATE Online_Users SET state=%d WHERE uin=%lu",
 	    state, temp_user.uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -203,12 +203,12 @@ int db_online_setstate(struct online_user &temp_user, int state)
       handle_database_error(res, "[SET STATE]");
     nRet = -1;
    }
-   else 
+   else
    {
     nRet = ( (strcmp(PQcmdTuples(res), "") != 0) ? 0 : -1 );
       PQclear(res);
    }
-  return(nRet);    
+  return(nRet);
 }
 
 
@@ -221,14 +221,14 @@ int db_online_touch(struct online_user &temp_user)
    cstring dbcomm_str;
   int      nRet;
 
-  nRet = shm_touch(temp_user);   
-   
+  nRet = shm_touch(temp_user);
+
    /* If admin wants realtime uptodate online_users table */
    if (lp_realtime_odb())
    {
       /* exec select command on backend server */
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-              "UPDATE Online_Users SET lutm=%d WHERE uin=%lu", 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+              "UPDATE Online_Users SET lutm=%d WHERE uin=%lu",
    	       timeToLong(time(NULL)), temp_user.uin);
 
       res = PQexec(users_dbconn, dbcomm_str);
@@ -237,7 +237,7 @@ int db_online_touch(struct online_user &temp_user)
          handle_database_error(res, "[ONLINE TOUCH]");
       nRet = -1;
       }
-      else 
+      else
       {
       nRet = ( (strcmp(PQcmdTuples(res), "") != 0) ? 0 : -1 );
          PQclear(res);
@@ -257,17 +257,17 @@ int  db_online_insert(struct online_user &temp_user)
    cstring dbcomm_str;
    int      nRet;
    /* exec select command on backend server */
-   
+
    if (!shm_add(temp_user)) return(-1);
-   
+
    DEBUG(50, ("Adding user into online table (shm_index=%lu)\n", temp_user.shm_index));
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "INSERT INTO Online_Users values (%lu,%lu,%d,%d,%d,%lu,%lu,%d,%d,%d,%d,%lu,255,%d,%d,%d,%lu)", 
-	    temp_user.uin, ipToIcq(temp_user.ip), temp_user.udp_port, temp_user.tcp_port, 
-            temp_user.status, temp_user.uptime, temp_user.lutime, temp_user.ttl, 
-	    temp_user.protocol, temp_user.servseq, temp_user.servseq2, 
-	    temp_user.session_id, temp_user.tcpver, temp_user.estat, temp_user.active, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "INSERT INTO Online_Users values (%lu,%lu,%d,%d,%d,%lu,%lu,%d,%d,%d,%d,%lu,255,%d,%d,%d,%lu)",
+	    temp_user.uin, ipToIcq(temp_user.ip), temp_user.udp_port, temp_user.tcp_port,
+            temp_user.status, temp_user.uptime, temp_user.lutime, temp_user.ttl,
+	    temp_user.protocol, temp_user.servseq, temp_user.servseq2,
+	    temp_user.session_id, temp_user.tcpver, temp_user.estat, temp_user.active,
 	    temp_user.shm_index);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -276,7 +276,7 @@ int  db_online_insert(struct online_user &temp_user)
       handle_database_error(res, "[INSERT INTO ONLINE]");
       nRet = -1;
    }
-   else 
+   else
    {
       nRet = ( (strcmp(PQcmdTuples(res), "") != 0) ? 0 : -1 );
       PQclear(res);
@@ -293,7 +293,7 @@ int  db_online_delete(unsigned long to_uin, int shm)
    PGresult *res;
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM Online_Users WHERE uin=%lu", to_uin);
 
    if (shm) shm_delete(to_uin);
@@ -308,7 +308,7 @@ int  db_online_delete(unsigned long to_uin, int shm)
    PQclear(res);
 
    /* delete from online_profiles table */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM Online_Profiles WHERE sn='%lu'", to_uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -319,17 +319,17 @@ int  db_online_delete(unsigned long to_uin, int shm)
    }
 
    PQclear(res);
-   
+
    if (lp_realtime_odb())
    {
       /* Just in case... I'll delete all expired records from database */
       /* We should do this only in online_db realtime mode             */
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-              "DELETE FROM Online_Users WHERE ((%lu-lutm) > (ttl+5)) AND (ttl > 0)", 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+              "DELETE FROM Online_Users WHERE ((%lu-lutm) > (ttl+5)) AND (ttl > 0)",
 	       time(NULL));
 
       res = PQexec(users_dbconn, dbcomm_str);
-      
+
       if (PQresultStatus(res) != PGRES_COMMAND_OK)
       {
          handle_database_error(res, "[DELETE EXPIRED USERS]");
@@ -339,7 +339,7 @@ int  db_online_delete(unsigned long to_uin, int shm)
       PQclear(res);
       }
    }
-   
+
    return(0);
 }
 
@@ -347,19 +347,19 @@ int  db_online_delete(unsigned long to_uin, int shm)
 /**************************************************************************/
 /* This function return user data from online database			  */
 /**************************************************************************/
-int db_add_online_lookup(unsigned long caller_uin, unsigned long to_uin, 
+int db_add_online_lookup(unsigned long caller_uin, unsigned long to_uin,
 			 struct online_user &temp_user)
 {
    PGresult *res;
    fstring dbcomm_str;
   int      nRet;
-   
+
    if (shm_lookup(to_uin, temp_user) != 0) return (-1);
-      
+
    /* now we should find out if caller have rights to view user status */
    if (temp_user.status == ICQ_STATUS_PRIVATE)
    {
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
       "SELECT 1 FROM Online_Contacts WHERE (ouin=%lu) AND (tuin=%lu) AND (type=%d) LIMIT 1",
 	        to_uin, caller_uin, VISIBLE_CONTACT);
 
@@ -379,7 +379,7 @@ int db_add_online_lookup(unsigned long caller_uin, unsigned long to_uin,
    else
    {
     /* we do not need to count, just try to fetch 1 record */
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
       "SELECT 1 FROM Online_Contacts WHERE (ouin=%lu) AND (tuin=%lu) AND (type=%d) LIMIT 1",
 	        to_uin, caller_uin, INVISIBLE_CONTACT);
 
@@ -396,7 +396,7 @@ int db_add_online_lookup(unsigned long caller_uin, unsigned long to_uin,
          PQclear(res);
       }
    }
-  return(nRet);   
+  return(nRet);
 }
 
 
@@ -412,15 +412,15 @@ int db_online_lookup(unsigned long to_uin, struct online_user &temp_user)
 /**************************************************************************/
 /* Return user data from online database if auser is in his contact list  */
 /**************************************************************************/
-int need_notification(unsigned long auin, unsigned long to_uin, 
+int need_notification(unsigned long auin, unsigned long to_uin,
 		      struct online_user &to_user)
 {
    PGresult *res;
    fstring dbcomm_str;
    int      nRet;
-   
+
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
     "SELECT * FROM Online_Users WHERE (uin=%lu) AND EXISTS(SELECT 1 FROM Online_Contacts WHERE (tuin=%lu) AND (ouin=%lu) AND (type=%d))",
 	    to_uin, auin, to_uin, NORMAL_CONTACT);
 
@@ -431,7 +431,7 @@ int need_notification(unsigned long auin, unsigned long to_uin,
     nRet = -1;
    }
   else
-   if (PQnfields(res) != ONLN_TBL_FIELDS) 
+   if (PQnfields(res) != ONLN_TBL_FIELDS)
    {
     LOG_SYS(0, ("Corrupted table structure in online_table: \n"));
       exit(EXIT_ERROR_DB_STRUCTURE);
@@ -441,25 +441,25 @@ int need_notification(unsigned long auin, unsigned long to_uin,
    if (PQntuples(res) > 0)
    {
       to_user.uin	 = atoul(PQgetvalue(res, 0, 0));
-      to_user.ip	 = icqToIp(atoul(PQgetvalue(res, 0, 1))); 
-      to_user.udp_port	 = atol(PQgetvalue(res, 0,  2)); 
-      to_user.tcp_port	 = atol(PQgetvalue(res, 0,  3)); 
+      to_user.ip	 = icqToIp(atoul(PQgetvalue(res, 0, 1)));
+      to_user.udp_port	 = atol(PQgetvalue(res, 0,  2));
+      to_user.tcp_port	 = atol(PQgetvalue(res, 0,  3));
       to_user.status	 = atol(PQgetvalue(res, 0,  4));
-      to_user.uptime	 = atoul(PQgetvalue(res, 0,  5)); 
-      to_user.lutime	 = atoul(PQgetvalue(res, 0,  6)); 
-      to_user.ttl	 = atol(PQgetvalue(res, 0,  7)); 
-      to_user.protocol	 = (unsigned short)atoi(PQgetvalue(res, 0, 8)); 
+      to_user.uptime	 = atoul(PQgetvalue(res, 0,  5));
+      to_user.lutime	 = atoul(PQgetvalue(res, 0,  6));
+      to_user.ttl	 = atol(PQgetvalue(res, 0,  7));
+      to_user.protocol	 = (unsigned short)atoi(PQgetvalue(res, 0, 8));
       to_user.servseq	 = atol(PQgetvalue(res, 0,  9));
       to_user.servseq2	 = atol(PQgetvalue(res, 0, 10));
       to_user.session_id = atoul(PQgetvalue(res, 0, 11));
       to_user.state	 = atol(PQgetvalue(res, 0, 12));
-      to_user.tcpver	 = atol(PQgetvalue(res, 0, 13)); 
+      to_user.tcpver	 = atol(PQgetvalue(res, 0, 13));
       to_user.estat 	 = atol(PQgetvalue(res, 0, 14));
       to_user.active	 = atol(PQgetvalue(res, 0, 15));
-      
+
       nRet = 0;
    }
-   else 
+   else
    {
       nRet = -1;
     }
@@ -472,7 +472,7 @@ int need_notification(unsigned long auin, unsigned long to_uin,
 /**************************************************************************/
 /* This function return user data from online database			  */
 /**************************************************************************/
-int db_online_lookup(unsigned long to_uin, 
+int db_online_lookup(unsigned long to_uin,
 		     struct online_user &temp_user,
 		     unsigned short magnum1,
 		     unsigned short magnum2)
@@ -497,15 +497,15 @@ int db_online_lookup(unsigned long to_uin,
       temp_user.dc_type		= 0;
       temp_user.dc_cookie	= 0;
       temp_user.uclass		= 0x400;	/* icq admin */
-	
+
       ipc_vars->magic_num1 = random_num();
       ipc_vars->magic_num2 = random_num();
-      
-      return(0);   
+
+      return(0);
    }
-   
+
    if (shm_lookup(to_uin, temp_user) == 0) return(0);
-   
+
    return(-1);
 
 }
@@ -537,13 +537,13 @@ int db_online_sseq_close(struct online_user &temp_user, int inc_num = 0)
 int db_online_activate_user(unsigned long uin)
 {
    PGresult *res;
-   
+
    cstring dbcomm_str;
-   
+
    shm_activate_user(uin);
-   
+
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "UPDATE Online_Users SET active=1 WHERE uin=%lu", uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -555,13 +555,13 @@ int db_online_activate_user(unsigned long uin)
 
    if (strcmp(PQcmdTuples(res),"") != 0 )
    {
-      PQclear(res);  
+      PQclear(res);
       return(0);
    }
-   else 
+   else
    {
       PQclear(res);
-      return(-1);    
+      return(-1);
    }
 }
 
@@ -570,7 +570,7 @@ int db_online_activate_user(unsigned long uin)
 /**************************************************************************/
 /* Used to save user profile/away info in online_profiles table 	  */
 /**************************************************************************/
-int db_online_save_profile(char *sn, int type, char *mime, 
+int db_online_save_profile(char *sn, int type, char *mime,
                            char *data, int datasize)
 {
    PGresult *res;
@@ -578,7 +578,7 @@ int db_online_save_profile(char *sn, int type, char *mime,
    int nRet = 0;
 
    /* delete old record */
-   slprintf(tempst3, sizeof(tempst3)-1, 
+   slprintf(tempst3, sizeof(tempst3)-1,
            "DELETE FROM Online_Profiles WHERE sn='%s' AND type=%d", sn, type);
 
    res = PQexec(users_dbconn, tempst3);
@@ -594,8 +594,8 @@ int db_online_save_profile(char *sn, int type, char *mime,
    /* now time to encode data and save all this shit to db */
    convert_to_postgres(cmime, sizeof(fstring)-1, mime);
    hexencode(tempst, data, datasize);
-   slprintf(tempst3, sizeof(tempst3)-1, 
-           "INSERT INTO Online_Profiles values ('%s',%d,'%s','%s')", 
+   slprintf(tempst3, sizeof(tempst3)-1,
+           "INSERT INTO Online_Profiles values ('%s',%d,'%s','%s')",
 	    sn, type, cmime, tempst);
 
    res = PQexec(users_dbconn, tempst3);
@@ -604,12 +604,12 @@ int db_online_save_profile(char *sn, int type, char *mime,
       handle_database_error(res, "[OPRF INSERT]");
       nRet = -1;
    }
-   else 
+   else
    {
       nRet = ((strcmp(PQcmdTuples(res), "") != 0) ? 0 : -1);
       PQclear(res);
    }
-   
+
    return(nRet);
 }
 
@@ -623,8 +623,8 @@ int db_online_get_profile(char *sn, int type, char *mime, int max_mime,
    PGresult *res;
    int datasize = 0;
 
-   slprintf(tempst3, sizeof(tempst3)-1, 
-           "SELECT mime,data FROM Online_Profiles WHERE (sn like '%s') AND (type=%d) LIMIT 1", 
+   slprintf(tempst3, sizeof(tempst3)-1,
+           "SELECT mime,data FROM Online_Profiles WHERE (sn like '%s') AND (type=%d) LIMIT 1",
 	    sn, type);
 
    res = PQexec(users_dbconn, tempst3);
@@ -633,13 +633,13 @@ int db_online_get_profile(char *sn, int type, char *mime, int max_mime,
       handle_database_error(res, "[SELECT PRFL]");
       return(-1);
    }
-   
+
    if (PQntuples(res) < 1) { PQclear(res); return(-1); }
-   
+
    /* now time to decode data */
    snprintf(mime, max_mime, PQgetvalue(res, 0, 0));
    ITrans.translateToClient(mime);
-   
+
    snprintf(tempst3, sizeof(tempst3)-1, PQgetvalue(res, 0, 1));
    datasize = hexdecode(data, tempst3, max_data);
 

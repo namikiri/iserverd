@@ -87,7 +87,7 @@ WARNING: you should execute this commands from user postgres (or you can add
 
 -----=======OLD DATABASE CONVERTATION=======-------
 
-I've made utility called db_convert. This program will convert your Micro$oft 
+I've made utility called iserver_db_convert. This program will convert your Micro$oft 
 Access database to Postgress sql users database. First of all you'll need export 
 Access database to text file with symbol ';' as delimiter.
 Open ICQSDB.mdb, highlight icqusers_tb table, then select menu file/export. In 

@@ -48,10 +48,10 @@ static int      debug_count    = 0;
 void log_alarm_packet(int level, Packet &pack)
 {
    (void)dbghdr (level, "", "", (__LINE__) );(void)dbgtext("\n");
-   
-   DEBUGADD(level, ("[Packet size: %d bytes] [%s:%d]\n", pack.sizeVal, 
+
+   DEBUGADD(level, ("[Packet size: %d bytes] [%s:%d]\n", pack.sizeVal,
                      inet_ntoa(pack.from_ip), pack.from_port));
-			       
+
    dbg_dump_data(level, pack.buff, pack.sizeVal);
    DEBUGADD(level, ("\n"));
 }
@@ -85,7 +85,7 @@ void reopen_logs( void )
    pstring fname;
 
    (void)umask( lp_umask() );
-  
+
    if( DEBUGLEVEL > 0 )
    {
       pstrcpy( fname, debugf );
@@ -98,14 +98,14 @@ void reopen_logs( void )
          if( dbgf ) (void)fclose( dbgf );
          if( append_log ) dbgf = fopen( debugf, "a" );
          else dbgf = fopen( debugf, "w" );
-	
-         if (dbgf == NULL) 
+
+         if (dbgf == NULL)
          {
 	    LOG_SYS(0, ("FATAL ERROR: Can't open (create) debug logfile: \"%s\"\n", debugf));
 	    exit(EXIT_ERROR_LOG_CREATE);
          }
-	
-         fchmod(fileno(dbgf), lp_lperms());	
+
+         fchmod(fileno(dbgf), lp_lperms());
          force_check_log_size();
          if( dbgf ) setbuf( dbgf, NULL );
          (void)umask( lp_umask() );
@@ -141,7 +141,7 @@ BOOL need_to_check_log_size( void )
    if( debug_count++ < 100 )  return( False );
 
    maxlog = lp_log_size() * 1024;
-   if( !dbgf || maxlog <= 0 ) 
+   if( !dbgf || maxlog <= 0 )
    {
       debug_count = 0;
       return(False);
@@ -159,7 +159,7 @@ void check_log_size( void )
    struct stat st;
 
    if( geteuid() != 0 ) return;
-   
+
    if( !need_to_check_log_size() ) return;
 
    maxlog = lp_log_size() * 1024;
@@ -188,7 +188,7 @@ void check_log_size( void )
 /**************************************************************************/
 int Debug1( char *format_str, ... )
 {
-   va_list ap;  
+   va_list ap;
    int old_errno = errno;
 
    if( stdout_logging )
@@ -200,7 +200,7 @@ int Debug1( char *format_str, ... )
       errno = old_errno;
       return( 0 );
    }
-  
+
    {
       if( !dbgf )
       {
@@ -232,7 +232,7 @@ int Debug1( char *format_str, ... )
 
   check_log_size();
   errno = old_errno;
-  
+
   return(0);
 
 }
@@ -277,7 +277,7 @@ void format_debug_text( char *msg )
 
   format_bufr[format_pos] = '\0';
 
-} 
+}
 
 /**************************************************************************/
 /* Flush debug output, including the format buffer content.		  */
@@ -300,8 +300,8 @@ BOOL dbghdr( int level, char *file, char *func, int line )
    {
       char header_str[200];
       header_str[0] = '\0';
-      if (level <= DEBUGLEVEL) 
-       (void)Debug1( "[%s, %d%s] %s:%s(%d)\n", timestring(False), 
+      if (level <= DEBUGLEVEL)
+       (void)Debug1( "[%s, %d%s] %s:%s(%d)\n", timestring(False),
 		     level, header_str, file, func, line );
    }
 
@@ -318,7 +318,7 @@ BOOL dbgtext( char *format_str, ... )
    va_list ap;
    pstring msgbuf;
 
-   va_start( ap, format_str ); 
+   va_start( ap, format_str );
    vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
    va_end( ap );
 
@@ -335,10 +335,10 @@ BOOL dbgtext( char *format_str, ... )
 void log_debug_packet(int level, Packet &pack)
 {
    if (DEBUGLEVEL < level) return;
-   
+
    (void)dbghdr (level, "", "", (__LINE__) );(void)dbgtext("\n");
 
-   DEBUGADD(level, ("Received %d bytes from [%s:%d]\n", pack.sizeVal, 
+   DEBUGADD(level, ("Received %d bytes from [%s:%d]\n", pack.sizeVal,
 	                   inet_ntoa(pack.from_ip), pack.from_port));
 
    dbg_dump_data(level, pack.buff, pack.sizeVal);
@@ -361,7 +361,7 @@ void dbg_dump_data(int level, const char *buf1, int len)
       return;
    }
    if (len < 0)	return;
-   if (len == 0)	
+   if (len == 0)
    {
       DEBUGADD(level, ("\n"));
       return;
@@ -387,13 +387,13 @@ void dbg_dump_data(int level, const char *buf1, int len)
    if (i % 16 != 0)	/* finish off a non-16-char-length row */
    {
       int n;
-      
+
       n = 16 - (i % 16);
       DEBUGADD(level, (" "));
       if (n > 8) DEBUGADD(level, (" "));
-      
+
       while (n--) DEBUGADD(level, ("   "));
-   
+
       n = MIN(8, i % 16);
       dbg_print_asc(level, &buf[i - (i % 16)], n);
       DEBUGADD(level, (" "));
@@ -402,8 +402,8 @@ void dbg_dump_data(int level, const char *buf1, int len)
       dbg_print_asc(level, &buf[i - n], n);
       DEBUGADD(level, ("\n"));
    }
-}  
-    
+}
+
 /**************************************************************************/
 /* Print asc char (if it can't be printed print ".").			  */
 /**************************************************************************/

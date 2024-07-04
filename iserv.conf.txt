@@ -71,7 +71,7 @@ database user		=	iserver
 database password	=	password
 database addr		=	127.0.0.1
 database port		=	5432
-users db name		=	users_db
+users db name		=	ICQ
 
 # scheduler time counters (in seconds)
 vacuumdb timeout	=	1800

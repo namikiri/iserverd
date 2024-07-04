@@ -44,7 +44,7 @@ Packet::Packet(Packet *packet)
 {
    maxSize = packet->maxSize;
    nextData = packet->nextData;
-   sizeVal = packet->sizeVal;   
+   sizeVal = packet->sizeVal;
    for (long i = 0; i < sizeVal; i++) buff[i] = packet->buff[i];
 }
 
@@ -107,7 +107,7 @@ Packet& Packet::operator<<(unsigned int data)
    put_le_int(data, nextData);
    sizeVal += SIZEOF_UNSIGNED_INT;
    nextData += SIZEOF_UNSIGNED_INT;
-   return(*this);    
+   return(*this);
 }
 
 
@@ -116,7 +116,7 @@ Packet& Packet::operator<<(unsigned short data)
    put_le_short(data, nextData);
    sizeVal += SIZEOF_UNSIGNED_SHORT;
    nextData += SIZEOF_UNSIGNED_SHORT;
-   return(*this);    
+   return(*this);
 }
 
 
@@ -125,7 +125,7 @@ Packet& Packet::operator<<(unsigned long data)
    put_le_long(data, nextData);
    sizeVal += SIZEOF_UNSIGNED_LONG;
    nextData += SIZEOF_UNSIGNED_LONG;
-   return(*this);    
+   return(*this);
 }
 
 
@@ -135,14 +135,14 @@ Packet& Packet::operator<<(char data)
    memcpy(nextData, &data, s);
    sizeVal += s;
    nextData += s;
-   return(*this);    
+   return(*this);
 }
 
 
 Packet& Packet::operator<<(char *data)
 {
    int s;
-   
+
    if (asciiz == 1)
    {
       s = strlen((char *)data) + 1;
@@ -160,7 +160,7 @@ Packet& Packet::operator<<(char *data)
 
 Packet& Packet::operator>>(char &in)
 {
-   if(nextData + SIZEOF_CHAR > (buff + sizeVal)) 
+   if(nextData + SIZEOF_CHAR > (buff + sizeVal))
       in = 0;
    else
    {
@@ -173,7 +173,7 @@ Packet& Packet::operator>>(char &in)
 
 Packet& Packet::operator>>(unsigned short &in)
 {
-   if(nextData + SIZEOF_UNSIGNED_SHORT > (buff + sizeVal)) 
+   if(nextData + SIZEOF_UNSIGNED_SHORT > (buff + sizeVal))
       in = 0;
    else
    {
@@ -186,7 +186,7 @@ Packet& Packet::operator>>(unsigned short &in)
 
 Packet& Packet::operator>>(unsigned int &in)
 {
-   if(nextData + SIZEOF_UNSIGNED_INT > (buff + sizeVal)) 
+   if(nextData + SIZEOF_UNSIGNED_INT > (buff + sizeVal))
       in = 0;
    else
    {
@@ -199,7 +199,7 @@ Packet& Packet::operator>>(unsigned int &in)
 
 Packet& Packet::operator>>(unsigned long &in)
 {
-   if(nextData + SIZEOF_UNSIGNED_LONG > (buff + sizeVal)) 
+   if(nextData + SIZEOF_UNSIGNED_LONG > (buff + sizeVal))
       in = 0;
    else
    {
@@ -212,7 +212,7 @@ Packet& Packet::operator>>(unsigned long &in)
 
 Packet& Packet::operator>>(long &in)
 {
-   if(nextData + SIZEOF_LONG > (buff + sizeVal)) 
+   if(nextData + SIZEOF_LONG > (buff + sizeVal))
       in = 0;
    else
    {
@@ -225,7 +225,7 @@ Packet& Packet::operator>>(long &in)
 
 Packet& Packet::operator>>(short &in)
 {
-   if(nextData + SIZEOF_SHORT > (buff + sizeVal)) 
+   if(nextData + SIZEOF_SHORT > (buff + sizeVal))
       in = 0;
    else
    {

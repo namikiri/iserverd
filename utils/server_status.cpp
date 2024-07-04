@@ -31,8 +31,8 @@
 
 #include "includes.h"
 
-extern pstring debugf; 
-extern pstring systemf; 
+extern pstring debugf;
+extern pstring systemf;
 extern pstring alarmf;
 extern pstring usersf;
 extern BOOL append_log;
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   slprintf(debugf,  sizeof(debugf), "/dev/null");
   setup_alrlogging( "", True);
   setup_syslogging( "", True);
-  
+
   /* Loading configuration file */
   if (!lp_load(configf,False,False,True))
   {
@@ -71,26 +71,26 @@ int main(int argc, char **argv)
     exit(EXIT_ERROR_CONFIG_OPEN);
   }
 
-  /* open listening socket */  
+  /* open listening socket */
   init_bindinterface();
   server_addr = bind_interface;
- 
+
   bind_interface.s_addr = INADDR_ANY;
   udpserver_start(0, 1000);
   setNonBlocking(msockfd);
-  
+
   /* send system request to get data */
   reply_pack.clearPacket();
   reply_pack << (unsigned short)SYS_PROTO
              << (unsigned short)ICQ_SYSxRCV_SYSINFO_REQ
              << (unsigned short)(strlen(lp_info_passwd())+1)
              << lp_info_passwd();
- 
+
   reply_pack.from_ip   = server_addr;
   reply_pack.from_port = lp_udp_port();
   udp_send_direct_packet(reply_pack);
   msleep(50);
-  
+
   /* Now time to get response - timeout 7 secs */
   for (int j=0; j<35; j++)
   {
@@ -100,8 +100,8 @@ int main(int argc, char **argv)
          sinfo.lutime = time(NULL);
          pack >> (pvers)
               >> (pcomm);
-	      
-         if ((pvers == SYS_PROTO) && 
+
+         if ((pvers == SYS_PROTO) &&
             (pcomm == ICQ_SYSxSND_SYSINFO_REP))
          {
             pack >> (sinfo.bind_port)
@@ -123,16 +123,16 @@ int main(int argc, char **argv)
 
             if (!lp_proclist())
 	    {
-	    
+
                for (int i=0; i<pcount; i++)
 	       {
 	          pack >> prpid
 	               >> prrole
 	               >> prsize;
 	       }
-		
-	       pack >> users_num;       
-	    
+
+	       pack >> users_num;
+
                printf("Server status:     Online\n");
                printf("Bind address:      %s\n", inet_ntoa(icqToIp(sinfo.bind_addr)));
                printf("UDP bind port:     %lu\n", sinfo.bind_port);
@@ -152,22 +152,22 @@ int main(int argc, char **argv)
                printf("Number of PPS:     %lu\n", sinfo.pp_num);
             }
 	    else
-	    {	  
-	       printf("Number of processes: %d\n", pcount);  
+	    {
+	       printf("Number of processes: %d\n", pcount);
 	       printf("-----------------------------------\n");
                for (int i=0; i<pcount; i++)
 	       {
 	          pack >> prpid
 	               >> prrole
 	               >> prsize;
-		       
+
                   switch (prrole)
                   {
                      case ROLE_PACKET : strncpy(sprole, "[packet  ]", 31); break;
                      case ROLE_SOCKET : strncpy(sprole, "[socket  ]", 31); break;
                      case ROLE_EPACKET: strncpy(sprole, "[epacket ]", 31); break;
-                     case ROLE_ETIMER : strncpy(sprole, "[etimer  ]", 31); break;      
-                     case ROLE_EUSER  : strncpy(sprole, "[euser   ]", 31); break;      
+                     case ROLE_ETIMER : strncpy(sprole, "[etimer  ]", 31); break;
+                     case ROLE_EUSER  : strncpy(sprole, "[euser   ]", 31); break;
                      case ROLE_DEFRAG : strncpy(sprole, "[defrag  ]", 31); break;
                      case ROLE_ACTIONS: strncpy(sprole, "[actions ]", 31); break;
                      case ROLE_BUSY   : strncpy(sprole, "[busy    ]", 31); break;
@@ -177,12 +177,12 @@ int main(int argc, char **argv)
                   }
 
 		  printf(" ppid=%lu\tprole=%d\t%s\n", prpid, prrole, sprole);
-	      
+
                }
-	       
+
 	       printf("\n");
             }
-			    
+
 	    exit(0);
          }
 	 else
@@ -195,13 +195,13 @@ int main(int argc, char **argv)
 	       exit(1);
 	    }
 	 }
-      } /* if (udp_receive) */      
+      } /* if (udp_receive) */
 
       msleep(200);
 
    }
 
-   printf("Timeout. No response from server...\n");      
+   printf("Timeout. No response from server...\n");
    exit(2);
 }
 

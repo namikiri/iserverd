@@ -40,7 +40,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/uio.h>
-#include <unistd.h> 
+#include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
 #include "libpq-fe.h"
@@ -48,85 +48,83 @@
 #define FIELDS_NUMBER 41-1
 
 #define OPTSTR  "d:x:p:u:a:w:"
-#define db_addr ""
-#define db_port "5432"
-#define db_users_db "users_db"
-#define db_user getenv("USER")
-#define db_pass ""
+//#define db_addr ""
+//#define db_port "5432"
+//#define db_user getenv("USER")
+//#define db_pass ""
 
-typedef char fld_string[255]; 
+typedef char fld_string[255];
 typedef char cmd_string[255];
 typedef char fstring[255];
 
 /* only one function definition */
-void write_status(int plines, int pfound, int dead_usr, 
+void write_status(int plines, int pfound, int dead_usr,
 		  int new_usr, int fullness, int progres);
 
 /* single record for users info database (full version) */
 
 typedef struct full_user_info
 {
-    unsigned long        uin; 	/* user uin number */
-    int		        auth;   /* authorization */
-    int		     pemail1;   /* if email1 is public */
+	unsigned long		uin; 	/* user uin number */
+	int				 	auth;	/* authorization */
+	int				 pemail1;	/* if email1 is public */
 
-    int                  age;	/* user's age */
-    int               gender;	/* user's gender */
-    int		    disabled;   /* if user's account disabled */
-    char       can_broadcast;   /* if he can send broadcast messages */
-    char         ch_password;   /* if user need to change password */
-    char 	  gmt_offset;   /* user gmt time offset */
-    
-    char	      bmonth;   /* user's birth day */
-    char      		bday;   /* user's bith month */
-    char     	       byear;   /* user's birth year */
-    int             wcountry;	/* work country */  
-    long    	     cr_date;   /* date of account creation */
-    long  	   lastlogin;   /* last user login time */
-    unsigned long    ip_addr;   /* last user's ip address */
-    unsigned long    nupdate;   /* notes update time */
+	int					 age;	/* user's age */
+	int				  gender;	/* user's gender */
+	int				disabled;	/* if user's account disabled */
+	char	   can_broadcast;	/* if he can send broadcast messages */
+	char		 ch_password;	/* if user need to change password */
+	char 	  	  gmt_offset;	/* user gmt time offset */
 
-    int             hcountry;	/* home country */
-    int 	       wocup;   /* work ocupation */
+	char		 	  bmonth;	/* user's birth day */
+	char		  		bday;	/* user's bith month */
+	char	 		   byear;	/* user's birth year */
+	int				wcountry;	/* work country */
+	long			 cr_date;	/* date of account creation */
+	long  		   lastlogin;	/* last user login time */
+	unsigned long	 ip_addr;	/* last user's ip address */
+	unsigned long	 nupdate;	/* notes update time */
 
-    char 	wcompany[32];   /* work company name */
-    char 	  wtitle[32];   /* work title */
+	int			 	hcountry;	/* home country */
+	int 			   wocup;	/* work ocupation */
 
-    char          hphone[32];	/* home phone */
-    char 	    hfax[32];   /* home fax */
-    char 	   hcell[32];   /* home cell phone */    
-    char 	    hzip[32];   /* home zip code */        
-    char          hpage[128];	/* www home page */
-    char	   haddr[64];   /* home address */
-    char           hcity[32];	/* home city */
-    char          hstate[32];	/* home state */
+	char 		wcompany[32];	/* work company name */
+	char 	  	  wtitle[32];	/* work title */
 
-    char	   waddr[64];   /* work address */
-    char           wcity[32];	/* work city */
-    char          wstate[32];	/* work state */  
+	char		  hphone[32];	/* home phone */
+	char 			hfax[32];	/* home fax */
+	char 		   hcell[32];	/* home cell phone */
+	char 			hzip[32];	/* home zip code */
+	char		  hpage[128];	/* www home page */
+	char		   haddr[64];	/* home address */
+	char		   hcity[32];	/* home city */
+	char		  hstate[32];	/* home state */
 
-    char 	 wdepart[32];   /* work department */
-    char          wphone[32];	/* work phone */
-    char 	  wpager[32];   /* work cell phone */        
-    char 	    wfax[32];   /* work fax */    
-    char 	    wzip[32];   /* work zip code */
-    char 	  wpage[128];	/* work www page */
-    char          passwd[32];	/* user's password */
-    char            nick[32];	/* user's nickname */
-    char            last[32]; 	/* user's lastname */
-    char           first[32]; 	/* user's firstname */
-    char          email1[64]; 	/* user's first email addres */
-    char          email2[64]; 	/* user's second email addres */
-    char          email3[64]; 	/* user's third email addres */
-    char          notes[255];	/* users notes */
-    unsigned short   martial;	/* user's martial status */    
-    char            nuin[32]; 	/* new string uin */
-    char           wzip2[11]; 	/* new wzip string */
-    char           hzip2[11]; 	/* new hzip string */
-    short           bcountry;   /* born country */
-    char          bstate[32];   /* born state */
-    char           bcity[32];   /* born city */
+	char		   waddr[64];	/* work address */
+	char		   wcity[32];	/* work city */
+	char		  wstate[32];	/* work state */
 
+	char 	 	 wdepart[32];	/* work department */
+	char		  wphone[32];	/* work phone */
+	char	 	  wpager[32];	/* work cell phone */
+	char 			wfax[32];	/* work fax */
+	char 			wzip[32];	/* work zip code */
+	char 		  wpage[128];	/* work www page */
+	char		  passwd[32];	/* user's password */
+	char			nick[32];	/* user's nickname */
+	char			last[32]; 	/* user's lastname */
+	char		   first[32]; 	/* user's firstname */
+	char		  email1[64]; 	/* user's first email addres */
+	char		  email2[64]; 	/* user's second email addres */
+	char		  email3[64]; 	/* user's third email addres */
+	char		  notes[255];	/* users notes */
+	unsigned short	 martial;	/* user's martial status */
+	char			nuin[32]; 	/* new string uin */
+	char		   wzip2[11]; 	/* new wzip string */
+	char		   hzip2[11]; 	/* new hzip string */
+	short			bcountry;	/* born country */
+	char		  bstate[32];	/* born state */
+	char		   bcity[32];	/* born city */
 } full_user_info;
 
 #include "translate.h"

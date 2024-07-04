@@ -47,7 +47,7 @@ uint32 interpret_addr(char *str)
    for (i = 0; pure_address && str[i]; i++)
    if (!(isdigit((int)str[i]) || str[i] == '.')) pure_address = False;
 
-   /* if it's in the form of an IP address then 
+   /* if it's in the form of an IP address then
       get the lib to interpret it */
    if (pure_address)
    {
@@ -55,7 +55,7 @@ uint32 interpret_addr(char *str)
    }
    else
    {
-       /* otherwise assume it's a network name of some sort and use 
+       /* otherwise assume it's a network name of some sort and use
           Get_Hostbyname */
       if ((hp = Get_Hostbyname(str)) == 0)
       {

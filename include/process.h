@@ -107,7 +107,7 @@ typedef struct sock_info
    unsigned short sock_type;
    unsigned short aim_started;
    struct sockaddr_in cli_addr;
-   
+
    /* TODO: information about packet rate of this socket */
 
 } sock_info;

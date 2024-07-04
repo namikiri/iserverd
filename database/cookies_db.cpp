@@ -37,11 +37,11 @@
 int db_cookie_insert(unsigned long uin, char *cookie, unsigned short type)
 {
    PGresult *res;
-   
+
    cstring dbcomm_str;
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-              "INSERT INTO login_cookies values (%lu, %lu, \'%s\', 0, %d)", 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+              "INSERT INTO login_cookies values (%lu, %lu, \'%s\', 0, %d)",
 	       uin, time(NULL), cookie, type);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -65,10 +65,10 @@ int db_cookie_insert(unsigned long uin, char *cookie, unsigned short type)
 int db_cookie_delete(unsigned long uin)
 {
    PGresult *res;
-   
+
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM login_cookies WHERE uin=%lu", uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -83,10 +83,10 @@ int db_cookie_delete(unsigned long uin)
       PQclear(res);
       return(0);
    }
-   else 
+   else
    {
       PQclear(res);
-      return(-1);    
+      return(-1);
    }
 }
 
@@ -97,10 +97,10 @@ int db_cookie_delete(unsigned long uin)
 int db_cookie_delete(char *cookie)
 {
    PGresult *res;
-   
+
    cstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM login_cookies WHERE cookie like \'%s\'", cookie);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -115,10 +115,10 @@ int db_cookie_delete(char *cookie)
       PQclear(res);
       return(0);
    }
-   else 
+   else
    {
       PQclear(res);
-      return(-1);    
+      return(-1);
    }
 }
 
@@ -131,13 +131,13 @@ unsigned long db_cookie_check(char *cookie)
 {
    PGresult *res;
    unsigned long uin;
-   
+
    cstring dbcomm_str;
    db_cookie_check_expired();
-   
+
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "SELECT * FROM login_cookies WHERE (cookie like \'%s\') AND type=%d", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "SELECT * FROM login_cookies WHERE (cookie like \'%s\') AND type=%d",
 	    cookie, TYPE_COOKIE);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -147,19 +147,19 @@ unsigned long db_cookie_check(char *cookie)
       return(1);
    }
 
-   if (PQnfields(res) != LOGC_TBL_FIELDS) 
+   if (PQnfields(res) != LOGC_TBL_FIELDS)
    {
       LOG_SYS(0, ("Corrupted table structure in login_cookie table: \n"));
       exit(EXIT_ERROR_DB_STRUCTURE);
    }
-   
+
    if (PQntuples(res) > 0)
    {
       uin = atoul(PQgetvalue(res, 0, 0));
-      PQclear(res);  
+      PQclear(res);
       return (uin);
    }
-   else 
+   else
    {
       PQclear(res);
       return(0);
@@ -171,18 +171,18 @@ unsigned long db_cookie_check(char *cookie)
 /* Return cookie for specified uin number. If specified cookie 	  	  */
 /* doesn't exist function return -1, on database error function return -2 */
 /**************************************************************************/
-int db_cookie_get(unsigned long uin, char *cookie, unsigned short &used, 
+int db_cookie_get(unsigned long uin, char *cookie, unsigned short &used,
                   unsigned short type)
 {
    PGresult *res;
    char *cook = cookie;
-   
+
    fstring dbcomm_str;
    db_cookie_check_expired();
-   
+
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "SELECT * FROM login_cookies WHERE (uin=%lu) AND (type=%d)", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "SELECT * FROM login_cookies WHERE (uin=%lu) AND (type=%d)",
 	    uin, type);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -192,21 +192,21 @@ int db_cookie_get(unsigned long uin, char *cookie, unsigned short &used,
       return(-2);
    }
 
-   if (PQnfields(res) != LOGC_TBL_FIELDS) 
+   if (PQnfields(res) != LOGC_TBL_FIELDS)
    {
       LOG_SYS(0, ("Corrupted table structure in login_cookie table: \n"));
       exit(EXIT_ERROR_DB_STRUCTURE);
    }
-   
+
    if (PQntuples(res) > 0)
    {
       used = (unsigned short)atol(PQgetvalue(res, 0, 3));
       strncpy(cook, PQgetvalue(res, 0, 2), 254);
-      
+
       PQclear(res);
       return (0);
    }
-   else 
+   else
    {
       PQclear(res);
       return(-1);
@@ -220,10 +220,10 @@ int db_cookie_get(unsigned long uin, char *cookie, unsigned short &used,
 void db_cookie_use(unsigned long uin)
 {
    PGresult *res;
-   
+
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "UPDATE login_cookies SET used=used+1 WHERE uin=%lu", uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -238,7 +238,7 @@ void db_cookie_use(unsigned long uin)
       PQclear(res);
       return;
    }
-   else 
+   else
    {
       PQclear(res);
       return;
@@ -252,10 +252,10 @@ void db_cookie_use(unsigned long uin)
 void db_cookie_use(char *cookie)
 {
    PGresult *res;
-   
+
    cstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "UPDATE login_cookies SET used=used+1 WHERE cookie like \'%s\'", cookie);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -270,7 +270,7 @@ void db_cookie_use(char *cookie)
       PQclear(res);
       return;
    }
-   else 
+   else
    {
       PQclear(res);
       return;
@@ -284,11 +284,11 @@ void db_cookie_use(char *cookie)
 void db_cookie_check_expired()
 {
    PGresult *res;
-   
+
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "DELETE FROM login_cookies WHERE %lu = (%lu - cdate)", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "DELETE FROM login_cookies WHERE %lu = (%lu - cdate)",
 	    lp_v7_cookie_timeout(), time(NULL));
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -303,7 +303,7 @@ void db_cookie_check_expired()
       PQclear(res);
       return;
    }
-   else 
+   else
    {
       PQclear(res);
       return;

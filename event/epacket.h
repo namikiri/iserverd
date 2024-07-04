@@ -39,7 +39,7 @@ typedef struct indirect_pack
    unsigned long shm_index;	/* online user record shm index */
    unsigned int  retry_num;	/* number of retries		*/
    unsigned int  ctime_out;	/* current timeout		*/
-   unsigned int  time_out;	/* max time to next retry	*/  
+   unsigned int  time_out;	/* max time to next retry	*/
    unsigned long ack_stamp;	/* unique packet stamp		*/
    unsigned long to_uin;	/* to whom we send pack		*/
    unsigned int  to_port;	/* destination port 		*/

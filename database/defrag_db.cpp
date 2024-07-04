@@ -37,7 +37,7 @@
 /**************************************************************************/
 /* This func add message to database (if user is not online) 		  */
 /**************************************************************************/
-int db_defrag_addpart(unsigned long from_uin, int seq, int part_num, 
+int db_defrag_addpart(unsigned long from_uin, int seq, int part_num,
 			int part_cnt, int len, char *buffer)
 {
   PGresult *res;
@@ -45,12 +45,12 @@ int db_defrag_addpart(unsigned long from_uin, int seq, int part_num,
   cstring dbcomm_str;
   int lo_fd;
   int nRet;
-  
-  DEBUG(50, ("Incoming fragmented packet... part %d of %d\n", 
+
+  DEBUG(50, ("Incoming fragmented packet... part %d of %d\n",
              part_num, part_cnt));
-  
+
   PQclear(PQexec(users_dbconn, "BEGIN"));
-  
+
   /* first of all we should create large object and write data in it */
   oid   = lo_creat(users_dbconn, INV_READ|INV_WRITE);
   lo_fd = lo_open(users_dbconn, oid, INV_READ|INV_WRITE);
@@ -58,8 +58,8 @@ int db_defrag_addpart(unsigned long from_uin, int seq, int part_num,
   lo_close(users_dbconn, lo_fd);
 
   /* then we create record with created oid int Fragment_Storage tbl */
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-       "INSERT INTO Fragment_Storage values (%lu, %d, %d, %d, %d, %lu, %lu)", 
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+       "INSERT INTO Fragment_Storage values (%lu, %d, %d, %d, %d, %lu, %lu)",
             from_uin, seq, part_num, part_cnt, len, oid, time(NULL));
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -74,16 +74,16 @@ int db_defrag_addpart(unsigned long from_uin, int seq, int part_num,
      /* insert completed successfully */
      nRet = 0;
   }
-  else 
+  else
   {
      /* command ok, but insert failed */
      nRet = -1;
   }
 
-     PQclear(res);     
+     PQclear(res);
      PQclear(PQexec(users_dbconn, "END"));
 
-  return(nRet);  
+  return(nRet);
 }
 
 
@@ -96,10 +96,10 @@ int db_defrag_delete(unsigned long from_uin)
   unsigned long oid;
   cstring dbcomm_str;
   unsigned short frag_cnt;
-  
+
   PQclear(PQexec(users_dbconn, "BEGIN"));
-  
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
        "SELECT frg FROM Fragment_Storage WHERE uin=%u", from_uin);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -114,28 +114,28 @@ int db_defrag_delete(unsigned long from_uin)
   if (frag_cnt > 0)
   {
      char **valid = NULL;
-     
+
      for (int i=0;i<frag_cnt;i++)
      {
-       oid = strtoul(PQgetvalue(res, i, 0), valid, 10); 
+       oid = strtoul(PQgetvalue(res, i, 0), valid, 10);
        lo_unlink(users_dbconn, oid);
        valid = NULL;
      }
-     
+
      PQclear(res);
-     
-     slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+     slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
              "DELETE FROM Fragment_Storage WHERE uin=%u", from_uin);
-     
+
      PQclear(PQexec(users_dbconn, dbcomm_str));
      PQclear(PQexec(users_dbconn, "END"));
      return(0);
   }
-  else 
+  else
   {
      PQclear(res);
      PQclear(PQexec(users_dbconn, "END"));
-     return(-1);    
+     return(-1);
   }
 }
 
@@ -149,11 +149,11 @@ int db_defrag_delete(unsigned long from_uin, unsigned long seq)
   unsigned long oid;
   cstring dbcomm_str;
   unsigned short frag_cnt;
-  
+
   PQclear(PQexec(users_dbconn, "BEGIN"));
-    
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-      "SELECT frg FROM Fragment_Storage WHERE uin=%u AND seq=%d", 
+
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+      "SELECT frg FROM Fragment_Storage WHERE uin=%u AND seq=%d",
        from_uin, seq);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -168,31 +168,31 @@ int db_defrag_delete(unsigned long from_uin, unsigned long seq)
   if (frag_cnt > 0)
   {
      char **valid = NULL;
-     
+
      for (int i=0;i<frag_cnt;i++)
      {
-       oid = strtoul(PQgetvalue(res, i, 0), valid, 10); 
+       oid = strtoul(PQgetvalue(res, i, 0), valid, 10);
        DEBUG(100, ("DELETE LARGE OBJECT with OID=%lu\n", oid));
        lo_unlink(users_dbconn, oid);
        valid = NULL;
      }
-     
+
      PQclear(res);
-     
-     slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+     slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
              "DELETE FROM Fragment_Storage WHERE uin=%u", from_uin);
 
      res = PQexec(users_dbconn, dbcomm_str);
 
      PQclear(res);
-     PQclear(PQexec(users_dbconn, "END"));     
+     PQclear(PQexec(users_dbconn, "END"));
      return(0);
   }
-  else 
+  else
   {
-     PQclear(res);     
+     PQclear(res);
      PQclear(PQexec(users_dbconn, "END"));
-     return(-1);    
+     return(-1);
   }
 }
 
@@ -206,16 +206,16 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
   PGresult *res;
   fstring dbcomm_str;
   unsigned short frag_cnt, curr_size = 0, total_frags;
-  int pack_lenght = 0, i, lo_fd; 
+  int pack_lenght = 0, i, lo_fd;
   struct online_user user;
   BOOL all_fragments_exist = True;
 
   /* begin transaction */
   PQclear(PQexec(users_dbconn, "BEGIN"));
-  
+
   /* we need all exept uin and seq */
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-       "SELECT frg, prt_num, prt_cnt, len FROM Fragment_Storage WHERE uin=%lu AND seq=%d ORDER BY prt_num", 
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+       "SELECT frg, prt_num, prt_cnt, len FROM Fragment_Storage WHERE uin=%lu AND seq=%d ORDER BY prt_num",
 	from_uin, seq);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -228,10 +228,10 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
   frag_cnt = PQntuples(res);
 
   /* let's check if we have enought parts to defragment packet */
-  if (frag_cnt != 0) 
+  if (frag_cnt != 0)
   {
      total_frags = atol(PQgetvalue(res, 0, 2));
-     
+
      if (frag_cnt != total_frags)
      {
         PQclear(res);
@@ -246,10 +246,10 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
       return(False);
   }
 
-  DEBUG(100, ("Returned %d records from fragment_storage (total=%d)...\n", 
+  DEBUG(100, ("Returned %d records from fragment_storage (total=%d)...\n",
                frag_cnt, total_frags));
 
-  /* check if we have all packet fragments */  
+  /* check if we have all packet fragments */
   for (i=0;i<frag_cnt;i++)
   {
     curr_size = fragment_exist(res, frag_cnt, i);
@@ -265,16 +265,16 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
   }
 
   /* now if we have all fragments so we can merge them */
-  if (all_fragments_exist) 
+  if (all_fragments_exist)
   {
      /* check each packet and sum fragments len */
      DEBUG(100, ("We have defragmented packet with lenght = %d\n", pack_lenght));
-     
+
      /* Sanity check :) */
      if (pack_lenght > MAX_PACKET_SIZE)
      {
         /* alarm to console */
-        LOG_ALARM(0, ("WARNING: User %lu sent in fragments too big packet (%d bytes)\n",  
+        LOG_ALARM(0, ("WARNING: User %lu sent in fragments too big packet (%d bytes)\n",
 		       from_uin, pack_lenght));
 	LOG_ALARM(0, ("Making dump of first 50 packet bytes to debug log file...\n"));
 
@@ -287,13 +287,13 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
 	/* dump it to log file */
 	log_alarm_packet(0, pack);
 	PQclear(res);
-	
+
 	PQclear(PQexec(users_dbconn, "END"));
 	/* delete packet fragments from database */
 	db_defrag_delete(from_uin, seq);
 	return(0);
      }
-     
+
      /* Now we have all parts we need and result packet not too big */
      /* We should merge all parts and send result packet to pipe */
      if (db_online_lookup(from_uin, user) == 0)
@@ -303,25 +303,25 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
 	inject_pack.from_port = user.udp_port;
 	inject_pack.sizeVal   = pack_lenght;
 	inject_pack.reset();
-	
+
 	for (i=0; i<frag_cnt; i++)
 	{
 	  lo_fd = lo_open(users_dbconn, atoul(PQgetvalue(res, i, 0)), INV_READ);
-	  inject_pack.nextData += lo_read(users_dbconn, lo_fd, 
-	                                  inject_pack.nextData, 
+	  inject_pack.nextData += lo_read(users_dbconn, lo_fd,
+	                                  inject_pack.nextData,
 	                                  atoul(PQgetvalue(res, i, 3)));
 	  lo_close(users_dbconn, lo_fd);
 	}
-	
+
         pipe_send_packet(inject_pack);
      }
-     
+
      PQclear(res);
      PQclear(PQexec(users_dbconn, "END"));
-     db_defrag_delete(from_uin, seq);     
+     db_defrag_delete(from_uin, seq);
      return(True);
   }
-  else 
+  else
   {
      PQclear(res);
      PQclear(PQexec(users_dbconn, "END"));
@@ -333,12 +333,12 @@ int db_defrag_check(unsigned long from_uin, unsigned short seq)
 /**************************************************************************/
 /* This func check if given fragment number exist in returned tuples 	  */
 /**************************************************************************/
-int fragment_exist(PGresult *res, unsigned short tuples_num, 
+int fragment_exist(PGresult *res, unsigned short tuples_num,
 		   unsigned short frag_number)
 {
   for(int i=0; i<tuples_num; i++)
   {
-    if (atol(PQgetvalue(res, i, 1)) == frag_number) 
+    if (atol(PQgetvalue(res, i, 1)) == frag_number)
 	return atol(PQgetvalue(res, i, 3));
   }
 
@@ -355,12 +355,12 @@ int db_defrag_check()
   unsigned long frag_cnt;
   fstring dbcomm_str;
 
-  /* begin transaction */  
+  /* begin transaction */
   PQclear(PQexec(users_dbconn, "BEGIN"));
-  
+
   /* we need all exept uin and seq */
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-       "SELECT frg, prt_num, prt_cnt, len FROM Fragment_Storage WHERE %lu - frgtime > %d", 
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+       "SELECT frg, prt_num, prt_cnt, len FROM Fragment_Storage WHERE %lu - frgtime > %d",
         time(NULL), lp_v3_pingtime()*10);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -372,17 +372,17 @@ int db_defrag_check()
   }
 
   frag_cnt = PQntuples(res);
-  
-  if (frag_cnt > 0) 
+
+  if (frag_cnt > 0)
   {
-     LOG_SYS(0, ("Fragment_storage cleanup has detected %lu expired records\n", 
-                  frag_cnt));  
+     LOG_SYS(0, ("Fragment_storage cleanup has detected %lu expired records\n",
+                  frag_cnt));
   }
-  
+
   PQclear(res);
   PQclear(PQexec(users_dbconn, "END"));
   db_defrag_delete();
-  
+
   return (0);
 }
 
@@ -396,11 +396,11 @@ int db_defrag_delete()
   unsigned long oid;
   cstring dbcomm_str;
   unsigned short frag_cnt;
-  
+
   PQclear(PQexec(users_dbconn, "BEGIN"));
-    
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-      "SELECT frg FROM Fragment_Storage WHERE %lu - frgtime > %d", 
+
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+      "SELECT frg FROM Fragment_Storage WHERE %lu - frgtime > %d",
        time(NULL), lp_v3_pingtime()*10);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -415,28 +415,28 @@ int db_defrag_delete()
   if (frag_cnt > 0)
   {
      char **valid = NULL;
-     
+
      for (int i=0;i<frag_cnt;i++)
      {
-       oid = strtoul(PQgetvalue(res, i, 0), valid, 10); 
+       oid = strtoul(PQgetvalue(res, i, 0), valid, 10);
        DEBUG(100, ("DELETE LARGE OBJECT with OID=%lu\n", oid));
        lo_unlink(users_dbconn, oid);
        valid = NULL;
      }
-     
+
      PQclear(res);
-     
-     slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-             "DELETE FROM Fragment_Storage WHERE %lu-frgtime > %d", 
+
+     slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+             "DELETE FROM Fragment_Storage WHERE %lu-frgtime > %d",
 	     time(NULL), lp_v3_pingtime()*10);
 
      res = PQexec(users_dbconn, dbcomm_str);
 
      PQclear(res);
-     PQclear(PQexec(users_dbconn, "END"));     
+     PQclear(PQexec(users_dbconn, "END"));
      return(0);
   }
-  else 
+  else
   {
      PQclear(res);
      PQclear(PQexec(users_dbconn, "END"));

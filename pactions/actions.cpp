@@ -42,7 +42,7 @@ void process_actions()
    unsigned short atype;
    unsigned long  pl1,pl2,pl3,pl4,date;
    char par11[255];
-   
+
    /* AP is starting up... we should parse config file and init all       */
    /* necessary structures and log stats information                      */
    parse_config_file(lp_actions_conf(), CONFIG_TYPE_ACTIONS);
@@ -54,8 +54,8 @@ void process_actions()
 
    log_parse_stats();
    usersdb_connect(); /* we need db connection for variable subs */
-   
-   /* loop... receive packet... process pack and again... circle of live  */   
+
+   /* loop... receive packet... process pack and again... circle of live  */
    while (1)
    {
       /* ---------------------------------------------------------------- */
@@ -75,20 +75,20 @@ void process_actions()
             current_rule = rules_root.sections_root[atype];
 	    while (current_rule != NULL)
 	    {
-	       if ((is_uin_match(pl1, current_rule->for_uins) == 1) && 
+	       if ((is_uin_match(pl1, current_rule->for_uins) == 1) &&
 	           (current_rule->enabled == True))
 	       {
 	          if (current_rule->action == A_STOP) break;
-	          
+
 		  /* now we can make additional checks and run current_rule */
 		  DEBUGADD(100, ("--> Current_rule->status = %lu\n", current_rule->status));
-		  if (  ((atype == ACT_STATUS) && (pl4 == current_rule->status)) 
+		  if (  ((atype == ACT_STATUS) && (pl4 == current_rule->status))
 		     || ((atype == ACT_STATUS) && (current_rule->status == ICQ_STATUS_ANY))
 		     ||  (atype != ACT_STATUS))
 		  {
 		     execute_rule(current_rule, atype, pl1, pl2, pl3, pl4, date, par11);
 		  }
-		  
+
 		  if (current_rule->astop) break;
 	       }
 	       current_rule = current_rule->next;
@@ -102,9 +102,9 @@ void process_actions()
 /**************************************************************************/
 /* function to execute rule						  */
 /**************************************************************************/
-void execute_rule(struct rule_node *rule, unsigned short atype, 
-                  unsigned long pl1, unsigned long pl2, 
-                  unsigned long pl3, unsigned long pl4, 
+void execute_rule(struct rule_node *rule, unsigned short atype,
+                  unsigned long pl1, unsigned long pl2,
+                  unsigned long pl3, unsigned long pl4,
 		  unsigned long date, char *par11)
 {
    switch (rule->action)
@@ -117,7 +117,7 @@ void execute_rule(struct rule_node *rule, unsigned short atype,
     		   DEBUGADD(50, ("--> Action A_LOG was passed to rule executer.\n"));
 		   execute_rule_log(rule, atype, pl1, pl2, pl3, pl4, date, par11);
 		   break;
-      case A_MAIL:    
+      case A_MAIL:
     		   DEBUGADD(50, ("--> Action A_MAIL was passed to rule executer.\n"));
 		   execute_rule_mail(rule, atype, pl1, pl2, pl3, pl4, date, par11);
 		   break;
@@ -125,10 +125,10 @@ void execute_rule(struct rule_node *rule, unsigned short atype,
     		   DEBUGADD(50, ("--> Action A_RUN was passed to rule executer.\n"));
 		   execute_rule_run(rule, atype, pl1, pl2, pl3, pl4, date, par11);
 		   break;
-		      
+
       default:	   LOG_SYS(0, ("ERR: Unknown action=%d passed to executer\n", rule->action));
 		   break;
-      
+
    }
 }
 
@@ -136,13 +136,13 @@ void execute_rule(struct rule_node *rule, unsigned short atype,
 /**************************************************************************/
 /* function to send data to actions processor				  */
 /**************************************************************************/
-void send_event2ap(Packet &apack, unsigned short atype, 
-                   unsigned long pl1, unsigned long pl2, 
-                   unsigned long pl3, unsigned long pl4, 
+void send_event2ap(Packet &apack, unsigned short atype,
+                   unsigned long pl1, unsigned long pl2,
+                   unsigned long pl3, unsigned long pl4,
 		   unsigned long date, char *str11)
 {
    apack.clearPacket();
-   
+
    apack << (unsigned short)atype
          << (unsigned  long)pl1
 	 << (unsigned  long)pl2
@@ -151,40 +151,40 @@ void send_event2ap(Packet &apack, unsigned short atype,
 	 << (unsigned  long)date
 	 << (unsigned short)(strlen(str11)+1)
 	 << str11;
-	 
-   actions_send_packet(apack);   
+
+   actions_send_packet(apack);
 }
 
 
 /**************************************************************************/
 /* function to receive data from actions IPC pipe			  */
 /**************************************************************************/
-int recv_event2ap(Packet &apack, unsigned short &atype, 
-                   unsigned long &pl1, unsigned long &pl2, 
-                   unsigned long &pl3, unsigned long &pl4, 
+int recv_event2ap(Packet &apack, unsigned short &atype,
+                   unsigned long &pl1, unsigned long &pl2,
+                   unsigned long &pl3, unsigned long &pl4,
 		   unsigned long &date, char *str11)
 {
    unsigned short slen, i;
    int psize;
    char *dest = str11;
-   
+
    psize = actions_receive_packet(apack);
    if (psize < 0) { return(-1); }
-   
+
    /* apack contain all required variables... */
    apack.reset();
    apack >> atype >> pl1 >> pl2 >> pl3 >> pl4 >> date;
-	 
+
    /* now we should get string parameter from received packet */
    apack >> slen;
    if (slen > 255) { slen = 255; }
-   
-   for(i=0; i<slen; i++) apack >> tempst[i];
-   strncpy(dest, tempst, 255); 
 
-   DEBUG(50, ("APEvent(%d) pls=%lu/%lu/%lu/%lu, date=%lu, str1=\'%s\'\n", 
+   for(i=0; i<slen; i++) apack >> tempst[i];
+   strncpy(dest, tempst, 255);
+
+   DEBUG(50, ("APEvent(%d) pls=%lu/%lu/%lu/%lu, date=%lu, str1=\'%s\'\n",
             atype, pl1, pl2, pl3, pl4, date, str11));
-   
+
    return (psize);
 }
 
@@ -192,9 +192,9 @@ int recv_event2ap(Packet &apack, unsigned short &atype,
 /**************************************************************************/
 /* RULE_MESSAGE: function to execute send_message rule			  */
 /**************************************************************************/
-void execute_rule_msg(struct rule_node *rule, unsigned short atype, 
-                      unsigned long pl1, unsigned long pl2, 
-                      unsigned long pl3, unsigned long pl4, 
+void execute_rule_msg(struct rule_node *rule, unsigned short atype,
+                      unsigned long pl1, unsigned long pl2,
+                      unsigned long pl3, unsigned long pl4,
 		      unsigned long date, char *par11)
 {
    struct template_record *ptt = NULL;
@@ -202,7 +202,7 @@ void execute_rule_msg(struct rule_node *rule, unsigned short atype,
    struct msg_header msg_hdr;
    int msg_cnt = rule->tgt_uins->count;
    char *subs_buf = NULL;
-   
+
    bzero((void *)&msg_hdr, sizeof(msg_hdr));
 
    /* check for sender uin */
@@ -217,16 +217,16 @@ void execute_rule_msg(struct rule_node *rule, unsigned short atype,
    ptt = load_template(rule->string_2);
    if (ptt != NULL)
    {
-      subs_buf = execute_template_subst(ptt, rule, atype, pl1, pl2, 
+      subs_buf = execute_template_subst(ptt, rule, atype, pl1, pl2,
                                         pl3, pl4, date, par11);
 
       /* max size for email message is 1024 bytes */
-      if (strlen(subs_buf) > MAX_AMSG) 
+      if (strlen(subs_buf) > MAX_AMSG)
       {
          LOG_SYS(0, ("Warn: truncating msg template: %s\n", ptt->filename));
          string_truncate(subs_buf, MAX_AEMAIL);
       }
-	 
+
       /* it is time to get target uin(s) and send message(s) */
       msg_hdr.msglen = strlen(subs_buf);
 
@@ -235,7 +235,7 @@ void execute_rule_msg(struct rule_node *rule, unsigned short atype,
          msg_hdr.touin = rule->tgt_uins->node[i].uin_1;
          process_message(msg_hdr, subs_buf);
       }
-      
+
       free(subs_buf);
       return;
    }
@@ -249,9 +249,9 @@ void execute_rule_msg(struct rule_node *rule, unsigned short atype,
 /**************************************************************************/
 /* RULE_LOG: function to execute log rule				  */
 /**************************************************************************/
-void execute_rule_log(struct rule_node *rule, unsigned short atype, 
-                      unsigned long pl1, unsigned long pl2, 
-                      unsigned long pl3, unsigned long pl4, 
+void execute_rule_log(struct rule_node *rule, unsigned short atype,
+                      unsigned long pl1, unsigned long pl2,
+                      unsigned long pl3, unsigned long pl4,
 		      unsigned long date, char *par11)
 {
 
@@ -260,9 +260,9 @@ void execute_rule_log(struct rule_node *rule, unsigned short atype,
 /**************************************************************************/
 /* RULE_RUN: function to execute run_program rule			  */
 /**************************************************************************/
-void execute_rule_run(struct rule_node *rule, unsigned short atype, 
-                      unsigned long pl1, unsigned long pl2, 
-                      unsigned long pl3, unsigned long pl4, 
+void execute_rule_run(struct rule_node *rule, unsigned short atype,
+                      unsigned long pl1, unsigned long pl2,
+                      unsigned long pl3, unsigned long pl4,
 		      unsigned long date, char *par11)
 {
    FILE *rpipe = NULL;
@@ -278,10 +278,10 @@ void execute_rule_run(struct rule_node *rule, unsigned short atype,
       /* 4 - search code or new status                               */
       /* 5 - user ip address string (i.e. "10.10.10.2")              */
       /* 6 - optional text string                                    */
-      
-      fprintf(rpipe, "%s\n%lu\n%lu\n%s\n%lu\n%s\n\"%s\"\n", action2string(atype), 
+
+      fprintf(rpipe, "%s\n%lu\n%lu\n%s\n%lu\n%s\n\"%s\"\n", action2string(atype),
               pl1, pl2, inet_ntoa(icqToIp(pl3)), pl4, time2str1(date), par11);
-		 
+
       fflush(rpipe);
       fclose(rpipe);
    }
@@ -295,9 +295,9 @@ void execute_rule_run(struct rule_node *rule, unsigned short atype,
 /**************************************************************************/
 /* RULE_MAIL: function to execute send_mail rule			  */
 /**************************************************************************/
-void execute_rule_mail(struct rule_node *rule, unsigned short atype, 
-                       unsigned long pl1, unsigned long pl2, 
-                       unsigned long pl3, unsigned long pl4, 
+void execute_rule_mail(struct rule_node *rule, unsigned short atype,
+                       unsigned long pl1, unsigned long pl2,
+                       unsigned long pl3, unsigned long pl4,
 		       unsigned long date, char *par11)
 {
    fstring mail_program;
@@ -315,25 +315,25 @@ void execute_rule_mail(struct rule_node *rule, unsigned short atype,
       strncpy(mail_program, variable->str_val, sizeof(mail_program)-1);
       string_sub(mail_program, "%s", rule->string_1, sizeof(mail_program)-1);
       DEBUG(50, ("Command for mailer: %s\n", mail_program));
-      
+
       /* now time to get template and make message */
       ptt = load_template(rule->string_2);
       if (ptt != NULL)
       {
-         subs_buf = execute_template_subst(ptt, rule, atype, pl1, pl2, 
+         subs_buf = execute_template_subst(ptt, rule, atype, pl1, pl2,
 	                                   pl3, pl4, date, par11);
 
          /* max size for email message is 10000 bytes */
-         if (strlen(subs_buf) > MAX_AEMAIL) 
+         if (strlen(subs_buf) > MAX_AEMAIL)
 	 {
 	    LOG_SYS(0, ("Warn: truncating mail template: %s\n", ptt->filename));
 	    string_truncate(subs_buf, MAX_AEMAIL);
 	 }
-	 
+
          /* wow... here we can send message... */
          rpipe = dpopen(mail_program, "w");
          if (rpipe != NULL)
-         {      
+         {
 	    fprintf(rpipe, "To: %s\n", rule->string_1);
             fprintf(rpipe, subs_buf);
             fflush(rpipe);
@@ -341,7 +341,7 @@ void execute_rule_mail(struct rule_node *rule, unsigned short atype,
 	    free(subs_buf);
 	    return;
          }
-	 
+
 	 free(subs_buf);
       }
    }
@@ -357,7 +357,7 @@ void execute_rule_mail(struct rule_node *rule, unsigned short atype,
 struct template_record *load_template(char *tname)
 {
    struct template_record *ptt = NULL;
-   
+
    ptt = template_lookup(tname);
    if (ptt == NULL)
    {
@@ -366,7 +366,7 @@ struct template_record *load_template(char *tname)
       if (ptt == NULL) return(NULL);
       return(ptt);
    }
-   
+
    DEBUG(50, ("Template found in cache...\n"));
    return(ptt);
 }
@@ -378,10 +378,10 @@ struct template_record *load_template(char *tname)
 char *action2string(int action)
 {
    static fstring actionBuf;
-   
+
    switch (action)
    {
-      case ACT_ONLINE:     strncpy(actionBuf, "Online", 15); break;                           
+      case ACT_ONLINE:     strncpy(actionBuf, "Online", 15); break;
       case ACT_OFFLINE:    strncpy(actionBuf, "Offline", 15); break;
       case ACT_SAVEBASIC:  strncpy(actionBuf, "SaveBasicInfo", 15); break;
       case ACT_SEARCH:     strncpy(actionBuf, "Search", 15); break;
@@ -392,7 +392,7 @@ char *action2string(int action)
       case ACT_INTERR:     strncpy(actionBuf, "Internal_err", 15); break;
       case ACT_PPHUNG:     strncpy(actionBuf, "PPHung", 15); break;
    }
-   
+
    return (actionBuf);
 }
 

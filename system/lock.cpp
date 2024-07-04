@@ -94,7 +94,7 @@ int Unlock(FILE *fp)
    lock.l_len = 0L;
    lock.l_pid = getpid();
    rc = fcntl(fileno(fp), F_SETLK, &lock);
-    
+
 #elif HAVE_LOCKF
 #warn "lockf() file unlocking not supported!"
 #elif HAVE_FLOCKFILE

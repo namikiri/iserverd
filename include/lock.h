@@ -38,7 +38,7 @@
 /* lockf() use not implemented */
 #elif HAVE_FLOCKFILE
 /* flockfile/funlockfile included in stdio.h */
-#endif /* HAVE_FLOCK */ 
+#endif /* HAVE_FLOCK */
 
 #ifdef HAVE_STDARG_H
 #include <stdarg.h>

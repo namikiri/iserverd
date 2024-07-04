@@ -37,16 +37,16 @@
 int main(int argc, char **argv)
 {
    struct variable_record *var;
-   
-   if (argc < 2) 
+
+   if (argc < 2)
    {
       printf("Usage: chk_aim_cfg config-filename\n");
       exit(0);
    }
    parse_config_file(argv[1], CONFIG_TYPE_AIM);
-   print_aim_tree(); 
-  
-   var = aim_get_variable("TestVariable");    
+   print_aim_tree();
+
+   var = aim_get_variable("TestVariable");
    if (var != NULL) printf("%s\n", var->str_val);
 }
 
