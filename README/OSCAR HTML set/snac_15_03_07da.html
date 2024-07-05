@@ -1,0 +1,328 @@
+<html>
+<head>
+<title>SNAC(15,03)/07DA meta information response</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,03)/07DA&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_META_INFO_REPLY&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the server response to client meta info request 
+<a href="snac_15_02_07d0.html">SNAC(15,02)/07D0</a>. 
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 03</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 00</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;DA 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>reply type: SRV_META_INFO_REPLY</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number (incrementing)</td>
+</tr>
+<tr>
+<td>&nbsp;2E 04</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>reply subtype (see table bellow)</td>
+</tr>
+<tr>
+<td colspan=5>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;......</td>
+<td width=5>&nbsp;</td>
+<td>......</td>
+<td width=5>&nbsp;</td>
+<td width=55%>reply data (depending on subtype)</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td>
+</tr>
+</table>
+</td></tr></table>
+
+<br>
+
+Reply subtypes list:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=white>
+
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0001.html">SNAC(15,02)/07DA/0001</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Meta processing error server reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0064.html">SNAC(15,02)/07DA/0064</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user home info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_006e.html">SNAC(15,02)/07DA/006E</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user work info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0078.html">SNAC(15,02)/07DA/0078</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user more info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0082.html">SNAC(15,02)/07DA/0082</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user notes info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0087.html">SNAC(15,02)/07DA/0087</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user email(s) info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_008c.html">SNAC(15,02)/07DA/008C</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user interests info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0096.html">SNAC(15,02)/07DA/0096</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user affilations info server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0096s.html">SNAC(15,02)/07DA/0096</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Server SMS response (delivery receipt)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00a0.html">SNAC(15,02)/07DA/00A0</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user permissions server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00aa.html">SNAC(15,02)/07DA/00AA</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user password server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00b4.html">SNAC(15,02)/07DA/00B4</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Unregister account server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00be.html">SNAC(15,02)/07DA/00BE</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user homepage category server ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00c8.html">SNAC(15,02)/07DA/00C8</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User basic info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00d2.html">SNAC(15,02)/07DA/00D2</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User work info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00dc.html">SNAC(15,02)/07DA/00DC</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User more info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00e6.html">SNAC(15,02)/07DA/00E6</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User notes (about) info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00eb.html">SNAC(15,02)/07DA/00EB</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User extended email info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00f0.html">SNAC(15,02)/07DA/00F0</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User interests info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_00fa.html">SNAC(15,02)/07DA/00FA</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User past/affilations info reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0104.html">SNAC(15,02)/07DA/0104</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Short user information reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_010e.html">SNAC(15,02)/07DA/010E</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;User homepage category information reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_01a4.html">SNAC(15,02)/07DA/01A4</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search: user found reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_01ae.html">SNAC(15,02)/07DA/01AE</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search: last user found reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0302.html">SNAC(15,02)/07DA/0302</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Registration stats ack</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0366.html">SNAC(15,02)/07DA/0366</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Random search server reply</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_08a2.html">SNAC(15,02)/07DA/08A2</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Server variable requested via xml</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_0c3f.html">SNAC(15,02)/07DA/0C3F</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Server ack for set fullinfo command</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_03_07da_2012.html">SNAC(15,02)/07DA/2012</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Server ack for user spam report</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

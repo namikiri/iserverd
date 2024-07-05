@@ -1,0 +1,201 @@
+<html>
+<head>
+<title>Changes list</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td><b><font color="white">&nbsp;Changes&nbsp;</font></b></td>
+<td width=20% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr></table></td></tr></table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4> </td></tr><tr>
+<td width=7>&nbsp;</td><td valign=top>
+[<b>31.01.2005</b>] - Family 0x0002 information updated. 
+<br><br>
+
+[<b>31.01.2005</b>] - Added new SSI snac (remove yourself from another user ssi) 
+and some "hacking" information about <a href="snac_13_11.html">adding</a> 
+contacts without authorization. 
+<br><br>
+
+[<b>23.01.2005</b>] - Added ICQ avatars information (downloading/uploading 
+icons - service 0x0010). Added service request sequence description. Fixed 
+several bugs.
+<br><br>
+
+[<b>08.01.2005</b>] - Added new family 0x0085. This is IServerd protocol extension. 
+This family designed for icqv7 client to get broadcast messaging ability.
+<br><br>
+
+[<b>25.04.2004</b>] - I've made a massive update using many messages 
+i got in my mailbox. First there was a huge update by Alexey Emelyanov (auth 
+errors full list, channel 2 messages description, channel 1 messages fix, chat 
+snacs descriptions, new capabilities, CLSIDs for plugins, common TLV list, 
+"wanted" snacs). Also I fixed many bugs in documentation. Thanks to all people 
+who helps me to improve these docs.
+<br><br>
+
+[<b>13.06.2003</b>] - Fixed several errors. Fixed pages look in netscape & 
+konquerror browsers.
+<br><br>
+
+[<b>12.06.2003</b>] - capabilities.html page was rewritten using Gaim 
+sources. Added SSI includes for additional links and banners. Fixed bugs 
+in ext_status codes list (misc section). Added description for SNAC(01,14). 
+Fixed SNAC(04,02)/SNAC(04,05) descriptions (icbm flags issue). Added family 
+0x0f (AIM directory user search) and SNAC(0f,01), SNAC(0f,04).
+<br><br>
+
+[<b>11.06.2003</b>] - Added SNAC(10,02), SNAC(10,03), SNAC(10,05). 
+Changed (again) SNAC(01,11) description because I've read official TOC 
+documentation. Fixed several typo bugs.
+<br><br>
+
+[<b>10.06.2003</b>] - Added family 0x10 (aim buddy icons service) and SNAC(10,01), 
+SNAC(10,04). Fixed several errors and changed field descriptions in online 
+userinfo block.
+<br><br>
+
+[<b>08.06.2003</b>] - Added online userinfo block description linked into basic 
+information page. Online userinfo block used in many SNACs like SNAC(03,0B), 
+SNAC(04,07), etc.
+<br><br>
+ 
+[<b>07.06.2003</b>] - Added descriptions for SNAC(17,0A), SNAC(17,0B), SNAC(0B,03), 
+SNAC(0B,04), SNAC(0D,01), SNAC(0D,02), SNAC(0E,01), SNAC(0E,01), SNAC(0E,03), 
+SNAC(0E,05), SNAC(0E,06). Fixed several errors in family 0x17 SNACs and added new 
+info into SNAC(17,03). Please check "wanted" section for updates.
+<br><br>
+
+[<b>01.06.2003</b>] - Added SSI (server side information) authorization 
+sequence description.
+<br><br>
+
+[<b>31.05.2003</b>] - Ryczard Haase updates: Added SNAC(15,02)/07D0/0AA5 and reply 
+SNAC(15,03)/07DA/0302, fixed incorrect SNAC(1,11) field description. Added some 
+new info into 0x0AXX "wanted" requests descriptions and SNAC(15,02)/07D0/0AAF.
+<br><br>
+
+[<b>25.05.2003</b>] - Added some new fileds (original_from info and marital status) 
+in SNAC(15,03)/07DA/00DC. Added marital status code list to lists.html. Thanks to 
+Ryczard Haase for provided information. Added "Wanted" page with unknown snacs I 
+looking for details. 
+<br><br>
+
+[<b>24.05.2003</b>] - Added SNAC(15,02)/07D0/0AAF - client shortcut bar stats 
+report. Added SNAC(15,02)/07D0/1482 - client send SMS request. Added 
+SNAC(15,03)/07DA/0001 - meta processing error reply. Added SNAC(15,03)/07DA/0096s - 
+server reply for user SMS.
+<br><br>
+
+[<b>12.05.2003</b>] - Fixed many grammar bugs and pages structure problems.
+Added motd types list to lists.html
+<br><br>
+
+[<b>11.05.2003</b>] - Added description for SNAC(06,03) - server invitation 
+reply. Added style definitions for all project files. All pre tags now has 
+font-size style property. 
+<br><br>
+
+[<b>10.05.2003</b>] - Added description for srv_message SNAC(04,07) for 
+channels 1,4 messages. Fixed several bugs in SNAC(04,06). Added class 
+calculation example in lists.html
+<br><br>
+
+[<b>09.05.2003</b>] - Added new item type (0x14, buddy icon info) description 
+and TLV for this type (0xD5). Added description of SNAC(15,02)/07D0/2008 (2012) 
+- spam report to server staff. Added description of the channel1/4 messages - 
+SNAC(04,06).
+<br><br>
+
+[<b>04.05.2003</b>] - Added description of SNAC(15,02)/07D0/0C3A (0C3F) - 
+tlv-based save-info request/reply. Currently this request used only by ICQLite 
+client (build 1150).
+<br><br>
+
+[<b>23.03.2003</b>] - Added description of SNAC(15,02)/07D0/055F - white pages 
+search. Added description for SNAC(04,14) - mini typing notification (MTN). 
+Added lists.html page with status, msg_type, msg_flag, user_class lists. Added 
+description for random search SNACs.
+<br><br>
+
+[<b>15.03.2003</b>] - Added sequences.html page and two login examples (md5 based 
+login and channel 1 based login). Fixed bordercolor issue (bordercolor doesn't work 
+on opera and mozilla browsers). Added separate icq_search.html page for ICQ search 
+sequences.
+<br><br>
+
+[<b>02.03.2003</b>] - login.html page rewritten and ready. 
+<br><br>
+
+[<b>01.03.2003</b>] - Fixed bugs in SNAC(13,03) spec. Fixed typo bug in 
+families.html. Fixed bug in SNAC(13,14) specification. Added draft version 
+of login.html page.
+<br><br>
+
+[<b>23.02.2003</b>] - Added descriptions of SNAC(04,0B), SNAC(04,08), SNAC(04,09) 
+from icbm service. Added descriptions for all known SNACs from family 0x0a (AIM, 
+search by email). Added cross link to SNAC(01,06) spec for SNAC(01,07).
+<br><br>
+
+[<b>22.02.2003</b>] - Added credits page which contain list of people 
+contributed to these docs. Added basic protocol information (FLAP/SNAC/TLV).
+<br><br>
+
+[<b>15.02.2003</b>] - Added snac descriptions for administrative service 
+(AIM, family 0x07) subtypes. Fixed typo bugs in SSI service snaclist.
+<br><br>
+
+[<b>08.02.2003</b>] - Added snac descriptions for server-side information (SSI)
+service (ICQ/AIM, family 0x13). Added AIM/ICQ icons for family.html header. Added 
+SSI item description page ssi_item.html
+<br><br>
+
+[<b>02.02.2003</b>] - Added info for SNAC(01,07), SNAC(01,0A). Added rate limits 
+detailed info (page rate_limits.html). Thanks to Zoe Smale for provided information. 
+
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

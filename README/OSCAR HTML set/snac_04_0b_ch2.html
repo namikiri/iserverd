@@ -1,0 +1,273 @@
+<html>
+<head>
+<title>SNAC(04,0B)/CH2 client message error or data</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(04,0B)/CH2&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_ICBM_SENDxACK_CH2&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>Client send this snac as reply to <a href="snac_04_07_ch2.html">SNAC(04,07)/CH2</a>.
+See also common description for <a href="snac_04_0b.html">SNAC(04,0B)</a>.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 04</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 0B</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;xx xx xx xx<br>&nbsp;xx xx xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td valign=top>qword</td>
+ <td width=5>&nbsp;</td>
+ <td width=55% valign=top>msg-id cookie</td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 02</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>message channel</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>screenname string length</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>string</td>
+ <td>&nbsp;</td>
+ <td>screenname string</td>
+ </tr>
+ <tr valign=top>
+ <td>&nbsp;00 03</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>reason code (2 - busted payload, 3 - channel specific)</td>
+ </tr>
+ <tr><td colspan=5 height=15></td></tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#c9c9e9>&nbsp;Following contents is specific for capability,
+   which was used in message with the same msg-id cookie</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+  <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+  <tr><td bgcolor=#e9e9e9>
+
+   <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr><td height=8 colspan=3></td></tr>
+   <tr><td width=20></td>
+   <td>
+    <table width=610 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+    <table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+    <tr><td bgcolor=#c9c9e9 style="font-size: 13px;">&nbsp;
+      Data format description for capability <b><font face="Courier New">
+       {09461349-4C7F-11D1-8222-444553540000}</font></b>
+    </td></tr>
+    <tr><td bgcolor=#f9f9f9>
+ 
+     <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+     <tr>
+     <td>&nbsp;xx xx</td>
+     <td>&nbsp;</td>
+     <td>word (LE)</td>
+     <td>&nbsp;</td>
+     <td>length of following data</td>
+     </tr>
+     <tr>
+     <td width=147>&nbsp;xx xx</td>
+     <td width=5>&nbsp;</td>
+     <td>word (LE)</td>
+     <td width=5>&nbsp;</td>
+     <td width=55%>protocol version</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx .. xx</td>
+     <td>&nbsp;</td>
+     <td>guid (LE)</td>
+     <td>&nbsp;</td>
+     <td><a href="plugins.html">plugin</a> or zero bytes</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx xx</td>
+     <td>&nbsp;</td>
+     <td>word</td>
+     <td>&nbsp;</td>
+     <td>unknown</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx xx xx xx</td>
+     <td>&nbsp;</td>
+     <td>dword (LE)</td>
+     <td>&nbsp;</td>
+     <td>client capabilities flags</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx</td>
+     <td>&nbsp;</td>
+     <td>byte</td>
+     <td>&nbsp;</td>
+     <td>unknown</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx xx</td>
+     <td>&nbsp;</td>
+     <td>word (LE)</td>
+     <td>&nbsp;</td>
+     <td>seems to be a downcounter</td>
+     </tr>
+     </table>
+ 
+    </td></tr>
+    <tr><td bgcolor=#f9f9f9>
+     <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+     <tr>
+     <td width=147>&nbsp;xx xx</td>
+     <td width=5>&nbsp;</td>
+     <td>word (LE)</td>
+     <td width=5>&nbsp;</td>
+     <td width=55%>length of following data</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx xx</td>
+     <td>&nbsp;</td>
+     <td>word (LE)</td>
+     <td>&nbsp;</td>
+     <td>seems to be a downcounter as in first chunk above</td>
+     </tr>
+     <tr>
+     <td>&nbsp;xx ..</td>
+     <td>&nbsp;</td>
+     <td></td>
+     <td>&nbsp;</td>
+     <td>unknown, usually zeros</td>
+     </tr>
+     </table>
+ 
+    </td></tr>
+    <tr><td bgcolor=#f9f9f9>
+ 
+     <table width=620 cellSpacing=0 cellPadding=2 align=center border=0>
+     <tr>
+     <td>if plugin field in first chunk above is zero, here is
+       <a href="message.html">message</a>, overwise here is
+       plugin-specific data.
+     </td></tr></table>
+
+    </td></tr></table>
+    </td></tr></table>
+   </td><td width=5> </td></tr>
+   <tr><td height=5 colspan=3>
+   </td></tr></table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 54 28 00 6E 00 04  00 0B 00 00 00 00 00 0B *.T(.n..........
+  F3 3A C1 0C 70 18 00 00  00 02 07 36 32 31 38 38 .:..p......62188
+  39 35 00 03 1B 00 07 00  00 00 00 00 00 00 00 00 95..............
+  00 00 00 00 00 00 00 00  00 00 03 00 00 00 00 07 ................
+  00 0E 00 07 00 00 00 00  00 00 00 00 00 00 00 00 ................
+  00 E9 03 00 00 00 00 1B  00 55 73 65 72 20 69 73 .........User is
+  20 63 75 72 72 65 6E 74  6C 79 20 4F 63 63 75 70  currently Occup
+  69 65 64 00                                      ied.
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

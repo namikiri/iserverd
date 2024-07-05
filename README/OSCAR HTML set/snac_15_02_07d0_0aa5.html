@@ -1,0 +1,475 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0/0AA5 user registration stats</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0/0AA5&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_REGISTRATION_STATS&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+Client send this snac during first login. It contain some stats about user 
+registration. Server should reply via <a href="snac_15_03_07da_0302.html">
+SNAC(15,03)/07DA/0302</a>. Warning: they (AOL) may use this data to detect 
+ICQ clones.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=169>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 00</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td>&nbsp;</td>
+<td>dword</td>
+<td>&nbsp;</td>
+<td>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=147>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td>&nbsp;</td>
+<td>dword (LE)</td>
+<td>&nbsp;</td>
+<td>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>data type: META_DATA_REQ</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>request sequence number</td>
+</tr>
+<tr>
+<td>&nbsp;A5 0A</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>data subtype: META_REGISTRATION_STATS</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>client major version number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>client minor version number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>client lesser version number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>client build version number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td>&nbsp;</td>
+<td>dword (LE)</td>
+<td>&nbsp;</td>
+<td>client distribution number</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;00</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>unknown flag</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - email field filled, 0 - not</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - firstname field filled, 0 - not</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - lastname field filled, 0 - not</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - nickname field filled, 0 - not</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - publish email, 0 - not</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - auth required, 0 - not</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - show status on web, 0 - not</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - service "find my friends" checked</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - service "set ICQ homepage" checked</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - service "available for chat" checked</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - service "add email signature" checked</td>
+</tr>
+<tr>
+<td>&nbsp;01</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>unknown field</td>
+</tr>
+<tr>
+<td>&nbsp;01</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>unknown field</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>user birth year</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>unknown (reserved for user age ?)</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>spoken language #1 code</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>spoken language #2 code</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>spoken language #3 code</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>user gender code (1 - female, 2 - male)</td>
+</tr>
+<tr>
+<td>&nbsp;01 00 00 00</td>
+<td>&nbsp;</td>
+<td>---</td>
+<td>&nbsp;</td>
+<td>unknown data</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>number of registered owners (N)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td>&nbsp;</td>
+<td>dword (LE)</td>
+<td>&nbsp;</td>
+<td>registered owner uin #1</td>
+</tr>
+<tr>
+<td>&nbsp;...</td>
+<td>&nbsp;</td>
+<td>...</td>
+<td>&nbsp;</td>
+<td>...</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td>&nbsp;</td>
+<td>dword (LE)</td>
+<td>&nbsp;</td>
+<td>registered owner uin #N</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word (LE)</td>
+<td>&nbsp;</td>
+<td>length of ICQ install key</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. 00</td>
+<td>&nbsp;</td>
+<td>asciiz</td>
+<td>&nbsp;</td>
+<td>ICQ unique install key (find it in registry)</td>
+</tr>
+<tr><td colspan=5 height=8></td></tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>"Save password": 1 - yes, 0 - no</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - save pass selection was in second window</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>1 - "city" field was filled by user</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>unknown flag</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  00 15 00 02 00 00 00 11 00 02 00 01 00 7D 7B 00  ........ .....}{.
+  CA ED B4 03 D0 07 12 00 A5 0A 05 00 2D 00 01 00  ........ ....-...
+  C1 0E 55 00 00 00 01 00 00 00 00 00 00 00 00 00  ..U..... ........
+  00 00 00 00 00 00 00 00 01 FF FF 00 00 00 00 00  ........ ........
+  07 00 8F E4 5E 00 99 ED B4 03 9A ED B4 03 91 E4  ....^... ........
+  5E 00 AA ED B4 03 92 E4 5E 00 CA ED B4 03 27 00  ^....... ^.....'.
+  7B 38 33 45 41 36 43 35 30 2D 41 38 46 36 2D 34  {83EA6C5 0-A8F6-4
+  42 45 44 2D 38 35 34 41 2D 30 30 35 36 46 36 36  BED-854A -0056F66
+  33 46 36 31 38 7D 00 01 00 00 00                 3F618}.. ...
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

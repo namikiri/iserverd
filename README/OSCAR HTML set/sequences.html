@@ -1,0 +1,1107 @@
+<html>
+<head>
+<title>Various sequences in OSCAR protocol</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;OSCAR sequences&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0 bgcolor=#E9E9E9>
+<tr><td bgcolor=white>
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 width=30>&nbsp;<b>1. </b>&nbsp;</td>
+<td bgcolor=#f0f0f0 width=570>&nbsp;<a href="login.html">Login sequence</a></td>
+<td bgcolor=#f0f0f0 width=18 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 width=18 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>2.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#offline_msgs">Retrieving offline messages sequences</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>3.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#get_user_info">Retrieving user information sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>4.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#migration">Client migration sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>5.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#registration">New uin registration sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>6.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#unregistration">Delete user account (unregister) sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>7.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#evil_request">Send user warning sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>8.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#set_user_info">Change user_info sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>9.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#account_change">AIM change account info sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>10.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#verification">Client verification sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>11.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="icq_search.html">ICQ search user(s) sequences</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>12.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="icq_ssi_auth.html">ICQ SSI authorization sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>13.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="service_request.html">Service request sequence</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>14.</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="ssbi_sequence.html">Upload/download server-stored buddy icons (SSBI) sequences</a></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f0f0f0 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="offline_msgs"></a>&nbsp;Retrieving offline messages sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ IM service has ability to save messages were sent to you when you was offline. 
+ICQ client can request these saved messages (called offline messages) after 
+<a href="login.html">login sequence</a>. After receiving offline messages client 
+should ask server to delete them or it will receive them in next request. If there 
+is no offline messages server sends only 
+<a href="snac_15_03_0042.html">SNAC(15,03)/0042</a> (without 
+<a href="snac_15_03_0041.html">SNAC(15,03)/0041</a>)<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Retrieving offline messages</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_003c.html">SNAC(15,02)/003C</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends offline messages request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_0041.html">SNAC(15,03)/0041</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends message #1</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>...</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>...</b></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_0041.html">SNAC(15,03)/0041</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends message #N</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_0042.html">SNAC(15,03)/0042</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends end-of-offline messages snac</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_003e.html">SNAC(15,02)/003E</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server to delete offline messages</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="get_user_info"></a>&nbsp;Retrieving user information sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ IM service user information is structured and has many fields. These fields 
+divided into several sections: basic info, work info, more info, about info, 
+extended email info, interests info, affilations info). There are 3 info requests 
+client can send to get full or short user information:<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Retrieving self full information</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_04b2.html">SNAC(15,02)/07D0/04B2</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server for self full information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00c8.html">SNAC(15,03)/07DA/00C8</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends basic user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00dc.html">SNAC(15,03)/07DA/00DC</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends more user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00eb.html">SNAC(15,03)/07DA/00EB</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends extended email user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_010e.html">SNAC(15,03)/07DA/010E</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends homepage category user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00d2.html">SNAC(15,03)/07DA/00D2</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends work user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00e6.html">SNAC(15,03)/07DA/00E6</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends user about information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00f0.html">SNAC(15,03)/07DA/00F0</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends user interests information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00fa.html">SNAC(15,03)/07DA/00FA</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends user affilations information</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+
+<br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Retrieving full user information (for another user)</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_04d0.html">SNAC(15,02)/07D0/04D0</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server for full user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00c8.html">SNAC(15,03)/07DA/00C8</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends basic user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00dc.html">SNAC(15,03)/07DA/00DC</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends more user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00eb.html">SNAC(15,03)/07DA/00EB</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends extended email user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_010e.html">SNAC(15,03)/07DA/010E</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends homepage category user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00d2.html">SNAC(15,03)/07DA/00D2</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends work user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00e6.html">SNAC(15,03)/07DA/00E6</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends user about information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00f0.html">SNAC(15,03)/07DA/00F0</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends user interests information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00fa.html">SNAC(15,03)/07DA/00FA</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends user affilations information</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+
+<br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Retrieving short user information</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_04ba.html">SNAC(15,02)/07D0/04BA</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server for short user information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0104.html">SNAC(15,03)/07DA/0104</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends short user information</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+
+<br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="migration"></a>&nbsp;Migration sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Migration sequence used to redirect client to new BOS server during current BOS 
+shutdown. Server can migrate whole connection or only several services. Migration 
+always initiated by server. Server can abort migration sequence via 
+<a href="snac_01_0d.html">SNAC(01,0D)</a> - server resume command.
+<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Migration sequence</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_01_0b.html">SNAC(01,0B)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends pause. Client should stop send snacs</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_0c.html">SNAC(01,0C)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ack pause command</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_12.html">SNAC(01,12)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends migration (cookie/BOS address)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>disconnect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client disconnects from BOS (only full migration)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="login.html#l0002">login</a> (stage II)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client start normal login sequence from stage II</td>
+</tr>
+
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="registration"></a>&nbsp;New uin registration sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ IM service supports automatic user registration. So client can obtain new 
+account in real time. To perform new uin registration client should provide 
+only password and random request id. Server also can reply via 
+<a href="snac_17_01.html">SNAC(17,01)</a> if it can't create new user account.
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;New uin registration</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b>connect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client connects to authorizer server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_17_04.html">SNAC(17,04)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends registration request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_17_05.html">SNAC(17,05)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends new uin (registration reply)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>disconnect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client disconnects from authorizer</td>
+</tr> 
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="unregistration"></a>&nbsp;Delete user ICQ account sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+This sequence used to unregister ICQ account. Use this carefully - this request 
+completely removes your uin from server. You should provide password for this 
+uin because it is required during unregistration.<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Unregistration sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_04c4.html">SNAC(15,02)/07D0/04C4</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends delete account request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00b4.html">SNAC(15,03)/07DA/00B4</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends account deleted ack</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>disconnect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client disconnects from BOS server</td>
+</tr> 
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="evil_request"></a>&nbsp;Send user warning sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+This sequence used to send warning to AIM user that bother you. User that have 
+too high warning level disconnects from server and can't connect for some time. 
+You can send normal and anonymous warning. Normal warning increase user warning 
+level by 15%, anonymous warning increase warn level by 3%.<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Send warning sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_04_08.html">SNAC(04,08)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends warning to user</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_04_09.html">SNAC(04,09)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server ack (new user warn level & warn level diff)</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="set_user_info"></a>&nbsp;Change user info sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ service user information is structured and has many fields. These fields 
+divided into several sections: basic info, work info, more info, about info, 
+extended email info, interests info, affilations info, password, permissions) 
+and you can save info by sections. Here is the sequences to change user 
+information:<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change basic info sequence</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_03ea.html">SNAC(15,02)/07D0/03EA</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new basic info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0064.html">SNAC(15,03)/07DA/0064</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change work info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_03f3.html">SNAC(15,02)/07D0/03F3</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new work info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_006e.html">SNAC(15,03)/07DA/006E</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change more info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_03fd.html">SNAC(15,02)/07D0/03FD</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new more info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0078.html">SNAC(15,03)/07DA/0078</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change notes info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0406.html">SNAC(15,02)/07D0/0406</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new notes info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0082.html">SNAC(15,03)/07DA/0082</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change extended email info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_040b.html">SNAC(15,02)/07D0/040B</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new extended email info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0087.html">SNAC(15,03)/07DA/0087</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change interests info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0410.html">SNAC(15,02)/07D0/0410</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new interests info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_008c.html">SNAC(15,03)/07DA/008C</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change affilations info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_041a.html">SNAC(15,02)/07D0/041A</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new affilations info to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0096.html">SNAC(15,03)/07DA/0096</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change user permissions sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0424.html">SNAC(15,02)/07D0/0424</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new user permissions to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00a0.html">SNAC(15,03)/07DA/00A0</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change user password sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_042e.html">SNAC(15,02)/07D0/042E</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send new password to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00aa.html">SNAC(15,03)/07DA/00AA</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change homepage category/description sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0442.html">SNAC(15,02)/07D0/0442</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send homepage category to server</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_00be.html">SNAC(15,03)/07DA/00BE</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Modern ICQ client use another way to update user information. They send single 
+unified request packet which contain tlv chain with data fields client want to 
+change. Here is the sequence:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change user permissions sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0c3a.html">SNAC(15,02)/07D0/0C3A</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send to server data it want to change</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_0c3f.html">SNAC(15,03)/07DA/0C3F</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server report saving info result</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="account_change"></a>&nbsp;AIM change account info sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+This sequence used to change AIM service account info (screenname formatting, email, 
+password). Server should ack account change request by SNAC(07,02)<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Change account info sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_07_04.html">SNAC(07,04)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends new account info to server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_07_05.html">SNAC(07,05)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends account change result</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="verification"></a>&nbsp;Client verification sequence</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+This request used by AOL AIM server to recognize clone clients. The 
+request contains eight bytes. The first four are an offset, the second 
+four are a length.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+When the client receives the request, it adds it to the current ds
+(0x00400000) and dereferences it, copying the data into a buffer which
+it then runs directly through the MD5 hasher. The 16 byte output of
+the hash is then sent back to the server.<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Client verification</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_01_1f.html">SNAC(01,1F)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server ack client for verification reply</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_20.html">SNAC(01,20)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends verification reply</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

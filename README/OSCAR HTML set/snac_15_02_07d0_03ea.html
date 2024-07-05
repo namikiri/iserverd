@@ -1,0 +1,396 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0/03EA client set user basic info command</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0/03EA&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">META_SET_BASIC_USERINFO&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+Client use this to change basic user information. Server should reply via 
+<a href="snac_15_03_07da_0064.html">SNAC(15,03)/07DA/0064</a> which contain 
+flag byte. If flag byte doesn't equal 0x0A - there was an error saving info. 
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data type: META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;02 00</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number</td>
+</tr>
+<tr>
+<td>&nbsp;EA 03</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data subtype: META_SET_BASIC_USERINFO</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>nickname string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>nickname string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>first name string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>first name string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>last name string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>last name string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>email string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>email string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home city string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home city string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home state string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home state string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home phone string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home phone string</td>
+</tr>
+
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home fax string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home fax string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home address string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home address string</td>
+</tr>
+
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>cell phone string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>cell phone string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home zip code string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home zip code string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>home country code</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>char</td>
+<td width=5>&nbsp;</td>
+<td width=55%>GMT offset</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>char</td>
+<td width=5>&nbsp;</td>
+<td width=55%>publish primary email flag</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 05 5F 00 B2 00 15 00 02 00 00 00 0B 00 02 *.._............
+  00 01 00 A4 A2 00 31 DE 0B 00 D0 07 0E 00 EA 03 ......1.........
+  09 00 4E 69 63 6B 4E 61 6D 65 00 0A 00 46 69 72 ..NickName...Fir
+  73 74 4E 61 6D 65 00 09 00 4C 61 73 74 4E 61 6D stName...LastNam
+  65 00 11 00 70 75 70 6B 69 6E 40 65 6D 61 69 6C e...pupkin@email
+  2E 6F 72 67 00 09 00 48 6F 6D 65 63 69 74 79 00 .org...Homecity.
+  04 00 53 74 61 00 11 00 2B 37 20 28 34 32 31 32 ..Sta...+7 (4212
+  29 20 48 50 48 4F 4E 45 00 0F 00 2B 37 20 28 34 ) HPHONE...+7 (4
+  32 31 32 29 20 48 46 41 58 00 0B 00 48 4F 4D 45 212) HFAX...HOME
+  53 54 52 45 45 54 00 13 00 2B 37 20 28 39 30 32 STREET...+7 (902
+  29 20 48 43 45 4C 4C 20 53 4D 53 00 06 00 31 31 ) HCELL SMS...11
+  31 31 31 00 07 00 EC 01                         111.....
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

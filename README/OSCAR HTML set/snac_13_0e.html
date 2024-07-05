@@ -1,0 +1,174 @@
+<html>
+<head>
+<title>SNAC(13,0E) server SSI modification ack</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(13,0E)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_SSIxMODxACK&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This SNAC is an ack sent by the server when <a href="snac_13_08.html">adding</a> 
+a buddy, <a href="snac_13_0a.html">deleting</a> a buddy, 
+or otherwise <a href="snac_13_09.html">modifying</a> a group. See also snac list for SSI service 
+<a href="families.html#f0013">here</a>. This snac contain flag. Here 
+is the list of its known values:<br><br>
+
+<table width=100% bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=100% cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0000</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;No errors (success)</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Item you want to modify not found in list</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0003</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Item you want to add allready exists</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000A</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Error adding item (invalid id, allready in list, invalid data)</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000C</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Can't add item. Limit for this type of items exceeded</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000D</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Trying to add ICQ contact to an AIM list</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000E</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Can't add this contact because it requires authorization</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=20%>&nbsp;00 13</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=60%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 0E</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=60%>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=60%>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td>dword</td>
+ <td width=5>&nbsp;</td>
+ <td width=60%>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+   <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>result code for item #1 (see list above)</td>
+   </tr>
+   <tr >
+   <td>&nbsp;...</td>
+   <td>&nbsp;</td>
+   <td>&nbsp;...</td>
+   <td>&nbsp;</td>
+   <td>&nbsp;...</td>
+   </tr>
+   <tr>
+   <td width=20%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>result code for item #n (see list above)</td>
+   </tr>
+   </table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 92 34 00 0C 00 13  00 0E 80 00 00 04 00 08 *..4............
+  00 00                   			   ..........
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

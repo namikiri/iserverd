@@ -1,0 +1,194 @@
+<html>
+<head>
+<title>Upload/download server-stored buddy icons (SSBI) sequences</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;OSCAR sequences&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="description"></a>&nbsp;Upload/download server-stored buddy icons (SSBI) sequences</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+SSBI service allows clients to store and retrieve little buddy icons called 
+ICQ avatars. Icon size is limited by size of flap packet (~8kb). Every icon has 
+unique combination of id (word), flags (byte) and md5 hash. AOL BOS server 
+doesn't support <a href="families.html#f0010">SSBI</a> service so you should 
+request it and setup as described <a href="service_request.html">here</a>. 
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+To upload own icon to server you should calculate icon md5 hash and store it 
+as ssi type=0x14 item. Then you'll get <a href="snac_01_21.html">SNAC(01,21)</a> 
+with icon flags bit8=1 - this is a command for you to start icon upload. 
+Here is the sequence description (<a href="examples/upload_icon.html">example dump</a>):
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Upload own icon to server</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_13_08.html">SNAC(13,08)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[BOS] User add icon id/flags/md5 hash to server (ssi type=14)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_0e.html">SNAC(13,0E)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[BOS] Server reply command ok (errcode=0x00)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_21.html">SNAC(01,21)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[BOS] Server command to upload icon (icon flags bit8=1)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 colspan=3 height=25 valign=middle><font size=2>&nbsp;&nbsp;Client check/prepare SSBI connection</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_10_02.html">SNAC(10,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[SSBI] Client sends icon to server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_10_03.html">SNAC(10,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[SSBI] Server reply with icon id/flags/md5 hash or with error</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 colspan=3 height=25 valign=middle><font size=2>&nbsp;&nbsp;All your buddies will receive <a href="snac_03_0b.html">SNAC(03,0B)</a> with TLV(0x1D) here</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_21.html">SNAC(01,21)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[BOS] Server ext status notification (icon flags bit8=0)</td>
+</tr>
+
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;To download icon from server you should know user 
+uin/screenname, icon id, icon flags and its md5 hash. You can get all needed 
+information from <a href="snac_03_0b.html">SNAC(03,0B)</a> containing TLV(0x1D). 
+Official ICQ clients also use <a href="snac_10_06.html">SNAC(10,06)</a> to get 
+client own icon after receiving <a href="snac_01_21.html">SNAC(01,21)</a>. Here 
+is the sequence (<a href="examples/download_icon.html">example dump</a>):
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Downloading buddy/own icon from server</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_03_0B.html">SNAC(03,0B)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[BOS] User status notification from server (with TLV(0x1D))</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 colspan=3 height=25 valign=middle><font size=2>&nbsp;&nbsp;Client check/prepare SSBI connection</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_10_06.html">SNAC(10,06)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[SSBI] Client sends icon request to server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_10_07.html">SNAC(10,07)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;[SSBI] Server reply with requested icon</td>
+</tr>
+
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr>
+<td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

@@ -1,0 +1,263 @@
+<html>
+<head>
+<title>SNAC(04,06) client send-message command</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(04,06)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_SEND_ICBM&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+Client use this snac to send message thru server. Within the ICBM 
+(Inter-Client Basic Message) types (family 4), a channel is defined. 
+Each channel represents a different kind of message.<br><br>
+
+Channel 1 is used for what would commonly be called an "instant message" (plain
+text messages). Channel 2 is used for complex messages (rtf, utf8) and
+negotiating "rendezvous". These transactions end in something more
+complex happening, such as a chat invitation, or a file transfer.
+Channel 3 is used for chat messages (not in the same family as
+these channels). Channel 4 is used for various ICQ messages.
+Examples are normal messages, URLs, and old-style
+authorization.<br><br> 
+
+This snac contain one fixed part (target uin, channel, msg-id cookie) 
+and <b>channel-dependend</b> tlv-chain.<br><br>
+
+First dword in msg-id cookies is actually the computer uptime in milliseconds 
+(ie GetTickCount(), at least this is what the ICQ Lite and the other official 
+clients I have tested uses).<br><br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 04</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 06</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=20>&nbsp;</td>
+ <td width=147>&nbsp;xx xx xx xx<br>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td valign=top>qword</td>
+ <td>&nbsp;</td>
+ <td width=55% valign=top>msg-id cookie</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>message channel (see table below)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;xx</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>screenname string length</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>string</td>
+ <td>&nbsp;</td>
+ <td>screenname string</td>
+ </tr>
+ </table>
+
+ <!-- TLV 0xXX -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>TLV.Type(0xXX) - icbm info</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;....</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>....</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>....</td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr> 
+ <td width=147>&nbsp;</td>
+ <td width=23%>....</td>
+ <td width=17% valign=top>&nbsp;....</td>
+ <td valign=top>....</td>
+ </tr>
+ </table>
+
+ <!-- TLV 0xXX -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>TLV.Type(0xXX) - icbm info</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;....</td>
+   <td width=5>&nbsp;</td>
+   <td>....</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>....</td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=white>
+
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=15%><b>&nbsp;<font size=2><a href="snac_04_06_ch1.html">Channel 1</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Channel 1 message format (plain-text messages)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2><a href="snac_04_06_ch2.html">Channel 2</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Channel 2 message format (rtf messages, rendezvous)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2><a href="snac_04_06_ch4.html">Channel 4</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Channel 4 message format (typed old-style messages)</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

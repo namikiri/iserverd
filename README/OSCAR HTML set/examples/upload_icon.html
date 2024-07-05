@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Upload icon sequence example dump</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td><b><font color="white">&nbsp;Upload icon sequence example dump&nbsp;</font></b></td>
+<td width=20% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr></table></td></tr></table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4> </td></tr><tr>
+<td width=7>&nbsp;</td><td valign=top>
+<font size=3><pre style="font-size: 13px">
+
+  // [BOS] Client command: add icon md5 hash item type=0x14 to ssi
+  2A 02 12 AA 00 2F 00 13  00 08 00 00 3E C9 00 08  *..../......&gt;...
+  00 01 31 00 00 18 13 00  14 00 1A 00 D5 00 12 01  ..1.............
+  10 EC 7B 60 67 CF D1 01  99 0C BD 33 F9 00 FC 4B  ..{`g......3...K
+  9B 01 31 00 00                                    ..1..
+
+  // [BOS] Server ack - success
+  2A 02 26 04 00 14 00 13  00 0E 80 00 3E C9 00 08  *.&.........&gt;...
+  00 06 00 01 00 02 00 04  00 00                    ..........
+
+  // [BOS] Server ext status - command to start upload (flags=0x41)
+  2A 02 26 05 00 26 00 01  00 21 80 00 C8 48 FF FB  *.&..&...!...H..
+  00 06 00 01 00 02 00 04  00 01 41 10 EC 7B 60 67  ..........A..{`g
+  CF D1 01 99 0C BD 33 F9  00 FC 4B 9B              ......3...K.
+
+  -------------------------------------------------------------------
+  // Client request and setup SSBI service connection
+  
+  // [SSBI] Icon upload request
+  2A 02 01 0C 16 19 00 10  00 02 00 00 77 C3 00 02  *...........w...
+  00 01 16 0B FF D8 FF E0  00 10 4A 46 49 46 00 01  ..........JFIF..
+  01 01 00 60 00 60 00 00  FF DB 00 43 00 01 01 01  ...`.`.....C....
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 FF DB 00  ................
+  43 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  C...............
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  ...........
+  AF 62 78 7B CD DA 35 E2  AE 92 55 27 4A 13 49 72  .bx{..5...U'J.Ir  
+  2F 7A 0E B5 E3 27 76 DC  5D 9A D9 A4 EE 8C 28 E4  /z...'v.].....(.
+  B8 BA 94 A9 CE 58 8C B9  4A 51 8B 92 78 C4 DF 35  .....X..JQ..x..5
+  A3 CC EE A9 C9 35 74 DA  92 94 94 92 52 52 69 A6  .....5t.....RRi.
+  7F FF D9                                          ...
+
+  // [SSBI] Server upload result reply - success
+  2A 02 B9 0A 00 1F 00 10  00 03 00 00 77 C3 00 02  *...........w...
+  00 00 01 01 10 EC 7B 60  67 CF D1 01 99 0C BD 33  ......{`g......3
+  F9 00 FC 4B 9B                                    ...K.
+  
+  -------------------------------------------------------------------
+
+  // [BOS] Server ext status notification
+  2A 02 26 07 00 26 00 01  00 21 80 00 C8 49 4C 87  *.&..&...!...IL.
+  00 06 00 01 00 02 00 04  00 01 01 10 EC 7B 60 67  .............{`g
+  CF D1 01 99 0C BD 33 F9  00 FC 4B 9B              ......3...K.
+
+  
+</pre></font>
+</font>
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="../index.html" target="_top">Main</a> | 
+<a href="../basic.html" target="_top">Basic</a> | 
+<a href="../login.html" target="_top">Login</a> | 
+<a href="../families.html" target="_top">Snaclist</a> | 
+<a href="../sequences.html" target="_top">Sequences</a> | 
+<a href="../lists.html" target="_top">Misc</a> | 
+<a href="../changes.html" target="_top">Changes</a> | 
+<a href="../credits.html" target="_top">Credits</a> | 
+<a href="../terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

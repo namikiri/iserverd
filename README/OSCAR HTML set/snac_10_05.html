@@ -1,0 +1,196 @@
+<html>
+<head>
+<title>SNAC(10,05) server AIM buddy icon reply</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(10,05)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_AIM_ICON_REPLY&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the server reply for <a href="snac_10_04.html">SNAC(10,04)</a> - 
+client buddy icon request. This snac contain requested buddy icon (jpg, gif, 
+bmp, etc...) and its md5 checksum.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 10</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 05</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td>dword</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;xx</td>
+ <td width=5>&nbsp;</td>
+ <td>byte</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>screenname string length</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>ascii</td>
+ <td>&nbsp;</td>
+ <td>screenname string</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 01</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>unknown field(s)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;01</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>icon flags (?)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;10</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>md5 hash size (16)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>array</td>
+ <td>&nbsp;</td>
+ <td>requested icon md5 hash</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>length of the icon</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>array</td>
+ <td>&nbsp;</td>
+ <td>icon data (jpg, gif, bmp, etc...)</td>
+ </tr>
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2a 02 bc 51 01 bf 00 10 00 05 00 00 00 01 00 04  *..Q.5..........
+  09 52 65 67 72 65 73 73 6f 72 00 01 01 10 f9 65  .Regressor.....e
+  56 88 e6 ad df ed 92 6b 62 6f bd f9 3c ee 01 95  V......kbo..<...
+  47 49 46 38 39 61 20 00 20 00 b3 00 00 ff 00 ff  GIF89a . .......
+  00 00 00 a0 ff 00 80 c0 00 60 a0 00 40 80 00 a0  .........`..@...
+  ff 40 c0 ff 40 c0 ff 80 ff ff ff 00 00 00 00 00  .@..@...........
+  00 00 00 00 00 00 00 00 00 00 00 00 00 21 f9 04  .............!..
+  01 00 00 00 00 21 fe 30 43 72 65 61 74 6f 72 3a  .....!.0Creator:
+  20 50 6f 6c 79 56 69 65 77 ae 20 56 65 72 73 69  .PolyView. Versi
+  6f 6e 20 33 2e 32 30 20 62 79 20 50 6f 6c 79 62  on 3.20 by Polyb
+  79 74 65 73 0d 0a 0d 0a 00 2c 00 00 00 00 20 00  ytes.....,.... .
+  20 00 00 04 ff 10 c8 49 ab bd 38 eb 8d 83 ff 60   ......I..8....`
+  c0 5d 9e 30 9c 44 5a ac c5 37 02 a5 20 9f 68 4a  .].0.DZ..7...hJ.
+  b0 ad a8 05 72 df d3 b5 1b 4b 47 92 19 8e 06 df   ...r....KG.....
+  8c 66 13 12 29 01 a4 e1 70 90 2a 4d 83 80 6a f5  .f..)...p.*M..j.
+  84 1d a9 60 aa 34 f9 23 68 85 ad 49 74 7a 40 b8  ...`.4.#h..Itz@.
+  dd e1 ea 71 69 de 12 a3 ed b7 fe 2d 2e d1 3c 76  ...qi......-..<v
+  12 78 7b 84 07 1f 64 28 67 5c 30 09 01 84 7a 86  .x{...d(g\0...z.
+  01 09 93 3c 33 66 8a 39 8d 8f 08 91 93 9e 51 4b  ...<3f.9......QK
+  92 5a 5c 92 9a 84 a5 9e 94 88 59 8d 2a 1e 94 79  .Z\.......Y.*..y
+  70 a8 a9 8d ab a5 a3 af 94 7c b3 b4 a0 26 97 ad  p........|...&..
+  99 b0 54 bc 8d b7 49 89 c6 37 b9 87 c5 c6 b5 96  ..T...I..7......
+  a8 b8 b7 a2 b4 d6 be 03 66 9f a4 bd d6 a9 d8 59  ........f......Y
+  d2 dc 9f b9 d7 ab da a2 cb 82 1f 32 e5 94 e0 da  ...........2....
+  ef 8b 30 03 4a 21 95 74 e5 b8 6a 04 34 57 3e 4c  ..0.J!.t..j.4W>L
+  a8 ed 83 92 02 c8 89 25 35 a4 39 21 d1 c4 03 10  .......%5.9!....
+  1b f7 16 76 08 c0 e2 52 88 26 38 ba 90 f0 50 b1  ...v...R.&8...P.
+  09 1a 52 2f 0e d6 e1 18 99 23 64 85 7b 20 4c aa  ..R/.....#d.{ L.
+  d4 10 01 00 3b                                   ....;
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

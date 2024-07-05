@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>Service request sequence example dump</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td><b><font color="white">&nbsp;Service request sequence example dump&nbsp;</font></b></td>
+<td width=20% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr></table></td></tr></table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4> </td></tr><tr>
+<td width=7>&nbsp;</td><td valign=top>
+<font size=3><pre style="font-size: 13px">
+
+  // client sends service 0x10 request on BOS connection
+  2A 02 12 AB 00 0C 00 01  00 04 00 00 5D 0E 00 04  *...........]...
+  00 10                                             ..
+
+  // server reply with server ip 64.12.31.136 & auth cookie
+  2A 02 26 06 01 2C 00 01  00 05 80 00 5D 0E 00 04  *.&..,......]...
+  00 06 00 01 00 02 00 04  00 0D 00 02 00 10 00 05  ................
+  00 0C 36 34 2E 31 32 2E  33 31 2E 31 33 36 00 06  ..64.12.31.136..
+  01 00 7B F3 F0 F3 A4 A5  6C 67 C5 DF 4B 78 4C 43  ..{.....lg..KxLC
+  C7 6C 3D 44 32 8D 96 82  DA 6A 41 7E 83 27 F4 D9  .l=D2....jA~.'..
+  B8 A5 83 6B 54 95 1B 91  B9 FE 6D A3 B6 86 FC 21  ...kT.....m....!
+  C7 F0 53 C1 A5 38 D6 07  D7 CA AA 7F 3E B6 FE D9  ..S..8......>...
+  AD D7 AE 31 1B 6A A4 52  40 23 38 25 98 40 73 96  ...1.j.R@#8%.@s.
+  E7 17 B8 31 C3 44 E8 98  15 1F DD E0 5C 31 48 7B  ...1.D......\1H{
+  7D E5 92 E8 35 14 C4 1E  1C 9C 4F FB F8 55 76 B1  }...5.....O..Uv.
+  68 DB CE 72 06 43 1A 77  78 12 83 AD EB 27 D3 2D  h..r.C.wx....'.-
+  2A 69 47 A5 FC DE C5 89  16 2E 74 52 BB 5C 6B BE  *iG.......tR.\k.
+  66 86 AB 83 3E C3 7C E8  24 C5 16 CE 4A 34 13 95  f...>.|.$...J4..
+  1B E4 56 35 EA 18 FC D5  F7 24 0F 64 6A E6 D4 5D  ..V5.....$.dj..]
+  BF 14 57 CE 4B 1D 7E CF  8F FD 1F CA 35 FA 29 97  ..W.K.~.....5.).
+  21 DC F7 1C 1A 36 24 CD  CC 5F 05 9C 44 A6 23 DF  !....6$.._..D.#.
+  BB 09 B2 36 17 36 91 26  0B 84 75 EA D2 FC BD 70  ...6.6.&..u....p
+  0F C6 6C 67 D0 64 99 82  A4 C2 00 10 D8 8C FF D9  ..lg.d..........
+  71 9F 50 25 8A 2A BD C6  5E 27 8B 33 BE 81 21 D1  q.P%.*..^'.3..!.
+  2B 4B                                             +K
+
+  -------------------------------------------------------------------
+  // Then client makes tcp connection to 64.12.31.136 
+
+  // Connection established. Server sends 0x00000001 (invitation)
+  2A 01 B9 06 00 0C 00 00  00 01 80 01 00 04 00 00  *...............
+  FF FF                                             ..
+
+  // Client sends auth cookie
+  2A 01 01 07 01 08 00 00  00 01 00 06 01 00 7B F3  *.............{.
+  F0 F3 A4 A5 6C 67 C5 DF  4B 78 4C 43 C7 6C 3D 44  ....lg..KxLC.l=D
+  32 8D 96 82 DA 6A 41 7E  83 27 F4 D9 B8 A5 83 6B  2....jA~.'.....k
+  54 95 1B 91 B9 FE 6D A3  B6 86 FC 21 C7 F0 53 C1  T.....m....!..S.
+  A5 38 D6 07 D7 CA AA 7F  3E B6 FE D9 AD D7 AE 31  .8......>......1
+  1B 6A A4 52 40 23 38 25  98 40 73 96 E7 17 B8 31  .j.R@#8%.@s....1
+  C3 44 E8 98 15 1F DD E0  5C 31 48 7B 7D E5 92 E8  .D......\1H{}...
+  35 14 C4 1E 1C 9C 4F FB  F8 55 76 B1 68 DB CE 72  5.....O..Uv.h..r
+  06 43 1A 77 78 12 83 AD  EB 27 D3 2D 2A 69 47 A5  .C.wx....'.-*iG.
+  FC DE C5 89 16 2E 74 52  BB 5C 6B BE 66 86 AB 83  ......tR.\k.f...
+  3E C3 7C E8 24 C5 16 CE  4A 34 13 95 1B E4 56 35  >.|.$...J4....V5
+  EA 18 FC D5 F7 24 0F 64  6A E6 D4 5D BF 14 57 CE  .....$.dj..]..W.
+  4B 1D 7E CF 8F FD 1F CA  35 FA 29 97 21 DC F7 1C  K.~.....5.).!...
+  1A 36 24 CD CC 5F 05 9C  44 A6 23 DF BB 09 B2 36  .6$.._..D.#....6
+  17 36 91 26 0B 84 75 EA  D2 FC BD 70 0F C6 6C 67  .6.&..u....p..lg
+  D0 64 99 82 A4 C2 00 10  D8 8C FF D9 71 9F 50 25  .d..........q.P%
+  8A 2A BD C6 5E 27 8B 33  BE 81 21 D1 2B 4B        .*..^'.3..!.+K
+
+  // Server sends supported services list - SNAC(01,03)
+  2A 02 B9 07 00 0E 00 01  00 03 00 00 81 2E E2 C4  *...............
+  00 01 00 10                                       ....
+
+  // Client ask for services version numbers - SNAC(01,17)
+  2A 02 01 08 00 12 00 01  00 17 00 00 00 00 00 17  *...............
+  00 01 00 04 00 10 00 01                           ........
+
+  // Server sends its services version numbers - SNAC(01,18)
+  2A 02 B9 08 00 12 00 01  00 18 00 00 81 2E E2 E4  *...............
+  00 01 00 04 00 10 00 01                           ........
+
+  // Client ask server for rate limits info - SNAC(01,06)
+  2A 02 01 09 00 0A 00 01  00 06 00 00 00 00 00 06  *...............
+
+  //  Server sends rate limits information - SNAC(01,07)
+  2A 02 B9 09 01 97 00 01  00 07 00 00 00 00 00 06  *...............
+  00 05 00 01 00 00 00 50  00 00 09 C4 00 00 07 D0  .......P........
+  00 00 05 DC 00 00 03 20  00 00 16 E4 00 00 17 70  ....... .......p
+  00 00 00 00 00 00 02 00  00 00 50 00 00 0B B8 00  ..........P.....
+  00 07 D0 00 00 05 DC 00  00 03 E8 00 00 17 70 00  ..............p.
+  00 17 70 00 00 03 16 00  00 03 00 00 00 14 00 00  ..p.............
+  13 EC 00 00 13 88 00 00  0F A0 00 00 0B B8 00 00  ................
+  17 70 00 00 17 70 00 00  03 16 00 00 04 00 00 00  .p...p..........
+  14 00 00 15 7C 00 00 14  B4 00 00 10 68 00 00 0B  ....|.......h...
+  B8 00 00 17 70 00 00 1F  40 00 00 03 16 00 00 05  ....p...@.......
+  00 00 00 0A 00 00 15 7C  00 00 14 B4 00 00 10 68  .......|.......h
+  00 00 0B B8 00 00 17 70  00 00 1F 40 00 00 03 16  .......p...@....
+  00 00 01 00 30 00 01 00  01 00 01 00 02 00 01 00  ....0...........
+  03 00 01 00 04 00 01 00  05 00 01 00 06 00 01 00  ................
+  07 00 01 00 08 00 01 00  09 00 01 00 0A 00 01 00  ................
+  0B 00 01 00 0C 00 01 00  0D 00 01 00 0E 00 01 00  ................
+  0F 00 01 00 10 00 01 00  11 00 01 00 12 00 01 00  ................
+  13 00 01 00 14 00 01 00  15 00 01 00 16 00 01 00  ................
+  17 00 01 00 18 00 01 00  19 00 01 00 1A 00 01 00  ................
+  1B 00 01 00 1C 00 01 00  1D 00 01 00 1F 00 01 00  ................
+  20 00 01 00 21 00 01 00  22 00 01 00 23 00 01 00   ...!..."...#...
+  24 00 01 00 25 00 10 00  01 00 10 00 03 00 10 00  $...%...........
+  04 00 10 00 05 00 10 00  06 00 10 00 07 00 10 00  ................
+  08 00 10 00 09 00 10 00  0A 00 10 00 0B 00 10 00  ................
+  0C 00 10 00 0D 00 02 00  00 00 03 00 02 00 01 00  ................
+  1E 00 10 00 02 00 04 00  00 00 05 00 00           .............
+
+  // Client ack connection rate limits - SNAC(01,08)
+  2A 02 01 0A 00 14 00 01  00 08 00 00 00 00 00 08  *...............
+  00 01 00 02 00 03 00 04  00 05                    ..........
+
+  // Client sends READY command - SNAC(01,02)
+  2A 02 01 0B 00 1A 00 01  00 02 00 00 00 00 00 02  *...............
+  00 01 00 04 00 10 08 E4  00 10 00 01 00 10 08 E4  ................
+
+  // Now client starts use this service - SNAC(10,06)
+  2A 02 01 0C 00 29 00 10  00 06 00 00 2A 95 00 06  *....)......*...
+  09 33 34 38 39 33 34 37  37 34 01 00 01 01 10 0B  .348934774......
+  56 66 D6 16 5E 31 75 20  8D 3F 0C 38 38 87 4C     Vf..^1u .?.88.L
+
+  ........
+  
+</pre></font>
+</font>
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="../index.html" target="_top">Main</a> | 
+<a href="../basic.html" target="_top">Basic</a> | 
+<a href="../login.html" target="_top">Login</a> | 
+<a href="../families.html" target="_top">Snaclist</a> | 
+<a href="../sequences.html" target="_top">Sequences</a> | 
+<a href="../lists.html" target="_top">Misc</a> | 
+<a href="../changes.html" target="_top">Changes</a> | 
+<a href="../credits.html" target="_top">Credits</a> | 
+<a href="../terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

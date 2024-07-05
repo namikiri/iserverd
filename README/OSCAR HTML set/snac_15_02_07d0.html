@@ -1,0 +1,335 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0 meta information request</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_META_INFO_REQ&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This snac used by client to request/update various information (request user info, 
+update user info, people search, send sms, request parameters, unregistration). 
+ICQ server should reply using <a href="snac_15_03_07da.html">SNAC(15,03)</a>. 
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 00</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request type: META_DATA_REQ</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number (incrementing)</td>
+</tr>
+<tr>
+<td>&nbsp;2E 04</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request subtype (see table bellow)</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;......</td>
+<td width=5>&nbsp;</td>
+<td>......</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request data (depended on subtype)</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr><tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr><tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+Request subtypes list:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=white>
+
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_03ea.html">SNAC(15,02)/07D0/03EA</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user basic info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_03f3.html">SNAC(15,02)/07D0/03F3</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user work info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_03fd.html">SNAC(15,02)/07D0/03FD</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user more info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0406.html">SNAC(15,02)/07D0/0406</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user notes info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_040b.html">SNAC(15,02)/07D0/040B</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user extended email info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0410.html">SNAC(15,02)/07D0/0410</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user interests info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_041a.html">SNAC(15,02)/07D0/041A</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user affilations info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0424.html">SNAC(15,02)/07D0/0424</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user permissions info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_042e.html">SNAC(15,02)/07D0/042E</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Change user password request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0442.html">SNAC(15,02)/07D0/0442</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Set user homepage category info request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_04b2.html">SNAC(15,02)/07D0/04B2</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Request full user info</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_04ba.html">SNAC(15,02)/07D0/04BA</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Request short user info</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_04c4.html">SNAC(15,02)/07D0/04C4</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Unregister user request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_04d0.html">SNAC(15,02)/07D0/04D0</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Request full user info #2</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0515.html">SNAC(15,02)/07D0/0515</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by details request (plain)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_051f.html">SNAC(15,02)/07D0/051F</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by uin request (plain)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0529.html">SNAC(15,02)/07D0/0529</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by email request (plain)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0533.html">SNAC(15,02)/07D0/0533</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;White pages search request (plain, simple)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_053d.html">SNAC(15,02)/07D0/053D</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by details request (plain, wildcard)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0547.html">SNAC(15,02)/07D0/0547</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by email request (plain, wildcard)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0551.html">SNAC(15,02)/07D0/0551</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;White pages search request (plain, wildcard)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0569.html">SNAC(15,02)/07D0/0569</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by uin request (tlv)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_055f.html">SNAC(15,02)/07D0/055F</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Whitepages search request (tlv)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0573.html">SNAC(15,02)/07D0/0573</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Search by email request (tlv)</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_074e.html">SNAC(15,02)/07D0/074E</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Random chat user search request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0898.html">SNAC(15,02)/07D0/0898</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Request server variable via xml</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0aa5.html">SNAC(15,02)/07D0/0AA5</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Send registration stats report</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0aaf.html">SNAC(15,02)/07D0/0AAF</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Send shortcut bar stats report</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_0c3a.html">SNAC(15,02)/07D0/0C3A</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Save info tlv-based request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_1482.html">SNAC(15,02)/07D0/1482</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Client send SMS request</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=30%><b>&nbsp;<font size=2><a href="snac_15_02_07d0_2008.html">SNAC(15,02)/07D0/2008</a>&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top colspan=3>&nbsp;Client spam report request</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

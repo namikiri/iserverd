@@ -1,0 +1,429 @@
+<html>
+<head>
+<title>AUTH_FAILED: server authorization failed response</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">AUTH_FAILED&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the server error reply for for <a href="cli_ident.html">cli_ident</a> 
+packet. It contain authorization error code (see list bellow). It always come from 
+FLAP channel 0x04. See also channel 0x01 authorization 
+<a href="login.html" target="_top">sequence</a> info. Here is known authorization error codes 
+list:<br><br>
+<table width=100% bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+
+<table width=100% cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Invalid nick or password</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Service temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0003</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;All other errors</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Incorrect nick or password, re-enter</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0005</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Mismatch nick or password, re-enter</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0006</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Internal client error (bad input to authorizer)</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0007</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Invalid account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0008</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Deleted account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0009</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Expired account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000A</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;No access to database</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000B</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;No access to resolver</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000C</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Invalid database fields</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000D</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Bad database status</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000E</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Bad resolver status</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000F</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Internal error</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0010</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Service temporarily offline</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0011</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Suspended account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0012</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;DB send error</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0013</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;DB link error</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0014</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Reservation map error</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0015</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Reservation link error</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0016</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;The users num connected from this IP has reached the maximum</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0017</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;The users num connected from this IP has reached the maximum (reservation)</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0018</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Rate limit exceeded (reservation). Please try to reconnect in a few minutes</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0019</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;User too heavily warned</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001A</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;Reservation timeout</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001B</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;You are using an older version of ICQ. Upgrade required</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001C</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;You are using an older version of ICQ. Upgrade recommended</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001D</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Rate limit exceeded. Please try to reconnect in a few minutes</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001E</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Can't register on the ICQ network. Reconnect in a few minutes</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0020</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Invalid SecurID</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0022</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Account suspended because of your age (age &lt; 13)</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Type(0x01) - screen name (uin)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;xx ..</td>
+<td width=5>&nbsp;</td>
+<td>string</td>
+<td width=5>&nbsp;</td>
+<td width=60%>Screen name (uin)</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;00 04</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Type(0x04) - error page description url</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td width=60%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;xx ..</td>
+<td width=5>&nbsp;</td>
+<td>string (ascii)</td>
+<td width=5>&nbsp;</td>
+<td width=60%>error description page url string</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;00 08</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Type(0x08) - authorization error</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>Authorization error code (see above)</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;00 0C</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Type(0x0C) - unknown</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#f9f9f9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=60%>unknown field</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+ <!-- TLV 0x?? -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+  <table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+  <table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+   <tr><td bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0 >
+    <tr><td>&nbsp;May contain other tlv from the <a href="tlv_tags.html">following
+     list</a></td></tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 04 C3 2C 00 16 00 01 00 06 37 37 37 37 37 37 *..,......777777
+  00 08 00 02 00 05 00 0C 00 02 00 01             ............
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

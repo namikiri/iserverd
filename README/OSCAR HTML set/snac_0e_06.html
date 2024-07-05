@@ -1,0 +1,545 @@
+<html>
+<head>
+<title>SNAC(0E,06) chat room channel3 message from server</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(0E,06)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_CHAT_MESSAGE&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+This is the chat room message from server. AIM chat use only channel 3 messages. 
+Reflection flag used to receive own messages. See also <a href="info_block.html">
+additional information</a> about online userinfo block.
+<br><br> 
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 0E</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=352>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 06</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=22>&nbsp;</td>
+ <td width=142>&nbsp;xx xx xx xx<br>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td valign=top>qword</td>
+ <td>&nbsp;</td>
+ <td width=352 valign=top>msg-id cookie</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;00 03</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>message channel</td>
+ </tr>
+ </table>
+
+<!-- TLV 0x03 -->
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;00 03</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=344>TLV.Type(0x03) - sender information</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+  <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+  <tr><td colspan=5>
+
+ <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=20>&nbsp;</td>
+ <td width=122>&nbsp;xx</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td width=344>screenname (uin) strlen</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>ascii</td>
+ <td>&nbsp;</td>
+ <td>screenname (uin) string</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>warning level</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td>&nbsp;00 03</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>number of info TLVs (user info block)</td>
+ </tr>
+ </table>
+
+<!-- nested tlv(0x01) begin -->
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340>TLV.Type(0x01) - user class</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340><a href="lists.html#user_class">user class</a></td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x01) end-->
+
+<!-- nested tlv(0x0F) begin -->
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 0f</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340>TLV.Type(0x0f) - user idle time</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=340>user idle time in seconds</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x0F) end-->
+
+<!-- nested tlv(0x03) begin -->
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 03</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340>TLV.Type(0x03) - signon time</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=340>signon time (unix time_t)</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x0F) end-->
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td><td width=5> </td></tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+ <!-- TLV 0x01 begin -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;00 01</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=344>TLV.Type(0x01) - public/whisper flag</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 00</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+
+  <tr><td bgcolor=#f9f9f9>
+  <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+  <tr>
+  <td colspan=5>&nbsp;empty (no tlv data)</td>
+  </tr>
+  </table>
+</td></tr></table>
+</td></tr></table>
+</td><td width=5> </td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- tlv 0x01 end -->
+
+<!-- TLV 0x05 -->
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;00 05</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=346>TLV.Type(0x05) - message information</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+  <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+  <tr><td colspan=5>
+
+<!-- nested tlv(0x02) begin -->
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340>TLV.Type(0x02) - message encoding</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx ..</td>
+<td width=5>&nbsp;</td>
+<td>ascii</td>
+<td width=5>&nbsp;</td>
+<td width=340>message encoding string</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x02) end-->
+
+<!-- nested tlv(0x03) begin -->
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 03</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340>TLV.Type(0x03) - message language</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx ..</td>
+<td width=5>&nbsp;</td>
+<td>ascii</td>
+<td width=5>&nbsp;</td>
+<td width=340>message language abbr</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x03) end-->
+
+<!-- nested tlv(0x01) begin -->
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=20></td><td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=340>TLV.Type(0x01) - message text</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx ..</td>
+<td width=5>&nbsp;</td>
+<td>ascii</td>
+<td width=5>&nbsp;</td>
+<td width=340>message text (html)</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x0F) end-->
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td><td width=5> </td></tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dumps with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 EE FA 00 B0 00 0E 00 06 00 00 9B 7D BD 28  *............}.(
+  33 41 35 36 35 43 38 37 00 03 00 03 00 28 0D 52  3A565C87.....(.R
+  45 41 4C 52 65 67 72 65 73 73 6F 72 00 00 00 03  EALRegressor....
+  00 01 00 02 00 10 00 0F 00 04 00 00 00 18 00 03  ................
+  00 04 3E 4C BE 8C 00 01 00 00 00 05 00 68 00 02  ..&lt;L.........h..
+  00 08 75 73 2D 61 73 63 69 69 00 03 00 02 65 6E  ..us-ascii....en
+  00 01 00 52 3C 48 54 4D 4C 3E 3C 42 4F 44 59 20  ...R&lt;HTML&gt;&lt;BODY 
+  42 47 43 4F 4C 4F 52 3D 22 23 66 66 66 66 66 66  BGCOLOR="#ffffff
+  22 3E 3C 46 4F 4E 54 20 4C 41 4E 47 3D 22 30 22  "&gt;&lt;FONT LANG="0"
+  3E 48 69 2E 2E 2E 2E 20 41 6E 79 62 6F 64 79 20  &gt;Hi.... Anybody 
+  3F 3C 2F 46 4F 4E 54 3E 3C 2F 42 4F 44 59 3E 3C  ?&lt;/FONT&gt;&lt;/BODY&gt;&lt;
+  2F 48 54 4D 4C 3E                                /HTML&gt;
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

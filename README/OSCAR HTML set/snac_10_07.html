@@ -1,0 +1,249 @@
+<html>
+<head>
+<title>SNAC(10,07) server icq buddy icon reply</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(10,07)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_ICQ_ICON_REPLY&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the server reply for <a href="snac_10_06.html">SNAC(10,06)</a> - 
+client buddy icon request. This snac contain requested buddy icon (jpg, gif, 
+bmp, etc...) and its md5 checksum.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 10</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 07</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td>dword</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;xx</td>
+ <td width=5>&nbsp;</td>
+ <td>byte</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>uin length</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>ascii</td>
+ <td>&nbsp;</td>
+ <td>uin string</td>
+ </tr>
+ <tr>
+ <td colspan=5><font size="-2">&nbsp;</font></td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 01</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>icon id (not sure)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;01</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>icon flags (bitmask, purpose unknown)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;10</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>md5 hash size (16)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>array</td>
+ <td>&nbsp;</td>
+ <td>requested icon md5 hash</td>
+ </tr>
+
+ <tr>
+ <td colspan=5><font size="-2">&nbsp;</font></td>
+ </tr>
+
+ <tr>
+ <td>&nbsp;00</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>unknown (command ?)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 01</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>icon id (not sure)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;01</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>icon flags (bitmask, purpose unknown)</td>
+ </tr>
+ <tr>
+ <td>&nbsp;10</td>
+ <td>&nbsp;</td>
+ <td>byte</td>
+ <td>&nbsp;</td>
+ <td>md5 hash size (16) - yes, again</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>array</td>
+ <td>&nbsp;</td>
+ <td>requested icon md5 hash, again</td>
+ </tr>
+ <tr>
+ <td colspan=5><font size="-2">&nbsp;</font></td>
+ </tr>
+
+ <tr>
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>length of the icon</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx ..</td>
+ <td>&nbsp;</td>
+ <td>array</td>
+ <td>&nbsp;</td>
+ <td>icon data (jfif - jpeg file interchange format)</td>
+ </tr>
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 1C 8C 16 4A 00 10  00 07 00 00 5D 2E 00 06  *....J......]...
+  09 33 34 34 30 35 39 31  37 39 00 01 01 10 EC 7B  .344059179.....{
+  60 67 CF D1 01 99 0C BD  33 F9 00 FC 4B 9B 00 00  `g......3...K...
+  01 01 10 EC 7B 60 67 CF  D1 01 99 0C BD 33 F9 00  ....{`g......3..
+  FC 4B 9B 16 0B FF D8 FF  E0 00 10 4A 46 49 46 00  .K.........JFIF.
+  01 01 01 00 60 00 60 00  00 FF DB 00 43 00 01 01  ....`.`.....C...
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 FF DB  ................
+  00 43 01 01 01 01 01 01  01 01 01 01 01 01 01 01  .C..............
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 FF C0 00 11 08  00 40 00 34 03 01 22 00  .........@.4..".
+  02 11 01 03 11 01 FF C4  00 1F 00 00 01 05 01 01  ................
+  01 01 01 01 00 00 00 00  00 00 00 00 01 02 03 04  ................
+  05 06 07 08 09 0A 0B FF  C4 00 B5 10 00 02 01 03  ................
+  03 02 04 03 05 05 04 04  00 00 01 7D 01 02 03 00  ...........}....
+  04 11 05 12 21 31 41 06  13 51 61 07 22 71 14 32  ....!1A..Qa."q.2
+  81 91 A1 08 23 42 B1 C1  15 52 D1 F0 24 33 62 72  ....#B...R..$3br
+  82 09 0A 16 17 18 19 1A  25 26 27 28 29 2A 34 35  ........%&'()*45
+  36 37 38 39 3A 43 44 45  46 47 48 49 4A 53 54 55  6789:CDEFGHIJSTU
+  56 57 58 59 5A 63 64 65  66 67 68 69 6A 73 74 75  VWXYZcdefghijstu
+  ..........
+  84 7C 61 F6 2F 82 9E 08  F8 F5 E1 4F 00 DF E9 96  .|a./......O....
+  FA C6 9B A3 6A FF 00 11  BC BD 6E 33 7B 75 7C B1  ....j.....n3{u|.
+  DE 6B A7 C2 DE 21 D4 74  21 AC 6A 56 10 58 EA 3A  .k...!.t!.jV.X.:
+  85 9D 85 D4 A9 A2 CF 72  DE 1F 79 6E 24 D2 5E EE  .......r..yn$.^.
+  E0 AF 62 78 7B CD DA 35  E2 AE 92 55 27 4A 13 49  ..bx{..5...U'J.I
+  72 2F 7A 0E B5 E3 27 76  DC 5D 9A D9 A4 EE 8C 28  r/z...'v.].....(
+  E4 B8 BA 94 A9 CE 58 8C  B9 4A 51 8B 92 78 C4 DF  ......X..JQ..x..
+  35 A3 CC EE A9 C9 35 74  DA 92 94 94 92 52 52 69  5.....5t.....RRi
+  A6 7F FF D9                                       ....
+  
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

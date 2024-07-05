@@ -1,0 +1,188 @@
+<html>
+<head>
+<title>SNAC(01,02) client ready (tools libraries versions)</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(01,02)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_READY &nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the last snac in <a href="login.html#l0002" target="_top">protocol negotiation</a> sequence. 
+It tells BOS that we are ready to go online. Client must send this snac within 30 seconds after 
+signon, or the connection will be dropped. See also known <a href="families.html" target="_top">
+families list</a>.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 01</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 02</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>family number #1</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family #1 version</td>
+ </tr>
+ <tr >
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family #1 tool id; see comments below.</td>
+ </tr>
+ <tr >
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family #1 tool version</td>
+ </tr>
+ <tr>
+ <td>&nbsp;...</td>
+ <td>&nbsp;</td>
+ <td>&nbsp;...</td>
+ <td>&nbsp;</td>
+ <td>&nbsp;...</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family number #n</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family #n version</td>
+ </tr>
+ <tr >
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family #n tool id</td>
+ </tr>
+ <tr >
+ <td>&nbsp;xx xx</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>family #n tool version</td>
+ </tr>
+ </table>
+</td></tr></table>
+</td></tr></table>
+<br><span >Some years ago in protocol version "2" tool id field has
+been used to describe client software release (java, mac, win16, win32,
+mac68k, macppc). It seems what value is from the set of values for 
+TLV(0x16) in the <a href="tlv_tags.html">following list</a>. Also i've 
+seen combination of tool_id & tool_version in windows ICQ client protocol 
+dll.
+</span>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 22 A3 00 5A 00 01  00 02 00 00 00 00 00 02 *."..Z..........
+  00 01 00 03 01 10 04 7B  00 13 00 02 01 10 04 7B ................
+  00 02 00 01 01 01 04 7B  00 03 00 01 01 10 04 7B ................
+  00 15 00 01 01 10 04 7B  00 04 00 01 01 10 04 7B ................
+  00 06 00 01 01 10 04 7B  00 09 00 01 01 10 04 7B ................
+  00 0A 00 01 01 10 04 7B  00 0B 00 01 01 10 04 7B ................
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

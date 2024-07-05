@@ -1,0 +1,344 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0/0C3A set full info request</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0/0C3A&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_SET_FULLINFO&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is client tlv-based set personal info request used by ICQLite. 
+Server should respond with <a href="snac_15_03_07da_0c3f.html">
+SNAC(15,03)/07DA/0C3F</a> - which contain result flag. This snac contain 
+tlv chain and this chain may contain several TLVs of same type (for example 3 
+tlv(0x186) - language codes). Client can change all its information via single 
+packet. See also <a href="snac_15_xx_tlvs.html">list of TLVs</a> that modern 
+clients use in TLV-based requests.<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data type: META_DATA_REQ</td>
+</tr>
+<tr>
+<td>&nbsp;02 00</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number</td>
+</tr>
+<tr>
+<td>&nbsp;3A 0C</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data subtype: CLI_SET_FULLINFO</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0xxxx) - info to save</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td></td>
+<td width=5>&nbsp;</td>
+<td width=56%>info data (format depends on tlv type)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19% height=30 valign=middle>&nbsp;....</td>
+<td width=5 valign=middle>&nbsp;</td>
+<td valign=middle>....</td>
+<td width=5 valign=middle>&nbsp;</td>
+<td width=56% valign=middle>....</td>
+</tr>
+</table>
+
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0xxxx) - info to save</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td></td>
+<td width=5>&nbsp;</td>
+<td width=56%>info data (format depends on tlv type)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2a 02 14 34 02 9f 00 15  00 02 00 00 00 0e 00 02  *..4............
+  00 01 02 91 8f 02 8f e4  5e 00 d0 07 7f 4e 3a 0c  ........^...N:.
+  5e 01 15 00 12 00 70 72  69 6d 61 72 79 40 65 6d  ^.....primary@em
+  61 69 6c 2e 6f 72 67 00  01 5e 01 17 00 14 00 73  ail.org..^.....s
+  65 63 6f 6e 64 61 72 79  40 65 6d 61 69 6c 2e 6f  econdary@email.o
+  72 67 00 00 5e 01 12 00  0f 00 74 68 69 72 64 40  rg..^.....third@
+  6d 61 69 6c 2e 6f 72 67  00 00 76 02 15 00 13 00  mail.org..v.....
+  2b 37 20 28 39 30 32 29  20 31 31 31 31 31 31 31  +7 (902) 1111111
+  31 31 00 80 02 14 00 12  00 2b 37 20 28 34 32 31  11.......+7 (421
+  32 29 20 32 32 32 32 32  32 32 00 8a 02 14 00 12  2) 2222222......
+  00 2b 37 20 28 39 30 32  29 20 33 33 33 33 33 33  .+7 (902) 333333
+  33 33 00 c6 02 14 00 12  00 2b 37 20 28 34 32 31  33.......+7 (421
+  32 29 20 34 34 34 34 34  34 34 00 d0 02 14 00 12  2) 4444444......
+  00 2b 37 20 28 34 32 31  32 29 20 35 35 35 35 35  .+7 (4212) 55555
+  35 35 00 90 01 08 00 06  00 48 43 69 74 79 00 9a  55.......HCity..
+  01 06 00 04 00 48 53 74  00 a4 01 02 00 07 00 20  .....HSt....... 
+  03 08 00 06 00 4f 43 69  74 79 00 2a 03 06 00 04  .....OCity.*....
+  00 4f 73 74 00 34 03 02  00 07 00 62 02 0e 00 0c  .Ost.4.....b....
+  00 48 6f 6d 65 41 64 64  72 65 73 73 00 6c 02 04  .HomeAddress.l..
+  00 67 2b 00 00 13 02 1c  00 00 00 18 00 68 74 74  .g+..........htt
+  70 3a 2f 2f 68 6f 6d 65  2e 77 65 62 70 61 67 65  p://home.webpage
+  2e 75 72 6c 00 16 03 01  00 ec 54 01 0b 00 09 00  .url......T.....
+  4e 69 63 6b 4e 61 6d 65  00 40 01 0c 00 0a 00 46  NickName.@.....F
+  69 72 73 74 4e 61 6d 65  00 4a 01 0b 00 09 00 4c  irstName.J.....L
+  61 73 74 4e 61 6d 65 00  58 02 12 00 10 00 75 73  astName.X.....us
+  65 72 5f 61 62 6f 75 74  5f 74 65 78 74 00 72 01  er_about_text.r.
+  02 00 18 00 7c 01 01 00  02 3a 02 06 00 bb 07 03  ....|....:......
+  00 0e 00 86 01 02 00 44  00 86 01 02 00 37 00 86  .......D.....7..
+  01 02 00 26 00 b8 01 0d  00 0b 00 44 65 70 61 72  ...&.......Depar
+  74 6d 65 6e 74 00 c2 01  0b 00 09 00 50 6f 73 69  tment.......Posi
+  74 69 6f 6e 00 ae 01 0a  00 08 00 43 6f 6d 70 61  tion.......Compa
+  6e 79 00 94 02 0e 00 0c  00 57 6f 72 6b 41 64 64  ny.......WorkAdd
+  72 65 73 73 00 a8 02 06  00 04 00 57 53 74 00 9e  ress.......WSt..
+  02 08 00 06 00 57 43 69  74 79 00 da 02 1a 00 18  .....WCity......
+  00 68 74 74 70 3a 2f 2f  77 6f 72 6b 2e 77 65 62  .http://work.web
+  70 61 67 65 2e 75 72 6c  00 bc 02 04 00 ce 56 00  page.url......V.
+  00 b2 02 02 00 07 00 cc  01 02 00 05 00 ea 01 12  ................
+  00 64 00 0e 00 69 6e 74  65 72 65 73 74 5f 6b 65  .d...interest_ke
+  79 31 00 ea 01 12 00 67  00 0e 00 69 6e 74 65 72  y1.....g...inter
+  65 73 74 5f 6b 65 79 32  00 ea 01 12 00 68 00 0e  est_key2.....h..
+  00 69 6e 74 65 72 65 73  74 5f 6b 65 79 33 00 ea  .interest_key3..
+  01 12 00 6f 00 0e 00 69  6e 74 65 72 65 73 74 5f  ...o...interest_
+  6b 65 79 34 00                                   key4.
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
