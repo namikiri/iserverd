@@ -34,7 +34,7 @@
 extern unsigned short type_limits[SSI_TYPES_NUM];
 
 /* table to convert item type to internal item type */
-unsigned short itype_conv[SSI_TYPES_NUM] = 
+unsigned short itype_conv[SSI_TYPES_NUM] =
 {
    NORMAL_CONTACT, 	/* item 0x0000 - buddy     */
    0x0FFF, 		/* item 0x0001 - group     */
@@ -67,8 +67,8 @@ unsigned short db_ssi_get_itemnum(unsigned long uin, unsigned short itype)
    PGresult *res;
    fstring dbcomm_str;
    unsigned short item_num = 0;
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "SELECT count(*) FROM users_ssi_data WHERE (ouin=%lu) AND (type=%d)",
 	    uin, itype);
 
@@ -79,16 +79,16 @@ unsigned short db_ssi_get_itemnum(unsigned long uin, unsigned short itype)
       handle_database_error(res, "[GET SSI ITEMNUM]");
       return(0);
    }
-         
+
    if (PQntuples(res) > 0)
    {
       item_num = atoul(PQgetvalue(res, 0, 0));
       DEBUG(10, ("Limit check returned %d records...\n", item_num));
-      
+
       PQclear(res);
       return(item_num);
    }
- 
+
    PQclear(res);
    return(0);
 }
@@ -97,17 +97,17 @@ unsigned short db_ssi_get_itemnum(unsigned long uin, unsigned short itype)
 /**************************************************************************/
 /* This function retrieve user SSI items number and modification date     */
 /**************************************************************************/
-int db_ssi_get_modinfo(struct online_user *user, unsigned long &mod_date, 
+int db_ssi_get_modinfo(struct online_user *user, unsigned long &mod_date,
                        unsigned short &item_num)
 {
    PGresult *res;
    fstring dbcomm_str;
-   
+
    mod_date = 0;
    item_num = 0;
    int err_flag = 1;
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "SELECT udate FROM users_ssi_data WHERE (ouin=%lu) AND (type=%d)",
 	    user->uin, ITEM_REVISION);
 
@@ -118,8 +118,8 @@ int db_ssi_get_modinfo(struct online_user *user, unsigned long &mod_date,
       handle_database_error(res, "[GET USER SSI REVISION]");
       return(1);
    }
-         
-   if (PQntuples(res) > 0) 
+
+   if (PQntuples(res) > 0)
    {
       mod_date = atoul(PQgetvalue(res, 0, 0));
       err_flag = 0;
@@ -128,8 +128,8 @@ int db_ssi_get_modinfo(struct online_user *user, unsigned long &mod_date,
    PQclear(res);
 
    /* Now we should retrieve SSI items count */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "SELECT count(*) FROM users_ssi_data WHERE  (ouin=%lu) AND (type<>%d)", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "SELECT count(*) FROM users_ssi_data WHERE  (ouin=%lu) AND (type<>%d)",
 	    user->uin, ITEM_REVISION);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -147,11 +147,11 @@ int db_ssi_get_modinfo(struct online_user *user, unsigned long &mod_date,
 
       /* fix for missing mod_date entry */
       if ((item_num != 0) && (err_flag)) err_flag = db_ssi_create_modinfo(user);
-      
+
       PQclear(res);
       return(err_flag);
    }
-   
+
    PQclear(res);
    return(1);
 }
@@ -167,24 +167,24 @@ int db_ssi_set_modinfo(struct online_user *user, BOOL import)
    unsigned long  udate;
    unsigned short item_num;
    int get_result = 0;
-   
+
    get_result = db_ssi_get_modinfo(user, udate, item_num);
 
    if (get_result == 0)
    {
       /* ITEM_REVISION record exist for this user */
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
               "UPDATE users_ssi_data SET udate=%lu, revnum=revnum+1 WHERE (ouin=%lu) AND (type=%d);",
 	       time(NULL), user->uin, ITEM_REVISION);
    }
    else
    {
       /* ITEM_REVISION record doesn't exist for this user */
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
               "INSERT INTO users_ssi_data VALUES (%lu,0,0,0,%d,%d,0,%lu,%d,'','','',0,0,0,0,1);",
 	       user->uin, ITEM_REVISION, 0x0FFF, time(NULL), 1);
    }
-   
+
    res = PQexec(users_dbconn, dbcomm_str);
 
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -192,7 +192,7 @@ int db_ssi_set_modinfo(struct online_user *user, BOOL import)
       handle_database_error(res, "[UPDATE USER SSI REVISION]");
       return(1);
    }
-         
+
    /* insert/update completed successfully */
    PQclear(res);
 
@@ -209,7 +209,7 @@ int update_import_item(unsigned long uin)
    PGresult *res;
    fstring dbcomm_str;
 
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
             "UPDATE users_ssi_data SET udate=%lu WHERE (ouin=%lu) AND (type=%d)",
 	     time(NULL), uin, ITEM_IMPORT);
 
@@ -225,17 +225,17 @@ int update_import_item(unsigned long uin)
    PQclear(res);
    /* ------------- */
 
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "INSERT INTO users_ssi_data VALUES (%lu,0,0,0,%d,%d,0,%lu,0,'Import time','','',0,0,0,0,1)",
             uin, ITEM_IMPORT, 0xFFF, time(NULL));
-   
+
    res = PQexec(users_dbconn, dbcomm_str);
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
       handle_database_error(res, "[INSERT USER SSI REVISION]");
       return(1);
    }
-   
+
    PQclear(res);
    return(0);
 }
@@ -248,18 +248,18 @@ int db_ssi_create_modinfo(struct online_user *user)
 {
    PGresult *res;
    fstring dbcomm_str;
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "INSERT INTO users_ssi_data VALUES (%lu,0,0,0,%d,%d,0,%lu,%d,'','','',0,0,0,0,1)",
 	    user->uin, ITEM_REVISION, 0x0FFF, time(NULL), 1);
-   
+
    res = PQexec(users_dbconn, dbcomm_str);
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
       handle_database_error(res, "[CREATE USER SSI REVISION]");
       return(1);
    }
-         
+
    PQclear(res);
    return(0);
 }
@@ -268,8 +268,8 @@ int db_ssi_create_modinfo(struct online_user *user)
 /**************************************************************************/
 /* This function add new ssi item to database				  */
 /**************************************************************************/
-int ssi_db_add_item(struct online_user *user, char *item_name, 
-                    unsigned short gid, unsigned short iid, 
+int ssi_db_add_item(struct online_user *user, char *item_name,
+                    unsigned short gid, unsigned short iid,
 		    unsigned short itype, class tlv_chain_c &tlv_chain)
 {
    PGresult *res;
@@ -280,19 +280,19 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
    char privacy = 0;
    class tlv_c *tlv = NULL;
    fstring nickname, nickname2, item_name2;
-   
+
    strncpy(nickname, "", 64);
- 
+
    /* First I should check for item limit */
    if (db_ssi_get_itemnum(user->uin, itype) + 1 > type_limits[itype])
    {
       return(-2);
    }
-     
+
    /* Check for buddy item nickname */
    if ((itype == ITEM_BUDDY) && ((tlv = tlv_chain.get(SSI_TLV_NICKNAME)) != NULL))
    {
-      if (!v7_extract_string(nickname, *tlv, 128)) 
+      if (!v7_extract_string(nickname, *tlv, 128))
       {
          DEBUGADD(10, ("SSI_ERROR: TLV(131) problem... Nickname too big\n"));
          return(False);
@@ -314,7 +314,7 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
       {
          *tlv >> iperm;
       }
-      
+
       tlv_chain.remove(SSI_TLV_IDLEPERMS);
    }
 
@@ -325,7 +325,7 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
       {
          *tlv >> privacy;
       }
-      
+
       tlv_chain.remove(SSI_TLV_PRIVACY);
    }
 
@@ -336,7 +336,7 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
       {
          *tlv >> vclass;
       }
-      
+
       tlv_chain.remove(SSI_TLV_RIGHTS);
    }
 
@@ -347,22 +347,22 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
       {
          *tlv >> perms;
       }
-      
+
       tlv_chain.remove(SSI_TLV_PRESENSE);
    }
-   
+
    /* Check if we should convert target uin value */
    /* I'll add screenname -> uin converter later  */
    tuin = atoul(item_name);
-   
+
    /* Now time to code remaining TLVs into blob ascii string */
    tlv_chain.encode(tempst);
    convert_to_postgres2(nickname2, sizeof(fstring)-1, nickname);
    convert_to_postgres2(item_name2, sizeof(fstring)-1, item_name);
-  
-   DEBUGADD(50, ("SSI_ADD: ou=%lu,tu=%lu,gid=%d,iid=%d,it=%d,t=%d,auth=%d,tlvnum=%d\n", 
+
+   DEBUGADD(50, ("SSI_ADD: ou=%lu,tu=%lu,gid=%d,iid=%d,it=%d,t=%d,auth=%d,tlvnum=%d\n",
                   user->uin, tuin, gid, iid, int_itype, itype, auth, tlv_chain.num()));
-   
+
    if (tlv_chain.num()) { DEBUGADD(100, ("Tlv chain: %s\n", tempst)); }
 
 /* Now we can define and run sql insert db query   */
@@ -373,10 +373,10 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
       %lu, %lu, %d, %d, %d, %d, %d, %d, %d, '%s', '%s', '%s', %lu, %d, %lu, %lu, 0 \
    )"
 
-   snprintf(msg_buff, sizeof(msg_buff)-1, SSI_IIN195, user->uin, tuin, 
-            gid, iid, itype, int_itype, auth, 0, 0, item_name2, nickname2, tempst, 
+   snprintf(msg_buff, sizeof(msg_buff)-1, SSI_IIN195, user->uin, tuin,
+            gid, iid, itype, int_itype, auth, 0, 0, item_name2, nickname2, tempst,
 	    iperm, privacy, vclass, perms);
-	    
+
    res = PQexec(users_dbconn, msg_buff);
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
@@ -387,7 +387,7 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
    {
       PQclear(res);
    }
-   
+
    return(0);
 }
 
@@ -395,23 +395,23 @@ int ssi_db_add_item(struct online_user *user, char *item_name,
 /**************************************************************************/
 /* This function delete new ssi item from database			  */
 /**************************************************************************/
-int ssi_db_del_item(struct online_user *user, char *item_name, 
-                    unsigned short gid, unsigned short iid, 
+int ssi_db_del_item(struct online_user *user, char *item_name,
+                    unsigned short gid, unsigned short iid,
 		    unsigned short itype, class tlv_chain_c &tlv_chain)
 {
    PGresult *res;
 
-   DEBUGADD(50, ("SSI_DEL: ou=%lu,gid=%d,iid=%d,t=%d,tlvnum=%d\n", 
+   DEBUGADD(50, ("SSI_DEL: ou=%lu,gid=%d,iid=%d,t=%d,tlvnum=%d\n",
               user->uin, gid, iid, itype, tlv_chain.num()));
-   
+
    /* Now we can define and run sql delete query */
-   
+
 #define SSI_ID292 \
   "DELETE FROM users_ssi_data \
    WHERE ouin=%lu AND gid=%d AND iid=%d AND type=%d AND readonly=0"
 
    snprintf(msg_buff, sizeof(msg_buff)-1, SSI_ID292, user->uin, gid, iid, itype);
-	    
+
    res = PQexec(users_dbconn, msg_buff);
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
@@ -422,16 +422,16 @@ int ssi_db_del_item(struct online_user *user, char *item_name,
    {
       if (atoul(PQcmdTuples(res)) != 0)
       {
-         PQclear(res);  
+         PQclear(res);
          return(0);
       }
-      else 
+      else
       {
          PQclear(res);
          return(-1);
-      } 
+      }
    }
-   
+
    return(0);
 }
 
@@ -439,8 +439,8 @@ int ssi_db_del_item(struct online_user *user, char *item_name,
 /**************************************************************************/
 /* This function update ssi item 					  */
 /**************************************************************************/
-int ssi_db_update_item(struct online_user *user, char *item_name, 
-                       unsigned short gid, unsigned short iid, 
+int ssi_db_update_item(struct online_user *user, char *item_name,
+                       unsigned short gid, unsigned short iid,
 		       unsigned short itype, class tlv_chain_c &tlv_chain)
 {
    PGresult *res;
@@ -451,13 +451,13 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
    char privacy = 0;
    class tlv_c *tlv = NULL;
    fstring nickname, nickname2, item_name2;
-   
+
    strncpy(nickname, "", 64);
- 
+
    /* Check for buddy item nickname */
    if ((itype == ITEM_BUDDY) && ((tlv = tlv_chain.get(SSI_TLV_NICKNAME)) != NULL))
    {
-      if (!v7_extract_string(nickname, *tlv, 128)) 
+      if (!v7_extract_string(nickname, *tlv, 128))
       {
          DEBUGADD(0, ("SSI_ERROR: TLV(131) problem... Nickname too big\n"));
          return(False);
@@ -479,7 +479,7 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
       {
          *tlv >> iperm;
       }
-      
+
       tlv_chain.remove(SSI_TLV_IDLEPERMS);
    }
 
@@ -490,7 +490,7 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
       {
          *tlv >> privacy;
       }
-      
+
       tlv_chain.remove(SSI_TLV_PRIVACY);
    }
 
@@ -501,7 +501,7 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
       {
          *tlv >> vclass;
       }
-      
+
       tlv_chain.remove(SSI_TLV_RIGHTS);
    }
 
@@ -512,22 +512,22 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
       {
          *tlv >> perms;
       }
-      
+
       tlv_chain.remove(SSI_TLV_PRESENSE);
    }
-   
+
    /* Check if we should convert target uin value */
    /* I'll add screenname -> uin converter later  */
    tuin = atoul(item_name);
-   
+
    /* Now time to code remaining TLVs into blob ascii string */
    tlv_chain.encode(tempst);
    convert_to_postgres2(nickname2, sizeof(fstring)-1, nickname);
    convert_to_postgres2(item_name2, sizeof(fstring)-1, item_name);
-  
-   DEBUGADD(50, ("SSI_UPDATE: ou=%lu,tu=%lu,gid=%d,iid=%d,it=%d,t=%d,auth=%d,tlvnum=%d\n", 
+
+   DEBUGADD(50, ("SSI_UPDATE: ou=%lu,tu=%lu,gid=%d,iid=%d,it=%d,t=%d,auth=%d,tlvnum=%d\n",
                  user->uin, tuin, gid, iid, int_itype, itype, auth, tlv_chain.num()));
-   
+
    if (tlv_chain.num()) { DEBUGADD(50, ("Tlv chain string: %s\n", tempst)); }
 
 /* Now we can define and run sql insert db query   */
@@ -560,15 +560,15 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
 
    if (itype == ITEM_BUDDY)
    {
-      snprintf(msg_buff, sizeof(msg_buff)-1, SSI_IUOB473, auth, nickname2, 
+      snprintf(msg_buff, sizeof(msg_buff)-1, SSI_IUOB473, auth, nickname2,
                tempst, iperm, privacy, vclass, perms, user->uin, iid, gid, itype);
    }
    else
    {
-      snprintf(msg_buff, sizeof(msg_buff)-1, SSI_IUOA473, auth, item_name2, nickname2, 
+      snprintf(msg_buff, sizeof(msg_buff)-1, SSI_IUOA473, auth, item_name2, nickname2,
                tempst, iperm, privacy, vclass, perms, user->uin, iid, gid, itype);
    }
-   	    
+
    res = PQexec(users_dbconn, msg_buff);
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
    {
@@ -579,16 +579,16 @@ int ssi_db_update_item(struct online_user *user, char *item_name,
    {
       if (atoul(PQcmdTuples(res)) != 0)
       {
-         PQclear(res);  
+         PQclear(res);
          return(0);
       }
-      else 
+      else
       {
          PQclear(res);
          return(1);
-      } 
+      }
    }
-   
+
    PQclear(res);
    return(0);
 }
@@ -602,8 +602,8 @@ BOOL db_ssi_get_auth(unsigned long uin, unsigned long tuin)
    PGresult *res;
    unsigned short auth=0;
    fstring dbcomm_str;
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "SELECT count(*) FROM users_perms WHERE (uin=%lu) AND (tuin=%lu) AND (type=%d)",
 	    uin, tuin, PERMS_AUTH);
 
@@ -614,13 +614,13 @@ BOOL db_ssi_get_auth(unsigned long uin, unsigned long tuin)
       handle_database_error(res, "[GET SSI AUTH]");
       return(0);
    }
-         
+
    if (PQntuples(res) > 0)
    {
       auth = atoul(PQgetvalue(res, 0, 0));
-      
+
       PQclear(res);
-      
+
       if (auth == 0)
       {
          return(False);
@@ -630,7 +630,7 @@ BOOL db_ssi_get_auth(unsigned long uin, unsigned long tuin)
          return(True);
       }
    }
- 
+
    PQclear(res);
    return(False);
 }
@@ -645,8 +645,8 @@ int db_item_count(unsigned long uin, unsigned short type, int gid, int iid)
    fstring dbcomm_str;
    fstring clause_temp;
    int count = 0;
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "SELECT count(*) FROM Users_SSI_Data WHERE (ouin=%lu) ", uin);
 
    if (type > 0)
@@ -666,7 +666,7 @@ int db_item_count(unsigned long uin, unsigned short type, int gid, int iid)
       snprintf(clause_temp, 255, "AND (iid=%d) ", iid);
       safe_strcat(dbcomm_str, clause_temp, 255);
    }
-   
+
    res = PQexec(users_dbconn, dbcomm_str);
    if (PQresultStatus(res) != PGRES_TUPLES_OK)
    {
@@ -674,17 +674,17 @@ int db_item_count(unsigned long uin, unsigned short type, int gid, int iid)
       return(False);
    }
 
-         
+
    if (PQntuples(res) > 0)
    {
       count = atoul(PQgetvalue(res, 0, 0));
-      DEBUG(50, ("Check item count (%lu, type=%d, gid=%d, iid=%d) = %d\n", 
+      DEBUG(50, ("Check item count (%lu, type=%d, gid=%d, iid=%d) = %d\n",
                   uin, type, gid, iid, count));
-		  
+
       PQclear(res);
       return(count);
    }
- 
+
    PQclear(res);
    return(0);
 }
@@ -698,15 +698,15 @@ int db_ssi_check_dgroup(struct online_user *user)
    PGresult *res;
    fstring dbcomm_str;
    BOOL ssi_changed = False;
-   
+
    if (db_item_count(user->uin, ITEM_GROUP, 0, -1) == 0)
    {
 
-      DEBUG(10, ("Master group for %lu doesn't exist. Creating new one...\n", user->uin));      
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      DEBUG(10, ("Master group for %lu doesn't exist. Creating new one...\n", user->uin));
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
               "INSERT INTO users_ssi_data VALUES (%lu,0,0,0,%d,%d,0,0,0,'','','',0,0,0,0,0);",
 	       user->uin, ITEM_GROUP, 0x0FFF);
-   
+
       res = PQexec(users_dbconn, dbcomm_str);
       if (PQresultStatus(res) != PGRES_COMMAND_OK)
       {
@@ -722,19 +722,19 @@ int db_ssi_check_dgroup(struct online_user *user)
    {
       /* And one more thing... Miranda wants group with gid!=0 and strlen(name) > 0  */
       /* to upload contacts. Why don't to create it ? Miranda bugs make me so angry. */
-      
+
       DEBUG(10, ("General group for %lu doesn't exist. Creating new one...\n", user->uin));
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
               "INSERT INTO users_ssi_data VALUES (%lu,0,1,0,%d,%d,0,0,0,'General','','',0,0,0,0,0);",
 	       user->uin, ITEM_GROUP, 0x0FFF);
-   
+
       res = PQexec(users_dbconn, dbcomm_str);
       if (PQresultStatus(res) != PGRES_COMMAND_OK)
       {
          handle_database_error(res, "[CREATE GENERAL SSI GROUP]");
          return(1);
       }
-      
+
       ssi_changed = True;
       PQclear(res);
    }
@@ -757,7 +757,7 @@ BOOL db_ssi_auth_grant(unsigned long fuin, unsigned long tuin)
 #define SSI_UAG648 \
   "UPDATE users_ssi_data SET auth=0 WHERE (ouin=%lu) AND \
       (uin=%lu) AND (type=%d) AND (auth=1)"
-   
+
    slprintf(dbcomm_str, sizeof(dbcomm_str)-1, SSI_UAG648, tuin, fuin, ITEM_BUDDY);
    res = PQexec(users_dbconn, dbcomm_str);
 
@@ -772,18 +772,18 @@ BOOL db_ssi_auth_grant(unsigned long fuin, unsigned long tuin)
    {
       if (atoul(PQcmdTuples(res)) != 0)
       {
-         PQclear(res);  
+         PQclear(res);
          return(True);
       }
-      else 
+      else
       {
          PQclear(res);
          return(False);
-      } 
+      }
    }
-   
-   PQclear(res);  
-   return(False); 
+
+   PQclear(res);
+   return(False);
 }
 
 
@@ -799,10 +799,10 @@ void db_ssi_auth_add(unsigned long uin, unsigned long tuin, unsigned long rid)
 /* We'll use #define to avoid multistring literals */
 #define SSI_IAP694 \
   "INSERT INTO Users_Perms VALUES (%lu, %lu, %d, %lu)"
-   
+
    slprintf(dbcomm_str, sizeof(dbcomm_str)-1, SSI_IAP694, uin, tuin, PERMS_AUTH, rid);
    res = PQexec(users_dbconn, dbcomm_str);
-   PQclear(res);   
+   PQclear(res);
 }
 
 
@@ -816,8 +816,8 @@ BOOL db_ssi_get_added(unsigned long uin, unsigned long by_uin)
    fstring dbcomm_str;
 
    DEBUG(50, ("db_ssi_get_added(%lu, %lu) called...\n", uin, by_uin));
-   
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "SELECT count(*) FROM users_perms WHERE (uin=%lu) AND (tuin=%lu) AND (type=%d)",
 	    uin, by_uin, PERMS_ADDED);
 
@@ -828,13 +828,13 @@ BOOL db_ssi_get_added(unsigned long uin, unsigned long by_uin)
       handle_database_error(res, "[GET SSI ADDED]");
       return(0);
    }
-         
+
    if (PQntuples(res) > 0)
    {
       added = atoul(PQgetvalue(res, 0, 0));
-      
+
       PQclear(res);
-      
+
       if (added == 0)
       {
          return(False);
@@ -844,7 +844,7 @@ BOOL db_ssi_get_added(unsigned long uin, unsigned long by_uin)
          return(True);
       }
    }
- 
+
    PQclear(res);
    return(False);
 }
@@ -862,10 +862,10 @@ void db_ssi_added_add(unsigned long uin, unsigned long by_uin, unsigned long rid
 /* We'll use #define to avoid multistring literals */
 #define SSI_IAP694 \
   "INSERT INTO Users_Perms VALUES (%lu, %lu, %d, %lu)"
-   
+
    slprintf(dbcomm_str, sizeof(dbcomm_str)-1, SSI_IAP694, uin, by_uin, PERMS_ADDED, rid);
    res = PQexec(users_dbconn, dbcomm_str);
-   PQclear(res);   
+   PQclear(res);
 }
 
 

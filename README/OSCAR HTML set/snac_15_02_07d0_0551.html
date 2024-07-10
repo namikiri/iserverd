@@ -1,0 +1,481 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0/0551 wildcard white pages search request</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0/0551&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_WHITE_PAGES_SEARCH_WILDCARD&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is client wildcard white pages search request. Used by ICQ2000 when client use 
+wildcard symbol '*' in search strings. Server should respond with 1 or more packets. Last reply packet allways 
+<a href="snac_15_03_07da_01ae.html">SNAC(15,03)/07DA/01AE</a>, other reply packets 
+<a href="snac_15_03_07da_01a4.html">SNAC(15,03)/07DA/01A4</a>. Client should fill 
+all fields. Empty strings and zero values (exept online_only flag) are not used in search.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data type: META_DATA_REQ</td>
+</tr>
+<tr>
+<td>&nbsp;02 00</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number</td>
+</tr>
+<tr>
+<td>&nbsp;51 05</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data subtype: META_WHITE_PAGES_SEARCH_WILDCARD</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>first name string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>first name string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>last name string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>last name string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>nickname string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>nickname string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>email string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>email string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>minimum age</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>maximum age</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>char</td>
+<td width=5>&nbsp;</td>
+<td width=55%>gender</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>char</td>
+<td width=5>&nbsp;</td>
+<td width=55%>speaking language</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>city string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>city string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>state string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>state string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>country code</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>company string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>company string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>department string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>department string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>position string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>position string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>ocupation field code</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>past category code</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>past keywords string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>past keywords string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>interests category code</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>interests keywords string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>interests keywords string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>affilations category code</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>affilations keywords string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>affilations keywords string</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>homepage category code</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>homepage keywords string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz str</td>
+<td width=5>&nbsp;</td>
+<td width=55%>homepage keywords string</td>
+</tr>
+<tr>
+<td valign=top>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td valign=top>char</td>
+<td width=5>&nbsp;</td>
+<td width=55%>0-search all users, 1-search online only</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr><tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 79 7D 00 D9 00 15 00 02 00 00 00 0F 00 02 *.y.............
+  00 01 00 CB C9 00 8F E4 5E 00 D0 07 10 00 51 05 ........^.....3.
+  0A 00 46 2A 72 73 74 4E 61 6D 65 00 09 00 4C 61 ..F*rstName...La
+  73 74 4E 61 6D 65 00 09 00 4E 69 63 6B 4E 61 6D stName...NickNam
+  65 00 0F 00 45 6D 61 69 6C 40 65 6D 61 69 6C 2E e...Email@email.
+  72 75 00 12 00 16 00 02 26 05 00 43 69 74 79 00 ru......&..City.
+  03 00 53 74 00 07 00 08 00 43 6F 6D 70 61 6E 79 ..St.....Company
+  00 0B 00 44 65 70 61 72 74 6D 65 6E 74 00 09 00 ...Department...
+  70 6F 73 69 74 69 6F 6E 00 01 2E 01 0C 00 63 6F position......co
+  6C 6C 65 67 65 5F 6B 65 79 00 68 00 1D 00 63 6F llege_key.h...co
+  6D 70 75 74 65 72 73 5F 6B 65 79 2C 63 6F 6D 70 mputers_key,comp
+  75 74 65 72 73 5F 6B 65 79 32 00 CD 00 0E 00 46 uters_key2.....F
+  61 6E 20 63 6C 75 62 73 20 6B 65 79 00 D5 0A 0D an clubs key....
+  00 61 6D 69 67 61 5F 68 70 5F 6B 65 79 00 01    .amiga_hp_key..
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

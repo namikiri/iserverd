@@ -98,7 +98,7 @@ void Buffer::put_le_short(unsigned short x, char *p)
    else
    {
       q[1] = x & 0xff;
-      q[0] = (x >> 8) & 0xff;   
+      q[0] = (x >> 8) & 0xff;
    }
 }
 
@@ -113,7 +113,7 @@ void Buffer::put_le_int(unsigned int x, char *p)
       q[2] = (x >> 16) & 0xff;
       q[3] = (x >> 24) & 0xff;
    }
-   else     
+   else
    {
       q[3] = x & 0xff;
       q[2] = (x >> 8) & 0xff;

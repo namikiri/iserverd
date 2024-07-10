@@ -39,13 +39,13 @@
 void (*rsignal(int signo, void (*hndlr)(int)))(int)
 {
   struct sigaction act, oact;
-  
+
   act.sa_handler = hndlr;
   sigemptyset(&act.sa_mask);
   act.sa_flags = SA_RESTART;
-  
+
   if (sigaction(signo, &act, &oact) < 0) return (SIG_ERR);
-  
+
   return (oact.sa_handler);
 }
 
@@ -57,11 +57,11 @@ void block_signal(int signo)
 {
   sigset_t signal_set;
   sigset_t old_signal_set;
-  
+
   sigemptyset(&signal_set);
   sigaddset(&signal_set, signo);
   sigprocmask(SIG_BLOCK, &signal_set, &old_signal_set);
- 
+
 }
 
 
@@ -72,11 +72,11 @@ void unblock_signal(int signo)
 {
   sigset_t signal_set;
   sigset_t old_signal_set;
-  
+
   sigemptyset(&signal_set);
   sigaddset(&signal_set, signo);
   sigprocmask(SIG_UNBLOCK, &signal_set, &old_signal_set);
- 
+
 }
 
 
@@ -88,7 +88,7 @@ RETSIGTYPE mySIGHUPHandler(int param)
     BOOL ret;
 
     LOG_SYS(0,("SIGHUP catched: Reloading configuration...\n"));
-    if (lp_file_list_changed()) 
+    if (lp_file_list_changed())
     {
        exit_ok = False;
        reload_in_progress = True;
@@ -100,7 +100,7 @@ RETSIGTYPE mySIGHUPHandler(int param)
        killpg(0, SIGINT);
        exit_ok = True;
     }
-    
+
     return;
 }
 
@@ -109,7 +109,7 @@ RETSIGTYPE mySIGHUPHandler(int param)
 /* Func: parent SIGINT handler						  */
 /**************************************************************************/
 RETSIGTYPE mySIGINTHandler(int param)
-{   
+{
    if (exit_ok)
    {
       LOG_SYS(0, ("SIGINT catched: Shutting down...\n"));
@@ -123,10 +123,10 @@ RETSIGTYPE mySIGINTHandler(int param)
 /* Func: child SIGINT handler						  */
 /**************************************************************************/
 RETSIGTYPE childSIGINTHandler(int param)
-{   
+{
    DEBUG(10, ("[%d/%d] SIGINT catched: Shutting down...\n", getpid(), process_role));
    PQfinish(users_dbconn);
-     
+
    exit(EXIT_NORMAL);
 }
 
@@ -147,7 +147,7 @@ RETSIGTYPE myAPSIGCHLDHandler(int param)
 {
    pid_t              cpid = 1;
    int                status;
-    
+
    while(cpid > 0)
    {
       cpid = waitpid(-1, &status, WNOHANG);
@@ -164,7 +164,7 @@ RETSIGTYPE mySIGCHLDHandler(int param)
 {
    pid_t              cpid = 1;
    int                status;
-    
+
    while(cpid > 0)
    {
       cpid = waitpid(0, &status, WNOHANG);
@@ -183,7 +183,7 @@ RETSIGTYPE mySIGCHLDHandler(int param)
            if (WEXITSTATUS(status) == EXIT_ERROR_DB_FAILURE)
            {
               LOG_ALARM(0, ("RDBMS server failure detected. Recovering started...\n"));
-	      
+
               exit_ok = False;
               reload_in_progress = True;
               killpg(0, SIGINT);
@@ -209,7 +209,7 @@ RETSIGTYPE mySIGCHLDHandler(int param)
         else if ((WIFSIGNALED(status)) && (!reload_in_progress))
         {
             LOG_SYS(50, ("SIGCHLD: child exited: pid=[%ld], signal=[%d], ec=[%d]%s\n",
-                   (unsigned long)cpid, WTERMSIG(status), WEXITSTATUS(status), 
+                   (unsigned long)cpid, WTERMSIG(status), WEXITSTATUS(status),
 		   (WCOREDUMP(status) ? " (core dumped)" : "")));
         }
         else
@@ -226,12 +226,12 @@ RETSIGTYPE mySIGCHLDHandler(int param)
 	    if (!reload_in_progress)
 	    {
                LOG_SYS(50, ("SIGCHLD: child role was [%d], starting new one.\n", child_lookup(cpid)));
-	    }   
+	    }
             childs_check = 1;
-        }	
+        }
       }
-      
-      child_delete(cpid); 
+
+      child_delete(cpid);
     }
 }
 
@@ -248,32 +248,32 @@ RETSIGTYPE mySIGSEGVHandler(int param)
   }
 
   FILE *ftrace = NULL;
-  
+
   /* hmm... bad idea to write this to tmp dir */
   ftrace = fopen("/tmp/isd-crashdump.txt", "a");
-  
+
   if (ftrace != NULL)
   {
      fprintf(ftrace, "============================================================\n");
      fprintf(ftrace, "[%s] SIGSEGV: IServerd Segmentation Fault\n", time2str(time(NULL)));
      fprintf(ftrace, "------------------------------------------------------------\n");
      fprintf(ftrace, "System name: %s, compiler: %s\n", SYSTEM_UNAME, COMPILER_NAME);
-     fprintf(ftrace, "Process role: %d, online_users_num: %lu, max_online: %d\n", 
+     fprintf(ftrace, "Process role: %d, online_users_num: %lu, max_online: %d\n",
                       process_role, ipc_vars->online_usr_num, max_user_cnt);
 
-     fprintf(ftrace, "Stime: [%s] \nHtime: [%s]\n", 
+     fprintf(ftrace, "Stime: [%s] \nHtime: [%s]\n",
                       time2str(server_started), time2str(config_loaded));
-		   
+
      fprintf(ftrace, "Debug level: %d, log level: %d\n", DEBUGLEVEL, LOGLEVEL);
      fprintf(ftrace, "------------------------------------------------------------\n");
-     fprintf(ftrace, "Queue: Packs: %lu, bytes: %lu, pmax: %lu, bmax: %lu, errs: %lu\n\n", 
-                      ipc_vars->pack_in_queue, ipc_vars->byte_in_queue, 
-   		      ipc_vars->max_queue_pack, ipc_vars->max_queue_size, 
-		      ipc_vars->queue_send_errors);  
-		   
+     fprintf(ftrace, "Queue: Packs: %lu, bytes: %lu, pmax: %lu, bmax: %lu, errs: %lu\n\n",
+                      ipc_vars->pack_in_queue, ipc_vars->byte_in_queue,
+   		      ipc_vars->max_queue_pack, ipc_vars->max_queue_size,
+		      ipc_vars->queue_send_errors);
+
      fprintf(ftrace, "IServerd stack backtrace dump: \n\n");
 
-#ifdef HAVE_BACKTRACE  
+#ifdef HAVE_BACKTRACE
      /* trying to dump stack backtrace */
      void *addr_array[32];
      int addr_num = backtrace(addr_array, 32);
@@ -282,15 +282,15 @@ RETSIGTYPE mySIGSEGVHandler(int param)
 #else
      fprintf(ftrace, "[ glibc backtrace(...) is not supported, dump skipped ] \n\n");
 #endif
-  
+
      fprintf(ftrace, "\n\nOK... This is some info about crash, but it not enought\n");
      fprintf(ftrace, "If you have iserverd core around - try to get backtrace from it\n");
      fprintf(ftrace, "You can found instructions in BUGS file located in source tree\n\n");
-     fprintf(ftrace, "Please send this information to iserverd authors.\n\n\n");     
+     fprintf(ftrace, "Please send this information to iserverd authors.\n\n\n");
 
      fclose(ftrace);
    }
-   
+
    abort();
 }
 

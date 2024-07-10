@@ -1,0 +1,491 @@
+<html>
+<head>
+<title>Format of SSI item</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;Format of SSI item&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+SSI service allow you to store various information on the server. Server-side 
+information is stored as a list of items. Here is common structure of item: 
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>  <tr><td  bgcolor=#fafafa >
+   <table width=500 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=28%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>Length of the item name</td>
+   </tr>
+   <tr>
+   <td width=28%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>Item name string</td>
+   </tr>
+   <tr>
+   <td width=28%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>Group ID#</td>
+   </tr>
+   <tr>
+   <td width=28%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>Item ID#</td>
+   </tr>
+   <tr>
+   <td width=28%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>Type of item flag (see list bellow)</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#fafafa >
+
+   <table width=500 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=28%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>Length of the additional data</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#fafafa >
+
+ <!-- TLV 0xXX -->
+ <table width=500 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=50> </td>
+ <td>
+
+<table width=450 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f0f0f0 >
+
+   <table width=450 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=21%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type (TLV #1)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td  bgcolor=#f0f0f0 >
+   <table width=450 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=21%>&nbsp;.. ..</td>
+   <td width=5>&nbsp;</td>
+   <td>xxxx</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Value</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td>
+ </tr>
+ </table>
+
+ <table width=500 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=50> </td>
+ <td>
+
+  <table width=450 cellSpacing=0 bgcolor=#f9f9f9 cellPadding=0 align=center border=0>
+  <tr><td>
+
+   <table width=450 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td>&nbsp;....</td>
+   <td width=5>&nbsp;</td>
+   <td>....</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>....</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+
+ </td><td width=5> </td>
+ </tr>
+ </table>
+
+ <!-- TLV 0xXX -->
+ <table width=500 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=50> </td>
+ <td>
+
+<table width=450 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f0f0f0 >
+
+   <table width=450 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=21%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type (TLV #n)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td  bgcolor=#f0f0f0 >
+   <table width=450 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=21%>&nbsp;.. ..</td>
+   <td width=5>&nbsp;</td>
+   <td>xxxx</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Value</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+About name of the item. It can be icq uin, aim screenname, group name or special id. 
+SSI contains a "master group" which contains all other groups. Master group has a 
+group ID# of 0x0000. All groups have item ID# of 0x0000. You can't have groups or 
+items with same group/item ID#. <br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Every item can have additional data stored as tlv chain. For example group item 
+can store its buddy ID numbers in TLV(0x00C8). Buddy item may contain buddy 
+comment in TLV(0x013C) or/and SMS number in TLV(0x013A) or/and alerts settings 
+in TLV(0x013D). You can't add buddy that requires authorization without permission. 
+You can add it only with TLV(0x0066) as a buddy record awaiting authorization.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Each item has a type. It can be buddy record, group record, permit record, 
+presence permissions or something other. Each item type have its limitations and 
+you can request them via <a href="snac_13_02.html">SNAC(13,02)</a>. Here is the 
+list of known item types: 
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E5E5E5 >
+
+ <table width=500 cellSpacing=1 cellPadding=1 border=0>
+ <tr>
+ <td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0000</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Buddy record (name: uin for ICQ and screenname for AIM)</td>
+ </tr>
+ 
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Group record</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Permit record ("Allow" list in AIM, and "Visible" list in ICQ)</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0003</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Deny record ("Block" list in AIM, and "Invisible" list in ICQ)</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Permit/deny settings or/and bitmask of the AIM classes</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0005</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Presence info (if others can see your idle status, etc) </td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0009</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Unknown. ICQ2k shortcut bar items ?</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000E</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Ignore list record.</td>
+ </tr>
+
+ <tr >
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000F</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Last update date (name: "LastUpdateDate").</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0010</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Non-ICQ contact (to send SMS). Name: 1#EXT, 2#EXT, etc</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0013</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Item that contain roster import time (name: "Import time")</td>
+ </tr>
+
+ <tr>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0014</b></td>
+ <td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Own icon (avatar) info. Name is an avatar id number as text</td>
+ </tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Here is the list of known TLVs in additional data blob (itype - item type that 
+may have this tlv in its data blob): <br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x0066), itype 0x00, size 00]</b></font> - 
+Signifies that you are awaiting authorization for this buddy. The client is 
+in charge of putting this TLV, but you will not receiving status updates for 
+the contact until they authorize you, regardless if this is here or not. 
+Meaning, this is only here to tell your client that you are waiting for 
+authorization for the person. This TLV is always empty.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00C8), itype 0x01, size XX]</b></font> - 
+If group is the master group, this contains the group ID#s of all groups in the 
+list. If the group is a normal group, this contains the buddy ID#s of all buddies 
+in the group. Each ID# is 2 bytes. If there are no groups in the list (if in the 
+master group), or no buddies in the group (if in a normal group), then this TLV 
+is not present.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00C9), itype 0x05, size 04]</b></font> - 
+Unknown (contain 0x0000006f when others could not see idle time, contain 
+0x0000046f when others could see idle time).<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00CA), itype 0x04, size 01]</b></font> - 
+This is the byte that tells the AIM servers your privacy setting. If 1, then 
+allow all users to see you. If 2, then block all users from seeing you. If 3, 
+then allow only the users in the permit list. If 4, then block only the users 
+in the deny list. If 5, then allow only users on your buddy list.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00CB), itype 0x04, size 04]</b></font> - 
+This is a bit mask which tells the AIM servers which class of users you want 
+to be visible to. If 0xffffffff, then all users can see you. If 0x00000004, then 
+AIM users can not see you. See known user classes 
+<a href="lists.html#user_class">here</a>.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00CC), itype 0x04, size 04]</b></font> - 
+Bitmask of flags containing "Allow others to see..." options. The default 
+is 0x00000000. The flags are the following, logically ORed together: <br>
+<ul>
+<li>0x00000002 - Do not allow others to see that I am using a wireless device</li>
+<li>0x00000400 - Allow others to see my idle time</li>
+<li>0x00400000 - Allow others to see that I am typing a response</li>
+</ul>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00CD), itype 0x09, size XX]</b></font> - 
+This item type (9) looks like ICQ2k shortcut list. Examples: "2672,0,2,1" 
+and "3097,0,0,0"<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00D4), itype 0x13, size 04]</b></font> - 
+TLV for import time item (type 0x0013). Contains timestamp in unix_t 
+format (seconds since 1.1.1970) when the buddylist has been first time 
+uploaded to the server<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x00D5), itype 0x14, size XX]</b></font> - 
+TLV for buddy icon info (type 0x0014). Contains the icon flags (1 byte), 
+md5 hash size (1 byte) and md5 hash of the you are using (allways 
+16 bytes).<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x0131), itype 0x00, size XX]</b></font> - 
+This stores the name that the contact should show up as in the contact 
+list. It should initially be set to the contact's nick name, and can be 
+changed to anything by the client.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x0137), itype 0x00, size XX]</b></font> - 
+Your buddy locally assigned mail address.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x013A), itype 0x00, size XX]</b></font> - 
+Your buddy locally assigned SMS number.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x013C), itype 0x00, size XX]</b></font> - 
+This stores the "buddy comment" field. The max length winaim lets you use 
+is 0x0054. I'm not sure if that is a true limit or not.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x013D), itype 0x00, size 02]</b></font> - 
+Personal alerts for this buddy.<br>
+First byte:<br>
+<ul>
+<li>0x01 - Pop up window notification</li>
+<li>0x02 - Play sound (sound file specified in 0x013e TLV)</li>
+</ul>
+
+Second byte: <br>
+<ul>
+<li>0x01 - When contact comes online</li>
+<li>0x02 - When contact becomes unidle</li>
+<li>0x04 - When contact returns from away</li>
+</ul>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x013E), itype 0x00, size XX]</b></font> - Sound 
+client should play as alert for this buddy.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=darkblue><b>[TLV(0x0145), itype 0x00, size XX]</b></font> - 
+Date/time (unix time() format) when you send message to this you first time. 
+Actually I noticed that ICQLite adds this TLV then you first open message 
+dialog at this user. Also I've seen this tlv in LastUpdateDate item.
+
+<br><br>
+</td><td width=5>&nbsp;</td>
+</tr></table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>SSI item examples:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+  
+  Buddy item ('6218897', gid=0x0A1E, iid=0x4318, nick='FunBoo')
+  00 07 36 32 31 38 38 39  37 0A 1E 43 18 00 00 00  ..6218897..C....
+  0A 01 31 00 06 46 75 6E  42 6F 6F                 ..1..FunBoo
+
+  Group item ('General', gid=0x1DCA, iid=0, contain iid=0x1f11)
+  00 07 47 65 6e 65 72 61  6c 1d ca 00 00 00 01 00  ..General.......
+  06 00 c8 00 02 1f 11                              ....... 
+
+  System item ('LastUpdateDate', gid=0, iid=0x69D9, type=0x0f)
+  00 0e 4c 61 73 74 55 70  64 61 74 65 44 61 74 65  ..LastUpdateDate
+  00 00 69 d9 00 0f 00 08  01 45 00 04 41 e2 e4 e8  ..i......E..A...
+
+  Own icon hash ('1', gid=0, iid=0x1813, type=0x14, +tlv(0x00D5))
+  00 01 31 00 00 18 13 00  14 00 1A 00 D5 00 12 01  ..1.............
+  10 FC 23 B3 F7 C8 00 D3  92 EF 5E 06 8A D3 66 7F  ..#.......^...f.
+  C7 01 31 00 00                                    ..1..
+
+  Non-icq contact ('1#EXT', gid=0, iid=0x2BD6, type=0x10)
+  00 05 31 23 45 58 54 00  00 2b d6 00 10 00 20 01  ..1#EXT..+.... .
+  31 00 08 41 6c 65 78 61  6e 64 72 01 3a 00 10 2b  1..Alexandr.:..+
+  37 20 28 39 30 32 29 20  35 34 32 32 39 39 33     7 (902) 5422993
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

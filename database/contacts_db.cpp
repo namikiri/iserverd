@@ -38,7 +38,7 @@
 int db_contacts_clear()
 {
    PGresult *res;
-   
+
    res = PQexec(users_dbconn, "DELETE FROM Online_Contacts");
 
    if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -47,7 +47,7 @@ int db_contacts_clear()
       return(-1);
    }
 
-   PQclear(res);  
+   PQclear(res);
    return(0);
 }
 
@@ -55,8 +55,8 @@ int db_contacts_clear()
 /**************************************************************************/
 /* Insert new contact list in contact database 				  */
 /**************************************************************************/
-int db_contact_insert(unsigned long uin, int number, 
-		      unsigned long *contact, int type, 
+int db_contact_insert(unsigned long uin, int number,
+		      unsigned long *contact, int type,
 		      unsigned long rid)
 {
    /* There is two ways to add contact list to database */
@@ -64,7 +64,7 @@ int db_contact_insert(unsigned long uin, int number,
    /* 2. Use set of inserts  (int_db_contact_insert_i)  */
    /* first is much faster than second                  */
    int_db_contact_insert_c(uin, number, contact, type, rid);
-      
+
    return(0);
 }
 
@@ -73,19 +73,19 @@ int db_contact_insert(unsigned long uin, int number,
 /* This is the internal function to add user contact list to database     */
 /* It use copy from stdin statement                                       */
 /**************************************************************************/
-int int_db_contact_insert_c(unsigned long uin, int number, 
-		            unsigned long *contact, int type, 
+int int_db_contact_insert_c(unsigned long uin, int number,
+		            unsigned long *contact, int type,
 			    unsigned long rid)
 {
    PGresult *res;
-   
+
    cstring dbcomm_str;
-   
-   DEBUG(100, ("Copy %d records for %lu to contact database.\n", 
+
+   DEBUG(100, ("Copy %d records for %lu to contact database.\n",
             number, uin));
 
    res = PQexec(users_dbconn, "COPY Online_Contacts FROM stdin");
-   
+
    if (PQresultStatus(res) != PGRES_COPY_IN)
    {
       handle_database_error(res, "[DB_CONTACT_COPY_IN]");
@@ -95,15 +95,15 @@ int int_db_contact_insert_c(unsigned long uin, int number,
    {
       PQclear(res);
    }
-   
+
    for (int i=0; i<number; i++)
    {
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, "%lu\t%lu\t%d\t%lu\n", 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, "%lu\t%lu\t%d\t%lu\n",
 	       uin, contact[i], type, rid);
 
       PQputline(users_dbconn, dbcomm_str);
    }
-   
+
    PQputline(users_dbconn, "\\.\n");
    PQendcopy(users_dbconn);
 
@@ -115,23 +115,23 @@ int int_db_contact_insert_c(unsigned long uin, int number,
 /* This is the internal function to add user contact list to database     */
 /* It use set of insert commands in single transaction                    */
 /**************************************************************************/
-int int_db_contact_insert_i(unsigned long uin, int number, 
-		            unsigned long *contact, int type, 
+int int_db_contact_insert_i(unsigned long uin, int number,
+		            unsigned long *contact, int type,
 			    unsigned long rid)
 {
    PGresult *res;
-   
+
    cstring dbcomm_str;
-   
-   DEBUG(100, ("Inserting %d records for %lu to contact database.\n", 
+
+   DEBUG(100, ("Inserting %d records for %lu to contact database.\n",
             number, uin));
 
    PQclear(PQexec(users_dbconn, "BEGIN"));
-   
+
    for (int i=0; i<number; i++)
    {
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-              "INSERT INTO Online_Contacts values (%lu, %lu, %d, %lu)", 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+              "INSERT INTO Online_Contacts values (%lu, %lu, %d, %lu)",
 	      uin, contact[i], type, rid);
 
       res = PQexec(users_dbconn, dbcomm_str);
@@ -145,9 +145,9 @@ int int_db_contact_insert_i(unsigned long uin, int number,
          PQclear(res);
       }
    }
-   
+
    PQclear(PQexec(users_dbconn, "END"));
-   
+
    return(0);
 }
 
@@ -158,10 +158,10 @@ int int_db_contact_insert_i(unsigned long uin, int number,
 int db_contact_delete(unsigned long uin)
 {
    PGresult *res;
-   
+
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM Online_Contacts WHERE ouin=%lu", uin);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -176,24 +176,24 @@ int db_contact_delete(unsigned long uin)
       PQclear(res);
       return(0);
    }
-   else 
+   else
    {
       PQclear(res);
-      return(-1);    
+      return(-1);
    }
 }
 
 /**************************************************************************/
 /* Delete contact records with specified owner from database		  */
 /**************************************************************************/
-int db_contact_delete(unsigned long ouin, unsigned long tuin, 
+int db_contact_delete(unsigned long ouin, unsigned long tuin,
 		      unsigned short type)
 {
    PGresult *res;
-   
+
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM Online_Contacts WHERE ouin=%lu AND tuin=%lu AND type=%d", ouin, tuin, type);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -208,10 +208,10 @@ int db_contact_delete(unsigned long ouin, unsigned long tuin,
       PQclear(res);
       return(0);
    }
-   else 
+   else
    {
       PQclear(res);
-      return(-1);    
+      return(-1);
    }
 }
 
@@ -228,8 +228,8 @@ int db_contact_lookup(unsigned long uin, int type, unsigned long **contact)
    int number;
 
    fstring dbcomm_str;
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-           "SELECT ouin FROM Online_Contacts WHERE tuin=%lu AND type=%d", 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+           "SELECT ouin FROM Online_Contacts WHERE tuin=%lu AND type=%d",
 	   uin, type);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -240,29 +240,29 @@ int db_contact_lookup(unsigned long uin, int type, unsigned long **contact)
    }
 
    number = PQntuples(res);
-   
+
    if (number > 0)
    {
-      if (PQnfields(res) < 1) 
+      if (PQnfields(res) < 1)
       {
-         LOG_SYS(0, ("Corrypted table structure in db: \"%s\"\n", 
+         LOG_SYS(0, ("Corrypted table structure in db: \"%s\"\n",
 	             lp_db_users()));
          exit(EXIT_ERROR_DB_STRUCTURE);
       }
-      
+
       *contact = (unsigned long *)malloc(sizeof(unsigned long)*number);
       DEBUG(200, ("Trying to malloc %d bytes for %d records (result: %06X)\n",
-                  (sizeof(unsigned long)*number), number, 
+                  (sizeof(unsigned long)*number), number,
 		  (unsigned long)*contact));
-		
-      for (int i=0;i<number;i++) (*contact)[i] = atoul(PQgetvalue(res, i, 0));	
+
+      for (int i=0;i<number;i++) (*contact)[i] = atoul(PQgetvalue(res, i, 0));
 
       PQclear(res);
       return(number);
    }
    else
    {
-      PQclear(res);  
+      PQclear(res);
       return(0);
    }
 }
@@ -274,10 +274,10 @@ int db_contact_lookup(unsigned long uin, int type, unsigned long **contact)
 int db_contact_delete(unsigned long ouin, unsigned short type)
 {
    PGresult *res;
-   
+
    fstring dbcomm_str;
    /* exec select command on backend server */
-   slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+   slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
            "DELETE FROM Online_Contacts WHERE ouin=%lu AND type=%d", ouin, type);
 
    res = PQexec(users_dbconn, dbcomm_str);
@@ -292,10 +292,10 @@ int db_contact_delete(unsigned long ouin, unsigned short type)
       PQclear(res);
       return(0);
    }
-   else 
+   else
    {
       PQclear(res);
-      return(-1);    
+      return(-1);
    }
 }
 

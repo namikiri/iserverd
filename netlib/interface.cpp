@@ -81,7 +81,7 @@ static void add_interface(struct in_addr ip, struct in_addr nmask)
 
    iface = (struct interface *)malloc(sizeof(*iface));
    if (!iface) return;
-	
+
    ZERO_STRUCTPN(iface);
 
    iface->ip = ip;
@@ -104,7 +104,7 @@ static void interpret_interface(char *token)
 
    ip = ipzero;
    nmask = ipzero;
-	
+
    for (i=0;i<total_probed;i++)
    {
       if (ms_fnmatch(token, probed_ifaces[i].name) == 0)
@@ -208,7 +208,7 @@ void load_interfaces(void)
       probed_ifaces = (iface_struct *)memdup(ifaces, sizeof(ifaces[0])*total_probed);
    }
 
-   /* if we don't have a interfaces line then use all broadcast capable 
+   /* if we don't have a interfaces line then use all broadcast capable
       interfaces except loopback */
    if (!ptr || !*ptr)
    {
@@ -223,7 +223,7 @@ void load_interfaces(void)
          if (probed_ifaces[i].netmask.s_addr != allones_ip.s_addr &&
 	     probed_ifaces[i].ip.s_addr != loopback_ip.s_addr)
 	 {
-	     add_interface(probed_ifaces[i].ip, 
+	     add_interface(probed_ifaces[i].ip,
 	                   probed_ifaces[i].netmask);
          }
       }
@@ -254,7 +254,7 @@ BOOL interfaces_changed(void)
    {
       return True;
    }
-	
+
    return False;
 }
 
@@ -280,7 +280,7 @@ BOOL is_local_net(struct in_addr from)
    struct interface *i;
    for (i=local_interfaces;i;i=i->next)
    {
-      if((from.s_addr & i->nmask.s_addr) == 
+      if((from.s_addr & i->nmask.s_addr) ==
          (i->ip.s_addr & i->nmask.s_addr))
          return True;
    }
@@ -312,7 +312,7 @@ BOOL we_are_multihomed(void)
 
    if(multi == -1)
    multi = (iface_count() > 1 ? True : False);
-	
+
    return multi;
 }
 
@@ -321,8 +321,8 @@ BOOL we_are_multihomed(void)
 /* Return the Nth interface						  */
 /**************************************************************************/
 struct interface *get_interface(int n)
-{ 
-   struct interface *i;  
+{
+   struct interface *i;
    for (i=local_interfaces;i && n;i=i->next) n--;
 
    if (i) return i;
@@ -337,7 +337,7 @@ struct interface *get_interface(int n)
 struct in_addr *iface_n_ip(int n)
 {
    struct interface *i;
-  
+
    for (i=local_interfaces;i && n;i=i->next)  n--;
 
    if (i) return &i->ip;
@@ -352,7 +352,7 @@ struct in_addr *iface_n_ip(int n)
 struct in_addr *iface_n_bcast(int n)
 {
    struct interface *i;
-  
+
    for (i=local_interfaces;i && n;i=i->next) n--;
 
    if (i) return &i->bcast;
@@ -404,7 +404,7 @@ struct in_addr *iface_ip(struct in_addr ip)
 
 
 int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
-{  
+{
    struct ifconf ifc;
    char buff[8192];
    int fd, i, n;
@@ -418,7 +418,7 @@ int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
    {
       return -1;
    }
-  
+
    ifc.ifc_len = sizeof(buff);
    ifc.ifc_buf = buff;
 
@@ -426,10 +426,10 @@ int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
    {
       close(fd);
       return -1;
-   } 
+   }
 
    ifr = ifc.ifc_req;
-  
+
    n = ifc.ifc_len / sizeof(struct ifreq);
 
    /* Loop through interfaces, looking for given IP address */
@@ -446,7 +446,7 @@ int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
       if (ioctl(fd, SIOCGIFFLAGS, &ifr[i]) != 0)
       {
          continue;
-      }  
+      }
 
       if (!(ifr[i].ifr_flags & IFF_UP))
       {
@@ -456,7 +456,7 @@ int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
       if (ioctl(fd, SIOCGIFNETMASK, &ifr[i]) != 0)
       {
          continue;
-      }  
+      }
 
       nmask = ((struct sockaddr_in *)&ifr[i].ifr_addr)->sin_addr;
 
@@ -470,7 +470,7 @@ int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
    close(fd);
 
    return total;
-}  
+}
 
 
 /**************************************************************************/
@@ -479,7 +479,7 @@ int get_interfaces(struct iface_struct *ifaces, int max_interfaces)
 void init_bindinterface()
 {
   load_interfaces();
-  if (iface_count() > 0) 
+  if (iface_count() > 0)
   {
      if (lp_bind_all_ifaces())
      {

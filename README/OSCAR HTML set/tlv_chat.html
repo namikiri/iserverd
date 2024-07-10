@@ -1,0 +1,2039 @@
+<html>
+<head>
+<title>Common tlv set for exchange and room description.</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=645 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">Common chat description tlv set.</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4> </td></tr>
+<tr>
+<td width=7>&nbsp;</td>
+<td valign=top>
+
+<br>Here is a common tlv set for exchange and room description:<br><br>
+
+ <!-- TLV 0x01 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 01</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x01) - browsable tree</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>empty?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x02 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 02</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x02) - exclusively for class</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%><a href="lists.html#user_class">user class</a></td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x03 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 03</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x03) - max concurrent rooms</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>byte</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>max concurrent rooms</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x04 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 04</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x04) - max room name length</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>byte</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>max room name length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x05 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 05</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x05) - root rooms</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=580 cellSpacing=2 cellPadding=0 align=right border=0>
+   <tr><td>
+
+<table cellSpacing=0 cellPadding=0 border=0><tr><td height=3></td></tr><tr><td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#c9c9e9>&nbsp;
+Following chat room identification info may be repeated more then once
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+    <table width=565 cellSpacing=0 cellPadding=0 align=center border=0>
+    <tr>
+    <td width=130>&nbsp;xx xx</td>
+    <td width=5>&nbsp;</td>
+    <td>word</td>
+    <td width=5>&nbsp;</td>
+    <td width=58%>exchange</td>
+    </tr>
+    <tr>
+    <td>&nbsp;xx</td>
+    <td>&nbsp;</td>
+    <td>byte</td>
+    <td>&nbsp;</td>
+    <td>cookie length</td>
+    </tr>
+    <tr>
+    <td>&nbsp;xx ..</td>
+    <td>&nbsp;</td>
+    <td>array</td>
+    <td>&nbsp;</td>
+    <td>cookie</td>
+    </tr>
+    <tr>
+    <td>&nbsp;xx xx</td>
+    <td>&nbsp;</td>
+    <td>word</td>
+    <td>&nbsp;</td>
+    <td>instance number</td>
+    </tr>
+    </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr><tr><td height=3></td></tr></table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x06 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 06</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x06) - search tags</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>search tag #1</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;...</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>...</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>...</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>search tag #n</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x65 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 65</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x65) - child rooms</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x66 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 66</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x66) - contains user class</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x67 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 67</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x67) - contains user array</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x68 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 68</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x68) - evil generated</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x69 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 69</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x69) - evil generated array</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x6A -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 6A</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x6A) - fully qualified name</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x6B -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 6B</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x6B) - moderator</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x6C -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 6C</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x6C) - more room info</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x6D -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 6D</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x6D) - num children</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x6E -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 6E</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x6E) - num instances</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x6F -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 6F</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x6F) - occupancy</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x70 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 70</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x70) - occupancy array</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x71 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 71</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x71) - occupant evil</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x72 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 72</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x72) - occupant evil array</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x73 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 73</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x73) - occupant list</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x74 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 74</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x74) - parent room</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x75 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 75</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x75) - room activity</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x76 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 76</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x76) - room activity array</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x77 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 77</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x77) - room gross evil</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x78 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 78</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x78) - room net evil</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x79 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 79</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x79) - speaker</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xC9 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 C9</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xC9) - chat flag</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xCA -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 CA</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xCA) - create time</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx xx xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>dword</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>creation time</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xCB -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 CB</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xCB) - creator</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xCC -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 CC</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xCC) - description</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xCD -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 CD</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xCD) - description url</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xCE -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 CE</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xCE) - is closed</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xCF -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 CF</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xCF) - language</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xD0 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 D0</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xD0) - mandatory channels</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xD1 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 D1</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xD1) - max message length</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>max message length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xD2 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 D2</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xD2) - max occupancy</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>max occupancy</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xD3 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 D3</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xD3) - name</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>name</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xD4 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 D4</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xD4) - optional channels</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>&nbsp;</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>?</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0xD5 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 D5</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0xD5) - creation permission</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>byte</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>creation permission (0 - not allowed, 1 - room creation,
+     2 - exchange creation)</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;</td></tr> 
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=645 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

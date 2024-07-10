@@ -47,7 +47,7 @@ int vslprintf(char *str, int n, char *format, va_list ap)
 
 int slprintf(char *str, int n, char *format, ...)
 {
-   va_list ap;  
+   va_list ap;
    int ret;
 
    va_start(ap, format);
@@ -61,7 +61,7 @@ int slprintf(char *str, int n, char *format, ...)
 
 int fdprintf(int fd, char *format, ...)
 {
-   va_list ap;  
+   va_list ap;
    int ret;
    pstring str;
    va_start(ap, format);
@@ -71,5 +71,5 @@ int fdprintf(int fd, char *format, ...)
    va_end(ap);
    return write(fd, str, strlen(str));
 
-}  
+}
 

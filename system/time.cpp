@@ -144,16 +144,16 @@ int TimeZoneFaster(time_t t)
     {
       table_size++;
 
-      dst_table[i].zone = zone; 
+      dst_table[i].zone = zone;
       dst_table[i].start = dst_table[i].end = t;
-    
+
       /* no entry will cover more than 6 months */
       low = t - MAX_DST_WIDTH/2;
       if (t < low)   low = TIME_T_MIN;
-      
+
       high = t + MAX_DST_WIDTH/2;
       if (high < t)  high = TIME_T_MAX;
-      
+
       /* widen the new entry using two bisection searches */
       while (low+60*60 < dst_table[i].start)
       {
@@ -251,10 +251,10 @@ char *timestr()
    struct tm *tim;
    time_t t;
    t = time(NULL);
-	
+
    tim = LocalTime(&t);
-   slprintf(TimeBuf, sizeof(TimeBuf)-1, "%02d.%02d.%04d %02d:%02d:%02d", 
-            tim->tm_mday, tim->tm_mon+1, (tim->tm_year+1900), 
+   slprintf(TimeBuf, sizeof(TimeBuf)-1, "%02d.%02d.%04d %02d:%02d:%02d",
+            tim->tm_mday, tim->tm_mon+1, (tim->tm_year+1900),
             tim->tm_hour, tim->tm_min, tim->tm_sec);
 
    return(TimeBuf);
@@ -270,10 +270,10 @@ char *time2str(time_t stime)
    struct tm *tim;
 
    tim = LocalTime(&stime);
-   slprintf(TimeBuf, sizeof(TimeBuf)-1, "%02d.%02d.%04d %02d:%02d:%02d", 
+   slprintf(TimeBuf, sizeof(TimeBuf)-1, "%02d.%02d.%04d %02d:%02d:%02d",
             tim->tm_mday, tim->tm_mon+1, (tim->tm_year+1900),
             tim->tm_hour, tim->tm_min, tim->tm_sec);
-	
+
    return(TimeBuf);
 }
 
@@ -287,11 +287,11 @@ char *time2str1(time_t stime)
    struct tm *tim;
 
    tim = LocalTime(&stime);
-   slprintf(TimeBuf, sizeof(TimeBuf)-1, "%02d.%02d.%02d %02d:%02d", 
+   slprintf(TimeBuf, sizeof(TimeBuf)-1, "%02d.%02d.%02d %02d:%02d",
             tim->tm_mday, tim->tm_mon+1,
-          ((tim->tm_year+1900) % 100), 
+          ((tim->tm_year+1900) % 100),
 	    tim->tm_hour, tim->tm_min);
-	
+
    return(TimeBuf);
 }
 
@@ -347,7 +347,7 @@ char *timestring(BOOL hires)
       }
    }
 
-   string_truncate(TimeBuf, strlen(TimeBuf)-1);	
+   string_truncate(TimeBuf, strlen(TimeBuf)-1);
 
    return(TimeBuf);
 }
@@ -363,7 +363,7 @@ time_t get_create_time(struct stat  *st,BOOL fake_dirs)
 
   if(S_ISDIR(st->st_mode) && fake_dirs)
     return (time_t)315493200L;          /* 1/1/1980 */
-    
+
   ret = MIN(st->st_ctime, st->st_mtime);
   ret1 = MIN(ret, st->st_atime);
 

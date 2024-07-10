@@ -40,13 +40,13 @@ off_t get_file_size(char *file_name)
    buf.st_size = 0;
 
    if (stat(file_name, &buf) != 0) return (off_t) - 1;
-   
+
    return (buf.st_size);
 }
 
 
 /**************************************************************************/
-/* Return filesize of file with specified opened file handler		  */ 
+/* Return filesize of file with specified opened file handler		  */
 /**************************************************************************/
 off_t get_file_size(int fd)
 {
@@ -66,7 +66,7 @@ BOOL file_modified_date(const char *filename, time_t *lastmodified)
    struct stat st;
 
    if (stat(filename, &st) != 0) return False;
-   
+
    *lastmodified = st.st_mtime;
    return True;
 }
@@ -80,7 +80,7 @@ BOOL file_modified(const char *filename, time_t *lastmodified)
    time_t mtime;
    if (!file_modified_date(filename, &mtime)) return False;
    if (mtime <= *lastmodified) return False;
-   
+
    *lastmodified = mtime;
    return True;
 }
@@ -104,7 +104,7 @@ char *file_load(char *fname, size_t *size)
    p = (char *)malloc(sbuf.st_size+1);
    if (!p) return NULL;
 
-   if (read(fd, p, sbuf.st_size) != sbuf.st_size) 
+   if (read(fd, p, sbuf.st_size) != sbuf.st_size)
    {
       free(p);
       return NULL;

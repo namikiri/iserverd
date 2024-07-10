@@ -1,0 +1,575 @@
+<html>
+<head>
+<title>Detailed OSCAR login sequence description</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;OSCAR login&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0 bgcolor=#E9E9E9>
+<tr><td bgcolor=white>
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 width=120>&nbsp;<b>Login stage I:</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#l0001">Authorization</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>Login stage II:</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#l0002">Protocol negotiation </a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>Login stage III:</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#l0003">Services setup</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>Login stage IV:</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#l0004">Final actions</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>Example #1:</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="elmd5.html">Login with MD5 based authorization</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;<b>Example #2:</b>&nbsp;</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="elch01.html">Login with channel 0x01 based authorization</a></td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="L0001"></a>Login stage I: Authorization&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Currently there is two ways to pass authentification in OSCAR protocol. First is 
+FLAP channel 0x01 authorization (password not crypted but roasted), second is MD5 
+based where password is MD5 crypted. In both ways server could return error or 
+authorization cookie + BOS address. Here is both auth sequences (client&lt;-&gt;server):
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0>
+<b><font size=2 color=white>&nbsp;1. Channel 0x01 authorization (success)</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=500 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=40 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=110 valign=top>&nbsp;&nbsp;<b>connect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client connects to authorizer server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="cli_ident.html">cli_ident</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client send login request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="srv_cookie.html">srv_cookie</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server reply via BOS address / cookie</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>disconnect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client disconnects from authorizer</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;2. MD5 based authorization</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=500 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=40 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=110 valign=top>&nbsp;&nbsp;<b>connect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client connects to authorizer server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_17_06.html">SNAC(17,06)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends md5-authkey request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_17_07.html">SNAC(17,07)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends md5-authkey string</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_17_02.html">SNAC(17,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends authorization request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_17_03.html">SNAC(17,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends authorization reply</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>disconnect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client disconnects from authorizer</td>
+</tr> 
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+In channel 0x01 authorization server may replace 
+<a href="srv_cookie.html">srv_cookie</a> packet reply via 
+<a href="auth_failed.html">auth_failed</a> packet which contain authorization 
+error code. In MD5 based authorization sequence server always reply via 
+<a href="snac_17_03.html">SNAC(17,03)</a> which may contain cookie / BOS address 
+or authorization error code.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+When authorization sequence successfully finishes client has authorization cookie, 
+ip address and port of the BOS server. At this point it should disconnect from 
+authorizer and connect to BOS. This is the point where login stage II (protocol 
+negotiation) started.<br><br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="L0002"></a>Login stage II: Protocol negotiation&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+After authorization client should extract BOS server/auth cookie from reply 
+packet, connect to BOS and send cookie via special FLAP channel 0x01 
+packet named <a href="cli_cookie.html">cli_cookie</a>. In reply server will return list of 
+supported services - <a href="snac_01_03.html">SNAC(01,03)</a>. Then client 
+should ask needed services version numbers using 
+<a href="snac_01_17.html">SNAC(01,17)</a>. After that client will receive services 
+version numbers server has - <a href="snac_01_18.html">SNAC(01,18)</a>. Note that 
+client never shouldn't send snacs to services not listed in SNAC(01,03). It should 
+use service request <a href="snac_01_04.html">SNAC(01,04)</a> instead.<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Protocol negotiation</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=500 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=40 valign=top>&nbsp;&nbsp;<b>&lt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=110 valign=top>&nbsp;&nbsp;<b>connect</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client connects to BOS server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="cli_cookie.html">cli_cookie</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends cookie</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_03.html">SNAC(01,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends supported services list</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_17.html">SNAC(01,17)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask for services version numbers</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_18.html">SNAC(01,18)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends its services version numbers</td>
+</tr> 
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+After negotiation client should setup current connection. It request 
+rate limitations information via <a href="snac_01_06.html">SNAC(01,06)</a>. 
+Then server will return connection rate limitations info - 
+<a href="snac_01_07.html">SNAC(01,07)</a>. At this point client start calculating 
+its rate level on every SNAC it send. Server rate limitations information SNAC 
+should be acked using <a href="snac_01_08.html">SNAC(01,08)</a>. Now connection 
+ready.<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Protocol negotiation</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=500 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_06.html">SNAC(01,06)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server for rate limits info</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_07.html">SNAC(01,07)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends rate limits information</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_08.html">SNAC(01,08)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ack connection rate limits</td>
+</tr> 
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="L0003"></a>Login stage III: Services setup&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Most of the services has limitations which you can request via SNAC(xx,02). For 
+example client should know max_contact_buddies for BLM service. ICBM service 
+has message default limits and client can change them as you need. Client also 
+should send its capabilities list to Location service.
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Protocol negotiation</font></b></td></tr>
+<tr><td  bgcolor=#E5E5E5 >
+
+<table width=500 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_02_02.html">SNAC(02,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server location service limitations</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_02_03.html">SNAC(02,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server replies via location service limitations</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_02_04.html">SNAC(02,04)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends its <a href="capabilities.html">capabilities</a> / profile to server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_03_02.html">SNAC(03,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server BLM service limitations</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_03_03.html">SNAC(03,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server replies via BLM service limitations</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_04_04.html">SNAC(04,04)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server for ICBM service parameters</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_04_05.html">SNAC(04,05)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends ICBM service parameters to client</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_04_02.html">SNAC(04,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client change default ICBM parameters command</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_09_02.html">SNAC(09,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server PRM service limitations</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_09_03.html">SNAC(09,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends PRM service limitations to client</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_02.html">SNAC(13,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client ask server for SSI service limitations</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_03.html">SNAC(13,03)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends SSI service limitations to client</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_05.html">SNAC(13,05)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client check if its local SSI copy is up-to-date</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_0f.html">SNAC(13,0F)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server tell client its local copy up-to-date</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_07.html">SNAC(13,07)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client activates server SSI data</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Note that this order is not strict and client can send several requests and then 
+wait for replies. But it should remember about rate limitations.<br><br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="L0004"></a>Login stage IV: Final actions&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+This is last login actions you should perform. ICQ client at this stage set its 
+DC information and status on main connection via 
+<a href="snac_01_1e.html">SNAC(01,1E)</a>. Login sequence finishes by client ready 
+<a href="snac_01_02.html">SNAC(01,02)</a> which contain version/build numbers for 
+protocol dlls.
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=500 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Final actions</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=500 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_1e.html">SNAC(01,1E)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends its DC info and status to server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_01_02.html">SNAC(01,02)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client READY command</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+After SNAC(01,02) client command server start broadcast client presence to its 
+buddies and client start receiving messages and presence notifications. ICQ 
+client should also <a href="sequences.html#offline_msgs">check</a> for offline 
+messages.
+<br><br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

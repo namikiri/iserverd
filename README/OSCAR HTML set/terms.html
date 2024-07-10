@@ -1,0 +1,217 @@
+<html>
+<head>
+<title>Protocol specification terminology</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=644 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;TERMINOLOGY&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+The follow is a list of terms you may see through out these pages. 
+Most of them a taken from AOL AIM documents<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td valign=top><b>&nbsp;BOS</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>Basic OSCAR Service. This term refers to the services that form the core of the 
+ Instant Messenger service. These services include Login/Logoff, Locate, Instant Message, Roster management, 
+ Info management and Buddy List
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;Buddy List</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>The buddy list tool allows a user to see in near realtime when his friends (buddies) 
+ are using the Instant Messenger service. A user may set a preference to block others from seeing him when he is on. 
+ He may also set a permit or deny list to selectively show his presence.
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;DC</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>DC is an abbreviation for direct connection. 
+ It is too expensive to send all client data thru server. This problem was solved 
+ by client-to-client direct connections when one client connects to port opened by 
+ another client to send messages, files and other information. 
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;FLAP</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>FLAP is a low-level communications protocol that facilitates the development of higher-level, 
+ record-oriented, communications layers. It is used on the TCP connection between all clients and servers. 
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+ 
+ <tr>
+ <td valign=top nowrap><b>&nbsp;ICBM</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>ICBM - Inter Client Basic Message. ICBM is a channelized client-to-client mechanism. 
+ Currently the most user visible channel is used for Instant Messages.  
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;Instant Message (IM)</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>The instant message tool allows a user to send a short message to another Instant 
+ Messenger nickname that is delivered directly to the users screen in near realtime. This is unlike Email which 
+ may contain larger amounts of data and may be delivered at a later time. The receiver may easily respond with an 
+ instant message back to the sender creating a semi-realtime conversation.   
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;Login/Logoff </b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>The Login/Logoff tool is an internal service of the Instant Messenger client. 
+ The tool is responsible for keeping the client connected to the Instant Messenger servers. 
+ This includes the initial login, any migrations that occur during a users session, and the final logoff. 
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;Migration </b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>The process of moving a user automatically from one server to another. 
+ A migration may happen at anytime during a users session, and is completely transparent. Although the 
+ client may appear sluggish, no data will be lost during the migration.  
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;OSCAR</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>Open System for Communication in Realtime - the internal project name 
+ (as opposed to the external marketing name) used to identify Instant Messenger.   
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;SSI</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>A SSI (server-stored information) 
+ is a service that allow client to store its contact list data (buddies, groups, 
+ comments, visibility, invisibility, ignore, perms mask) on the server. 
+ This increases client mobility and drastically reduces network traffic and 
+ server load. Oscar use <a href="families.html#f0013">family 0x13</a> for 
+ this service.
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;SNAC</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>A SNAC is the basic communication unit that is exchanged between clients and servers. 
+ The SNAC communication layers sits on top of the FLAP layer.    
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;Tool</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>Tools supply the underlying support for talking between Modules and the core software.  
+There will be one tool for each of the services that the Instant Messenger offers. Each tool can support many modules.
+ </td>
+ </tr>
+ <tr>
+ <td colspan=5>&nbsp;</td>
+ </tr> 
+
+ <tr>
+ <td valign=top nowrap><b>&nbsp;TLV</b></td>
+ <td valign=top width=15 align=center>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+ <td valign=top colspan=3>TLV - Type Length Value. A tuple allowing typed opaque information to be passed through 
+ the protocol. Typically TLV's are intended for interpretation at the core layer. Being typed, new elements can be 
+ added w/o modifying the lower layers. 
+ </td></tr>
+ <tr><td colspan=5>&nbsp;</td></tr> 
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=644 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

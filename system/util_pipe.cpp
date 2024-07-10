@@ -48,7 +48,7 @@ int pipe_send_packet(Packet &pack)
    int snd_result;
 
    /* first write packet parameters to temp packet */
-   spack.clearPacket();   
+   spack.clearPacket();
    spack << (unsigned  long)(ipToIcq(pack.from_ip))
          << (unsigned  long)(pack.from_port)
 	 << (long)pack.sock_hdl
@@ -58,7 +58,7 @@ int pipe_send_packet(Packet &pack)
 	 << (unsigned short)pack.from_local
 	 << (unsigned short)pack.flap_channel
 	 << (unsigned  long)pack.seq_number;
-	     
+
    /* preparing temp packet for pipe socket */
    memcpy(spack.nextData, pack.buff, pack.sizeVal);
    spack.sizeVal += pack.sizeVal;
@@ -69,8 +69,8 @@ int pipe_send_packet(Packet &pack)
    /* send packet to pipe socket in non-blocking mode */
    snd_result = sendto(incoming_pipe_fd[P_WRIT], spack.buff, spack.sizeVal, 0, 0, 0);
 
-   if (snd_result > 0) 
-   {      
+   if (snd_result > 0)
+   {
       ipc_vars->pack_in_queue++;
       ipc_vars->byte_in_queue += snd_result;
 
@@ -94,12 +94,12 @@ int pipe_send_packet(Packet &pack)
 /**************************************************************************/
 void tcp_writeback_packet(Packet &pack)
 {
-   DEBUG(400, ("Writeback packet: size=%d, from=%s:%d, sock_hdl=%lu, sock_rnd=%lu, sock_type=%d, flap_chan=%d\n", 
-              pack.sizeVal, inet_ntoa(pack.from_ip), pack.from_port, pack.sock_hdl, pack.sock_rnd, 
+   DEBUG(400, ("Writeback packet: size=%d, from=%s:%d, sock_hdl=%lu, sock_rnd=%lu, sock_type=%d, flap_chan=%d\n",
+              pack.sizeVal, inet_ntoa(pack.from_ip), pack.from_port, pack.sock_hdl, pack.sock_rnd,
 	      pack.sock_type, pack.flap_channel));
 
    pipe_pack.clearPacket();
-   
+
    /* first write packet parameters to temp packet */
    pipe_pack << (unsigned  long)(ipToIcq(pack.from_ip))
              << (unsigned  long)(pack.from_port)
@@ -120,7 +120,7 @@ void tcp_writeback_packet(Packet &pack)
 
 
 /**************************************************************************/
-/* Pipe packet read procedure. Lock pipe and read packet		  */ 
+/* Pipe packet read procedure. Lock pipe and read packet		  */
 /* into packet class							  */
 /**************************************************************************/
 void pipe_receive_packet(Packet &pack)
@@ -131,13 +131,13 @@ void pipe_receive_packet(Packet &pack)
 
    lock_pipe(INCOMING_PIPE);
 
-   pipe_pack.sizeVal = recvfrom(incoming_pipe_fd[P_READ], pipe_pack.buff, 
+   pipe_pack.sizeVal = recvfrom(incoming_pipe_fd[P_READ], pipe_pack.buff,
         			MAX_PACKET_SIZE, 0, 0, 0);
 
    unlock_pipe(INCOMING_PIPE);
    lock_ipcw();
-   
-   if (pipe_pack.sizeVal > 0) 
+
+   if (pipe_pack.sizeVal > 0)
    {
       if ((ipc_vars->pack_in_queue != 0) ||
           (ipc_vars->byte_in_queue != 0))
@@ -159,7 +159,7 @@ void pipe_receive_packet(Packet &pack)
 
    unlock_ipcw();
 
-   pipe_pack.reset();   
+   pipe_pack.reset();
    pipe_pack >> temp_ip
              >> pack.from_port
 	     >> pack.sock_hdl
@@ -169,7 +169,7 @@ void pipe_receive_packet(Packet &pack)
 	     >> pack.from_local
 	     >> pack.flap_channel
 	     >> pack.seq_number;
-	     
+
    pack.from_ip = icqToIp(temp_ip);
    memcpy(pack.buff, pipe_pack.nextData, pipe_pack.sizeVal-28);
    pack.sizeVal = pipe_pack.sizeVal-28;
@@ -179,7 +179,7 @@ void pipe_receive_packet(Packet &pack)
 
 
 /**************************************************************************/
-/* tcp outgoing pipe read procedure. Read packet from tog pipe 		  */ 
+/* tcp outgoing pipe read procedure. Read packet from tog pipe 		  */
 /* into packet class with all its paramaters				  */
 /**************************************************************************/
 int toutgoing_receive_packet(Packet &pack)
@@ -187,12 +187,12 @@ int toutgoing_receive_packet(Packet &pack)
    unsigned long temp_ip;
    pack.clearPacket();
 
-   pipe_pack.sizeVal = recvfrom(toutgoing_pipe_fd[P_READ], pipe_pack.buff, 
+   pipe_pack.sizeVal = recvfrom(toutgoing_pipe_fd[P_READ], pipe_pack.buff,
 				MAX_PACKET_SIZE, 0, 0, 0);
 
    if (pipe_pack.sizeVal > 0)
    {
-      pipe_pack.reset();   
+      pipe_pack.reset();
       pipe_pack >> temp_ip
                 >> pack.from_port
 	        >> pack.sock_hdl
@@ -200,7 +200,7 @@ int toutgoing_receive_packet(Packet &pack)
 	        >> pack.sock_type
 	        >> pack.sock_evt
 	        >> pack.flap_channel;
-   
+
       pack.from_ip = icqToIp(temp_ip);
       pack.sizeVal = pipe_pack.sizeVal - 22;
       memcpy(pack.buff, pipe_pack.nextData, pack.sizeVal);
@@ -209,7 +209,7 @@ int toutgoing_receive_packet(Packet &pack)
    {
       pack.sizeVal = 0;
    }
-   
+
    return(pipe_pack.sizeVal);
 }
 
@@ -221,9 +221,9 @@ int actions_receive_packet(Packet &pack)
 {
    pack.clearPacket();
 
-   pack.sizeVal = recvfrom(actions_pipe_fd[P_READ], pack.buff, 
+   pack.sizeVal = recvfrom(actions_pipe_fd[P_READ], pack.buff,
         		   MAX_PACKET_SIZE, 0, 0, 0);
-   
+
    return(pack.sizeVal);
 }
 
@@ -236,12 +236,12 @@ int actions_receive_packet(Packet &pack)
 void epacket_receive_packet(indirect_pack &inpack)
 {
    unsigned long temp_ip;
-   
-   pipe_pack.sizeVal = recvfrom(outgoing_pipe_fd[P_READ], pipe_pack.buff, 
+
+   pipe_pack.sizeVal = recvfrom(outgoing_pipe_fd[P_READ], pipe_pack.buff,
         			MAX_PACKET_SIZE, 0, 0, 0);
 
    pipe_pack.reset();
-   
+
    pipe_pack >> temp_ip
              >> inpack.to_port
 	     >> inpack.retry_num
@@ -263,19 +263,19 @@ void epacket_receive_packet(indirect_pack &inpack)
 /**************************************************************************/
 void epacket_receive_event(event_pack &inpack)
 {
-   pipe_pack.sizeVal = recvfrom(epacket_pipe_fd[P_READ], pipe_pack.buff, 
+   pipe_pack.sizeVal = recvfrom(epacket_pipe_fd[P_READ], pipe_pack.buff,
         			MAX_PACKET_SIZE, 0, 0, 0);
 
    DEBUG(400, ("Received epacket event record, length: %d\n", pipe_pack.sizeVal));
 
    pipe_pack.reset();
-   
+
    pipe_pack >> inpack.mtype
              >> inpack.uin_number
 	     >> inpack.ack_stamp
 	     >> inpack.ttl;
-  
-   return;	        
+
+   return;
 }
 
 
@@ -284,13 +284,13 @@ void epacket_receive_event(event_pack &inpack)
 /**************************************************************************/
 void euser_receive_event(event_pack &inpack)
 {
-   pipe_pack.sizeVal = recvfrom(euser_pipe_fd[P_READ], pipe_pack.buff, 
+   pipe_pack.sizeVal = recvfrom(euser_pipe_fd[P_READ], pipe_pack.buff,
         			MAX_PACKET_SIZE, 0, 0, 0);
 
    DEBUG(400, ("Received euser event record, length: %d\n", pipe_pack.sizeVal));
 
    pipe_pack.reset();
-     
+
    pipe_pack >> inpack.mtype
     	     >> inpack.uin_number
     	     >> inpack.ack_stamp
@@ -306,16 +306,16 @@ void euser_receive_event(event_pack &inpack)
 /**************************************************************************/
 void defrag_receive_pipe(defrag_pack &inpack)
 {
-   pipe_pack.sizeVal = recvfrom(defrag_pipe_fd[P_READ], pipe_pack.buff, 
+   pipe_pack.sizeVal = recvfrom(defrag_pipe_fd[P_READ], pipe_pack.buff,
         			MAX_PACKET_SIZE, 0, 0, 0);
 
    pipe_pack.reset();
-    
+
    pipe_pack >> inpack.mtype
     	     >> inpack.uin_num
     	     >> inpack.seq;
 
-   DEBUG(100, ("Received defrag record, len:%d, mtype:%lu, uin:%lu, seq:%d\n", 
+   DEBUG(100, ("Received defrag record, len:%d, mtype:%lu, uin:%lu, seq:%d\n",
                 pipe_pack.sizeVal, inpack.mtype, inpack.uin_num, inpack.seq));
 
    return;
@@ -328,15 +328,15 @@ void defrag_receive_pipe(defrag_pack &inpack)
 /* timeout and long unique number of packet to recognize ack on 	  */
 /* any protocol (ack_timestamp)						  */
 /**************************************************************************/
-void event_send_packet(Packet &pack, unsigned long to_uin, 
-     unsigned long shm_index, unsigned long retry_num, 
+void event_send_packet(Packet &pack, unsigned long to_uin,
+     unsigned long shm_index, unsigned long retry_num,
      unsigned long rtimeout, unsigned long ack_timestamp)
 {
 
    lock_pipe(OUTGOING_PIPE);
 
    pipe_pack.clearPacket();
-   
+
    pipe_pack << (unsigned long)(ipToIcq(pack.from_ip))
              << (unsigned long)(pack.from_port)
 	     << (unsigned long)retry_num
@@ -348,7 +348,7 @@ void event_send_packet(Packet &pack, unsigned long to_uin,
    /* preparing temp packet for pipe socket */
    memcpy(pipe_pack.nextData, pack.buff, pack.sizeVal);
    pipe_pack.sizeVal += pack.sizeVal;
-   
+
    /* send packet to pipe socket */
    sendto(outgoing_pipe_fd[P_WRIT], pipe_pack.buff, pipe_pack.sizeVal, 0, 0, 0);
 
@@ -359,16 +359,16 @@ void event_send_packet(Packet &pack, unsigned long to_uin,
 /**************************************************************************/
 /* Write epacket event record to event pipe.			          */
 /**************************************************************************/
-void epacket_send_event(event_pack &pack) 
+void epacket_send_event(event_pack &pack)
 {
    /* preparing temp packet for pipe socket */
    pipe_pack.clearPacket();
-   
+
    pipe_pack << (unsigned  long)pack.mtype
              << (unsigned  long)pack.uin_number
 	     << (unsigned  long)pack.ack_stamp
 	     << (unsigned short)pack.ttl;
-   
+
    /* send packet to pipe socket */
    sendto(epacket_pipe_fd[P_WRIT], pipe_pack.buff, pipe_pack.sizeVal, 0, 0, 0);
 }
@@ -377,17 +377,17 @@ void epacket_send_event(event_pack &pack)
 /**************************************************************************/
 /* Write euser event record to event pipe.			          */
 /**************************************************************************/
-void euser_send_event(event_pack &pack) 
+void euser_send_event(event_pack &pack)
 {
    /* preparing temp packet for pipe socket */
    pipe_pack.clearPacket();
-   
+
    pipe_pack << (unsigned  long)pack.mtype
              << (unsigned  long)pack.uin_number
 	     << (unsigned  long)pack.ack_stamp
 	     << (unsigned short)pack.ttl
 	     << (unsigned  long)pack.ip;
-   
+
    /* send packet to pipe socket */
    sendto(euser_pipe_fd[P_WRIT], pipe_pack.buff, pipe_pack.sizeVal, 0, 0, 0);
 }
@@ -396,15 +396,15 @@ void euser_send_event(event_pack &pack)
 /**************************************************************************/
 /* Write to defragment pipe.						  */
 /**************************************************************************/
-void defrag_send_pipe(defrag_pack &pack) 
+void defrag_send_pipe(defrag_pack &pack)
 {
    /* preparing temp packet for pipe socket */
    pipe_pack.clearPacket();
-   
+
    pipe_pack << (unsigned  long)pack.mtype
              << (unsigned  long)pack.uin_num
 	     << (unsigned short)pack.seq;
-   
+
    /* send packet to pipe socket */
    sendto(defrag_pipe_fd[P_WRIT], pipe_pack.buff, pipe_pack.sizeVal, 0, 0, 0);
 }
@@ -419,7 +419,7 @@ void actions_send_packet(Packet &pack)
    memcpy(pipe_pack.buff, pack.buff, pack.sizeVal);
    pipe_pack.sizeVal = pack.sizeVal;
    pipe_pack.append();
-   
+
    /* send packet to pipe socket */
    sendto(actions_pipe_fd[P_WRIT], pipe_pack.buff, pipe_pack.sizeVal, 0, 0, 0);
 }
@@ -435,13 +435,13 @@ void wwp_socket_init()
      LOG_SYS(0,("ERROR: Can't create WWP unix domain socket...\n"));
      exit(EXIT_ERROR_FATAL);
   }
-  
+
   bzero((char *)&wp_serv_addr, sizeof(wp_serv_addr));
   wp_serv_addr.sun_family = AF_UNIX;
   snprintf(wp_serv_addr.sun_path, sizeof(wp_serv_addr.sun_path)-1,
            lp_wwp_socketname());
-	   
-  wp_saddrlen = sizeof(wp_serv_addr.sun_family) + 
+
+  wp_saddrlen = sizeof(wp_serv_addr.sun_family) +
                        strlen(wp_serv_addr.sun_path)+1;
 
   if (unlink(wp_serv_addr.sun_path) == 0)
@@ -454,7 +454,7 @@ void wwp_socket_init()
      LOG_SYS(0, ("ERROR: Can't bind WWP socket to special file...\n"));
      exit(EXIT_ERROR_FATAL);
   }
-  
+
   chmod(wp_serv_addr.sun_path, 0666);
 }
 

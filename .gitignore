@@ -12,6 +12,7 @@
 *.o
 *.so
 config.log
+config.status
 IServerd.spec
 Makefile
 config.status

@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>ICQ SSI authorization sequence</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;OSCAR sequences&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="description"></a>&nbsp;ICQ SSI authorization sequence description</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+There is "authorization" term in ICQ service. Every ICQ user can set its 
+authorization flag to protect himself against undesirable talks. If user 
+has enabled its authorization flag another user can't add it to contact 
+list without permission (and theoretically can't get its presence notices). 
+ICQ clones use <a href="families.html#f0003">BLM service</a> to get presence 
+for users they can't add to SSI. Here is the sequence to get permission from 
+user to add it to contact list:
+<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Correct SSI auth sequence (user #1 adds user #2)</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_13_11.html">SNAC(13,11)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 starts SSI transaction</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_13_08.html">SNAC(13,08)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 sends SSI add user #2 request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_13_12.html">SNAC(13,12)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 ends SSI transaction</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_0e.html">SNAC(13,0E)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server reply with error 0x0E (auth required for user #2)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 colspan=3 height=10 valign=middle></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_14.html">SNAC(13,14)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 sends SSI future auth to user #2 (optional)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_18.html">SNAC(13,18)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 sends SSI authorization request to user #2</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_13_11.html">SNAC(13,11)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 starts SSI transaction</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_08.html">SNAC(13,08)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 sends add user request with TLV(0x66)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=120 valign=top>&nbsp;&nbsp;<b><a href="snac_13_12.html">SNAC(13,12)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User #1 ends SSI transaction</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_0e.html">SNAC(13,0E)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server reply: operation finished succesfully</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 colspan=3 height=25 valign=middle><font size=2>&nbsp;&nbsp;Some time later... (after user #2 send authorization reply to user #1)</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_1B.html">SNAC(13,1B)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends SSI auth reply received from user #2</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_11.html">SNAC(13,11)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server starts transaction to edit user ssi local copy</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_09.html">SNAC(13,09)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server remove TLV(0x66) from contact awaiting auth</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_13_12.html">SNAC(13,12)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server ends transaction</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 colspan=3 height=25 valign=middle><font size=2>&nbsp;&nbsp;Now client should move user #2 to contact list</font></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_03_0b.html">SNAC(03,0B)</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Presense notification for user #2 (if user #2 online)</td>
+</tr>
+
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr>
+<td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

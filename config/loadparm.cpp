@@ -53,7 +53,7 @@ typedef struct
    char *sztranslate_tbl;
    char *szact_config;
    char *szwwp_filename;
-	
+
    int   max_log_size;
    BOOL  timestamp_log;
    BOOL  pid_in_logs;
@@ -91,7 +91,7 @@ typedef struct
    char *szdb_users;
 
    char *szinfo_pass;
-    
+
    BOOL enable_watchdog;
    BOOL degradated_mode;
    BOOL restrict2luip;
@@ -110,7 +110,7 @@ typedef struct
    int v3_max_msgsize;
    int v3_packet_mtu;
 
-   BOOL v5_enabled;	
+   BOOL v5_enabled;
    BOOL v5_reg_enabled;
    BOOL v5_autoregister;
    int v5_retries;
@@ -120,7 +120,7 @@ typedef struct
    int v5_max_msgsize;
    int v3_split_order;
 
-   BOOL v7_enabled;  
+   BOOL v7_enabled;
    BOOL v7_reg_enabled;
    BOOL v7_create_groups;
    BOOL v7_enable_import;
@@ -136,25 +136,25 @@ typedef struct
    int  v7_max_ssi_ignore;
    int  v7_max_ssi_nonicq;
    int  v7_max_ssi_avatars;
-   
+
    int  v7_dmax_channel;
    int  v7_dmax_msgsize;
    int  v7_dmax_sevil;
    int  v7_dmax_revil;
    int  v7_dmin_msg_interval;
-   
+
    char *szv7_proto_config;
    char *szv7_bos_address;
    BOOL v7_accept_concurent;
    BOOL v7_direct_v3_connect;
    BOOL v7_direct_v5_connect;
    char *szv7_table_charset;
-   
+
    char *szInclude;
    int   server_mode;
    int   deplist_vers;
    int   externals_num;
-  	
+
 } global;
 
 static global Globals;
@@ -165,7 +165,7 @@ typedef struct
    BOOL valid;
    BOOL autoloaded;
    char *szService;
-   BOOL *copymap;    
+   BOOL *copymap;
    char dummy[3];		/* for alignment */
 
 }  service;
@@ -192,10 +192,10 @@ static BOOL bGlobalOnly = True;
 
 BOOL handle_include(char *pszParmValue, char **ptr);
 
-static struct enum_list enum_server_mode[] = { {MOD_STANDALONE, "STANDALONE"}, 
+static struct enum_list enum_server_mode[] = { {MOD_STANDALONE, "STANDALONE"},
 {MOD_DAEMON, "DAEMON"}, {-1, NULL} };
 
-static struct enum_list enum_split_order[] = { {ORDER_FORWARD, "FORWARD"}, 
+static struct enum_list enum_split_order[] = { {ORDER_FORWARD, "FORWARD"},
 {ORDER_BACKWARD, "BACKWARD"}, {ORDER_DEFAULT, NULL} };
 
 /* note that we do not initialise the defaults union - */
@@ -215,13 +215,13 @@ static struct parm_struct parm_table[] =
    {"Actions config file",      P_STRING,  P_GLOBAL, &Globals.szact_config, NULL, NULL, 0},
    {"WWP socket filename",	P_STRING,  P_GLOBAL, &Globals.szwwp_filename, NULL, NULL, 0},
    {"Server mode",		P_ENUM,	   P_GLOBAL, &Globals.server_mode, NULL, enum_server_mode, 0},
-   {"Admin email",      	P_STRING,  P_GLOBAL, &Globals.szadmin_email, NULL, NULL, 0},	
+   {"Admin email",      	P_STRING,  P_GLOBAL, &Globals.szadmin_email, NULL, NULL, 0},
    {"Timestamp logs",   	P_BOOL,    P_GLOBAL, &Globals.timestamp_log, NULL, NULL, 0},
-   {"Log process pid",  	P_BOOL,    P_GLOBAL, &Globals.pid_in_logs, NULL, NULL, 0},	
-   {"Restrict access to LUIP",  P_BOOL,    P_GLOBAL, &Globals.restrict2luip, NULL, NULL, 0},	
-   	
-   {"Append logs",      	P_BOOL,    P_GLOBAL, &Globals.append_log, NULL, NULL, 0},	
-   {"Realtime online db",      	P_BOOL,    P_GLOBAL, &Globals.realtime_odb, NULL, NULL, 0},	
+   {"Log process pid",  	P_BOOL,    P_GLOBAL, &Globals.pid_in_logs, NULL, NULL, 0},
+   {"Restrict access to LUIP",  P_BOOL,    P_GLOBAL, &Globals.restrict2luip, NULL, NULL, 0},
+
+   {"Append logs",      	P_BOOL,    P_GLOBAL, &Globals.append_log, NULL, NULL, 0},
+   {"Realtime online db",      	P_BOOL,    P_GLOBAL, &Globals.realtime_odb, NULL, NULL, 0},
    {"Log umask",        	P_INTEGER, P_GLOBAL, &Globals.lumask, NULL, NULL, 0},
    {"Maxlog size",      	P_INTEGER, P_GLOBAL, &Globals.max_log_size, NULL, NULL, 0},
    {"Debug level",      	P_INTEGER, P_GLOBAL, &DEBUGLEVEL,  NULL, NULL, 0},
@@ -230,29 +230,29 @@ static struct parm_struct parm_table[] =
    {"Enable watchdog",      	P_BOOL,    P_GLOBAL, &Globals.enable_watchdog, NULL, NULL, 0},
    {"Start without RDBMS", 	P_BOOL,    P_GLOBAL, &Globals.degradated_mode, NULL, NULL, 0},
    {"Enable actions",           P_BOOL,    P_GLOBAL, &Globals.enable_actions, NULL, NULL, 0},
-   
+
    {"Bind on all interfaces",   P_BOOL,    P_GLOBAL, &Globals.all_ifaces, NULL, NULL, 0},
-   
+
    {"Watchdog timeout",       	P_INTEGER, P_GLOBAL, &Globals.watchdog_timeout, NULL, NULL, 0},
 
    {"Var dir path",     	P_STRING,  P_GLOBAL, &Globals.szvar_path, NULL, NULL, 0},
    {"Pid file path",    	P_STRING,  P_GLOBAL, &Globals.szpid_path, NULL, NULL, 0},
-      
+
    {"Max childs",       	P_INTEGER, P_GLOBAL, &Globals.max_childs, NULL, NULL, 0},
    {"Min childs",       	P_INTEGER, P_GLOBAL, &Globals.min_childs, NULL, NULL, 0},
-   	
+
    {"Database user",    	P_STRING,  P_GLOBAL, &Globals.szdb_user, NULL, NULL, 0},
    {"Database password",	P_STRING,  P_GLOBAL, &Globals.szdb_pass, NULL, NULL, 0},
-   {"Database addr",    	P_STRING,  P_GLOBAL, &Globals.szdb_addr, NULL, NULL, 0},	
+   {"Database addr",    	P_STRING,  P_GLOBAL, &Globals.szdb_addr, NULL, NULL, 0},
    {"Database port",   		P_STRING,  P_GLOBAL, &Globals.szdb_port, NULL, NULL, 0},
    {"Users db name",    	P_STRING,  P_GLOBAL, &Globals.szdb_users, NULL, NULL, 0},
-   	
+
    {"Info password",    	P_STRING,  P_GLOBAL, &Globals.szinfo_pass, NULL, NULL, 0},
    {"Vacuumdb timeout", 	P_INTEGER, P_GLOBAL, &Globals.vacuum_timeout, NULL, NULL, 0},
    {"Validate-cache timeout", 	P_INTEGER, P_GLOBAL, &Globals.cache_timeout, NULL, NULL, 0},
-   {"Defrag db check period", 	P_INTEGER, P_GLOBAL, &Globals.defrag_timeout, NULL, NULL, 0}, 
-   {"Online db check period", 	P_INTEGER, P_GLOBAL, &Globals.online_timeout, NULL, NULL, 0}, 
-      
+   {"Defrag db check period", 	P_INTEGER, P_GLOBAL, &Globals.defrag_timeout, NULL, NULL, 0},
+   {"Online db check period", 	P_INTEGER, P_GLOBAL, &Globals.online_timeout, NULL, NULL, 0},
+
    {"V5 proto enabled", 	P_BOOL,    P_GLOBAL, &Globals.v5_enabled, NULL, NULL, 0},
    {"V5 max retries",   	P_INTEGER, P_GLOBAL, &Globals.v5_retries, NULL, NULL, 0},
    {"V5 max timeout",   	P_INTEGER, P_GLOBAL, &Globals.v5_timeout, NULL, NULL, 0},
@@ -293,8 +293,8 @@ static struct parm_struct parm_table[] =
    {"V7 max visible size",    	P_INTEGER, P_GLOBAL, &Globals.v7_max_visible_size, NULL, NULL, 0},
    {"V7 max invisible size",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_invisible_size, NULL, NULL, 0},
    {"V7 max ssi groups",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_ssi_groups, NULL, NULL, 0},
-   {"V7 max ssi ignore",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_ssi_ignore, NULL, NULL, 0},   
-   {"V7 max ssi non-icq",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_ssi_nonicq, NULL, NULL, 0},   
+   {"V7 max ssi ignore",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_ssi_ignore, NULL, NULL, 0},
+   {"V7 max ssi non-icq",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_ssi_nonicq, NULL, NULL, 0},
    {"V7 max ssi avatars",   	P_INTEGER, P_GLOBAL, &Globals.v7_max_ssi_avatars, NULL, NULL, 0},
 
    {"V7 default max channel",  	P_INTEGER, P_GLOBAL, &Globals.v7_dmax_channel, NULL, NULL, 0},
@@ -328,7 +328,7 @@ void standard_sub_basic(char *str)
    for (s=str; (p=strchr(s, '%'));s=p)
    {
       int l = sizeof(pstring) - (int)(p-str);
-		
+
       switch (*(p+1))
       {
          case 'I' : string_sub(p,"%I", client_addr(),l); break;
@@ -337,7 +337,7 @@ void standard_sub_basic(char *str)
 
          default  : p+=2; break;
       }
-   } 
+   }
 #endif
 
 }
@@ -349,13 +349,13 @@ void subst_post_register(char *str, unsigned long uin, char* passwd)
 {
    char *p, *s;
    char suin[32];
-	
+
    snprintf(suin, 32, "%lu", uin);
-	
+
    for (s=str; (p=strchr(s, '%'));s=p)
    {
       int l = sizeof(pstring) - (int)(p-str);
-	
+
       switch (*(p+1))
       {
          case 'U' : string_sub(p,"%U%", suin,l); break;
@@ -364,7 +364,7 @@ void subst_post_register(char *str, unsigned long uin, char* passwd)
 
          default  : p+=2; break;
       }
-   } 
+   }
 }
 
 
@@ -405,7 +405,7 @@ void init_globals(void)
 
    string_set(&Globals.szv3_admin_notes, "There are no notes... :(");
    string_set(&Globals.szv3_post_registration, "Registration complete...");
-	
+
    Globals.default_ping     	= DEFAULT_PING_TIME;
    Globals.cache_timeout    	= VALIDATE_CACHE_TIMEOUT;
    Globals.vacuum_timeout 	= VACUUM_DB_TIMEOUT;
@@ -418,7 +418,7 @@ void init_globals(void)
    Globals.enable_actions  	= False;
    Globals.all_ifaces	   	= False;
    Globals.restrict2luip	= False;
-	
+
    Globals.v3_enabled       	= True;
    Globals.v3_pingtime      	= V3_PING_TIME;
    Globals.v3_max_search    	= V3_MAX_SEARCH;
@@ -433,7 +433,7 @@ void init_globals(void)
    Globals.pid_in_logs      	= False;
    Globals.shared_mem_size      = 512000;
    Globals.realtime_odb		= False;
-   
+
    Globals.v5_enabled       	= True;
    Globals.v5_reg_enabled   	= True;
    Globals.v5_autoregister  	= False;
@@ -469,7 +469,7 @@ void init_globals(void)
    Globals.v7_dmax_sevil	= 999;
    Globals.v7_dmax_revil	= 999;
    Globals.v7_dmin_msg_interval	= 0;
-   
+
    Globals.szdb_user        	= NULL;
    Globals.szdb_pass        	= NULL;
    Globals.szdb_addr        	= NULL;
@@ -502,7 +502,7 @@ TALLOC_CTX *lp_talloc;
 void init_translate()
 {
    char temp[128];
-   
+
    snprintf(temp, 128, "%s/%s", lp_translate_file(), lp_translate_tbl());
    ITrans.setTranslationMap(temp);
 }
@@ -531,7 +531,7 @@ char *lp_string(const char *s)
    if (!lp_talloc)  lp_talloc = talloc_init();
 
    /* leave room for substitution */
-   ret = (char *)talloc(lp_talloc, len + 100);	
+   ret = (char *)talloc(lp_talloc, len + 100);
 
    if (!ret) return NULL;
 
@@ -710,7 +710,7 @@ void free_service(service * pservice)
       free(pservice->copymap);
       pservice->copymap = NULL;
    }
-   
+
    for (i = 0; parm_table[i].label; i++)
       if ((parm_table[i].type == P_STRING) && parm_table[i].pclass == P_LOCAL)
          string_free((char **)(((char *)pservice) +
@@ -844,7 +844,7 @@ BOOL set_boolean(BOOL *pb, char *pszParmValue)
        strwicmp(pszParmValue, "0") == 0) *pb = False;
    else
    {
-      LOG_SYS(0, ("Error: Bad boolean in config file: \"%s\".\n", 
+      LOG_SYS(0, ("Error: Bad boolean in config file: \"%s\".\n",
                    pszParmValue));
 
 		bRetval = False;
@@ -876,7 +876,7 @@ int getservicebyname(char *pszServiceName, service * pserviceDest)
 /* Copy a service structure to another                                      */
 /* If pcopymapDest is NULL then copy all fields                             */
 /****************************************************************************/
-void copy_service(service * pserviceDest, service * pserviceSource, 
+void copy_service(service * pserviceDest, service * pserviceSource,
 		  BOOL *pcopymapDest)
 {
    int i;
@@ -991,7 +991,7 @@ BOOL lp_file_list_changed(void)
    struct file_lists *f = file_lists;
 
    DEBUG(6, ("lp_file_list_changed\n"));
-	
+
    while (f)
    {
       pstring n2;
@@ -1101,7 +1101,7 @@ BOOL lp_do_parameter(int snum, char *pszParmName, char *pszParmValue)
    int parmnum, i;
    void *parm_ptr = NULL;	/* where we are going to store the result */
    void *def_ptr = NULL;
-   
+
    parmnum = map_parameter(pszParmName);
 
    if (parmnum < 0)
@@ -1123,7 +1123,7 @@ BOOL lp_do_parameter(int snum, char *pszParmName, char *pszParmValue)
       {
          return (True);
       }
-      
+
       parm_ptr = ((char *)pSERVICE(snum)) + PTR_DIFF(def_ptr, &sDefault);
    }
 
@@ -1364,11 +1364,11 @@ BOOL lp_load(char *pszFname, BOOL global_only, BOOL save_defaults,
    bGlobalOnly = global_only;
    pstrcpy(n2, pszFname);
    standard_sub_basic(n2);
-   
+
    iServiceIndex = -1;
    bRetval = pm_process(n2, do_section, do_parameter);
    DEBUG(4, ("pm_process() returned %s\n", BOOLSTR(bRetval)));
-	
+
    config_loaded = time(NULL);
    if (bRetval) if (iServiceIndex >= 0) bRetval = service_ok(iServiceIndex);
    bLoaded = True;
@@ -1416,27 +1416,27 @@ BOOL handle_v3_post_reg(char *pszParmValue, char **ptr)
    add_to_file_list(fname);
    string_set(ptr, fname);
 
-   if (file_exist(fname, NULL)) 
+   if (file_exist(fname, NULL))
    {
       fsize = get_file_size(fname);
       if (fsize > 0)
       {
          if (fsize > 512) fsize = 512;
 	 post_file = fopen(fname, "r");
-	       
+
 	 string_free(&Globals.szv3_post_registration);
 	 Globals.szv3_post_registration = (char*)malloc(fsize+1);
 	 fsize = fread(Globals.szv3_post_registration, 1, fsize, post_file);
 	 fclose(post_file);
-	       
+
 	 Globals.szv3_post_registration[fsize] = 0;
-	       
+
 	 ITrans.translateToClient(Globals.szv3_post_registration);
-	       
+
 	 DEBUGADD(2, ("Reading data from post-registration file: %s\n", fname));
 
          return(True);
-      }    
+      }
    }
 
    LOG_SYS(0, ("WARNING: Can't find post-registration file %s\n", fname));
@@ -1451,7 +1451,7 @@ BOOL handle_v3_post_reg(char *pszParmValue, char **ptr)
 BOOL handle_translate(char *pszParmValue, char **ptr)
 {
    char temp[128];
-   
+
    snprintf(temp, 128, "%s/%s", Globals.sztranslate_path, pszParmValue);
    ITrans.setTranslationMap(temp);
    string_set(&Globals.sztranslate_tbl, pszParmValue);
@@ -1472,27 +1472,27 @@ BOOL handle_v3_adm_notes(char *pszParmValue, char **ptr)
    add_to_file_list(fname);
    string_set(ptr, fname);
 
-   if (file_exist(fname, NULL)) 
+   if (file_exist(fname, NULL))
    {
       fsize = get_file_size(fname);
       if (fsize > 0)
       {
          if (fsize > 512) fsize = 512;
 	 adm_file = fopen(fname, "r");
-	      
+
 	 string_free(&Globals.szv3_admin_notes);
 	 Globals.szv3_admin_notes = (char*)malloc(fsize+1);
 	 fsize = fread(Globals.szv3_admin_notes, 1, fsize, adm_file);
 	 fclose(adm_file);
-	       
+
 	 Globals.szv3_admin_notes[fsize] = 0;
-	       
+
 	 ITrans.translateToClient(Globals.szv3_admin_notes);
-	       
+
 	 DEBUGADD(2, ("Reading data from v3_admin notes: %s\n", fname));
 
          return(True);
-      }    
+      }
    }
 
    LOG_SYS(0, ("WARNING: Can't find V3 admin notes file %s\n", fname));
@@ -1512,7 +1512,7 @@ BOOL handle_include(char *pszParmValue, char **ptr)
    standard_sub_basic(fname);
    string_set(ptr, fname);
 
-   if (file_exist(fname, NULL)) 
+   if (file_exist(fname, NULL))
    {
       DEBUGADD(2, ("Grab parameters from includes: %s\n", fname));
       return (pm_process(fname, do_section, do_parameter));
@@ -1539,9 +1539,9 @@ void usage()
       printf("\t-p <port>             Listen on the specified port\n");
       printf("\n");
    }
-   
+
    if (process_role == ROLE_DUSER)
-   {   
+   {
       printf("Usage: disconnect -r uin [-c config] [-h?V]\n");
       printf("\t-r <uin>              User to disconnect from server\n");
       printf("\t-?(h)                 Print usage\n");
@@ -1549,9 +1549,9 @@ void usage()
       printf("\t-c <config name>      Set the config filename\n");
       printf("\n");
    }
-   
+
    if (process_role == ROLE_STATUS)
-   {   
+   {
       printf("Usage: server_status [-c config] [-lh?V]\n");
       printf("\t-?(h)                 Print usage\n");
       printf("\t-V                    Print version\n");
@@ -1559,7 +1559,7 @@ void usage()
       printf("\t-l                    Print process list\n");
       printf("\n");
    }
-   
+
    exit(EXIT_NORMAL);
 }
 
@@ -1569,8 +1569,8 @@ void usage()
 /**************************************************************************/
 void process_command_line_opt(int argc, char **argv)
 {
-   char         flag;          
-   extern char  *optarg;       
+   char         flag;
+   extern char  *optarg;
 
     /* OPTSTR  "loVd:c:p:" */
     while ((flag = getopt(argc, argv, OPTSTR)) != (int)EOF)
@@ -1581,14 +1581,14 @@ void process_command_line_opt(int argc, char **argv)
             case 'p':
 		Globals.udp_port = atoi(optarg);
                 break;
-	
+
 	    case 'r':
 	        if (process_role == ROLE_DUSER)
 		{
 		   deluser = atoul(optarg);
 		   break;
 		}
-	    
+
 	    /* debug log filename */
 	    case 'd':
 		string_set(&Globals.szdbglog_path, optarg);
@@ -1599,17 +1599,17 @@ void process_command_line_opt(int argc, char **argv)
 		string_set(&Globals.szconfig_path, optarg);
 		break;
 
-	    /* if we should overwrite logfiles */	
+	    /* if we should overwrite logfiles */
             case 'o':
 		Globals.append_log = False;
                 break;
-	    
+
 	    /* version request */
             case 'V':
 		printf("Iserverd version: %s\n\n", Iversion);
 		exit(EXIT_NORMAL);
                 break;
-	    
+
 	    case 'l':
 	        Globals.proclist = True;
 		break;
@@ -1619,8 +1619,8 @@ void process_command_line_opt(int argc, char **argv)
 	    case 'h':
             default:  usage();
         }
-    }   
-    
+    }
+
     if ((process_role == ROLE_DUSER) && (deluser == 0)) usage();
 }
 

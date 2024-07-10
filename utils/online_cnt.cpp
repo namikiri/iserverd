@@ -40,7 +40,7 @@ void cgi_exit()
 {
   printf ("Content-type: text/html\n");  printf ("Pragma: No-cache\n\n");
   printf ("N/A\n");
-  
+
   PQfinish(dbconn);
 }
 
@@ -51,22 +51,22 @@ void cgi_exit()
 void usersdb_connect()
 {
    char	    *pghost, *pgport,  *pgoptions, *pgtty;
-   char	    *dbName, *dblogin, *dbpassw;	    
+   char	    *dbName, *dblogin, *dbpassw;
 
    pghost  = "127.0.0.1";	/* address of db server if NULL - unix */
    pgport  = "5432";		/* port of the backend */
    dbName  = "users_db";	/* database name */
    dblogin = "iserverd";	/* database user */
    dbpassw = "default";		/* database password */
-   
+
    pgoptions = NULL;		/* special options for backend server */
    pgtty     = NULL;		/* debugging tty for the backend server */
 
 				/* make a connection to the database */
-   dbconn = PQsetdbLogin(pghost, pgport, pgoptions, pgtty, dbName, 
+   dbconn = PQsetdbLogin(pghost, pgport, pgoptions, pgtty, dbName,
                                dblogin, dbpassw);
 
-   if (PQstatus(dbconn) == CONNECTION_BAD) cgi_exit(); 
+   if (PQstatus(dbconn) == CONNECTION_BAD) cgi_exit();
 }
 
 
@@ -75,7 +75,7 @@ void usersdb_connect()
 /**************************************************************************/
 int main(int argc, char **argv)
 {
-  unsigned long number; 
+  unsigned long number;
   PGresult *res;
 
   usersdb_connect();
@@ -90,17 +90,17 @@ int main(int argc, char **argv)
   if (PQntuples(res) > 0)
   {
      char **valid = NULL;
-     number = strtoul(PQgetvalue(res, 0, 0), valid, 10); 
+     number = strtoul(PQgetvalue(res, 0, 0), valid, 10);
      PQclear(res);
      printf ("Content-type: text/html\n");     printf ("Pragma: No-cache\n\n");
      printf ("%lu", number);
-     
+
   }
   else
   {
      cgi_exit();
   }
-  
+
   PQfinish(dbconn);
 }
 

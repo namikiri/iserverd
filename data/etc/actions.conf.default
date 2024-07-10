@@ -1,0 +1,24 @@
+## This is a sample actions config file. By default enabled 
+## only one action - send email to admin on registration request
+
+# First come system variables. Do not delete them.
+# -------------------------------------------------------------------
+
+# sendmail program (slow but it does aliasing)
+var MAIL_PROGRAM	"/sbin/sendmail -FIServerd -odi -oem -oi -t";
+var DATE_IN_MAIL	 True;
+var AUTO_DISABLE_RULE	 True;
+var ENABLE_DB_LOOKUPS	 True;
+var MSG_SENDER_UIN	 1001;
+
+# -------------------------------------------------------------------
+
+## first of all we should declare necessary variables
+var ADMIN_EMAIL    "root@localhost";
+
+## We need notification on new register_requests
+event Registration {
+
+    mail to $ADMIN_EMAIL using "/etc/iserverd/texts/reg_mess.ptt";
+    
+};

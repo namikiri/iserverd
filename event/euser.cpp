@@ -37,11 +37,11 @@
 void process_euser()
 {
    struct event_pack epacket;
-  
+
    usersdb_connect();	/* connect to database server  */
    db_online_clear();	/* clear online_users table    */
    db_contacts_clear(); /* clear online_contacts table */
-      
+
    evnt_fds[0].fd      = euser_pipe_fd[P_READ];
    evnt_fds[0].events  = POLLIN;
    evnt_fds[0].revents = 0;
@@ -55,13 +55,13 @@ void process_euser()
       /* block on sockets array for infinity time */
       if (poll(evnt_fds, 1, -1) < 1)
       {
-         if (errno != EINTR) 
+         if (errno != EINTR)
          {
             LOG_SYS(10, ("We have problem with poll(): %s\n", strerror(errno)));
 	    exit(EXIT_ERROR_FATAL);
          }
       }
-    
+
       /* check if we have event notification in pipe */
       if (isready_data2(0))
       {
@@ -78,8 +78,8 @@ void process_euser()
 void euser_process_event(event_pack &inpack)
 {
     unsigned long ip;
-    
-    DEBUG(200, ("EUSER EVENT: mtype: %lu, uin: %lu, stamp: %lu, ttl: %d\n", 
+
+    DEBUG(200, ("EUSER EVENT: mtype: %lu, uin: %lu, stamp: %lu, ttl: %d\n",
 	     inpack.mtype, inpack.uin_number, inpack.ack_stamp, inpack.ttl));
 
     switch (inpack.mtype)
@@ -92,7 +92,7 @@ void euser_process_event(event_pack &inpack)
 
 	     /* first we should find out client ip address */
 	     ip = cache_ip_lookup(inpack.uin_number);
-	     send_event2ap(papack, ACT_OFFLINE, inpack.uin_number, 0, ip, 0, 
+	     send_event2ap(papack, ACT_OFFLINE, inpack.uin_number, 0, ip, 0,
 		           longToTime(time(NULL)), "");
 	     break;
 	case MESS_UPDATE:
@@ -104,7 +104,7 @@ void euser_process_event(event_pack &inpack)
 	     online_cache_decrement();
 	     scheduler_timer();
 	     break;
-	     
+
 	default: break;
     }
 }
@@ -138,21 +138,21 @@ void online_cache_decrement()
    unsigned long temp_uin;
    unsigned long overhead, processed_num;
    unsigned long uptime;
-   
+
    /* shm array may contain holes (!) */
    overhead = max_user_cnt;
    processed_num = 0;
 
    DEBUG(300, ("Decrement user's cache called...\n"));
-  
+
    for (int i=0; i<(int)overhead; i++)
-   {      
+   {
       temp_user = &(usr_shm[i]);
 
       if (processed_num >= ipc_vars->online_usr_num) break;
 
       /* check for hole */
-      if (temp_user->uin != 0) 
+      if (temp_user->uin != 0)
       {
          processed_num++;
       }
@@ -160,22 +160,22 @@ void online_cache_decrement()
       {
          continue;
       }
-      
+
       if (temp_user->ttl != 0)
       {
          temp_user->ttlv--;
-	 
-         DEBUG(450, ("Decrementing ttl: uin=%lu, ttl=%lu, idx=%d\n", 
+
+         DEBUG(450, ("Decrementing ttl: uin=%lu, ttl=%lu, idx=%d\n",
 	   	      temp_user->uin, temp_user->ttlv, i));
       }
-       
-      if ((temp_user->ttlv < 1) && 
+
+      if ((temp_user->ttlv < 1) &&
           (temp_user->uin != 0) &&
 	  (temp_user->ttl != 0))
       {
-	   
+
          temp_uin = temp_user->uin;
-	   
+
          /* calculate approx user uptime */
 	 uptime = (unsigned long)(time(NULL) - longToTime(temp_user->uptime));
 
@@ -203,16 +203,16 @@ void online_cache_decrement()
 /* cache and database and init lastupdate value in online user record	  */
 /**************************************************************************/
 void move_user_online(struct online_user &user)
-{  
+{
     send_online2cache( user.uin, user.ttl, ipToIcq(user.ip) );
     db_users_touch( user );
     broadcast_online( user );
     db_defrag_delete( user.uin );
-    
-    DEBUG(100, ("User %lu moved online: [ttl=%ld,ltime=%s]\n", 
+
+    DEBUG(100, ("User %lu moved online: [ttl=%ld,ltime=%s]\n",
 		user.uin, user.ttl, time2str(longToTime(user.lutime))));
-    
-    send_event2ap(papack, ACT_ONLINE, user.uin, user.status, ipToIcq(user.ip), 
+
+    send_event2ap(papack, ACT_ONLINE, user.uin, user.status, ipToIcq(user.ip),
                   user.protocol, longToTime(user.lutime), "");
 
 }
@@ -239,13 +239,13 @@ void move_user_offline(unsigned long uin)
 void send_offline2cache(unsigned long uin)
 {
    struct event_pack pmessage;
-  
+
    pmessage.mtype      = MESS_OFFLINE;
    pmessage.uin_number = uin;
    pmessage.ack_stamp  = 0;
    pmessage.ttl	       = 0;
    pmessage.ip	       = 0;
-  
+
    euser_send_event(pmessage);
 }
 
@@ -257,13 +257,13 @@ void send_offline2cache(unsigned long uin)
 void send_online2cache(unsigned long uin, unsigned short ttl, unsigned long ip)
 {
    struct event_pack pmessage;
-  
+
    pmessage.mtype      = MESS_ONLINE;
    pmessage.uin_number = uin;
    pmessage.ack_stamp  = 0;
    pmessage.ttl	       = ttl;
    pmessage.ip	       = ip;
-   
+
    euser_send_event(pmessage);
 }
 
@@ -275,15 +275,15 @@ void send_online2cache(unsigned long uin, unsigned short ttl, unsigned long ip)
 void send_update2cache(unsigned long uin, unsigned short ttl)
 {
    struct event_pack pmessage;
-   
+
    pmessage.mtype      = MESS_UPDATE;
    pmessage.uin_number = uin;
    pmessage.ack_stamp  = 0;
    pmessage.ttl	       = ttl;
    pmessage.ip	       = 0;
-  
+
    DEBUG(300, ("Trying to send update cmd to pipe: ttl=%d\n", pmessage.ttl));
-  
+
    euser_send_event(pmessage);
 }
 

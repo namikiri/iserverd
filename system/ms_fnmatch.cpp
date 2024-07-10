@@ -87,7 +87,7 @@ int ms_fnmatch(char *pattern, char *string)
    }
 
    if (! *n) return 0;
-	
+
    return -1;
 
 }

@@ -116,7 +116,7 @@ void create_new_users_table();
 BOOL check_and_fix_database(char *dbname, char *dbuser, char *dbpass, char *dbaddr, char *dbport);
 BOOL check_user_tbl(PGconn *dbconn, char *tbl_name, int fldnum);
 BOOL check_user_tbl2(PGconn *dbconn, char *tbl_name, int fldnum);
-BOOL create_user_tbl(PGconn *dbconn, char *cr_query);
+BOOL create_user_tbl(PGconn *dbconn, char *cr_query, char *t_name);
 BOOL grant_permissions(PGconn *dbconn, char *tbl_name, char *username);
 BOOL delete_user_tbl(PGconn *dbconn, char *tblname);
 

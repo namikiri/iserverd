@@ -1,0 +1,639 @@
+<html>
+<head>
+<title>Basic OSCAR information (Online userinfo block)</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td><b>
+<font color="white">&nbsp;Basic OSCAR information (Userinfo block)&nbsp;</font>
+</b></td><td width=40% align=right><b><font color="white">&nbsp;</font></b>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0><tr>
+<td><b><font size=2 color="white">&nbsp;
+<a name="b0001"></a>Online userinfo block&nbsp;</font></b></td>
+</tr></table>
+</td></tr><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td><td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Many usefull SNACs contain special block with online user information. This block 
+allways contain screenname (uin), warning level and number of TLVs in TLV chain. 
+TLV chain contain additional user information like DC info, status, user class, 
+idle time, online time, external ip address, account registration time, etc...
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Here is the list of SNACs that contain userinfo block: SNAC(03,0B), SNAC(04,07), 
+SNAC(0E,06), SNAC(01,0F), SNAC(01,10), SNAC(02,06), ... Most of them contain just 
+three TLVs: user class, idle time, online time. 
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Note that you may find TLV not listed here in userinfo block. If you have such 
+new TLV, please send it to author of this documentation. Here is the format of 
+the online userinfo block (all TLVs are optional):
+<br><br>
+
+<table width=620 cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=20></td><td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#FAFAFA>
+
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20></td>
+<td width=125>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>byte</td>
+<td width=5>&nbsp;</td>
+<td width=330>screenname (uin) length</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;xx ..</td>
+<td>&nbsp;</td>
+<td>ascii</td>
+<td>&nbsp;</td>
+<td>screenname (uin) string</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>warning level</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>number of tlvs in tlv-chain</td>
+</tr>
+</table>
+
+</td></tr><tr><td bgcolor=#FAFAFA>
+
+<!-- nested tlv(0x01) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x01) - user class <span >(nick flags)</span></td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324><a href="lists.html#user_class">User class</a></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x01) end-->
+
+<!-- nested tlv(0x02) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0 >
+<tr>
+<td width=125>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x02) - create time</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0 >
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324>create time (unix time_t format)</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x02) end-->
+
+<!-- nested tlv(0x03) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 03</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x03) - signon time</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324>signon time (unix time_t format)</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x03) end-->
+
+<!-- nested tlv(0x04) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0 >
+<tr>
+<td width=125>&nbsp;00 04</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x04) - idle time</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0 >
+<tr>
+<td width=125>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>idle time (in seconds)</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x04) end-->
+
+<!-- nested tlv(0x05) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 05</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x05) - account creation time <span><br>(member since)</span></td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324>time when this account was registered</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x05) end-->
+
+<!-- nested tlv(0x06) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 06</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x06) - user status [ICQ only]</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324><a href="lists.html#user_status">User status</a></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x06) end-->
+
+<!-- nested tlv(0x0A) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 0A</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x0A) - external ip addr [ICQ only]</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324>External ip address</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x0A) end-->
+
+<!-- nested tlv(0x0C) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 0C</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x0C) - user DC info [ICQ only]</td>
+</tr>
+<tr>
+<td>&nbsp;00 25</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=125>&nbsp;xx xx xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>dword</td>
+   <td width=5>&nbsp;</td>
+   <td width=324>DC internal ip address</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>DC tcp port</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx</td>
+   <td>&nbsp;</td>
+   <td>byte</td>
+   <td>&nbsp;</td>
+   <td><a href="lists.html#dc_type">DC type</a></td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>DC protocol version</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>DC auth cookie</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>Web front port</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 00 00 03</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>Client futures</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>last info update time</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>last ext info update time (i.e. icqphone status)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>last ext status update time (i.e. phonebook)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>unknown</td>
+   </tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x0C) end-->
+
+<!-- nested tlv(0x0D) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 0D</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x0D) - client capabilities list</td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx ..</td>
+<td width=5>&nbsp;</td>
+<td>CLSIDs</td>
+<td width=5>&nbsp;</td>
+<td width=324>Client <a href="capabilities.html">capabilities</a> list</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x0A) end-->
+
+<!-- nested tlv(0x0F) begin -->
+<table width=592 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=4></td></tr><tr><td width=20></td><td>
+<table width=564 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;00 0F</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=324>TLV.Type(0x0F) - <span>online time</span></td>
+</tr>
+<tr>
+<td>&nbsp;00 04</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=564 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=125>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=324>client online time (in seconds)</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+<!-- nested tlv(0x01) end-->
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=5>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

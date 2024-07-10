@@ -44,17 +44,17 @@ int tog_process(Packet &tpacket)
    if ((rresult = toutgoing_receive_packet(tpacket)) > 0)
    {
       /* packet processors can ack to close particular connection */
-      if (tpacket.sock_evt == SOCK_TERM) 
-      { 
-         DEBUG(50, ("tog_process, closing_connection (%lu, %lu)\n", 
+      if (tpacket.sock_evt == SOCK_TERM)
+      {
+         DEBUG(50, ("tog_process, closing_connection (%lu, %lu)\n",
                      tpacket.sock_hdl, tpacket.sock_rnd));
          close_socket(tpacket.sock_hdl, tpacket.sock_rnd);
          return(rresult);
       }
-   
+
       if (tpacket.sock_type == SAIM) flap_send_packet(tpacket);
    }
-   
+
    return(rresult);
 }
 
@@ -68,14 +68,14 @@ void udp_process(Packet &upacket)
    unsigned long uin_num, temp_stamp, lj;
 
    udp_receive_packet(upacket);
-   upacket.reset(); 
+   upacket.reset();
    upacket >> pversion;
 
    /* well, ack packets we should handle separately    */
    /* because we can process them in non-blocking mode */
    switch (pversion)
    {
-      case V3_PROTO: 
+      case V3_PROTO:
 
            upacket >> pcomm;
 
@@ -86,11 +86,11 @@ void udp_process(Packet &upacket)
               process_ack_event(uin_num, temp_stamp);
               return;
            }
-              
+
 	   break;
-	      
+
       case V5_PROTO:
-         
+
            V5Decrypt(upacket);
 	   upacket >> lj >> uin_num >> lj >> pcomm;
 
@@ -101,7 +101,7 @@ void udp_process(Packet &upacket)
               process_ack_event(uin_num, temp_stamp);
               return;
            }
-              
+
            break;
 
       case SYS_PROTO:
@@ -110,7 +110,7 @@ void udp_process(Packet &upacket)
            return;
 
    }
-   
+
    /* sanity check - to avoid spoofing */
    if (ipToIcq(upacket.from_ip) != 0)
    {
@@ -137,7 +137,7 @@ void wwp_process(Packet &wpacket)
 /* doesn't decrease during several seconds that needed special handling   */
 /**************************************************************************/
 void watchdog_check()
-{  
+{
    /* if (lp_watchdog_enabled()) */
    if (False)
    {
@@ -159,7 +159,7 @@ void watchdog_check()
       {
          DEBUG(300, ("WATCHDOG reset (old: %lu, inc: %lu, ipc: %lu)\n",
       	              old_counter, increm_num, ipc_vars->pack_in_queue));
- 	     
+
          watchdog_cnt = 0;
          increm_num   = 0;
          old_counter  = ipc_vars->pack_in_queue;
@@ -171,13 +171,13 @@ void watchdog_check()
          /* well, it is pity but we have hung :( */
          LOG_ALARM(0, ("WATCHDOG: Packet-processors hung detected\n"));
          LOG_ALARM(0, ("WATCHDOG: restarting child processes...\n"));
-	       
+
 	 block_signal(SIGCHLD);
-	 
+
          /* send signal to actions processor */
          send_event2ap(papack, ACT_PPHUNG, 0, 0, 0, 0, longToTime(time(NULL)), "");
          sleep(1);
-			     
+
          exit_ok      = False;
          killpg(0, SIGINT); sleep(3);
          exit_ok      = True;
@@ -185,7 +185,7 @@ void watchdog_check()
          watchdog_cnt = 0;
 	 old_counter  = ipc_vars->pack_in_queue;
 	 old_time     = timeToLong(time(NULL));
-	 
+
 	 unblock_signal(SIGCHLD);
       }
    }
@@ -241,12 +241,12 @@ void check_sockets_timeout()
 	  (sock_inf[i].sock_type == SAIM))
       {
          DEBUG(50, ("AIM: Socket index=%d closed on timeout...\n", i));
-	 
+
 	 /* we can use low-level socket shutdown routine because */
 	 /* user still haven't hi-level connection               */
          close_socket_index_r(i, sock_inf[i].rnd_id);
 	 continue;
-      }   
+      }
    }
 }
 
@@ -258,7 +258,7 @@ void check_sockets_timeout()
 void tcp_process(int index)
 {
    sock_inf[index].lutime = curr_time;
-	 
+
    if (sock_inf[index].sock_type == SAIM)
    {
       flap_recv_packet(index, int_pack);
@@ -272,7 +272,7 @@ void tcp_process(int index)
       tcp_receive_packet(index, int_pack);
    }
 
-   if (int_pack.sizeVal == 0) 
+   if (int_pack.sizeVal == 0)
    {
       /* there is a problem with socket.. (closing connection) */
       close_socket_index(index, int_pack.sock_rnd);
@@ -296,7 +296,7 @@ void close_socket(long sock_hdl, unsigned long sock_rnd)
 {
    for (int i=RES_SLOTS; i<tcp_sock_count; i++)
    {
-      if ((sock_hdl == sock_fds[i].fd) && 
+      if ((sock_hdl == sock_fds[i].fd) &&
           (sock_rnd == sock_inf[i].rnd_id))
       {
          DEBUG(100, ("Closing connection with index=%d\n", i));
@@ -312,7 +312,7 @@ void close_socket(long sock_hdl, unsigned long sock_rnd)
 /**************************************************************************/
 void close_socket_index(int index, unsigned long rnd_id)
 {
-	     
+
    if ((index + 1) >  tcp_sock_count) return;
    if (rnd_id != sock_inf[index].rnd_id) return;
 
@@ -322,12 +322,12 @@ void close_socket_index(int index, unsigned long rnd_id)
    /* offline - we haven't database connection in SP          */
    int_pack.clearPacket();
    int_pack              << (unsigned long)0x00000000;
-   
+
    int_pack.sock_hdl      = sock_fds[index].fd;
    int_pack.sock_evt 	  = SOCK_TERM;
    int_pack.sock_rnd      = rnd_id;
    int_pack.sock_type	  = sock_inf[index].sock_type;
-   
+
    increm_num++;
    spipe_send_packet(int_pack);
    close_socket_index_r(index, rnd_id);
@@ -346,7 +346,7 @@ void poll_table_init()
    sock_inf  = new struct sock_info[lp_max_tcp_connections()+RES_SLOTS+5];
    curr_time = (unsigned long)time(NULL);
 
-   for (int i=0;i<(lp_max_tcp_connections()+RES_SLOTS);i++) 
+   for (int i=0;i<(lp_max_tcp_connections()+RES_SLOTS);i++)
    {
       sock_fds[i].fd          = -1;
       sock_fds[i].events      = 0;
@@ -357,7 +357,7 @@ void poll_table_init()
       sock_inf[i].sock_type   = 0;
       sock_inf[i].lutime      = 0;
    }
-   
+
    /* num of accepted sockets =0, so array contain only RES_SLOTS reserved slots */
    tcp_sock_count = RES_SLOTS;
 
@@ -369,7 +369,7 @@ void poll_table_init()
    sock_inf[SUDP].aim_cli_seq = 0;
    sock_inf[SUDP].rnd_id      = 0;
    sock_inf[SUDP].sock_type   = SUDP;
-   
+
    sock_fds[SWWP].fd 	      = wwpsockfd;
    sock_fds[SWWP].events      = POLLIN;
    sock_fds[SWWP].revents     = 0;
@@ -410,19 +410,19 @@ void poll_table_init()
 /* Accept connection from aim/v7 based clients 				  */
 /**************************************************************************/
 void aim_accept_connect()
-{   
+{
    struct sockaddr_in caddr;
    socklen_t caddr_len = sizeof(caddr);
-   
+
    /* check if we can't accept this connection */
    if ((tcp_sock_count+1) > (lp_max_tcp_connections()+RES_SLOTS))
    {
       close(accept(aimsockfd, (struct sockaddr *)&caddr, &caddr_len));
-      LOG_SYS(0, ("WARN: Connection table full, connection from %s:%d dropped...\n", 
+      LOG_SYS(0, ("WARN: Connection table full, connection from %s:%d dropped...\n",
                    inet_ntoa(caddr.sin_addr), htons(caddr.sin_port)));
       return;
    }
-   
+
    sock_fds[tcp_sock_count].fd = accept(aimsockfd, (struct sockaddr *)&caddr,
 				        &caddr_len);
 
@@ -431,10 +431,10 @@ void aim_accept_connect()
       DEBUG(0, ("Error: Can't accept socket: %s\n", strerror(errno)));
       return;
    }
-					  
+
    /* now fill information about accepted socket into sock_fds & sock_inf */
    sock_fds[tcp_sock_count].events      = POLLIN | POLLERR;
-   sock_fds[tcp_sock_count].revents     = 0;     
+   sock_fds[tcp_sock_count].revents     = 0;
    sock_inf[tcp_sock_count].aim_srv_seq = (unsigned short)random();
    sock_inf[tcp_sock_count].aim_cli_seq = 0; /* undefined yet  */
    sock_inf[tcp_sock_count].aim_started = 2; /* just connected */
@@ -442,11 +442,11 @@ void aim_accept_connect()
    sock_inf[tcp_sock_count].sock_type   = SAIM;
    sock_inf[tcp_sock_count].cli_addr    = caddr;
    sock_inf[tcp_sock_count].lutime      = curr_time;
-   
+
    setNonBlocking(sock_fds[tcp_sock_count].fd);
-   
+
    DEBUG(50, ("Accepted TCP AIM connection from %s:%d (rnd_id=%lu)\n",
-              inet_ntoa(caddr.sin_addr), ntohs(caddr.sin_port), 
+              inet_ntoa(caddr.sin_addr), ntohs(caddr.sin_port),
 	      sock_inf[tcp_sock_count].rnd_id));
 
 #ifndef DISABLE_ADD_OBJECT
@@ -463,7 +463,7 @@ void aim_accept_connect()
    int_pack.from_port	  = ntohs(sock_inf[tcp_sock_count].cli_addr.sin_port);
    int_pack.from_ip	  = sock_inf[tcp_sock_count].cli_addr.sin_addr;
    int_pack.flap_channel  = 1;
-   
+
    increm_num++;
    spipe_send_packet(int_pack);
    tcp_sock_count++;
@@ -477,13 +477,13 @@ void msn_accept_connect()
 {
    struct sockaddr_in client_addr;
    socklen_t addr_len = sizeof(client_addr);
-   
+
    close(accept(aimsockfd, (struct sockaddr *)&client_addr, &addr_len));
 
    LOG_SYS(0, ("Dropped TCP MSN connection from %s:%d\n",
-                inet_ntoa(client_addr.sin_addr), 
+                inet_ntoa(client_addr.sin_addr),
 	        ntohs(client_addr.sin_port)));
-	    
+
    /* TODO: msn packets processing */
 }
 
@@ -500,7 +500,7 @@ void spipe_send_packet(Packet &pack)
    while (spres < 0)
    {
       spres = pipe_send_packet(pack);
-      
+
       if (spres < 0)
       {
          if (errno == EMSGSIZE)
@@ -510,11 +510,11 @@ void spipe_send_packet(Packet &pack)
 	    ipc_vars->queue_send_errors++;
 	    return;
          }
-      
-         if ((errno == EAGAIN)  || 
-	     (errno == EINTR)   || 
-	     (errno == ENOMEM)  || 
-	     (errno == ENOBUFS) || 
+
+         if ((errno == EAGAIN)  ||
+	     (errno == EINTR)   ||
+	     (errno == ENOMEM)  ||
+	     (errno == ENOBUFS) ||
 	     (errno == EWOULDBLOCK))
          {
             /* Well, here we should wait while we can write data to this */
@@ -523,12 +523,12 @@ void spipe_send_packet(Packet &pack)
             wfds[0].fd = incoming_pipe_fd[P_WRIT];
 	    wfds[0].revents = 0;
 	    wfds[0].events = POLLOUT;
-	 
+
    	    wfds[1].fd = sock_fds[STOG].fd;
 	    wfds[1].revents = 0;
 	    wfds[1].events = POLLIN;
-	 
-	    while((wfds[0].revents & POLLOUT) == 0) 
+
+	    while((wfds[0].revents & POLLOUT) == 0)
 	    {
 	       poll(wfds, 2, -1);
 	       while (tog_process(arpack) > 0) {};

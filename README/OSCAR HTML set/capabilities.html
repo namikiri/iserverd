@@ -1,0 +1,549 @@
+<html>
+<head>
+<title>Capabilities</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;Capabilities&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Capability is a 16-byte array that represent specific ability of IM client 
+(AIM or ICQ). For example there is RTF-capability meaning that client supports 
+RTF messages. Each client has its own capability list and it use 
+<a href="snac_02_04.html">SNAC(02,04)</a> to send this list to server.
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+All native clients was built using COM technology. So capability is a CLSID - 
+ID of client COM object that handle specific client ability (RTF-messages, 
+buddy icons, chat, crypting, games). Here is the list of known CLSIDs:
+<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461341-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports voice chat. Currently used only by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0 ><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461342-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports direct play service. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461343-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports file transfer (can send files). Currently used only by 
+AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461344-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+<span >Something called "route finder"</span>. Currently used
+only by ICQ2K clients.</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461345-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports DirectIM/IMImage. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0 ><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461346-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports avatar service. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461347-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports stocks (add-ins). This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461347-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports stocks (add-ins). This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461348-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports filetransfers (can receive files). This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{09461349-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports channel 2 extended, TLV(0x2711) based messages. Currently used
+only by ICQ clients. ICQ clients and clones use this GUID as message format
+sign. Trillian client use another GUID in channel 2 messages to implement
+its own message format (trillian doesn't use TLV(x2711) in SecureIM
+channel 2 messages!).</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{0946134A-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports games. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{0946134A-4C7F-11D1-2282-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Indeed, there are two of games caps. The previous appears to be correct, 
+but in some versions of winaim, this one is set.  Either they forgot to fix 
+endianness, or they made a typo. It really doesn't matter which because the 
+meaning of them is the same.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{0946134B-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports buddy lists transfer. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{0946134D-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Setting this lets AIM users receive messages from ICQ users, and ICQ users receive 
+messages from AIM users. It also lets ICQ users show up in buddy lists for AIM 
+users, and AIM users show up in buddy lists for ICQ users. And ICQ 
+privacy/invisibility acts like AIM privacy, in that if you add a user to your deny 
+list, you will not be able to see them as online (previous you could still see them, 
+but they couldn't see you.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{0946134E-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports UTF-8 messages. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{97B12751-243C-4334-AD22-D6ABF73F1492}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports RTF messages. This capability currently used by ICQ service and ICQ clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{A0E93F37-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Unknown capability This capability currently used only by ICQ2001/ICQ2002 clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{10CF40D1-4C7F-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Unknown capability This capability currently used only by ICQ2002 client.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{2E7A6475-FADF-4DC8-886F-EA3595FDB6DF}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Unknown capability This capability currently used only by ICQ2001 client.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{563FC809-0B6f-41BD-9F79-422609DFA2F3}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Unknown capability This capability currently used only by ICQLite/ICQ2Go clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/aim.gif" width=16 height=16 alt="Used in AIM"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{748F2420-6287-11D1-8222-444553540000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports chat service. This capability currently used by AIM service and AIM clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{F2E7C7F4-FEAD-4DFB-B235-36798BDF0000}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+Client supports trillian SecureIM channel-2 messages. This capability currently used by Trillian clients.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0><tr><td width=10></td><td>
+<table width=600 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+<table width=600 cellSpacing=1 cellPadding=1 border=0><tr>
+<td bgcolor=#f9f9f9 width=16 valign=middle align=center><img src="pictures/icq.gif" width=16 height=16 alt="Used in ICQ"></td>
+<td bgcolor=#f9f9f9 width=582 valign=top nowrap><b><font face="Courier New"><small>{97B12751-243C-4334-AD22-D6ABF73F14xx}&nbsp;</small></font></b></td>
+</tr><tr>
+<td colspan=2 bgcolor=#f9f9f9 valign=middle>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td width=2></td><td>
+<font size=2>
+This is not cpability at all. This GUID used by SIM/Kopete clients to detect same 
+clients version.
+</font>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+</td><td width=5>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

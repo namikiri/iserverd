@@ -40,7 +40,7 @@ int aim_tcp_server_start(int port_number)
    int bindcnt = 0;
    BOOL bindFailed = False;
    int val = 1;
-  
+
    if ((aimsockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
    {
       LOG_SYS(0, ("WARNING: Can't create aim/v7 tcp socket...\n"));
@@ -51,11 +51,11 @@ int aim_tcp_server_start(int port_number)
    a_server.sin_addr = bind_interface;
    a_server.sin_port = htons(port_number);
 
-   setsockopt(aimsockfd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));   
-   
+   setsockopt(aimsockfd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
+
    while (bindcnt < MAX_BIND_TRY)
    {
-     if (bind(aimsockfd, (struct sockaddr *)&a_server, 
+     if (bind(aimsockfd, (struct sockaddr *)&a_server,
 	      sizeof(struct sockaddr)) < 0)
      {
         bindFailed = True;
@@ -66,32 +66,32 @@ int aim_tcp_server_start(int port_number)
      {
         bindFailed = False;
         break;
-     }			
+     }
    }
-  		
+
    if (bindFailed)
    {
       LOG_SYS(0, ("ERROR: Can't bind aim/v7 tcp socket...\n"));
       LOG_SYS(3, ("       problem: \"%s\"\n",   strerror(errno)));
-      LOG_SYS(3, ("       bind addr: [%s], bind port [%d]\n", 
-			  inet_ntoa(bind_interface),  port_number)); 
+      LOG_SYS(3, ("       bind addr: [%s], bind port [%d]\n",
+			  inet_ntoa(bind_interface),  port_number));
       close(aimsockfd);
-      aimsockfd = -1;  
-      
+      aimsockfd = -1;
+
       /* exit(EXIT_ERROR_ANOTHER_PROCESS); */
    }
 
-   if (listen(aimsockfd, -1) < 0) 
+   if (listen(aimsockfd, -1) < 0)
    {
       LOG_SYS(0, ("ERROR: Can't listen aim tcp socket, exiting...\n"));
       LOG_SYS(3, ("       problem: \"%s\"\n",   strerror(errno)));
       close(aimsockfd);
       aimsockfd = -1;
-      
+
    }
    else
-   {   
-      LOG_SYS(3, ("Init: TCP server (OSCAR) started on [%s:%d]\n", 
+   {
+      LOG_SYS(3, ("Init: TCP server (OSCAR) started on [%s:%d]\n",
                   inet_ntoa(a_server.sin_addr), port_number));
    }
 
@@ -107,7 +107,7 @@ int msn_tcp_server_start(int port_number)
    struct sockaddr_in m_server;
    int bindcnt = 0;
    BOOL bindFailed = False;
-  
+
    if ((msnsockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
    {
       LOG_SYS(0, ("WARNING: Can't create MSN tcp socket...\n"));
@@ -117,10 +117,10 @@ int msn_tcp_server_start(int port_number)
    m_server.sin_family = AF_INET;
    m_server.sin_addr = bind_interface;
    m_server.sin_port = htons(port_number);
-   
+
    while (bindcnt < MAX_BIND_TRY)
    {
-     if (bind(msnsockfd, (struct sockaddr *)&m_server, 
+     if (bind(msnsockfd, (struct sockaddr *)&m_server,
 	      sizeof(struct sockaddr)) < 0)
      {
         bindFailed = True;
@@ -131,32 +131,32 @@ int msn_tcp_server_start(int port_number)
      {
         bindFailed = False;
         break;
-     }			
+     }
    }
-  		
+
    if (bindFailed)
    {
       LOG_SYS(0, ("ERROR: Can't bind MSN tcp socket...\n"));
       LOG_SYS(3, ("       problem: \"%s\"\n",   strerror(errno)));
-      LOG_SYS(3, ("       bind addr: [%s], bind port [%d]\n", 
-			  inet_ntoa(bind_interface),  port_number)); 
+      LOG_SYS(3, ("       bind addr: [%s], bind port [%d]\n",
+			  inet_ntoa(bind_interface),  port_number));
       close(msnsockfd);
-      msnsockfd = -1;  
-      
+      msnsockfd = -1;
+
       /* exit(EXIT_ERROR_ANOTHER_PROCESS); */
    }
 
-   if (listen(msnsockfd, -1) < 0) 
+   if (listen(msnsockfd, -1) < 0)
    {
       LOG_SYS(0, ("ERROR: Can't listen MSN tcp socket, exiting...\n"));
       LOG_SYS(3, ("       problem: \"%s\"\n",   strerror(errno)));
       close(msnsockfd);
       msnsockfd = -1;
-      
+
    }
    else
-   {   
-      LOG_SYS(3, ("Init: Listening for MSN protocol on [%s:%d]\n", 
+   {
+      LOG_SYS(3, ("Init: Listening for MSN protocol on [%s:%d]\n",
                   inet_ntoa(m_server.sin_addr), port_number));
    }
 
@@ -180,7 +180,7 @@ void tcp_receive_packet(int index, Packet &pack)
    pack.from_port    = ntohs(sock_inf[index].cli_addr.sin_port);
    pack.flap_channel = 0;
    pack.net_order    = 0; /* default value */
-   
+
    /* sanity check, also we don't care about REFUSED, INTR & BLOCK errors */
    if (pack.sizeVal == -1) pack.sizeVal = 0;
 }
@@ -194,12 +194,12 @@ void tcp_receive_packet(int index, Packet &pack)
 BOOL ready_data(int sock_hdl)
 {
    struct pollfd sock_chk;
-   
+
    sock_chk.fd     = sock_hdl;
    sock_chk.events = POLLIN;
-   
+
    if (poll(&sock_chk, 1, 0) != 1) return False;
-   
+
    return True;
 }
 
@@ -210,7 +210,7 @@ BOOL ready_data(int sock_hdl)
 int wait4write(int sock_hdl, int time)
 {
    struct pollfd sock_chk;
-   
+
    sock_chk.fd     = sock_hdl;
    sock_chk.events = POLLOUT;
    return(poll(&sock_chk, 1, time));
@@ -223,7 +223,7 @@ int wait4write(int sock_hdl, int time)
 int wait4read(int sock_hdl, int time)
 {
    struct pollfd sock_chk;
-   
+
    sock_chk.fd     = sock_hdl;
    sock_chk.events = POLLIN;
    return(poll(&sock_chk, 1, time));

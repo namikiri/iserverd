@@ -1,0 +1,515 @@
+<html>
+<head>
+<title>SNAC(07,03) requested account info reply</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(07,03)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_ACCOUNTxINFOxREPLY&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the client account info (screen-name formating, email info, etc) requested
+via <a href="snac_07_02.html">SNAC(07,02)</a>. It also may contain error
+code / error url instead if request failed.<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 07</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 03</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+   <table width=630 cellSpacing=2 cellPadding=0 align=center border=0>
+   <tr><td>
+<table width=630 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#C9C9E9>&nbsp;
+Following structure may be repeated more then once
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+   <table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=170>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=55%>permissions flags <span>
+   (1 - r/o, 2 - r/o, 3 - r/w)</span></td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>number of following TLVs</td>
+   </tr>
+   </table>
+
+ <!-- TLV 0x01 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 01</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x01) - user screenname</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>user formated screenname</td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x11 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 11</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x11) - user email</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>user email string</td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x13 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;00 13</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x13) - registration status</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>registration status <span >(1 - no disclosure,
+     2 - limit disclosure, 3 - full disclosure (?))</span></td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <hr>
+
+ <!-- TLV 0x08 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;00 08</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x08) - error subcode</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>error subcode (see below)</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x04 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;00 04</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x04) - error description url</td>
+   </tr>
+   <tr>
+   <td width=25%>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Error description url string</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5></td>
+ </tr>
+ <tr><td height=5 colspan=3> 
+ 
+  </td></tr></table>
+  </td></tr></table>
+  </td></tr></table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Here is known administrative error codes list:<br><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E5E5E5>
+
+<table width=100% cellSpacing=1 cellPadding=1 border=0 >
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;validate nickame</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;validate password</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0003</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;validate e-mail</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;service temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0005</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;field change temporarily unavailable</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0006</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid nickname</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0007</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid password</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0008</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid e-mail</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0009</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid registration preference</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000A</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid old password</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000B</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid nickname length</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000C</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid password length</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000D</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid e-mail length</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000E</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid old password length</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x000F</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;need old password</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0010</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;read only field</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0011</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;write only field</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0012</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;unsupported type</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0013</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;all other errors</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0014</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;bad snac</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0015</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0016</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;deleted account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0017</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;expired account</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0018</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;no database access</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0019</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;invalid database fields</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001A</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;bad database status</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001B</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;migration cancel</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001C</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;internal error</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001D</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;pending request</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001E</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;not dt status</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x001F</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;outstanding confirm</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0020</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;no e-mail address</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0021</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;over limit</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0022</b></td>
+<td bgcolor=#f9f9f9 valign=top >&nbsp;&nbsp;e-mail host fail</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=70 valign=top>&nbsp;&nbsp;<b>0x0023</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;dns fail</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+<br>
+
+<br>Example SNAC dumps with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 3D 1E 00 28 00 07 00 03 00 00 00 02 00 02  *.=..(..........
+  00 03 00 01 00 11 00 16 41 56 53 68 75 74 6B 6F  ........AVShutko
+  40 6D 61 69 6C 2E 6B 68 73 74 75 2E 72 75        @mail.khstu.ru
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

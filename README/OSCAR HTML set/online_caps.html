@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Changes in new AIM clients</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td><b><font color="white">&nbsp;Changes discovered in new AIM clients by <font color="#ff9fff">John Roark</font>&nbsp;</font></b></td>
+<td width=20% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr></table></td></tr></table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4> </td></tr><tr>
+<td width=7>&nbsp;</td><td valign=top>
+<font size=3><pre style="font-size: 13px">
+
+ I have been investigating the latest versions of AIM (5.2.3277) and 
+ found that capability CLSIDs are not passed with SRV_USER_ONLINE 
+ anymore... That is TLV(0x000D) still comes with SNAC(03,0B) but it only 
+ contains CLSIDs not of the form {0946xxxx-4C7F-11D1-8222-444553540000} 
+ like the chat CLSID {748F2420-6287-11D1-8222-444553540000}. instead 
+ SNAC(03,0B) contains a new TLV of type 0x0019 that contains a list of 
+ two byte CLSID diffs for example the following CLSIDs:
+
+ 0946134A 4C7F 11D1 8222 444553540000
+ 0946134B 4C7F 11D1 8222 444553540000
+ 0946134D 4C7F 11D1 8222 444553540000
+ 09461341 4C7F 11D1 8222 444553540000
+ 09460000 4C7F 11D1 8222 444553540000
+ 09461343 4C7F 11D1 8222 444553540000
+ 094601FF 4C7F 11D1 8222 444553540000
+ 09460001 4C7F 11D1 8222 444553540000 &lt;-- new CLSID for encryption
+ 09461345 4C7F 11D1 8222 444553540000
+ 09461346 4C7F 11D1 8222 444553540000
+ 09461347 4C7F 11D1 8222 444553540000
+ 
+ Is now represented as just:
+ 
+ 134A
+ 134B
+ 134D
+ 1341
+ 0000
+ 1343
+ 01FF
+ 0001  &lt;-- encryption
+ 1345
+ 1346
+ 1347
+ 
+</pre></font>
+
+<font color=darkblue>
+&nbsp; I can confirm this for ICQ (currently ICQ2003b & ICQLite4.1). This is not 
+replacement for 0x0D tlv, but just the effective try to reduce traffic from ICQ servers. 
+You can found TLV(0x0D) & TLV(0x19) in single packet.
+</font>
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

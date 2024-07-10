@@ -1,0 +1,458 @@
+<html>
+<head>
+<title>Basic OSCAR information (FLAP, SNAC, TLV)</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;Basic OSCAR information (FLAP, SNAC, TLV)&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0 bgcolor=#E9E9E9>
+<tr><td bgcolor=white>
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 width=25>&nbsp;1.</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#b0001">FLAP protocol (version 1.0) description</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;2.</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#b0002">SNAC communication unit description</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;3.</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="#b0003">TLV (Type-Length-Value) tuple description</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0>&nbsp;4.</td>
+<td bgcolor=#f0f0f0>&nbsp;<a href="info_block.html">Online userinfo block description</a></td>
+</tr>
+</table>
+</td></tr>
+</table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="b0001"></a>FLAP transport (version 1.0)&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+FLAP is a low-level communications protocol that facilitates the development of 
+higher-level, datagram-oriented, communications layers. It is used on the TCP 
+connection between all clients and servers. Here is format of FLAP datagram:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=400 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#fafafa >
+<table width=400 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;2A</td>
+<td width=5>&nbsp;</td>
+<td width=20%>byte</td>
+<td width=5>&nbsp;</td>
+<td width=65%>FLAP id byte</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td>&nbsp;</td>
+<td>byte</td>
+<td>&nbsp;</td>
+<td>FLAP channel</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>FLAP datagram seq number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>FLAP data size</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#fafafa >
+
+<table width=400 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=50> </td>
+<td>
+
+<table width=350 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#fafafa >
+
+<table width=350 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td height=50 align=center valign=middle>&nbsp;......</td>
+<td valign=middle width=65%>FLAP data</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+FLAP id byte is always 0x2A. It is frame-start sign.<br><br>
+	
+&nbsp;&nbsp;&nbsp;&nbsp;
+The flap sequence numbers used for errors detection. So server can detect problem 
+when client set flap data size field = 10 and write 20 bytes 0x2A as data. The flap 
+sequence number origins are picked quite randomly. There is no connection between 
+the sequence number set from the server and the set from the client. Sequence numbers are 
+always incremented upward (towards 0x8000) for each command sent. If the sequence number 
+does reach 0x8000, it will wrap to 0x0000, for obvious reasons. If you start a new connection, 
+it is recommended that a new sequence number origin is picked for that connection, for purposes 
+of internal coherency. Sequence numbers are independent of channels: there's a single series 
+of sequence numbers per TCP connection (per socket).<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Channels are the method used to multiplex separate paths of communication across the same 
+TCP socket. These are analogous to TCP/UDP port numbers. Five channels are currently used 
+by OSCAR: 
+<ul>
+<li><b>0x01</b> - New Connection Negotiation </li>
+<li><b>0x02</b> - <a href="basic.html#b0002">SNAC</a> data</li>
+<li><b>0x03</b> - FLAP-level Error </li>
+<li><b>0x04</b> - Close Connection Negotiation </li>
+<li><b>0x05</b> - Keep alive</li>
+</ul>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+After a new connection (socket) is set up using channel 0x01, data should only be carried 
+on channel 0x02, until a low-level FLAP error occurs (channel 0x03) or there is planned 
+termination, which gets "negotiated" (on channel 0x04). Most live events processed during 
+the lifespan of the client are done over channel 0x02. <b><a href="basic.html#b0002">SNACs</a> are 
+never transmitted on any channel other than 0x02</b><br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+The best way to read an incoming FLAP command is to first read only the starting 6 bytes 
+(the FLAP headers). From these 6bytes, you can determine how many more bytes you need to 
+read to complete the command, and how much memory you need to allocate to store it. Never 
+read more or less than the number of bytes specified in the FLAP headers, or your read will 
+result in a truncated or uninterpretable command. (If you read too much, you will probably 
+end up reading the start of the next command, which is bad. Lost data is unacceptable in 
+the AIM standard.)<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Because every command must follow FLAP guidelines, I'd recommend using a low-level routine 
+to add the FLAP headers (normally, this will be the "flush transmit queue" routine, so that 
+addition of sequence numbers and the rest of the FLAP headers is done as close timewise as 
+possible to the command being put on the wire). This is the best way to prevent out-of-order 
+seqnums from getting used (which, as stated earlier, is quite fatal). <br><br>
+
+</td>
+<td width=5></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="b0002"></a>SNAC format description&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+A SNAC is the basic communication unit that is exchanged between clients and servers. 
+The SNAC communication layers sits on top of the FLAP layer. SNAC is the normal contents 
+of the FLAP Data Field for channel 0x02. SNACs are only sent over channel 0x02. Data sent 
+across other channels are not considered complete SNACs. There can be only one SNAC per 
+FLAP frame. Here is the format of SNAC:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=350 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#fafafa >
+<table width=350 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=25%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td width=20%>word</td>
+<td width=5>&nbsp;</td>
+<td width=50%><a href="families.html">Family</a> (service) id number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td><a href="families.html">Family</a> subtype id number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td>&nbsp;</td>
+<td>dword</td>
+<td>&nbsp;</td>
+<td>SNAC request id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#fafafa >
+
+<table width=350 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=50> </td>
+<td>
+
+<table width=300 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#fafafa >
+
+<table width=300 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td height=40 align=center valign=middle>&nbsp;......</td>
+<td valign=middle width=56%>SNAC data</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+There is no formal declaration of the length of the SNAC data portion (that information 
+must be assumed from the FLAP headers). Families, identified by the "family ID", constitute 
+a group of services. Subtypes are a subdivision of the families. Each subtype ID is different 
+depending on the specific service or information provided in the data section.<br><br>
+	
+&nbsp;&nbsp;&nbsp;&nbsp;
+Request IDs are 32bit values used to identify non-atomic information. The client can generate 
+completely random reqid's as long as it remembers what the request was for. Often, though, 
+the results of the SNAC are irrelevant, and the reqid's can be forgotten. But, in 
+information-requestion SNACs, it is imperative you remember the reqid you sent because that's 
+the only way to link it to the response! If this is not done, it will be impossible to have 
+more than one pending request of the same SNAC subtype (which is unlikely at best). For 
+server-initiated SNACs, the reqid most significant bit=1, and this num count up to zero from 
+than from zero.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Flags is a general SNAC properties. There is not enough information about snac flags, but known 
+that if bit1 of flags=1 there are more SNACs for this request-id was sent. Bit16=1 <b>mean that 
+SNAC contain some unknown information at the beginning</b> (first come a length of additional data 
+(word) and then data itself).<br><br>
+
+</td>
+<td width=5></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="b0003"></a>TLV (Type-Length-Value) tuple description&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+TLVs are a very convenient and efficient method of putting data into an organized 
+format, especially variable length strings, etc. TLV literally stands for "Type, 
+Length, Value". And that's exactly what it is: a 16bit Type code, a 16bit value 
+for the length of the Value field, and then the actual data in the Value field 
+(variable length). Here is TLV format:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=250 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#fafafa >
+<table width=250 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=20%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td width=20%>word</td>
+<td width=5>&nbsp;</td>
+<td width=65%>TLV type number</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td>&nbsp;</td>
+<td>word</td>
+<td>&nbsp;</td>
+<td>TLV length value</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#fafafa >
+
+<table width=250 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=50> </td>
+<td>
+
+<table width=200 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#fafafa >
+
+<table width=200 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td height=30 align=center valign=middle>&nbsp;......</td>
+<td valign=middle width=69%>TLV data</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+TLVs can be be in SNACs, but that's not required. TLVs often are used directly 
+in the FLAP Data Field, but normally are inside of SNACs. More than one 
+TLV of each Type code may exist in a single FLAP command (SNAC or not). TLVs 
+must follow the strict tuple-rule, or they're really not TLVs, they're raw 
+data. One tlv may contain nested tlv chain inside.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+TLVs are a big win. They make sending a variable length string like, e.g., 
+"afritz@iname" as simple as defining a TLV with values {0x0011, 0x000c, 
+"afritz@iname.com"}. (The type 0x0011 is used throughout the authorization 
+process as the "email address type".) A side note about strings: strings in 
+this protocol are never NULL-terminated. If they look like they are, that's 
+probably a word-length value behind it. <br><br>
+</td>
+<td width=5></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

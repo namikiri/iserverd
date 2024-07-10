@@ -5,7 +5,7 @@
 #endif
 
 #ifdef HAVE_STDIO_H
-#include <stdio.h> 
+#include <stdio.h>
 #endif
 
 #ifdef HAVE_SYS_STAT_H
@@ -30,10 +30,10 @@
 
 int main(int argc, char **argv)
 {
-   char tempst[1024];   
+   char tempst[1024];
    int fd;
 
-   if (argc < 2) 
+   if (argc < 2)
    {
       printf("usage: %s filenameXXXXXX\n", argv[0]);
       exit(-1);
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
    mktemp(tempst);
    fd = open(tempst, O_CREAT);
 #else
-#define close "ERROR: I need mktemp utility or mktemp/mkstemp functions" 
+#define close "ERROR: I need mktemp utility or mktemp/mkstemp functions"
 #endif
 #endif
    close(fd);

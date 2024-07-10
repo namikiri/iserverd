@@ -1,0 +1,176 @@
+<html>
+<head>
+<meta name=generator content="FAR editor">
+<meta http-equiv=keywords name=keywords content="ICQ, protocol, icq v7, icq v8, icq v9, oscar, aim, flap, snac, icbm, tlv, v7, v8, v9, IM">
+<meta http-equiv=description name=description content="AOL OSCAR (ICQ/AIM services) protocol specification. This protocol also known as ICQ v7.">
+<meta http-equiv=robots name=robots content="all">
+<meta http-equiv=revisit name=revisit content="7">
+<title>OSCAR (ICQ v7/v8/v9) protocol documentation</title>
+
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=644 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr>
+<td><b><font color="white">&nbsp;OSCAR (ICQ v7/v8/v9) protocol documentation&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;<b>Updated: 07.02.2005&nbsp;</b></font></b>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4>&nbsp;</td></tr>
+<tr><td width=7>&nbsp;</td><td valign=top>
+
+<center>
+<div style="background-color: wheat; padding: 1em;">
+  <em>This is a mirror of <a href="http://iserverd.khstu.ru/oscar/"
+        rel="noopener">http://iserverd.khstu.ru/oscar/</a></em>
+  </div>
+</center>
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<b>OSCAR</b>. "<b><font color=darkblue><font color=#000000>O</font>pen 
+<font color=#000000>S</font>ystem for <font color=#000000>C</font>ommunic<font color=#000000>a</font>tion 
+in <font color=#000000>R</font>ealtime</font></b>" - the internal project name 
+(as opposed to the external marketing name) used to identify Instant Messenger 
+protocol. 
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+The protocol described in this documentation is used in ICQ and AIM. ICQ was bought by AOL and 
+after that they initiated merging these services. ICQ client started using the OSCAR protocol 
+and ICQ developers named this protocol v7. I think this is wrong because this number is used 
+to identify direct connection "rendezvous" protocol version. As I said before, the client-to-server 
+protocol is named "OSCAR" and there is no icq v7, icq v8, nor icq v9. AOL programmers just added 
+the 0x15 family for compatibility with old ICQ server database engine and begin use uins as 
+screennames
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+I tried to gather as more details about OSCAR as possible. This 
+documentation set was written for both AIM and ICQ IM services. Here is the 
+list of links to information with short descriptions:
+<br><br>
+
+<table width=565 cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=15>&nbsp;</td><td>
+<table width=550 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=white>
+
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="basic.html" target="_top">Basic</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top width=90%>&nbsp;Protocol basic info. FLAP/SNAC/TLV formats, etc</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="login.html" target="_top">Login</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;Detailed authorization, login and services setup description</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="families.html" target="_top">Snaclist</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;List of known services and their SNACs with links to detailed info</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="sequences.html" target="_top">Sequences</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;Information about various packet sequences (e.g. search)</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="lists.html" target="_top">Misc</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;User classes, status types, message types, message flags, etc...</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="changes.html" target="_top">Changes</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;Changes that was made in these docs.</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="credits.html" target="_top">Credits</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;List of the people who helps me with these docs</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="terms.html" target="_top">Terms</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;Protocol specification terminology</td>
+</tr>
+<tr>
+<td bgcolor=#f2f2f2 valign=top nowrap><b>&nbsp;[<a href="wanted.html" target="_top">Wanted</a>] &nbsp;&nbsp;</b></td>
+<td bgcolor=#f2f2f2 valign=top>&nbsp;List of unknown SNACs I'm looking info for</td>
+</tr>
+<!--#include virtual="_download.htxt" -->
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<b>Disclaimer</b>: This documentation set and the author are in no way affiliated with 
+Mirabilis (AOL). No reverse engineering or decompilation of any AOL/ICQ
+code took place to make this documentation. AIM is a registered trademark of 
+America Online, Inc. ICQ is a registered trademark of ICQ Inc.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<b>Attention</b>: This is not official OSCAR specification - USE IT AT YOUR OWN 
+RISK. I don't earn money for this work, I'm only have some fun. Please do not 
+send me a letters like "This is all shit. Goodbye", but feel free to tell me 
+about missing info and about bugs.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+You always can find fresh copy of this documentation set at website 
+<a href="http://iserverd.khstu.ru/oscar/">http://iserverd.khstu.ru/oscar/</a>. 
+Please, please, please, if you have protocol information not listed here or you found a bug in 
+documentation (protocol bug, syntax/grammar error or obfuscated info) 
+<a href="mailto:avshutko@mail.khstu.ru?subject=oscar_info">send it to me</a> with "oscar_info" 
+string in subject field or you can send it to 
+<a href="http://www.d.kth.se/~d95-mih/icq/icq-devel/">icq-devel</a> mailing list. 
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+P.S. I know my English is hard to read so I'm looking for English-speaking man 
+who could help me with this problem.
+<br>
+
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=644 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr>
+<td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

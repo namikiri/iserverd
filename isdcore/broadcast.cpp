@@ -85,33 +85,33 @@ void broadcast_online( struct online_user &auser )
  ) \
  AS TMP on uin=TMP.ouin \
  WHERE active=1"
- 
+
    if (auser.status != ICQ_STATUS_PRIVATE)
    {
-      slprintf(dbcomm_str, sizeof( dbcomm_str )-1, 
-	       BCST_NPAM54, auser.uin, NORMAL_CONTACT, auser.uin, 
+      slprintf(dbcomm_str, sizeof( dbcomm_str )-1,
+	       BCST_NPAM54, auser.uin, NORMAL_CONTACT, auser.uin,
 	       INVISIBLE_CONTACT, lp_v7_max_contact_size());
-   } 
+   }
    else
    {
-      slprintf(dbcomm_str, sizeof( dbcomm_str )-1, 
-		BCST_PAM74, auser.uin, NORMAL_CONTACT, auser.uin, 
+      slprintf(dbcomm_str, sizeof( dbcomm_str )-1,
+		BCST_PAM74, auser.uin, NORMAL_CONTACT, auser.uin,
 		VISIBLE_CONTACT, lp_v7_max_contact_size());
    }
 
    res = PQexec(users_dbconn, dbcomm_str);
-   
+
    if (PQresultStatus( res ) != PGRES_TUPLES_OK )
    {
       handle_database_error(res, "[BROADCAST ONLINE]");
       PQclear( PQexec(users_dbconn, "ABORT") );
       return;
    }
-   
+
    /* number of returned users (tuples with information) */
-   users_cnt = PQntuples( res );   
+   users_cnt = PQntuples( res );
    DEBUG(100, ("Complex query return %d users to alert...\n", users_cnt));
-   
+
    /* now it is time to send online alert to all users in loop */
    if ( PQnfields( res ) == 2 )
    {
@@ -120,11 +120,11 @@ void broadcast_online( struct online_user &auser )
          /* first fill online_user structure */
          to_user.uin	    = atoul( PQgetvalue(res, i, 0));
 	 to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
 	 /* get shm data by index and copy it into to_user */
 	 puser = shm_iget_user(to_user.uin, to_user.shm_index);
 	 if (puser == NULL) continue;
-	 
+
 	 memcpy((void *)&to_user, (const void *)puser,
 	         sizeof(struct online_user));
 
@@ -132,7 +132,7 @@ void broadcast_online( struct online_user &auser )
          send_user_online( to_user, auser );
       }
    }
- 
+
    PQclear( res );
    PQclear( PQexec(users_dbconn, "END" ));
 }
@@ -151,7 +151,7 @@ void broadcast_offline( unsigned long uin )
 
    /* first of all we should request online users that have target 	  */
    /* in their contacts and after that lock database rows          	  */
-   
+
 #define BCST_AF157 \
 "SELECT uin,ishm FROM online_users \
  JOIN \
@@ -163,22 +163,22 @@ void broadcast_offline( unsigned long uin )
  ) \
  AS TMP on uin=TMP.ouin \
  WHERE (active=1)"
-   
+
    PQclear( PQexec(users_dbconn, "BEGIN" ));
-   slprintf(dbcomm_str, sizeof( dbcomm_str )-1, 
+   slprintf(dbcomm_str, sizeof( dbcomm_str )-1,
 	    BCST_AF157, uin, NORMAL_CONTACT, lp_v7_max_contact_size());
- 
+
    res = PQexec(users_dbconn, dbcomm_str);
-   
+
    if (PQresultStatus( res ) != PGRES_TUPLES_OK )
    {
       handle_database_error(res, "[BROADCAST OFFLINE]");
       PQclear( PQexec(users_dbconn, "ABORT") );
       return;
    }
-   
+
    /* number of returned users (tuples with information) */
-   users_cnt = PQntuples( res );   
+   users_cnt = PQntuples( res );
    /* now it is time to send online alert to all users in loop */
    if ( PQnfields( res ) == 2 )   /* sanity check - to avoid core dumps */
    {
@@ -187,19 +187,19 @@ void broadcast_offline( unsigned long uin )
          /* first fill online_user structure */
          to_user.uin	    = atoul( PQgetvalue(res, i, 0));
 	 to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
 	 /* get shm data by index and copy it into to_user */
 	 puser = shm_iget_user(to_user.uin, to_user.shm_index);
 	 if (puser == NULL) continue;
-	 
+
 	 memcpy((void *)&to_user, (const void *)puser,
 	         sizeof(struct online_user));
-       
+
          /* all ready we can send packet */
          send_user_offline( to_user, uin );
       }
    }
- 
+
    PQclear( res );
    PQclear( PQexec(users_dbconn, "END" ));
 }
@@ -258,29 +258,29 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
  AS TMP on uin=TMP.ouin \
  WHERE active=1"
 
-   if (((auser.status & 0x0000ffff) == ICQ_STATUS_PRIVATE) && 
+   if (((auser.status & 0x0000ffff) == ICQ_STATUS_PRIVATE) &&
        ((old_status & 0x0000ffff) != ICQ_STATUS_PRIVATE))
    {
 
-      slprintf(dbcomm_str, sizeof( dbcomm_str )-1, 
-		 BCST_ASTP228, auser.uin, NORMAL_CONTACT, auser.uin, 
+      slprintf(dbcomm_str, sizeof( dbcomm_str )-1,
+		 BCST_ASTP228, auser.uin, NORMAL_CONTACT, auser.uin,
 		 INVISIBLE_CONTACT, lp_v7_max_contact_size());
 
-      slprintf(priv_str, sizeof( dbcomm_str )-1, 
-		 BCST_ASTPI248, auser.uin, NORMAL_CONTACT, auser.uin, 
+      slprintf(priv_str, sizeof( dbcomm_str )-1,
+		 BCST_ASTPI248, auser.uin, NORMAL_CONTACT, auser.uin,
 		 VISIBLE_CONTACT, lp_v7_max_contact_size());
-   
+
       res = PQexec(users_dbconn, dbcomm_str);
-   
+
       if (PQresultStatus( res ) != PGRES_TUPLES_OK )
       {
          handle_database_error(res, "[BROADCAST STATUS]");
 	 PQclear( PQexec(users_dbconn, "ABORT") );
          return;
       }
-   
+
       /* number of returned users (tuples with information) */
-      users_cnt = PQntuples( res );   
+      users_cnt = PQntuples( res );
 
       /* now it is time to send online alert to all users in loop */
       if ( PQnfields( res ) == 2 )
@@ -290,33 +290,33 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
             /* first fill online_user structure */
             to_user.uin	    = atoul( PQgetvalue(res, i, 0));
    	    to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
 	    /* get shm data by index and copy it into to_user */
 	    puser = shm_iget_user(to_user.uin, to_user.shm_index);
 	    if (puser == NULL) continue;
-	    
+
 	    memcpy((void *)&to_user, (const void *)puser,
 	            sizeof(struct online_user));
-     
+
             /* all ready so we can send packet */
             send_user_offline( to_user, auser.uin );
          }
       }
- 
+
       PQclear( res );
- 
+
       /* send status for hidden users */
       res = PQexec(users_dbconn, priv_str);
-   
+
       if (PQresultStatus( res ) != PGRES_TUPLES_OK )
       {
          handle_database_error(res, "[BROADCAST STATUS2]");
 	 PQclear( PQexec( users_dbconn, "ABORT") );
          return;
       }
-   
+
       /* number of returned users (tuples with information) */
-      users_cnt = PQntuples( res );   
+      users_cnt = PQntuples( res );
       /* now it is time to send online alert to all users in loop */
       if ( PQnfields( res ) == 2 )   /* sanity check - to avoid core dumps */
       {
@@ -325,24 +325,24 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
             /* first fill online_user structure */
             to_user.uin	       = atoul( PQgetvalue(res, i, 0));
 	    to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
 	    /* get shm data by index and copy it into to_user */
 	    puser = shm_iget_user(to_user.uin, to_user.shm_index);
 	    if (puser == NULL) continue;
-	    
+
 	    memcpy((void *)&to_user, (const void *)puser,
 	            sizeof(struct online_user));
-     
+
             /* all ready we can send packet */
             send_user_status( to_user, auser );
          }
       }
- 
+
       PQclear( res );
       PQclear( PQexec(users_dbconn, "END" ));
       return;
    }
-   
+
 /* Define query to avoid multistring literals      */
 /* Query to broadcast status change (from private) */
 #define BCST_ASFP352 \
@@ -359,27 +359,27 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
     LIMIT %d \
  ) \
  AS TMP on uin=TMP.ouin \
- WHERE active=1" 
-   
-   if (((auser.status & 0x0000ffff) != ICQ_STATUS_PRIVATE) && 
+ WHERE active=1"
+
+   if (((auser.status & 0x0000ffff) != ICQ_STATUS_PRIVATE) &&
        ((old_status & 0x0000ffff) == ICQ_STATUS_PRIVATE))
-   {   
-   
-      slprintf(dbcomm_str, sizeof( dbcomm_str )-1, 
-	       BCST_ASFP352, auser.uin, NORMAL_CONTACT, auser.uin, 
+   {
+
+      slprintf(dbcomm_str, sizeof( dbcomm_str )-1,
+	       BCST_ASFP352, auser.uin, NORMAL_CONTACT, auser.uin,
 	       INVISIBLE_CONTACT, lp_v7_max_contact_size());
-		  
+
       res = PQexec(users_dbconn, dbcomm_str);
-   
+
       if (PQresultStatus( res ) != PGRES_TUPLES_OK )
       {
          handle_database_error(res, "[BROADCAST STATUS_PV]");
 	 PQclear( PQexec( users_dbconn, "ABORT") );
          return;
       }
-      
+
       /* number of returned users (tuples with information) */
-      users_cnt = PQntuples( res );   
+      users_cnt = PQntuples( res );
 
       /* now it is time to send online alert to all users in loop */
       if ( PQnfields( res ) == 2 )
@@ -389,11 +389,11 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
             /* first fill online_user structure */
             to_user.uin	    = atoul( PQgetvalue(res, i, 0));
 	    to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
 	    /* get shm data by index and copy it into to_user */
 	    puser = shm_iget_user(to_user.uin, to_user.shm_index);
 	    if (puser == NULL) continue;
-	    
+
 	    memcpy((void *)&to_user, (const void *)puser,
 	            sizeof(struct online_user));
 
@@ -401,13 +401,13 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
             send_user_online( to_user, auser );
          }
       }
- 
+
       PQclear( res );
- 
+
       PQclear( PQexec(users_dbconn, "END" ));
       return;
    }
-   
+
 /* Define query to avoid multistring literals      */
 /* Query to broadcast status change (from private) */
 #define BCST_ASN417 \
@@ -426,37 +426,37 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
  AS TMP on uin=TMP.ouin \
  WHERE active=1"
 
-   if (((auser.status & 0x0000ffff) != ICQ_STATUS_PRIVATE) && 
+   if (((auser.status & 0x0000ffff) != ICQ_STATUS_PRIVATE) &&
        ((old_status & 0x0000ffff) != ICQ_STATUS_PRIVATE))
    {
-      slprintf(dbcomm_str, sizeof( dbcomm_str )-1, 
-	        BCST_ASN417, auser.uin, NORMAL_CONTACT, auser.uin, 
+      slprintf(dbcomm_str, sizeof( dbcomm_str )-1,
+	        BCST_ASN417, auser.uin, NORMAL_CONTACT, auser.uin,
 	        INVISIBLE_CONTACT, lp_v7_max_contact_size());
-	       
+
       res = PQexec(users_dbconn, dbcomm_str);
-   
+
       if (PQresultStatus( res ) != PGRES_TUPLES_OK )
       {
          handle_database_error(res, "[BROADCAST STATUS_PV2]");
 	 PQclear( PQexec( users_dbconn, "ABORT" ) );
          return;
       }
-   
+
       /* number of returned users (tuples with information) */
-      users_cnt = PQntuples( res );   
+      users_cnt = PQntuples( res );
       /* now it is time to send online alert to all users in loop */
       if ( PQnfields( res ) == 2 )
       {
          for( int i=0; i<users_cnt; i++ )
-         {     
+         {
             /* first fill online_user structure */
             to_user.uin	    = atoul( PQgetvalue(res, i, 0));
 	    to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
 	    /* get shm data by index and copy it into to_user */
 	    puser = shm_iget_user(to_user.uin, to_user.shm_index);
 	    if (puser == NULL) continue;
-	    
+
 	    memcpy((void *)&to_user, (const void *)puser,
 	            sizeof(struct online_user));
 
@@ -464,12 +464,12 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
             send_user_status( to_user, auser );
          }
       }
- 
+
       PQclear( res );
       PQclear( PQexec(users_dbconn, "END" ));
       return;
    }
-   
+
    /* just in case. This code should be unreachable */
    PQclear( PQexec(users_dbconn, "END" ));
 }
@@ -478,8 +478,8 @@ void broadcast_status( struct online_user &auser, unsigned long old_status )
 /* Purpose: Broadcast administrator message to online (and possibly to    */
 /* offline) users.							  */
 /**************************************************************************/
-void broadcast_message(BOOL online_only, unsigned long department, 
-		       char *message, unsigned short mess_type, 
+void broadcast_message(BOOL online_only, unsigned long department,
+		       char *message, unsigned short mess_type,
 		       unsigned long from_uin)
 {
    PGresult *res;		/* structure pointer for db requests */
@@ -490,13 +490,13 @@ void broadcast_message(BOOL online_only, unsigned long department,
    struct msg_header msg_hdr;
    unsigned long curr_time;
    int oust_size = 0;
-  
+
    bzero((void *)&msg_hdr, sizeof(msg_hdr));
-   
+
 /* ------------------------------------------ */
 /* First stage: Send messages to online users */
 /* ------------------------------------------ */
-   
+
 /* Define query to avoid multistring literals */
 /* broadcast message for specified department */
 #define BCST_MD502 \
@@ -507,7 +507,7 @@ void broadcast_message(BOOL online_only, unsigned long department,
     WHERE wdepart='%lu' \
  ) \
  AND uin<>%lu"
-   
+
 /* Define query to avoid multistring literals */
 /* broadcast message for all users            */
 #define BCST_MA515 \
@@ -515,43 +515,43 @@ void broadcast_message(BOOL online_only, unsigned long department,
  WHERE (active=1) AND (uin<>%lu)"
 
    PQclear( PQexec(users_dbconn, "BEGIN" ));
-   
+
    /* if depart = 0 we'll send msg 2 all */
-   if (department != 0) 
+   if (department != 0)
    {
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
 	       BCST_MD502, department, from_uin);
    }
-   else 
+   else
    {
-      slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+      slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
                BCST_MA515, from_uin);
    }
-   
+
    res = PQexec(users_dbconn, dbcomm_str);
-   
+
    if (PQresultStatus(res) != PGRES_TUPLES_OK)
    {
       handle_database_error(res, "[BROADCAST-MESS2ONLINE]");
       return;
    }
-   
+
    users_cnt      = PQntuples(res);
    curr_time      = timeToLong(time(NULL));
    oust_size      = sizeof(struct online_user);
    msg_hdr.msglen = strlen(message);
-   
+
    /* now it is time to send online alert to all users in loop */
    for( int i=0; i<users_cnt; i++ )
    {
       /* first fill online_user structure */
       to_user.uin	 = atoul( PQgetvalue(res, i, 0));
       to_user.shm_index  = atoul( PQgetvalue(res, i, 1));
-         
+
       /* get shm data by index and copy it into to_user */
       puser = shm_iget_user(to_user.uin, to_user.shm_index);
       if (puser == NULL) continue;
-      
+
       memcpy((void *)&to_user, (const void *)puser, oust_size);
 
       /* all things ready, now we can send packet */
@@ -560,13 +560,13 @@ void broadcast_message(BOOL online_only, unsigned long department,
       msg_hdr.mtype    = mess_type;
       msg_hdr.from_ver = V3_PROTO;
       msg_hdr.mtime    = curr_time;
-      
+
       send_online_message(msg_hdr, to_user, message);
    }
 
-   PQclear(res);    
+   PQclear(res);
    PQclear( PQexec(users_dbconn, "END" ));
-   
+
 /* -------------------------------------------- */
 /* Second stage: Send messages to offline users */
 /* -------------------------------------------- */
@@ -590,24 +590,24 @@ void broadcast_message(BOOL online_only, unsigned long department,
     SELECT uin FROM Online_Users \
  )"
 
-   PQclear( PQexec(users_dbconn, "BEGIN" ));   
-   if (online_only != True)    
+   PQclear( PQexec(users_dbconn, "BEGIN" ));
+   if (online_only != True)
    {
       /* if depart = 0 we'll send msg 2 all */
       if (department != 0)
       {
          /* we should get uins for all unconnected */
 	 /* users from specified department */
-         slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+         slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
 	          BCST_MDO576, department);
       }
-      else 
+      else
       {
          /* we should get uins for all unconnected users */
-         slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
+         slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
 	          BCST_MAO586);
       }
-      
+
       res = PQexec(users_dbconn, dbcomm_str);
       if (PQresultStatus(res) != PGRES_TUPLES_OK)
       {
@@ -616,22 +616,22 @@ void broadcast_message(BOOL online_only, unsigned long department,
       }
 
       users_cnt = PQntuples(res); /* number of found users */
-      
+
       PGresult *res1;		  /* second struct for queries */
       bigstring nmessage;	  /* for converted message */
       time_t stime, mtime;	  /* for time values */
       bigstring dbcomm_str;	  /* for query body */
-      
+
       /* translate to server and remove all system chars */
       convert_to_postgres(nmessage, sizeof(nmessage)-1 ,message);
       stime = time(NULL); mtime = mktime(gmtime(&stime));
-      
+
       /* now it is time to add offline message to all users in loop */
       for( long i=0; i<users_cnt; i++ )
       {
          to_user.uin = atoul( PQgetvalue(res, i, 0));
-         slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-                  "INSERT INTO Users_Messages values (%lu, %lu, %lu, %d, '%s')", 
+         slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+                  "INSERT INTO Users_Messages values (%lu, %lu, %lu, %d, '%s')",
                    to_user.uin, from_uin, mktime(gmtime(&stime)), mess_type, nmessage);
 
          /* exec select command on backend server */
@@ -642,10 +642,10 @@ void broadcast_message(BOOL online_only, unsigned long department,
             return;
          }
 	 PQclear(res1);
-      }      
+      }
       PQclear( res );
    }
-   
+
    PQclear( PQexec(users_dbconn, "END" ));
 }
 

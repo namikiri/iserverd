@@ -45,14 +45,14 @@ void process_socket()
    Packet upacket;		/* udp socket processor temporal packet   */
    Packet wpacket;		/* unix wwp socket temporal packet	  */
    Packet tpacket;		/* tcp socket temporal packet		  */
-   
+
    /* initialization */
    flap_init();
    watchdog_init();
    poll_table_init();
 
    LOG_SYS(10, ("Init: Ready to serve requests on sockets [poll]\n"));
-   
+
    while(1)
    {
       csockets = 0;
@@ -66,26 +66,26 @@ void process_socket()
       curr_time = (unsigned long)time(NULL);
 
       /* check if we have incoming client udp/wwp messages */
-      if (isready_data(STOG)) 
+      if (isready_data(STOG))
       {
          while (tog_process(upacket) > 0) {};
 	 csockets++;
       }
 
-      if ((csockets < nsockets) && isready_data(SUDP)) 
+      if ((csockets < nsockets) && isready_data(SUDP))
          { udp_process(upacket); csockets++; }
 
       if ((csockets < nsockets) && isready_data(SAIM))
-         { aim_accept_connect(); csockets++; }	 
+         { aim_accept_connect(); csockets++; }
 
       if ((csockets < nsockets) && isready_data(SMSN))
          { msn_accept_connect(); csockets++; }
 
       if ((csockets < nsockets) && isready_data(SWWP))
          { wwp_process(wpacket); csockets++; }
-	 
+
       if (csockets < nsockets) { check_accepted_connections(); }
-      
+
       /* check for dead and hung childs */
       if ((curr_time - old_time) > 0)
       {
@@ -122,9 +122,9 @@ void check_accepted_connections()
             if (isready_error(i))
 	    {
    	       csockets++;
-	       DEBUG(10, ("Closing socket (%d/%d) on error [rev=%04X]\n", 
+	       DEBUG(10, ("Closing socket (%d/%d) on error [rev=%04X]\n",
 	                   i, tcp_sock_count, sock_fds[i].revents));
-			   
+
 	       close_socket_index(i, sock_inf[i].rnd_id);
             }
          }
@@ -139,17 +139,17 @@ void check_accepted_connections()
 void close_socket_index_r(int index, unsigned long rnd_id)
 {
    if ((index + 1) >  tcp_sock_count) return;
-   if (rnd_id != sock_inf[index].rnd_id) return;   
+   if (rnd_id != sock_inf[index].rnd_id) return;
 
-   DEBUG(100, ("Removing socket: [%s:%d],[i=%d/%d],[rnd=%lu],[ssec=%d]\n", 
-	     inet_ntoa(sock_inf[index].cli_addr.sin_addr), ntohs(sock_inf[index].cli_addr.sin_port), 
+   DEBUG(100, ("Removing socket: [%s:%d],[i=%d/%d],[rnd=%lu],[ssec=%d]\n",
+	     inet_ntoa(sock_inf[index].cli_addr.sin_addr), ntohs(sock_inf[index].cli_addr.sin_port),
 	     index, tcp_sock_count, sock_inf[index].rnd_id, sock_inf[index].aim_srv_seq));
 
    close(sock_fds[index].fd);
    tcp_sock_count--;
-   
-   /* delete socket from index */   
-   if ((index) != tcp_sock_count) 
+
+   /* delete socket from index */
+   if ((index) != tcp_sock_count)
    {
       /* well, we should move last socket data to this socket and dec cnt */
       sock_fds[index] = sock_fds[tcp_sock_count];
@@ -160,5 +160,5 @@ void close_socket_index_r(int index, unsigned long rnd_id)
 }
 
 
-#endif 
+#endif
 

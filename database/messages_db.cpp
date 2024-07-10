@@ -44,14 +44,14 @@ int db_add_message(struct msg_header &msg_hdr, char *message)
   time_t stime;
 
   convert_to_postgres(nmessage, sizeof(nmessage)-1 ,message);
-   
+
   stime = time(NULL);
 
   bigstring dbcomm_str;
   /* exec select command on backend server */
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-       "INSERT INTO Users_Messages values (%lu, %lu, %lu, %d, '%s')", 
-            msg_hdr.touin, msg_hdr.fromuin, mktime(gmtime(&stime)), 
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+       "INSERT INTO Users_Messages values (%lu, %lu, %lu, %d, '%s')",
+            msg_hdr.touin, msg_hdr.fromuin, mktime(gmtime(&stime)),
 	    msg_hdr.mtype, nmessage);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -63,13 +63,13 @@ int db_add_message(struct msg_header &msg_hdr, char *message)
 
   if (strcmp(PQcmdTuples(res),"") != 0)
   {
-     PQclear(res);  
+     PQclear(res);
      return(0);
   }
-  else 
+  else
   {
      PQclear(res);
-     return(-1);    
+     return(-1);
   }
 }
 
@@ -80,11 +80,11 @@ int db_add_message(struct msg_header &msg_hdr, char *message)
 int db_del_messages(unsigned long to_uin, unsigned long last_time)
 {
   PGresult *res;
-   
+
   cstring dbcomm_str;
   /* exec select command on backend server */
-  slprintf(dbcomm_str, sizeof(dbcomm_str)-1, 
-       "DELETE FROM Users_Messages WHERE to_uin=%lu and msg_date<=%lu", 
+  slprintf(dbcomm_str, sizeof(dbcomm_str)-1,
+       "DELETE FROM Users_Messages WHERE to_uin=%lu and msg_date<=%lu",
         to_uin, last_time);
 
   res = PQexec(users_dbconn, dbcomm_str);
@@ -99,7 +99,7 @@ int db_del_messages(unsigned long to_uin, unsigned long last_time)
      PQclear(res);
      return(0);
   }
-  else 
+  else
   {
      PQclear(res);
      return(-1);

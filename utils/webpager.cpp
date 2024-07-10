@@ -48,8 +48,8 @@ int main(int argc, char **argv)
   char fname[128];		/* data filename    */
   int dfhdl;			/* filename handler */
   int i, pos;
-  
-  unsigned long wwp_target_uin;	/* target uin (from data_file)     */ 
+
+  unsigned long wwp_target_uin;	/* target uin (from data_file)     */
   char wwp_tuin[32];		/* target uin string from df	   */
   char wwp_email[128];		/* email string (from data file)   */
   char wwp_name[128];		/* sender name (from data file)    */
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
   char file_buff[2048];		/* file can't be greater than 2048 */
   long read_len;		/* length of file */
   char **valid;
-  
+
   /* check if we have called without parameters */
   if (argc < 2)
   {
@@ -75,43 +75,43 @@ int main(int argc, char **argv)
     printf("------------------------------------\n");
     exit(EXIT_NORMAL);
   }
-  
+
   /* open file for reading only */
   strncpy(fname, argv[1], sizeof(fname)-1);
   dfhdl = open(fname, O_RDONLY);
 
-  if (dfhdl < 0) 
+  if (dfhdl < 0)
   {
     LOG_SYS(10, ("Can't open wwp message data file for reading...\n"));
     exit(EXIT_ERROR_FATAL);
   }
 
-  /* we don't want anybody to read this file, so we should delete 
+  /* we don't want anybody to read this file, so we should delete
      it quickly */
-  if (unlink(fname) < 0) 
+  if (unlink(fname) < 0)
   {
-     LOG_ALARM(10, ("Can't unlink wwp message data file...\n")); 
+     LOG_ALARM(10, ("Can't unlink wwp message data file...\n"));
   }
-  
+
   /* now it is time to parse file and send data to iserverd */
   bzero(file_buff, 2048);
   read_len = read(dfhdl, file_buff, 2048);
-  
+
   /* first of all we should interpret uin number at first string... */
   for (i=0; i<33; i++) if (file_buff[i] == '\n') break;
   if (i == 32) { LOG_ALARM(0, ("Uin field in datafile too big...\n")); exit(EXIT_ERROR_FATAL);}
   memcpy(wwp_tuin, file_buff, i); wwp_tuin[i] = 0;
-  
+
   valid = NULL; pos = i+1;
   wwp_target_uin = strtoul(wwp_tuin, valid, 10);
-  if (wwp_target_uin < 1001) 
+  if (wwp_target_uin < 1001)
   {
-     LOG_ALARM(0, ("Uin field in datafile contain incorrect symbols...\n")); 
+     LOG_ALARM(0, ("Uin field in datafile contain incorrect symbols...\n"));
      exit(EXIT_ERROR_FATAL);
   }
- 
+
   for (i=pos; i<pos+129; i++) if (file_buff[i] == '\n') break;
-  if (i == pos+128) { LOG_ALARM(0, ("Email field in datafile too big...\n")); exit(EXIT_ERROR_FATAL);}  
+  if (i == pos+128) { LOG_ALARM(0, ("Email field in datafile too big...\n")); exit(EXIT_ERROR_FATAL);}
   memcpy(wwp_email, file_buff+pos, i-pos); wwp_email[i-pos] = 0;
   pos = i+1;
 
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
   for (i=pos; i<pos+451; i++) if (file_buff[i] == '\0') break;
   if (i == pos+450) { LOG_ALARM(0, ("Text field in datafile too big...\n")); exit(EXIT_ERROR_FATAL);}
   memcpy(wwp_message, file_buff+pos, read_len - pos); wwp_message[read_len - pos] = 0;
-  
+
   /* send data to special socket */
   reply_pack.clearPacket();
   reply_pack << (unsigned  long)0x01020709
@@ -147,13 +147,13 @@ int main(int argc, char **argv)
   wp_serv_addr.sun_family = AF_UNIX;
   snprintf(wp_serv_addr.sun_path, sizeof(wp_serv_addr.sun_path)-1,
            "/tmp/wwp_sock");
-  wp_saddrlen = sizeof(wp_serv_addr.sun_family) + 
+  wp_saddrlen = sizeof(wp_serv_addr.sun_family) +
                        strlen(wp_serv_addr.sun_path) + 1;
 
   /* send packet to pipe socket */
-  sendto(wwpsockfd, reply_pack.buff, reply_pack.sizeVal, 0, 
+  sendto(wwpsockfd, reply_pack.buff, reply_pack.sizeVal, 0,
           (struct sockaddr *)&wp_serv_addr, wp_saddrlen);
-  
+
   shutdown(wwpsockfd, 2);
   close(wwpsockfd);
 

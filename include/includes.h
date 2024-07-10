@@ -48,7 +48,7 @@
 #endif
 
 #ifdef HAVE_STDIO_H
-#include <stdio.h> 
+#include <stdio.h>
 #endif
 
 #ifdef HAVE_STDDEF_H
@@ -155,14 +155,14 @@
 #endif
 
 #include <sys/un.h>
-#if defined HAVE_POLL_H      
-#include <poll.h>            
+#if defined HAVE_POLL_H
+#include <poll.h>
 #elif defined HAVE_SYS_POLL_H
-#include <sys/poll.h>        
-#endif                       
+#include <sys/poll.h>
+#endif
 
 #ifdef HAVE_SYSLOG_H
-#include <syslog.h> 
+#include <syslog.h>
 #endif
 
 #ifdef TIME_WITH_SYS_TIME
@@ -256,7 +256,7 @@ typedef int BOOL;
 typedef int SMODE;
 #endif
 
-#ifndef _PSTRING                  
+#ifndef _PSTRING
 #define PSTRING_LEN 1025
 #define FSTRING_LEN 257
 #define FIELDST_LEN 65
@@ -269,7 +269,7 @@ typedef char cstring[CSTRING_LEN];
 typedef char mstring[MSTRING_LEN];
 typedef char ffstring[FIELDST_LEN];
 #define _PSTRING
-#endif                            
+#endif
 
 #ifndef uint32
 #define uint32 unsigned int
@@ -332,9 +332,9 @@ enum case_handling {CASE_LOWER,CASE_UPPER};
 #include "protos.h"
 #endif
 
-#ifndef O_ACCMODE                               
+#ifndef O_ACCMODE
 #define O_ACCMODE (O_RDONLY | O_WRONLY | O_RDWR)
-#endif                                          
+#endif
 
 #define ZERO_ARRAY(x) memset((char *)(x), 0, sizeof(x))
 #define SLAB(LEN, POS)	LEN - POS >= 4 ? 4 : LEN - POS
@@ -365,7 +365,7 @@ void vsyslog(int priority, const char *message, va_list args);
 #define OPTSTR  		"r:loVd:c:p:m:"
 
 #ifndef HAVE_STRUCT_SEMUN
-typedef union semun 
+typedef union semun
 {
     int val;                           /* <= value for SETVAL */
     struct semid_ds *buf;              /* <= buffer for IPC_STAT & IPC_SET */
@@ -386,7 +386,7 @@ typedef struct ipc_structure
    unsigned long  max_queue_pack;	/* max number of packets in queue     */
    unsigned long  queue_send_errors;	/* number of errors in queue          */
    unsigned long  incw_packet_seq;	/* inc write pipe packet sequence     */
-   unsigned long  incr_packet_seq;	/* inc read pipe packet sequence      */   
+   unsigned long  incr_packet_seq;	/* inc read pipe packet sequence      */
    unsigned short magic_num1;		/* random number1 for system injector */
    unsigned short magic_num2;		/* random number2 for system injector */
    unsigned long  online_usr_num;	/* number of records in shm userspace */
@@ -420,16 +420,16 @@ struct child_process
 
     pid_t child_pid;		 /* child pid number */
     int   child_role;		 /* child function   */
-    
+
 };
 
 /* childs list element record */
 typedef struct child_record
 {
-    struct child_record  *prior; 
+    struct child_record  *prior;
     struct child_record  *next;
     struct child_process child;
-    
+
 } child_record;
 #endif
 

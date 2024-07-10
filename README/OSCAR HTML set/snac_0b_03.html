@@ -1,0 +1,314 @@
+<html>
+<head>
+<title>SNAC(0B,03) client stats report</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0><tr><td>
+<b><font color="white">SNAC(0B,03)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_STATS_REPORT&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>This is the client stats report. It contains local system info.<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=185>&nbsp;00 0B</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 03</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<!-- TLV 0x09 -->
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr><tr><td width=30></td><td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+<tr><td bgcolor=#f9f9f9>
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=25%>&nbsp;00 09</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x09) - local configuration (?)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr >
+   <td width=25%>&nbsp;xx xx xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>dword</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>probably, info creation time in time_t format (local)</td>
+   </tr>
+   <tr >
+   <td>&nbsp;xx xx xx xx</td>
+   <td>&nbsp;</td>
+   <td>dword</td>
+   <td>&nbsp;</td>
+   <td>time in time_t format (same value, but in GMT)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 00 00 00<br>&nbsp;00 00 00 00<br>
+       &nbsp;00 00 00 00<br>&nbsp;00 00 00 00</td>
+   <td>&nbsp;</td>
+   <td valign=top>16 bytes</td>
+   <td>&nbsp;</td>
+   <td valign=top>unknown (zero values)</td>
+   </tr>
+   <tr><td colspan=5 height=5></td></tr>
+   <tr>
+   <td>&nbsp;xx</td>
+   <td>&nbsp;</td>
+   <td>byte</td>
+   <td>&nbsp;</td>
+   <td>length of the screenname (uin) string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>ascii</td>
+   <td>&nbsp;</td>
+   <td>screenname (uin) string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>unknown (machine class ?)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>length of the OS name</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>ascii</td>
+   <td>&nbsp;</td>
+   <td>OS name (ex: Windows 2000)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>length of the OS version string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>ascii</td>
+   <td>&nbsp;</td>
+   <td>OS version (ex: 5.1.2600)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>length of the processor type</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>ascii</td>
+   <td>&nbsp;</td>
+   <td>processor type (ex: Intel.Pentium)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>length of the winsock description string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>ascii</td>
+   <td>&nbsp;</td>
+   <td>winsock DLL description string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>length of the winsock version string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>ascii</td>
+   <td>&nbsp;</td>
+   <td>winsock DLL version (ex: 5.1.2600.0)</td>
+   </tr>
+   <tr><td colspan=5 height=5></td></tr>
+   <tr>
+   <td>&nbsp;00 00</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Unknown field</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 02</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Unknown field</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 01</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Unknown field</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 01</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Unknown field</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 02</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Unknown field</td>
+   </tr>
+   <tr>
+   <td>&nbsp;00 02</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Unknown field</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+
+</td></tr></table>
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3> 
+</td></tr></table>
+
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 1B A6 00 9B 00 0B 00 03 00 00 00 01 00 03  *..æ.Û..........
+  00 09 00 8D 3E DE 02 8E 3E DE 2C BE 00 00 00 00  ...Í>¦.Î>¦,-....
+  00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 00  ................
+  0A 57 69 6E 64 6F 77 73 20 39 38 00 0D 34 2E 31  .Windows 98..4.1
+  30 2E 36 37 37 36 36 34 34 36 00 0D 49 6E 74 65  0.67766446..Inte
+  6C 20 50 65 6E 74 69 75 6D 00 2F 4D 69 63 72 6F  l Pentium./Micro
+  73 6F 66 74 20 43 6F 72 70 6F 72 61 74 69 6F 20  soft Corporatio 
+  42 53 44 20 53 6F 63 6B 65 74 20 41 50 49 20 66  BSD Socket API f
+  6F 72 20 57 69 6E 64 6F 77 73 00 09 34 2E 31 30  or Windows..4.10
+  2E 31 39 39 38 00 00 00 02 00 01 00 01 00 02 00  .1998...........
+  02 2A 02 1B A7 00 0C 00 01 00 04 00 00 00 01 00  .*..ç...........
+  04 00 18 2A 02 1B A8 00 0C 00 01 00 04 00 00 00  ...*..è.........
+  02 00 04 00 0F 2A 02 1B A9 00 0A 00 02 00 09 00  .....*..é.......
+  00 00 01 00 09 2A 02 1B AA 00 0A 00 02 00 0F 00  .....*..ê.......
+  00 00 02 00 0F                                   .....
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

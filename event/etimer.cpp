@@ -25,37 +25,37 @@
 /* OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 	  */
 /* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.			  */
 /*									  */
-/* This unit contain functions for etimer process, that send time tics    */ 
-/* every second to epacket-processor and euser-processor                  */ 
+/* This unit contain functions for etimer process, that send time tics    */
+/* every second to epacket-processor and euser-processor                  */
 /*									  */
 /**************************************************************************/
 
 #include "includes.h"
 
-#ifndef HAVE_UALARM                                                   
-u_int ualarm (u_int value, u_int interval)                            
-{                                                                     
-  struct itimerval timer, otimer;                                     
-                                                                        
-  timer.it_value.tv_sec = 0;                                          
-  timer.it_value.tv_usec = value;                                     
-  timer.it_interval.tv_sec = 0;                                       
-  timer.it_interval.tv_usec = interval;                               
-                                                                        
-  if (setitimer (ITIMER_REAL, &timer, &otimer) < 0) return (u_int)-1;                                                 
-                                                                  
+#ifndef HAVE_UALARM
+u_int ualarm (u_int value, u_int interval)
+{
+  struct itimerval timer, otimer;
+
+  timer.it_value.tv_sec = 0;
+  timer.it_value.tv_usec = value;
+  timer.it_interval.tv_sec = 0;
+  timer.it_interval.tv_usec = interval;
+
+  if (setitimer (ITIMER_REAL, &timer, &otimer) < 0) return (u_int)-1;
+
   return (otimer.it_value.tv_sec * 1000000) + otimer.it_value.tv_usec;
-}                                                                     
-#endif                                                                
+}
+#endif
 
 void process_etimer()
 {
    LOG_SYS(10, ("Init: ETimer processor initialization success\n"));
-  
+
    /* signal initialization */
    rsignal(SIGALRM,  (void(*)(int))etimerSIGALRMHandler);
    ualarm(1000000, 1000000);   	/* we need alarm each 1 sec 	*/
-      
+
    while(1)
    {
       /* all code is in SIGALRM handler */
@@ -81,12 +81,12 @@ RETSIGTYPE etimerSIGALRMHandler(int param)
 void send_timeout2cache()
 {
    struct event_pack pmessage;
-  
+
    pmessage.mtype      = MESS_TIMEOUT;
    pmessage.uin_number = 0;
    pmessage.ack_stamp  = 0;
    pmessage.ttl	       = 0;
-   
+
    euser_send_event(pmessage);
 }
 
@@ -97,12 +97,12 @@ void send_timeout2cache()
 void send_timeout2epacket()
 {
    struct event_pack pmessage;
-  
+
    pmessage.mtype      = MESS_TIMEOUT;
    pmessage.uin_number = 0;
    pmessage.ack_stamp  = 0;
    pmessage.ttl	       = 0;
-   
+
    epacket_send_event(pmessage);
 }
 

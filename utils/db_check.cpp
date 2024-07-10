@@ -32,8 +32,8 @@
 
 #include "includes.h"
 
-extern pstring debugf; 
-extern pstring systemf; 
+extern pstring debugf;
+extern pstring systemf;
 extern pstring alarmf;
 extern pstring usersf;
 extern BOOL append_log;
@@ -55,16 +55,16 @@ int main(int argc, char **argv)
   slprintf(debugf,  sizeof(debugf), "/dev/null");
   setup_alrlogging( "", True );
   setup_syslogging( "", True );
-  
+
   /* Loading configuration file */
   if (!lp_load(configf,False,False,True))
   {
     printf("FATAL ERROR: Can't find config file: \"%s\"\n", configf);
     exit(EXIT_ERROR_CONFIG_OPEN);
   }
-  
-  check_and_fix_database(lp_db_users(), lp_db_user(), lp_db_pass(), 
+
+  check_and_fix_database(lp_db_users(), lp_db_user(), lp_db_pass(),
                          lp_db_addr(), lp_db_port());
-  
+
 }
 

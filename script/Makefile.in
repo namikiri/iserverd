@@ -15,7 +15,7 @@ mkinstalldirs = $(SHELL) ../mkinstalldirs
 
 BIN_SCRIPT  =  iserver_db_manage.sh \
 	       iserver_convert_db.sh \
-	       post_mess.cgi
+	       iserver_post_mess.cgi
 
 DB_SCRIPT   =  iserver_icquser
 DB_SUPP     =  icquser.sql

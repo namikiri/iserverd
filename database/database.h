@@ -92,7 +92,7 @@ typedef struct online_user
    unsigned long  idle_time;	/* client idle time 			  */
    unsigned long  idle_perms;	/* idle permissions                       */
    unsigned long  ttl;		/* max live-time without update 	  */
-   unsigned long  ttlv;		/* current live-time 			  */   
+   unsigned long  ttlv;		/* current live-time 			  */
    unsigned short protocol;	/* protocol number 			  */
    unsigned long  servseq;	/* current server sequence num		  */
    unsigned long  servseq2;	/* v5 proto server sequence 2		  */
@@ -114,12 +114,12 @@ typedef struct online_user
    char 	  import_mode;	/* flag: 1 - import ssi trans in progres  */
    unsigned short ssi_version;  /* client ssi service handler version     */
 
-   unsigned short warn_level;	/* user warning level 			  */   
+   unsigned short warn_level;	/* user warning level 			  */
 
    struct icbm_params mopt[MAX_ICBM_CHANNELS]; /* icbm params per channel */
-         
+
    char           caps[MAX_CAPS][16];	/* caps 2D array for CLSID values */
-   
+
 } online_user;
 
 
@@ -137,7 +137,7 @@ typedef struct full_user_info
     short      can_broadcast;   /* if he can send broadcast messages 	  */
     int          ch_password;   /* if user need to change password 	  */
     char 	  gmt_offset;   /* user gmt time offset 		  */
-    char	      e1publ;   /* if user don't want to publish email1   */    
+    char	      e1publ;   /* if user don't want to publish email1   */
     char              bmonth;   /* user's birth day 			  */
     char      		bday;   /* user's bith month 			  */
     char 	      iphide;   /* if user doesn't want to show his ip 	  */
@@ -146,16 +146,16 @@ typedef struct full_user_info
     long 	        wzip;   /* work cell phone 			  */
     short 	       wocup;   /* work ocupation 			  */
     long 	     wdepart;   /* work department 			  */
-    short	    wcountry;	/* work country 			  */  
-    
+    short	    wcountry;	/* work country 			  */
+
     long    	     cr_date;   /* date of account creation 		  */
     long  	   lastlogin;   /* last user login time 		  */
     unsigned long    ip_addr;   /* last user's ip address 		  */
     unsigned long    nupdate;   /* notes update time 			  */
-    
+
     short	    hcountry;	/* home country 			  */
     long 	        hzip;   /* home cell phone 			  */
-    
+
     char 	       lang1;   /* speaking language #1 		  */
     char 	       lang2;   /* speaking language #2 		  */
     char 	       lang3;   /* speaking language #3 		  */
@@ -182,17 +182,17 @@ typedef struct full_user_info
     char      hpage_txt[128];   /* homepage description			  */
     char          hphone[64];	/* home phone 				  */
     char 	    hfax[64];   /* home fax 				  */
-    char 	   hcell[64];   /* home cell phone 			  */    
+    char 	   hcell[64];   /* home cell phone 			  */
 
     char	   waddr[64];   /* work address 			  */
     char           wcity[32];	/* work city 				  */
-    char          wstate[32];	/* work state 				  */  
+    char          wstate[32];	/* work state 				  */
     char 	wcompany[64];   /* work company name 			  */
 
     char 	  wtitle[64];   /* work title 				  */
     char          wphone[64];	/* work phone 				  */
-    char 	  wpager[64];   /* work cell phone 			  */        
-    char 	    wfax[64];   /* work fax 				  */    
+    char 	  wpager[64];   /* work cell phone 			  */
+    char 	    wfax[64];   /* work fax 				  */
     char 	  wpage[128];	/* work www page 			  */
     char          passwd[32];	/* user's password 			  */
     char            nick[32];	/* user's nickname 			  */
@@ -228,7 +228,7 @@ typedef struct full_user_info
     short	    bcountry;	/* born country 			  */
     char          bstate[32];	/* born state 				  */
     char           bcity[32];	/* born city 				  */
-    
+
 } full_user_info;
 
 /* partial user information - used in login handler */
@@ -263,7 +263,7 @@ typedef struct depart_info
     int		     depcode;	/* department unique code 		  */
     char           depmin[8];	/* department short name 		  */
     char	depname[255];   /* department full name 		  */
-    
+
 } depart_info;
 
 
@@ -279,7 +279,7 @@ typedef struct found_info
     char          email1[64]; 	/* user's first email addres 		  */
     char          email2[64]; 	/* user's second email addres 		  */
     char          email3[64]; 	/* user's third email addres 		  */
-    
+
 } found_info;
 
 /* for db_user_lookup function to get extended V5+ info from database */
@@ -321,7 +321,7 @@ typedef struct ext_user_info
     char       past_key2[64];   /* past entry #2 keywords		  */
     char       past_key3[64];   /* past entry #3 keywords		  */
     char	wdepart2[32];	/* work department in string format	  */
-    
+
 } ext_user_info;
 
 
@@ -348,7 +348,7 @@ typedef struct msg_header
    unsigned short mcharset;	/* message charset      */
    unsigned short mcsubset;     /* message char subset  */
    unsigned short msglen;	/* message str length   */
-   
+
 } msg_header;
 #endif /* _MSG_HEADER */
 

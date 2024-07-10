@@ -1,0 +1,19 @@
+My way to dump & analyse packets.
+	
+
+Sometimes people ask me how to dump ICQ packets. I'm using unix sinffer called snort. You can download it from http://www.clark.net/~roesch/security.html. This is a very usefull program. I run it in daemon mode with fillowing parameters: ./snort -D -i ed0 -d -c ./rule.txt -l ./log File rules.txt contain one rule to catch ICQ packets: log udp any any <> any 4000.
+
+In this mode snort will dump all ICQ packets into log directory. When i've been analysing V3 protocol - I simply read snort log files. But V5 client packets are crypted. Soo I've made a decrypt utility and a perl script, that parse snort log files. You can download this script and decrypt program from here. This script very simple in use. Remove separate lines from log file and then just run it with log filename as command string parameter: ./parse.pl snort.log and you'll receive log.txt.new after parsing, that contain all dumped packets decrypted.
+
+Here is example of parsed snort log file:
+
+[packets dump.gif]
+
+I highlight some header fields to show you how to analyse data.
+
+Yellow highlighted code - header field with protocol version number
+Pink highlighted code - header field with client uin information
+Blue highlighted code - header field with session id number
+Green highlighted code - header field with command number
+Red highlighted code - sequence1 and sequence2 fields
+Orange highlighted code - packet checksum field

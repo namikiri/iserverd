@@ -51,21 +51,21 @@ void scheduler_init()
 /**************************************************************************/
 void scheduler_timer()
 {
-   if (counter1 == (unsigned long)abs(lp_sched_vacuum())) 
-   { 
-      call_scheduler_vacuum(); 
+   if (counter1 == (unsigned long)abs(lp_sched_vacuum()))
+   {
+      call_scheduler_vacuum();
       counter1 = 1;
    }
 
-   if (counter2 == (unsigned long)abs(lp_online_check())) 
-   { 
-      call_online_check(); 
+   if (counter2 == (unsigned long)abs(lp_online_check()))
+   {
+      call_online_check();
       counter2 = 1;
    }
-   
-   if (counter3 == (unsigned long)abs(lp_defrag_check())) 
-   { 
-      call_defrag_check(); 
+
+   if (counter3 == (unsigned long)abs(lp_defrag_check()))
+   {
+      call_defrag_check();
       counter3 = 1;
    }
 
@@ -81,7 +81,7 @@ void call_scheduler_vacuum()
 {
     LOG_SYS(0, ("It is time to vacuum database...\n"));
     vacuum_online_tables();
-    
+
     return;
 }
 
@@ -92,15 +92,15 @@ void call_scheduler_vacuum()
 void call_defrag_check()
 {
     struct defrag_pack dpack;
-    
+
     LOG_SYS(0, ("It is time to cleanup defragment table...\n"));
-    
+
     dpack.mtype   = MESS_FRGCHECK;
     dpack.uin_num = 0;
     dpack.seq	  = 0;
-    
+
     defrag_send_pipe(dpack);
-    
+
     return;
 }
 
@@ -112,7 +112,7 @@ void call_online_check()
 {
     LOG_SYS(0, ("It is time to check online_users table...\n"));
     check_online_table();
-    
+
     return;
 }
 

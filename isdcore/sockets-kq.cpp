@@ -58,26 +58,26 @@ void process_socket()
 {
    int i;
    unsigned int udata_index = 0;
-   
+
    pack_processed = 0;		/* number of processed by server packets  */
    Packet upacket;		/* udp socket processor temporal packet   */
    Packet wpacket;		/* unix wwp socket temporal packet	  */
    Packet tpacket;		/* tcp socket temporal packet		  */
-   
+
    flap_init();
    watchdog_init();
    poll_table_init();
    kernel_queue_init();
 
    LOG_SYS(10, ("Init: Ready to serve requests on sockets [kqueue]\n"));
-   
+
    while(1)
    {
       nsockets = kevent(kernq, sock_chg, nchanges, sock_kev, KQNEVENTS, 0);
       nchanges = 0;
 
       if ((nsockets <= 0) && (errno != EINTR))
-      { 
+      {
          LOG_SYS(0, ("Kernel queue error: %s\n", strerror(errno)));
       }
 
@@ -86,7 +86,7 @@ void process_socket()
       for(i = 0; i < nsockets; i++)
       {
          udata_index = (unsigned int)sock_kev[i].udata;
-	 
+
          /* socket errors handler */
          if(sock_kev[i].flags & EV_ERROR)
 	 {
@@ -94,7 +94,7 @@ void process_socket()
 	    {
 	       if (udata_index >= RES_SLOTS)
 	       {
-	          DEBUG(10, ("[kq] Closing socket (%d/%d) on error\n", 
+	          DEBUG(10, ("[kq] Closing socket (%d/%d) on error\n",
 	                      udata_index, tcp_sock_count));
 
 	          close_socket_index(udata_index, sock_inf[udata_index].rnd_id);
@@ -105,7 +105,7 @@ void process_socket()
 		  close(sock_kev[i].ident);
 	       }
 	    }
-	    
+
 	    continue;
 	 }
 
@@ -113,7 +113,7 @@ void process_socket()
          switch(sock_kev[i].filter)
 	 {
 	    case EVFILT_READ:
-	         
+
 	         if ((int)sock_kev[i].ident == sock_fds[udata_index].fd)
 		 {
 		    if (udata_index == SUDP) { udp_process(upacket); }
@@ -124,21 +124,21 @@ void process_socket()
 
                     break;
 	         }
-	    
-	    case EVFILT_TIMER: 
 
-	         curr_time = (unsigned long)time(NULL); 
+	    case EVFILT_TIMER:
+
+	         curr_time = (unsigned long)time(NULL);
 
 	         watchdog_check();
                  check_sockets_timeout();
                  prchilds_check();
                  if (process_role != ROLE_SOCKET) return;
                  old_time = curr_time;
-		 
+
 		 break;
          }
       }
-      
+
       while (tog_process(upacket) > 0) {}; /* check for tog packets again */
    }
 }
@@ -152,10 +152,10 @@ void close_socket_index_r(int index, unsigned long rnd_id)
    if ((index + 1) >  tcp_sock_count) return;
    if (rnd_id != sock_inf[index].rnd_id) return;
 
-   DEBUG(100, ("Removing socket: [%s:%d],[i=%d/%d],[rnd=%lu],[ssec=%d]\n", 
-	     inet_ntoa(sock_inf[index].cli_addr.sin_addr), 
-	     ntohs(sock_inf[index].cli_addr.sin_port), 
-	     index, tcp_sock_count, sock_inf[index].rnd_id, 
+   DEBUG(100, ("Removing socket: [%s:%d],[i=%d/%d],[rnd=%lu],[ssec=%d]\n",
+	     inet_ntoa(sock_inf[index].cli_addr.sin_addr),
+	     ntohs(sock_inf[index].cli_addr.sin_port),
+	     index, tcp_sock_count, sock_inf[index].rnd_id,
 	     sock_inf[index].aim_srv_seq));
 
    tcp_sock_count--;
@@ -163,7 +163,7 @@ void close_socket_index_r(int index, unsigned long rnd_id)
    /* we should delete it by hands - this fd may be cloned by fork */
    EV_SET(sock_chg+nchanges, sock_fds[index].fd, EVFILT_READ, EV_DELETE, 0, 0, 0);
    nchanges++;
-   
+
    close(sock_fds[index].fd);
 
    /* delete socket from index */
@@ -171,10 +171,10 @@ void close_socket_index_r(int index, unsigned long rnd_id)
    {
       sock_fds[index] = sock_fds[tcp_sock_count];
       sock_inf[index] = sock_inf[tcp_sock_count];
-      
+
       /* now we should update kqueue object */
       EV_SET(sock_chg+nchanges, sock_fds[index].fd, EVFILT_READ, EV_ADD, 0, 0, (void *)index);
-	     
+
       nchanges++;
    }
 
@@ -190,7 +190,7 @@ void kernel_queue_init()
    sock_kev  = new struct kevent[KQNEVENTS*2];
    sock_chg  = new struct kevent[KQNEVENTS*2];
    nchanges  = 0;
-   
+
    /* Create a new kernel event queue and init descriptor */
    if ((kernq = kqueue()) == -1)
    {
@@ -203,9 +203,9 @@ void kernel_queue_init()
    {
       if (sock_fds[i].fd != -1)
       {
-         EV_SET(sock_chg+nchanges, sock_fds[i].fd, EVFILT_READ, 
+         EV_SET(sock_chg+nchanges, sock_fds[i].fd, EVFILT_READ,
 	        EV_ADD, 0, 0, (void *)i);
-		
+
 	 nchanges++;
       }
    }
@@ -223,7 +223,7 @@ void accept_add_object(int index)
 {
    if (sock_fds[index].fd != -1)
    {
-      EV_SET(sock_chg+nchanges, sock_fds[index].fd, 
+      EV_SET(sock_chg+nchanges, sock_fds[index].fd,
              EVFILT_READ, EV_ADD, 0, 0, (void *)index);
 
       nchanges++;

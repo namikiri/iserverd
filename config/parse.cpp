@@ -34,10 +34,10 @@ static char *bufr  = NULL;
 static int   bSize = 0;
 
 
-typedef struct 
+typedef struct
 {
 
-   char *buf; 
+   char *buf;
    char *p;
    size_t size;
 
@@ -66,15 +66,15 @@ static int EatWhitespace( myFILE *InFile )
         c = mygetc( InFile ) );
 
    return( c );
-} 
+}
 
 
 /* Delete comment from line */
 static int EatComment( myFILE *InFile )
 {
    int c;
-   for( c = mygetc( InFile ); 
-	('\n'!=c) && (EOF!=c) && (c>0); 
+   for( c = mygetc( InFile );
+	('\n'!=c) && (EOF!=c) && (c>0);
 	c = mygetc( InFile ) );
 
    return( c );
@@ -88,11 +88,11 @@ static int Continuation( char *line, int pos )
    while( (pos >= 0) && isspace(line[pos]) )
    pos--;
 
-   while(pos2 <= pos) 
+   while(pos2 <= pos)
    {
       size_t skip = 0;
       skip = 0;
-      if (skip) 
+      if (skip)
       {
         pos2 += skip;
       }
@@ -150,7 +150,7 @@ static BOOL Section( myFILE *InFile, BOOL (*sfunc)(char *) )
             if( i < 0 )
             {
                bufr[end] = '\0';
-	       LOG_SYS(0, ("WARNING: Badly formed line in configuration file: %s\n", bufr ));                                      
+	       LOG_SYS(0, ("WARNING: Badly formed line in configuration file: %s\n", bufr ));
                return( False );
             }
 
@@ -339,7 +339,7 @@ BOOL pm_process( char *FileName, BOOL (*sfunc)(char *),
 
    InFile = OpenConfFile( FileName );
    if(NULL == InFile) return(False);
-   
+
    if (NULL != bufr) result = Parse(InFile, sfunc, pfunc);
    else
    {
@@ -362,5 +362,5 @@ BOOL pm_process( char *FileName, BOOL (*sfunc)(char *),
    }
 
    return( True );
-} 
+}
 

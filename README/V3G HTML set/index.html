@@ -1,0 +1,90 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>IServerd project Home Page</title>
+
+<style type="TEXT/CSS">
+BODY {background-color: white; font-size: 16px; font-family: Arial, Sans-Serif}
+
+P.SM {font-size: 12px;text-indent : 0px;}
+P {text-align: justify; font-size: 16px; text-indent : 25px;}
+p {text-align: justify; font-size: 16px; text-indent : 25px;}
+TD {font-size: 16px; font family: Arial, Sans-Serif; font-style: strong;}
+LI {font-size: 16px; font family: Arial, Sans-Serif; font-style: strong;}
+</style>
+
+
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" border="0" width="710">
+<tr>
+<td width="91"></td>
+<td valign="top" align="left">
+  <font color="#0000A0"><b>
+  <h3><font face="arial" color="#0000A0">V3G protocol packet structure.</font></h3>
+  </b></font>
+</td>
+</tr>
+</table>
+
+<p>Packet consist of following parts: version number (2), sequence number (4), command code (2), 
+IN number (2x4), command parameters (parameters have non-fixed length)<br><br>
+
+<table cellpadding="0" cellspacing="0">
+<tr><td colspan="4"><hr></td></tr>
+<tr>
+<td width="20"></td><td><font color="#0000ff">03 00</font></td><td width="100"></td><td>version number (v3 proto) (allways <font color="#0000ff">00 03 </font> for v3 proto)</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">e8 03</font></td><td></td><td>command code   (<font color="#0000ff">03 e8</font>   - logon packet)</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">01 00</font></td><td></td><td>sequence num 1 (seq1)  (in reply packet it = <font color="#0000ff">00 00</font> )</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">02 00</font></td><td></td><td>sequence num 2 (seq2)  (in reply packet it = <font color="#0000ff">00 00</font> )</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">8f e4 5e 00</font></td><td></td><td>client local (intranet) UIN</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">00 00 00 00</font></td><td></td><td>client Internet UIN ???  (current client = <font color="#0000ff">00 00 00 00</font> )</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">bf 09 00 00</font></td><td></td><td>client tcp port number</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">04 00</font></td><td></td><td>password length        (length with final zero)</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">25 25 25 00</font></td><td></td><td>password (ASCIIZ plain string)</td>
+</tr>
+<tr>
+<td></td><td><font color="#0000ff">7a 00 02 00</font></td><td></td><td>logon version    (current client = <font color="#0000ff">7a 00 02 00</font> )</td>
+</tr>
+<tr>
+<td></td><td colspan="3">
+...
+</td>
+</tr>
+<tr><td colspan="4"><hr></td></tr>
+</table>
+
+
+</p><p>Server and client have no-crossed sequenses numbers. Client start from <font color="#0000ff">00 01</font> (sec2 from <font color="#0000ff">00 02</font>) 
+and increase seq number in each packet with 1. Server start seq1 from <font color="#0000ff">00 00</font> and increase it in 
+each packet with 1 and it doesn't change seq2 - it equiv <font color="#0000ff">00 00</font> (if this is not reply packet) 
+and it = seq2 of replyed packet. Seq2 in client messages used in reply packets to identify them.
+All strings are ASCIIZ - ASCII string with zero at the end to identify end_of_string. Before 
+each string there are 2 bytes of its length. TCP port number use 4 bytes (strange, isn't it?)
+Client ACK (reply) packets must have zero seq2 and seq1 = seq1 of server packet. Server ACK 
+must have seq1 = seq1 of server packet and seq2 = seq2 of server packet.</p>
+
+<br><br>
+
+<h3><font face="arial" color="#0000A0">V3G protocol packets description.</font></h3>
+
+<p>&nbsp;&nbsp;&nbsp;<a href="client.html">Client commands overview</a></p>
+<p>&nbsp;&nbsp;&nbsp;<a href="server.html">Server replies/async overview</a></p>
+
+<p><a href="mailto:AVShutko@mail.khstu.ru">Webmaster A.V.Shutko</a></p>
+</body></html>

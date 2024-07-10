@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0/0898 request server variable via xml</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0/0898&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_REQ_XML_INFO&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+Official clients use this to retrieve various information from server (like ads URL).
+Server should respond with <a href="snac_15_03_07da_08a2.html">SNAC(15,03)/07DA/08A2</a>.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 00</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data type: META_DATA_REQ</td>
+</tr>
+<tr>
+<td>&nbsp;02 00</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number</td>
+</tr>
+<tr>
+<td>&nbsp;98 08</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data subtype: META_REQ_XML_INFO</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>xml request string length</td>
+</tr>
+<tr>
+<td>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>asciiz</td>
+<td width=5>&nbsp;</td>
+<td width=55%>xml request string</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 22 A6 00 32 00 15 00 02 00 00 00 03 00 02 *."..2..........
+  00 01 00 24 22 00 8F E4 5E 00 D0 07 04 00 98 08 ...$"...^.......
+  16 00 3C 6B 65 79 3E 42 61 6E 6E 65 72 73 55 52 ..&lt;key&gt;BannersUR
+  4C 3C 2F 6B 65 79 3E 00                         L&lt;/key&gt;.
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+Request/response examples:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=10>&nbsp;&nbsp;</td>
+<td>
+<br>
+&lt;key&gt;BannersURL&lt;/key&gt;<br>
+&lt;value&gt;http://205.188.250.25/cb/%d/datafiles/banners.cb?%s&lt;/value&gt;<br><br>
+
+&lt;key&gt;DataFilesURL&lt;/key&gt;<br>
+&lt;value&gt;http://205.188.250.25/cb/%d/datafiles/%s.cb&lt;/value&gt;<br><br>
+
+&lt;key&gt;PartnersURL&lt;/key&gt;<br>
+&lt;value&gt;http://205.188.250.25/cb/%d/datafiles/%s.cb&lt;/value&gt;<br><br>
+
+&lt;key&gt;ReadersURL&lt;/key&gt;<br>
+&lt;value&gt;http://205.188.250.25/cb/%d/datafiles/%s.cb&lt;/value&gt;<br><br>
+
+&lt;key&gt;CLBannersURL&lt;/key&gt;<br>
+not found (0x14)<br><br>
+
+&lt;key&gt;DomainsURL&lt;/key&gt;<br>
+not found (0x14)<br><br>
+
+&lt;key&gt;LicenseKeysURL&lt;/key&gt;<br>
+not found (0x14)<br><br>
+
+&lt;key&gt;ShowMOTDOnFirstTime&lt;/key&gt;<br>
+&lt;value&gt;2&lt;/value&gt;<br><br>
+
+&lt;key&gt;SMSLongSigTail&lt;/key&gt;<br>
+not found (0x14)<br><br>
+
+&lt;key&gt;ReportToICQ&lt;/key&gt;<br>
+client send this only with my server (iserverd) wtf ?<br><br>
+
+%d replaced with version number (icq2002a ver 5.34 - 534)<br>
+%s replaced with random number (%s examples: 01971 05835)<br><br>
+
+<b>note</b>: icq2000a/b ignores server replies. icq2001/2002 use this to update its data files 
+from specified in reply http server and after that it says (popup dialog): 
+"datafiles and ldap lists updated from server".<br><br>
+
+</td><td width=10>&nbsp;</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

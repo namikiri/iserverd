@@ -1,0 +1,717 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html;>
+<title>ICQ Corp proto description - (version 1.0.49)</title>
+</head>
+<body vlink="#800080" link="#000080" alink="#FF0000"> 
+<u>
+<a href="#2">Client commands overview </a>
+</u><ul type="disc"><u>  
+<li>    <a href="#2">Logon packet (command <font color="#0000ff">03e8</font>)</a>       
+</li><li>    <a href="#3">Client reply packet  (command <font color="#0000ff">000a</font>)</a>       
+</li><li>    <a href="#4">Alive packet  (command <font color="#0000ff">042e</font>)</a>      
+</li><li>    <a href="#5">Disconnect packet  (command <font color="#0000ff">0438</font>)</a> 
+</li><li>    <a href="#6">New user added (for server)  (command <font color="#0000ff">053c</font>)</a>       
+</li><li>    <a href="#7">Set user status  (command <font color="#0000ff">04d8</font>)</a>   
+</li><li>    <a href="#8">Contact send  (command <font color="#0000ff">0406</font>)</a>
+</li><li>    <a href="#9">Get user notes  (command <font color="#0000ff">05aa</font>)</a>
+</li><li>    <a href="#10">Get user info  (command <font color="#0000ff">05fa</font>)</a>
+</li><li>    <a href="#11">Get user info1  (command <font color="#0000ff">0460</font>)</a>   
+</li><li>    <a href="#12">Get departments list packet  (command <font color="#0000ff">03f2</font>)</a>      
+</li><li>    <a href="#13">Get externals packet  (command <font color="#0000ff">04c4</font>)</a>     
+</li><li>    <a href="#14">First login packet  (command <font color="#0000ff">04ec</font>)</a>       
+</li><li>    <a href="#15">Get departments list1  (command <font color="#0000ff">05f0</font>)</a>    
+</li><li>    <a href="#16">Reconnect packet  (command <font color="#0000ff">015e</font>)</a> 
+</li><li>    <a href="#17">Usage stats packet  (command <font color="#0000ff">0532</font>)</a>       
+</li><li>    <a href="#18">Set user notes  (command <font color="#0000ff">0596</font>)</a>   
+</li><li>    <a href="#19">Set basic info  (command <font color="#0000ff">050a</font>)</a>   
+</li><li>    <a href="#20">Set user home info  (command <font color="#0000ff">0582</font>)</a>       
+</li><li>    <a href="#21">Set user home www-page  (command <font color="#0000ff">058c</font>)</a>   
+</li><li>    <a href="#22">Set user work info  (command <font color="#0000ff">0578</font>)</a>       
+</li><li>    <a href="#23">Set user work www-page  (command <font color="#0000ff">05be</font>)</a>   
+</li><li>    <a href="#24">Request offline messages  (command <font color="#0000ff">044c</font>)</a>
+</li><li>    <a href="#25">Change password  (command <font color="#0000ff">049c</font>)</a>  
+</li><li>    <a href="#26">Set auth mode  (command <font color="#0000ff">0514</font>)</a>
+</li><li>    <a href="#27">Search user  (command <font color="#0000ff">05c8</font>)</a>      
+</li><li>    <a href="#28">Send offline message  (command <font color="#0000ff">010e</font>)</a>     
+</li><li>    <a href="#29">Authorization request  (command <font color="#0000ff">0456</font>)</a>
+</li><li>    <a href="#30">Report client state command  (command <font color="#0000ff">0528</font>)</a>      
+</li><li>    <a href="#31">Packet fragment  (command <font color="#0000ff">05d2</font>)</a>  
+</li><li>    <a href="#32">Read administrator's registration notes  (command <font color="#0000ff">05dc</font>)</a>  
+</li><li>    <a href="#33">Send registration form (command <font color="#0000ff">05e6</font>)</a>    
+</li></u><li><u>    <a href="#34">Invisible list send  (command <font color="#0000ff">a406</font>)</a>      
+</u>
+</li></ul>
+<pre><a name="2"></a><b><u>Client commands overview </u></b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a> 
+
+<a name="2"></a><b>Logon packet (command <font color="#0000ff">03e8</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+
+<font color="#0000ff">/* 03 00 e8 03 01 00 02 00 8f e4 5e 00 00 00 00 00 b6 09 00 00 04 00 2e 2e 2e 
+00 7a 00 02 00 c0 a8 0a 01 04 00 01 00 00 02 00 00 00 00 00 00 00 03 00 7a 00 */</font>
+
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">03 e8</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number 1 (seq1)
+<font color="#0000ff">00 02</font>      - sequence number 2 (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - client intranet UIN number (i.e. 6218895)
+<font color="#0000ff">00 00 00 00</font>        - client internet UIN number (reserved)
+<font color="#0000ff">00 00 09 b6</font>        - client tcp port number (2486) - 4 bytes!
+<font color="#0000ff">00 04</font>              - client password length (3 symbols + 00)
+<font color="#0000ff">2e 2e 2e 00</font>        - client password + 00 ("...")
+<font color="#0000ff">02 00 7a 00</font>        - version of client packet (7a -&gt; 122 -&gt; 1.22)
+<font color="#0000ff">01 0a a8 c0</font>        - client real IP adress (192.168.10.1)
+<font color="#0000ff">04</font>         - gap byte
+<font color="#0000ff">00 00 01 00</font>        - initial status of client (online)
+<font color="#0000ff">02 00 00 00</font>        - tcp version (may be it size = 2 byte)
+<font color="#0000ff">00 00 00 00</font>        - reserved
+<font color="#0000ff">03 00 7a 00</font>        - version of the client
+
+Note:   this is first packet of client, but Mirabilis Groupware server can process messages 
+with out logon. Sequence number should start from <font color="#0000ff">00 01</font> (seq1) <font color="#0000ff">00 02</font> (seq2).
+
+<a name="3"></a><b>Client reply packet (command <font color="#0000ff">000a</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 0a 00 01 00 00 00 8f e4 5e 00 00 00 00 00 */</font>
+
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 0a</font>      - command code (server and client have the same code)
+<font color="#0000ff">00 01</font>      - sequence number of confirmed packet (seq1)
+<font color="#0000ff">00 00</font>      - allways zero for client (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note:   This type of packet used to confirm receiving server packet. It should have 
+seq1 = seq1 of replied server packet. If server after sending packet to client 
+don't receive ack packet it end it again. You (and server) shouldn't confirm that packets
+
+<a name="4"></a><b>Alive packet (command <font color="#0000ff">042e</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 2e 04 07 00 00 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 2e</font>      - command code
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note:   This packet sent to indicate connection is still up and client is still alive 
+and online. Client should send it after each 45 sec (for intrAnet) or 120 sec for internet.
+
+<a name="5"></a><b>Disconnect packet  (command <font color="#0000ff">0438</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 38 04 00 00 00 00 8f e4 5e 00 00 00 00 00 14 00 42 5f 55 53 45 52 5f 44 49 
+53 43 4f 4e 4e 45 43 54 45 44 00 05 00*/
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 38</font>      - command code
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 14</font>      - text message length
+<font color="#0000ff">42 5f .. 00</font>        - text message (B_USER_DISCONNECTED or B_MESSAGE_ACK)
+<font color="#0000ff">00 05</font>      - unknown (<font color="#0000ff">00 04</font> or <font color="#0000ff">00 05</font>)
+
+Note: This packet sent to inform server that client is disconnecting. Also it used to 
+get out_of_band server response (B_MESSAGE_ACK)
+
+<a name="6"></a><b>New user added (for server) (command <font color="#0000ff">053c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 3c 05 0c 00 0d 00 8f e4 5e 00 00 00 00 00 ec 03 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 3c</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 00 03 ec</font>        - new user UIN
+
+Note: This command inform server that user expand his contact list and it will alert 
+client when this user change status.
+
+
+<a name="7"></a><b> Set user status (command 04d8)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 d8 04 0f 00 10 00 8f e4 5e 00 00 00 00 00  00 01 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 d8</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 00 01 00</font>        - new status (i.e. private = 00 00 01 00)
+
+Status: 
+STATUS_ONLINE   = <font color="#0000ff">00 00 00 00</font>
+STATUS_AWAY     = <font color="#0000ff">00 00 00 01</font>
+STATUS_DND      = <font color="#0000ff">00 00 00 11</font>
+STATUS_PRIVATE  = <font color="#0000ff">00 00 01 00</font>
+
+Note: Used to inform server about user's new status.
+
+
+<a name="8"></a><b> Contact send (command <font color="#0000ff">0406</font>) </b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 06 04 05 00 06 00 8f e4 5e 00 00 00 00 00 03 8e e4 5e 00 8d e4 5e 00 8c e4 5e 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 06</font>      - command code
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">03</font>         - number of users in contact list
+<font color="#0000ff">00 5e e4 8e</font>        - UIN number 1 (6218894)
+<font color="#0000ff">00 5e e4 8d</font>        - UIN number 2 (6218893)
+<font color="#0000ff">00 5e e4 8c</font>        - UIN number 3 (6218892)
+
+Note: This comman used to inform server of client contact list. Server will send 
+notification of users from list status changing to client.
+
+<a name="9"></a><b> Get user notes (command <font color="#0000ff">05aa</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+
+/* 03 00 aa 05 06 00 07 00 8f e4 5e 00 00 00 00 00  04 00 6e 65 77 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 aa</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 5e e4 8e</font>        - target uin
+
+Note: Used to obtain user notes, last notes update time and last 
+ip address
+
+<a name="10"></a><b>Get user info (command <font color="#0000ff">05fa</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 fa 05 0a 00 0a 00 8f e4 5e 00 00 00 00 00 e9 fb 77 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 fa</font>      - command code
+<font color="#0000ff">00 0a</font>      - sequence number (seq1)
+<font color="#0000ff">00 0a</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 77 fb e9</font>        - uin of interested user
+
+Note: Used to obtain user's personal information (server will reply with 5 packets:
+ basic info, home info, home web, work info, work web)
+
+<a name="11"></a><b>Get user info1 (command <font color="#0000ff">0460</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 60 04 0a 00 0a 00 8f e4 5e 00 00 00 00 00 e9 fb 77 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 60</font>      - command code
+<font color="#0000ff">00 0a</font>      - sequence number (seq1)
+<font color="#0000ff">00 0a</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 77 fb e9</font>        - uin of interested user
+
+Note: Used to obtain user's basic personal information
+
+<a name="12"></a><b> Get departments list packet (command <font color="#0000ff">03f2</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 f2 03 01 00 01 00 00 00 00 00 00 00 00 00 8f e4 5e 00 04 00 2e 2e 2e 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">03 f2</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 01</font>      - sequence number (seq2)
+<font color="#0000ff">00 00 00 00</font>        - zero field (requester doesn't have UIN)
+<font color="#0000ff">00 00 00 00</font>        - zero field
+<font color="#0000ff">00 5e e4 8f</font>        - user uin number
+<font color="#0000ff">00 04 </font>             - password length
+<font color="#0000ff">2e 2e 2e 00</font>        - password
+
+Note: Client want to replicate departments list from server.
+
+<a name="13"></a><b> Get externals packet (command <font color="#0000ff">04c4</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 c4 04 01 00 01 00 8f e4 5e 00 00 00 00 00 00 00 00 04 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">c4 04</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 01</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - user uin number
+<font color="#0000ff">00 00 00 00</font>        - zero field
+<font color="#0000ff">00 00 00 04</font>        - external number
+
+Note: Client want all externals after this number from server.
+
+<a name="14"></a><b>First login packet (command <font color="#0000ff">04ec</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 ec 04 01 00 10 00 00 00 00 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 ec</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 10</font>      - sequence number (seq2)
+<font color="#0000ff">00 00 00 00</font>        - zero field (requester doesn't have UIN)
+<font color="#0000ff">00 00 00 00</font>        - zero field
+
+Note: This is the first command used to inform server that client start registration.
+
+<a name="15"></a><b>Get departments list1 (command <font color="#0000ff">05f0</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 f0 05 01 00 10 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">f0 05</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 10</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - sender UIN number
+<font color="#0000ff">00 00 00 00</font>        - zero field
+
+Note: Used by client to begin replicate departments list during normal session.
+
+<a name="16"></a><b>Reconnect packet (command <font color="#0000ff">015e</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 5e 01 d2 00 3f 00 3b 04 00 00 7a 00 01 00 71 03 9f 02 0a 0a 0a 05 07 04 
+00 00 04 3b 04 00 00 00 00 00 00 02 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">01 5e</font>      - command code
+<font color="#0000ff">00 d2</font>      - sequence number (seq1)
+<font color="#0000ff">00 3f</font>      - sequence number (seq2)
+<font color="#0000ff">00 00 3b 04</font>        - sender UIN number
+<font color="#0000ff">01 00 00 7a</font>        - client version
+<font color="#0000ff">02 9f 03 71</font>        - unknown field
+<font color="#0000ff">05 0a 0a 0a</font>        - client ip address
+<font color="#0000ff">00 00 04 3b</font>        - client tcp port 
+<font color="#0000ff">04</font>         - tcp ability (or proxy usage)
+<font color="#0000ff">00 00 00 00</font>        - just zeros 
+<font color="#0000ff">00 02</font>      - tcp protocol version
+
+Note: Used by client on server-confirm timeouts to check if there is its connection exist.
+
+<a name="17"></a><b>Usage stats packet (command <font color="#0000ff">0532</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/*       -- skipped -- */
+</font>
+Note: This packet contain registry key HKEY_CURRENT_USER\Software\Mirabilis\ICQCorp\Owners\xxx\Prefs\Stats.
+I haven't decode this information yet. I know that ICQ99, ICQ2000 also have such stats reports.
+
+<a name="18"></a><b>Set user notes (command <font color="#0000ff">059</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 96 05 06 00 07 00 8f e4 5e 00 00 00 00 00  04 00 6e 65 77 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 96</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>     - internet client UIN number (not used - reserved)
+<font color="#0000ff">04 00</font>              - new notes length
+<font color="#0000ff">6e 65 77 00</font>        - new notes + 00 ("new")
+
+Note: Used to change user notes.
+
+<a name="19"></a><b>Set basic info (command <font color="#0000ff">050a</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 0a 05 0d 00 0e 00 8f e4 5e 00 00 00 00 00 0a 00 52 65 67 72 65 73 73 6f 72 
+00 09 00 41 6c 65 78 61 6e 64 72 00 07 00 68 75 74 6b 6f 00 17 00 41 56 53 68 75 74
+6b 6f 40 6d 61 69 6c 2e 6b 68 73 74 75 2e 72 75 00  */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 0a</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 0a</font>              - Nick length
+<font color="#0000ff">52 .. 72 00</font>        - Nick
+<font color="#0000ff">00 09</font>              - First Name length
+<font color="#0000ff">41 .. 72 00</font>        - First Name
+<font color="#0000ff">00 07 </font>             - Last Name length
+<font color="#0000ff">68 .. 6f 00</font>        - Last Name
+<font color="#0000ff">00 17</font>              - Email length
+<font color="#0000ff">41 .. 75 00</font>        - Email
+
+Note: This packet change user basic info.
+
+<a name="20"></a><b>Set user home info (command <font color="#0000ff">0582</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 82 05 0c 00 0d 00 8f e4 5e 00 00 00 00 00 0d 00 4a 61 6d 62 75 6c 20 31 32 2d 
+32 39 00 0b 00 4b 68 61 62 61 72 6f 76 73 6b 00 03 00 46 45 00 07 00 06 00 70 68 6f 6e 
+65 00 04 00 66 61 78 00 04 00 73 6f 74 00 a4 09 01 00 01 1b 00 0e 03 4f 00*/
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 82</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 0a</font>              - Addr length           
+<font color="#0000ff">4a .. 39 00</font>        - addr string (Jambul 12-29)
+<font color="#0000ff">00 0b</font>              - City length           
+<font color="#0000ff">4b .. 6b 00</font>        - City string (Khabarovsk)
+<font color="#0000ff">00 03</font>              - State length
+<font color="#0000ff">46 45 00</font>   - State string  (FE)
+<font color="#0000ff">00 07</font>              - Country code  (007)
+<font color="#0000ff">00 06</font>              - phone str length
+<font color="#0000ff">2d .. 2d 00</font>        - phone string  (------)
+<font color="#0000ff">00 06</font>              - fax str length
+<font color="#0000ff">2d .. 2d 00</font>        - fax string (------)
+<font color="#0000ff">00 06</font>              - sot str length
+<font color="#0000ff">2d .. 2d 00</font>        - sot string (------)
+<font color="#0000ff">00 01 09 a4</font>        - index number  (68004)
+<font color="#0000ff">01</font>                 - gender (01 - female, 02 - male)
+<font color="#0000ff">00 15</font>              - age (21)
+<font color="#0000ff">0e</font>         - burth day (14)
+<font color="#0000ff">03</font>                 - burth month (03)
+<font color="#0000ff">00 4f</font>              - burth year (79)
+
+Note: This command used to set user "home" info┘
+
+<a name="21"></a><b>Set user home www-page (command <font color="#0000ff">058c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 8c 05 0c 00 0d 00 8f e4 5e 00 00 00 00 00 22 00 68 74 74 70 3A 2F 2F 6D 
+79 2E 68 6F 6D 65 70 61 67 65 2E 72 75 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 82</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 0a</font>              - homepage addr length          
+<font color="#0000ff">68 .. 75 00</font>        - homepage addr string          (http://my.homepage.ru)
+
+Note: This command set new home www-page in user info.
+
+<a name="22"></a><b>Set user work info (command <font color="#0000ff">0578</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 78 05 0c 00 0d 00 8f e4 5e 00 00 00 00 00 13 00 54 69 68 6F 6F 6B 65 61 
+6E 73 6B 61 79 61 20 31 33 36 00 0b 00 4B 68 61 62 61 72 6F 76 73 6B 00 03 00 46 
+45 00 07 00 06 00 4B 68 53 54 55 00 0a 00 73 79 73 20 61 64 6D 69 6E 00 01 00 00 
+00 04 00 5f 5f  5f 00 04 00 5f 5f 5f 00 04 00 5f 5f 5f 00 04 00 5f 5f 5f 00 63 00 
+00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 78</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>     - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 0a</font>              - work addr length              
+<font color="#0000ff">4a .. 39 00</font>        - work addr string (Jambul 12-29)
+<font color="#0000ff">00 0b</font>              - work city length              
+<font color="#0000ff">4b .. 6b 00</font>        - work city string (Khabarovsk)
+<font color="#0000ff">00 03</font>              - work state length
+<font color="#0000ff">46 45 00</font>        - work state string (FE)
+<font color="#0000ff">00 07</font>              - work country code (007)
+<font color="#0000ff">00 06</font>              - work phone str length
+<font color="#0000ff">5f .. 5f 00</font>        - work phone string (------)
+<font color="#0000ff">00 06</font>              - work fax str length
+<font color="#0000ff">5f .. 5f 00</font>        - work fax string (------)
+<font color="#0000ff">00 06</font>              - work pager str length
+<font color="#0000ff">5f .. 5f 00</font>        - work pager string (------)
+<font color="#0000ff">00 00 00 63</font>     - index number (99000)
+
+Note: This command used to set user "work" info┘
+
+<a name="23"></a><b>Set user work www-page (command <font color="#0000ff">05be</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 be 05 0c 00 0d 00 8f e4 5e 00 00 00 00 00 15 00 68 74 74 70 3A 2F 2F 77 
+77 77 2E 6B 68 73 74 75 2E 72 75 2F 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 be</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 0a</font>              - work homepage addr length             
+<font color="#0000ff">68 .. 2f 00</font>        - work homepage addr string (http://www.khstu.ru)
+
+Note: This command set new work www-page in user info.
+
+<a name="24"></a><b>Request offline messages (command <font color="#0000ff">044c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 4c 04 02 00 03 8f e4 5e 00 00 00 00 00 00 00 00 00 07 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 4c</font>      - command code (request all offline messages)
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 00 00 00</font>        - ??? unknown ???
+<font color="#0000ff">00 00 00 07</font>        - ??? unknown ??? (max number of messages?)
+
+Note: This packed used to ask server send all offline messages to client. 
+Each offline message should be confirmed with special command 05 28 and ack.
+
+<a name="25"></a><b>Change password (command <font color="#0000ff">049c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 9c 04 09 00 0a 00 8f e4 5e 00 00 00 00 00 72 00 15 00 70 61 73 73 77 6f 72 64 00*/
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 9c</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 09</font>              - new password length
+<font color="#0000ff">70 .. 64 00</font>        - new password (plain text)
+
+Note: Used to change user password.
+
+<a name="26"></a><b>Set auth mode (command <font color="#0000ff">0514</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 14 05 0c 00 0c 00 8f e4 5e 00 00 00 00 00 24 11 00 00 01 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#0000ff">05 14</font>  - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">24 11 00 00</font>        - unknown field (???)
+<font color="#0000ff">01</font>                 - mode (01 - no auth, 00 - auth)
+
+Note: Used to change security mode.
+
+<a name="27"></a><b>Search user (command <font color="#0000ff">05c8</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 c8 05 0b 00 0c 00 8f e4 5e 00 00 00 00 00 ff 01 00 01 09 00 72 65 67 72 
+65 73 73 6f 72 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 c8</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">01 ff</font>              - type of search (uin, nick, lname, fname, etc...)
+<font color="#0000ff">01 00</font>              - type of comparison (is, isn't, contain, etc...)
+<font color="#0000ff">09 00</font>              - length of searching string
+<font color="#0000ff">72 65 .. 00</font>        - searching string + 00 (asciiz)
+
+Type of search:
+<font color="#0000ff">00 ff</font>      - search for UIN
+<font color="#0000ff">01 ff</font>      - search for NickName
+<font color="#0000ff">02 ff</font>      - search for FirstName
+<font color="#0000ff">03 ff</font>      - search for LastName
+<font color="#0000ff">04 ff</font>      - search for Age
+<font color="#0000ff">05 ff</font>      - search for City  (work)
+<font color="#0000ff">06 ff</font>      - search for State (work)
+<font color="#0000ff">07 ff</font>      - search for Country (work)
+<font color="#0000ff">08 ff</font>      - search for Company
+<font color="#0000ff">09 ff</font>      - search for Job title
+<font color="#0000ff">0a ff</font>      - search for Department
+<font color="#0000ff">0b ff</font>      - search for City (home)
+<font color="#0000ff">0c ff</font>      - search for State (home)
+<font color="#0000ff">0d ff</font>      - search for Country (home)
+
+type of comp:   
+<font color="#0000ff">00 00</font>      - "contains" search 
+<font color="#0000ff">01 00</font>      - "doesn't contain" search
+<font color="#0000ff">02 00</font>      - "is" search
+<font color="#0000ff">03 00</font>      - "not" search
+<font color="#0000ff">04 00</font>      - "begins with" search
+<font color="#0000ff">05 00</font>      - "ends with" search
+
+Note: Used to search user in server database.
+
+<a name="28"></a><b>Send offline message (command <font color="#0000ff">010e</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 0e 01 11 00 12 00 8f e4 5e 00 00 00 00 00  8e e4 5e 00 01 00 04 00 2e 2e 2e 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">01 0e</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 5e e4 8e</font>        - user-recipient (6218894)
+<font color="#0000ff">00 00</font>              - subcommand or message type
+<font color="#0000ff">00 04</font>           - message length (optional)
+<font color="#0000ff">2e 2e 2e 00</font>        - message (optional)
+
+Subcommand:     
+MESS_THRU_SERVER = <font color="#0000ff">00 01</font>
+URL_THRU_SERVER  = <font color="#0000ff">00 04</font>
+YOU_WERE_ADDED   = <font color="#0000ff">03 0c</font>
+
+Added: Message after subcommand should have nick, F and L names, Email, auth_rule separated with <font color="#0000ff">#fe</font>
+
+Note: Used to send messages (url, broadcast, wwp and others) thru server
+
+<a name="29"></a><b>Authorization request (command <font color="#0000ff">0456</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 56 04 08 00 09 00 8f e4 5e 00 00 00 00 00 78 63 20 00 06 00 49 00 52 
+65 67 72 65 73 73 6f 72 fe 41 6c 65 78 61 6e 64 72 53 68 75 54 6b 6f fe 41 56 
+53 68 75 74 6b 6f 40 6d 61 69 6c 2e 6b 68 73 74 75 2e 72 75 fe 00 fe */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">04 56</font>      - command code
+<font color="#0000ff">00 0b</font>      - sequence number (seq1)
+<font color="#0000ff">00 0c</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 20 63 78</font>        - target uin
+<font color="#0000ff">00 06</font>              - unknown (???)
+<font color="#0000ff">00 49</font>              - length of string
+<font color="#0000ff">xx xx xx 00</font>        - identify string + request string
+
+Ident: String containing nick, firstname, lastname, email, auth_rule, request string.
+This fields in string are separated with <font color="#0000ff">0xfe</font> byte
+ (<font color="#0000ff">Reg#fe#Alexandr#fe#Shutko#AVShutko@i.am#fe#Auth me#00</font>). 
+
+Note: Used to request authorization from user.
+
+<a name="30"></a><b>Report client state command (command <font color="#0000ff">0528</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 28 05 02 00 03 00 8f e4 5e 00 7c ab 5c 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 28</font>      - command code
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 5c ab 7c</font>        - timestamp (date and time) = sec from 1900.
+<font color="#0000ff">00</font>              - client state (<font color="#0000ff">00</font> - disabled, <font color="#0000ff">01</font> - maximized, <font color="#0000ff">ff</font> - minimized to tray)
+
+Note: Client send this packet after login and after each state change (when you 
+press minimize or double click on ICQ icon in tray. 
+
+<a name="31"></a><b>Packet fragment (command <font color="#0000ff">05d2</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 d2 05 02 00 03 00 8f e4 5e 00 00 00 00 00 02 01 03 00 28 05 02 00 03 00 8f e4 5e 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 d2</font>      - command code
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - zero (reserved).
+<font color="#0000ff">02</font>              - total number of fragments
+<font color="#0000ff">01</font>                 - this fragment sequence index
+<font color="#0000ff">00 03</font>              - fragment begin
+...........
+
+
+Note: Sometimes client want to send big packets (greater than 450 bytes)... 
+It is use packet fragmentation for that - big messages, departments list, etc. 
+Max packet size = 450 bytes 
+
+<a name="32"></a><b>Read administrator's registration notes (command <font color="#0000ff">05dc</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 dc 05 01 00 10 00 00 00 00 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>   - version number
+<font color="#ff0000">04 dc</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 10</font>      - sequence number (seq2)
+<font color="#0000ff">00 00 00 00</font>        - zero field (requester doesn't have UIN)
+<font color="#0000ff">00 00 00 00</font>        - zero field
+
+Note: This is the first command used to obtain administrator's registration notes and common work info.
+
+<a name="33"></a><b>Send registration form (command <font color="#0000ff">05e6</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 e6 05 02 00 14 00 00 00 00 00 00 00 00 00 7a 00 0b 00 50 55 50 4B 49 4E 
+5F 56 41 53 00 06 00 56 41 53 41 00 50 55 50 4B 49 4E 00 16 00 50 55 50 4B 49 4E 
+40 45 4D 41 49 4C 2E 4B 48 53 54 55 2E 52 55 00 02 0a 00 48 4F 4D 45 5F 41 44 44 
+52 45 53 53 00 0b 00 4B 48 41 42 41 52 4F 56 53 4B 00 04 00 46 41 52 ff ff 0b 00 
+48 4F 4D 45 5F 50 48 4F 4E 45 00 09 00 48 4F 4D 45 5F 46 41 58 00 09 00 48 4F 4D 
+45 5F 53 4F 54 00 c6 09 01 00 02 0e 01 14 00 62 4f 00 0f 00 57 57 57 2E 50 55 50 
+4B 49 4E 2E 4F 52 47 00 13 00 54 69 68 6F 6F 6B 65 61 6E 73 6B 61 79 61 2C 20 31 
+33 36 00 10 00 57 4F 52 4B 5F 4B 48 41 42 41 52 4F 56 53 4B 00 03 00 46 41 00 07 
+00 06 00 4B 68 53 54 55 00 0a 00 53 59 53 5F 41 44 4D 49 4E 00 01 00 00 00 0b 00 
+57 4F 52 4B 5F 50 48 4F 4E 45 00 09 00 57 4F 52 4B 5F 46 41 58 00 0b 00 57 4F 52 
+4B 5F 50 41 47 45 52 00 c6 09 01 00 14 00 68 74 74 70 3A 2F 2F 77 77 77 2E 6B 68 
+73 74 75 2E 72 75 00 0e 00 45 58 54 45 4E 44 45 44 5F 44 41 54 41 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">05 e6</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 10</font>      - sequence number (seq2)
+<font color="#0000ff">00 00 00 00</font>        - zero field (requester doesn't have UIN)
+<font color="#0000ff">00 00 00 00</font>     - zero field
+<font color="#0000ff">7a 00</font>              - client version
+<font color="#0000ff">0b 00</font>              - NickName length
+<font color="#0000ff">xx .. xx 00</font>        - NickName string
+<font color="#0000ff">06 00</font>              - FName length
+<font color="#0000ff">xx .. xx 00</font>        - FName string
+<font color="#0000ff">07 00</font>              - LName length
+<font color="#0000ff">xx .. xx 00</font>        - LName string
+<font color="#0000ff">16 00</font>              - Email length
+<font color="#0000ff">xx .. xx 00</font>        - Email string
+<font color="#0000ff">02</font>                 - Gender (02 - male, 01 -female, 00 - not filled)
+<font color="#0000ff">0a 00</font>              - Home addr length
+<font color="#0000ff">xx .. xx 00</font>        - Home addr string
+<font color="#0000ff">0b 00</font>              - Home city length
+<font color="#0000ff">xx .. xx 00</font>        - Home city string
+<font color="#0000ff">04 00</font>              - Home state length
+<font color="#0000ff">xx .. xx 00</font>        - Home state string
+<font color="#0000ff">07 00</font>              - Home country 
+<font color="#0000ff">0b 00</font>              - Home phone length
+<font color="#0000ff">xx .. xx 00</font>        - Home phone string
+<font color="#0000ff">09 00</font>              - Home fax length
+<font color="#0000ff">xx .. xx 00</font>        - Home fax string
+<font color="#0000ff">09 00</font>              - Home sot length
+<font color="#0000ff">xx .. xx 00</font>        - Home sot string
+<font color="#0000ff">c6 09 01 00</font>        - mail index number
+<font color="#0000ff">02 0e 01 14</font>        - burth day and month
+<font color="#0000ff">00 62</font>              - age
+<font color="#0000ff">00 4f</font>              - burth year
+<font color="#0000ff">0f 00</font>              - Home www page length
+<font color="#0000ff">xx .. xx 00</font>        - Home www page string
+<font color="#0000ff">13 00</font>              - Work addr length
+<font color="#0000ff">xx .. xx 00</font>        - Work addr string
+<font color="#0000ff">10 00</font>           - Work city length
+<font color="#0000ff">xx .. xx 00</font>        - Work city string
+<font color="#0000ff">03 00</font>              - Work state length
+<font color="#0000ff">xx .. xx 00</font>        - Work state string
+<font color="#0000ff">07 00</font>              - Work country code length
+<font color="#0000ff">06 00</font>              - organization name length
+<font color="#0000ff">xx .. xx 00</font>        - organization name string
+<font color="#0000ff">0a 00</font>              - Job title length
+<font color="#0000ff">xx .. xx 00</font>        - Job title string
+<font color="#0000ff">03 00</font>              - Work state length
+<font color="#0000ff">xx .. xx 00</font>        - Work state string
+<font color="#0000ff">01 00 00 00</font>        - unknown field
+<font color="#0000ff">0b 00</font>              - Work phone length
+<font color="#0000ff">xx .. xx 00</font>        - Work phone string
+<font color="#0000ff">09 00</font>              - Work fax length
+<font color="#0000ff">xx .. xx 00</font>        - Work fax string
+<font color="#0000ff">0b 00</font>              - Work pager length
+<font color="#0000ff">xx .. xx 00</font>        - Work pager string
+<font color="#0000ff">c6 09 01 00</font>        - Work mail index
+<font color="#0000ff">14 00</font>              - Work www page length
+<font color="#0000ff">xx .. xx 00</font>        - Work www page string
+<font color="#0000ff">0e 00</font>              - registration ext data length
+<font color="#0000ff">xx .. xx 00</font>        - registration ext data string
+
+Note: This command used to send registration data to server.
+
+<a name="34"></a><b>Invisible list send (command <font color="#0000ff">a406</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 06 a4 06 00 07 00 8f e4 5e 00 00 00 00 00 03 8e e4 5e 00 8d e4 5e 00 8c e4 5e 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">a4 06</font>      - command code
+<font color="#0000ff">00 02</font>      - sequence number (seq1)
+<font color="#0000ff">00 03</font>      - sequence number (seq2)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">03</font>                 - number of users in contact list
+<font color="#0000ff">00 5e e4 8e</font>        - UIN number 1 (6218894)
+<font color="#0000ff">00 5e e4 8d</font>        - UIN number 2 (6218893)
+<font color="#0000ff">00 5e e4 8c</font>        - UIN number 3 (6218892)
+
+Note: This comman used to inform server of invisible client contact list. Server will 
+not send notification to users from this list if client changed status.
+</pre>
+
+
+</body></html>

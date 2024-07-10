@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>ICQ Search sequences in OSCAR protocol</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;OSCAR sequences&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="description"></a>&nbsp;ICQ search sequences description</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ clients use family 0x15 for search. This family was added by AOL programmers 
+for compatibility with old ICQ server database engine. There is many search types: 
+uin search, details (nick, firstname, lastname, email) search, whitepages search. 
+Currently there is two search formats supported: old-style plain format and 
+new tlv-based format. Both plain and tlv formats support wildcards in search 
+fields, but plain version has separate requests for this future.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+After request were sent server should reply via 
+<a href="snac_15_03_07da_01a4.html">SNAC(15,03)/07DA/01A4</a>, ..... , 
+<a href="snac_15_03_07da_01a4.html">SNAC(15,03)/07DA/01A4</a>, 
+<a href="snac_15_03_07da_01ae.html">SNAC(15,03)/07DA/01AE</a> 
+sequence. It also can send only 
+<a href="snac_15_03_07da_01ae.html">SNAC(15,03)/07DA/01AE</a> packet when one 
+user found. When search return no users server sends empty
+<a href="snac_15_03_07da_01ae.html">SNAC(15,03)/07DA/01AE</a> with result flag != 0x0A
+<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Typical search sequence</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=35 valign=top>&nbsp;&nbsp;<b>&gt;&gt;</b></td>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b>SNAC(15,02)/07D0/05xx</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Client sends search request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_01a4.html">SNAC(15,03)/07DA/01A4</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends found user #1 info</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>...</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>...</b></td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_01a4.html">SNAC(15,03)/07DA/01A4</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends found user #N-1 info</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>&lt;&lt;</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b><a href="snac_15_03_07da_01ae.html">SNAC(15,03)/07DA/01AE</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Server sends last user #N found info</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+
+
+<br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="plain"></a>&nbsp;ICQ search plain requests</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;
+These requests named "plain" because they contain plain search strings and numbers. 
+This information is not structured and these fields placed in strict defined order. 
+If string is empty or number=0 it is doesn't used in search.<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Search requests (plain)</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_051f.html">SNAC(15,02)/07D0/051F</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by uin plain request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0515.html">SNAC(15,02)/07D0/0515</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by details plain request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_053d.html">SNAC(15,02)/07D0/053D</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by details plain wildcard request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0529.html">SNAC(15,02)/07D0/0529</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by email plain request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0547.html">SNAC(15,02)/07D0/0547</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by email plain wildcard request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0533.html">SNAC(15,02)/07D0/0533</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Whitepages search plain request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0551.html">SNAC(15,02)/07D0/0551</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Whitepages search plain wildcard request</td>
+</tr>
+
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0><tr>
+<td><b><font size=2 color="white">&nbsp;<a name="tlv"></a>&nbsp;ICQ search tlv-based requests</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+&nbsp;&nbsp;&nbsp;&nbsp;
+These requests information placed in TLV chains. So it is structured. Client 
+should put only needed fields to these requests. This set doesn't contain 
+search by details request because it was replaced by white pages search.
+<br><br>
+
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=580 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#7070D0><b><font size=2 color=white>&nbsp;Search requests (tlv-based)</font></b></td></tr>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=580 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0569.html">SNAC(15,02)/07D0/0569</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by uin tlv-based request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_0573.html">SNAC(15,02)/07D0/0573</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Search by email tlv-based request</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 width=200 valign=top>&nbsp;&nbsp;<b><a href="snac_15_02_07d0_055f.html">SNAC(15,02)/07D0/055F</a></b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Whitepages search tlv-based request</td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+</td><td width=15>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

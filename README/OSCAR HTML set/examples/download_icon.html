@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Download icon sequence example dump</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td><b><font color="white">&nbsp;Download icon sequence example dump&nbsp;</font></b></td>
+<td width=20% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr></table></td></tr></table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td colspan=3 height=4> </td></tr><tr>
+<td width=7>&nbsp;</td><td valign=top>
+<font size=3><pre style="font-size: 13px">
+
+  // User 348934774 status notification from server with TLV(0x1D)
+  2A 02 26 0D 00 CF 00 03  00 0B 00 00 C8 4B 72 3D  *.&..........Kr=
+  09 33 34 38 39 33 34 37  37 34 00 00 00 09 00 01  .348934774......
+  00 02 00 50 00 0C 00 25  00 00 00 00 00 00 00 00  ...P...%........
+  04 00 09 CD A9 3C 4C 00  00 7C 0F 00 00 00 01 00  .....&lt;L..|......
+  00 00 00 00 00 00 00 00  00 00 00 00 00 00 0A 00  ................
+  04 00 00 00 00 00 06 00  04 10 00 00 00 00 19 00  ................
+  08 13 49 13 4C 13 4E 13  44 00 0D 00 40 56 3F C8  ..I.L.N.D...@V?.
+  09 0B 6F 41 BD 9F 79 42  26 09 DF A2 F3 17 8C 2D  ..oA..yB&......-
+  9B DA A5 45 BB 8D DB F3  BD BD 53 A1 0A 97 B1 27  ...E......S....'
+  51 24 3C 43 34 AD 22 D6  AB F7 3F 14 92 1A 09 3C  Q$&lt;C4."...?....&lt;
+  6C D7 FD 4E C5 9D 51 A6  47 4E 34 F5 A0 00 0F 00  l..N..Q.GN4.....
+  04 00 00 03 AE 00 1D 00  14 00 01 01 10 0B 56 66  ..............Vf
+  D6 16 5E 31 75 20 8D 3F  0C 38 38 87 4C 00 03 00  ..^1u .?.88.L...
+  04 41 EC 78 5A                                    .A.xZ
+
+  -------------------------------------------------------------------
+  // Client request and setup SSBI service connection
+
+  // Client request user 348934774 icon from server - SNAC(10,06)
+  2A 02 01 0D 00 29 00 10  00 06 00 00 2A 95 00 06  *....)......*...
+  09 33 34 38 39 33 34 37  37 34 01 00 01 01 10 0B  .348934774......
+  56 66 D6 16 5E 31 75 20  8D 3F 0C 38 38 87 4C     Vf..^1u .?.88.L
+  
+  // User 348934774 icon reply from server - SNAC(10,07)
+  2A 02 B9 0B 13 BC 00 10  00 07 00 00 2A 95 00 06  *...........*...
+  09 33 34 38 39 33 34 37  37 34 00 01 01 10 0B 56  .348934774.....V
+  66 D6 16 5E 31 75 20 8D  3F 0C 38 38 87 4C 00 00  f..^1u .?.88.L..
+  01 01 10 0B 56 66 D6 16  5E 31 75 20 8D 3F 0C 38  ....Vf..^1u .?.8
+  38 87 4C 13 7D FF D8 FF  E0 00 10 4A 46 49 46 00  8.L.}......JFIF.
+  01 01 01 00 60 00 60 00  00 FF DB 00 43 00 01 01  ....`.`.....C...
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 FF DB  ................
+  00 43 01 01 01 01 01 01  01 01 01 01 01 01 01 01  .C..............
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  01 01 01 01 01 01 01 01  01 01 01 01 01 01 01 01  ................
+  ...........
+  50 7F 9B 0A 2A 55 8B 72  A9 5C B6 41 DD F2 37 CA  P...*U.r.\.A..7.
+  72 40 5C 83 86 CA 85 6C  8F EF 63 B5 14 F9 E3 7B  r@\....l..c....{
+  5F AD BA 2E A9 75 D7 AF  E6 D7 40 51 6D 27 CB 17  _....u....@Qm'..
+  EA DF 75 DA 5F D6 BD 8F  FF D9                    ..u._.....
+
+ 
+</pre></font>
+</font>
+</td><td width=7>&nbsp;</td></tr>
+<tr><td colspan=3>&nbsp;</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="../index.html" target="_top">Main</a> | 
+<a href="../basic.html" target="_top">Basic</a> | 
+<a href="../login.html" target="_top">Login</a> | 
+<a href="../families.html" target="_top">Snaclist</a> | 
+<a href="../sequences.html" target="_top">Sequences</a> | 
+<a href="../lists.html" target="_top">Misc</a> | 
+<a href="../changes.html" target="_top">Changes</a> | 
+<a href="../credits.html" target="_top">Credits</a> | 
+<a href="../terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

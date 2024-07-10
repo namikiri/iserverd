@@ -1,0 +1,201 @@
+<html>
+<head>
+<title>SNAC(06,02) client invitation request</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(06,02)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_SEND_INVITATION&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+There is a menu item in AIM clients that say something like "Sign On A Friend" 
+and then it would ask for an email address/invitation text and it would sent a mail 
+to them saying how perfectly wonderful the AIM service is and why you should 
+use it and click here if you hate the person who sent this to you and want to
+complain and yell at them in a small box with pretty fonts. <br><br>
+
+You can send invitation using this snac. Server should reply via 
+<a href="snac_06_03.html">SNAC(06,03)</a><br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td>&nbsp;00 06</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 02</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td width=5>&nbsp;</td>
+ <td>dword</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td>
+ <!-- TLV 0x11 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+ <table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+ <table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 11</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x11) - recipient email</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>string (ascii)</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Recipient email string</td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+</td><td width=5>&nbsp;</td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x15 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=30> </td>
+ <td>
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;00 15</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x15) - invitation text</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=25%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td width=17%>string (ascii)</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Invitation string text</td>
+   </tr>
+   </table>
+  </td></tr>
+  </table>
+</td></tr></table>
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dumps with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2a 02 07 e8 00 3f 00 06-00 02 00 00 00 01 00 02   *....?..........
+  00 11 00 16 41 56 53 68-75 74 6b 6f 40 6d 61 69   ....AVShutko@mai
+  6c 2e 6b 68 73 74 75 2e-72 75 00 15 00 17 74 65   l.khstu.ru....te
+  73 74 20 69 6e 76 69 74-61 74 69 6f 6e 20 6d 65   st invitation me
+  73 73 61 67 65                                    ssage
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

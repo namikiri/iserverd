@@ -45,7 +45,7 @@ extern char **environ;
  *	   don't update ps display
  *	   (This is the default, as it is safest.)
  */
- 
+
 #if defined(HAVE_SETPROCTITLE)
 #define PS_USE_SETPROCTITLE
 #elif defined(HAVE_PSTAT) && defined(PSTAT_SETCMD)
@@ -87,7 +87,7 @@ static size_t ps_buffer_fixed_size;	/* size of the constant prefix  */
 void init_ps_display(int argc, char *argv[])
 {
    char prole[32];
-   
+
    strncpy(prole, "", 31);
 
 #ifndef PS_USE_NONE
@@ -166,8 +166,8 @@ void set_ps_display(int process_role, const char *value)
       case ROLE_PACKET : strncpy(prole, "[packet  processor] ", 31); break;
       case ROLE_SOCKET : strncpy(prole, "[socket  processor] ", 31); break;
       case ROLE_EPACKET: strncpy(prole, "[epacket processor] ", 31); break;
-      case ROLE_ETIMER : strncpy(prole, "[etimer  processor] ", 31); break;      
-      case ROLE_EUSER  : strncpy(prole, "[euser   processor] ", 31); break;      
+      case ROLE_ETIMER : strncpy(prole, "[etimer  processor] ", 31); break;
+      case ROLE_EUSER  : strncpy(prole, "[euser   processor] ", 31); break;
       case ROLE_DEFRAG : strncpy(prole, "[defrag  processor] ", 31); break;
       case ROLE_ACTIONS: strncpy(prole, "[actions processor] ", 31); break;
       case ROLE_BUSY   : strncpy(prole, "[busy    processor] ", 31); break;

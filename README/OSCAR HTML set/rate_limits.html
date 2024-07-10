@@ -1,0 +1,312 @@
+<html>
+<head>
+<title>Rate-limits description</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;Rate-limits&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td width=5>&nbsp;</td>
+<td><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Rate limits is a way to control client->server data flow. This is done 
+by calculating rate level on every client snac. If client rate goes above alert 
+server send warning, if it goes above limit server send warning and drop
+snacs from client, if it goes above disconnect level client disconnected from 
+server and can't connect again for some time.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+At some point in the logon sequence the client should send 
+<a href="snac_01_06.html">SNAC(01,06)</a> which is the "rate request" packet. 
+In reply, the server will send the "rate response" 
+<a href="snac_01_07.html">SNAC(01,07)</a> which contain rate limit parameters 
+formatted as follows:
+<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+First comes a word value telling you how many rate classes there are. 
+Then for each class you get a structure like this:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td><td>
+<table width=400 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#FAFAFA>
+<table width=400 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=28%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Rate class ID</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#FAFAFA>
+
+<table width=400 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Window size</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Clear level</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Alert level</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Limit level</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Disconnect level</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Current level</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Max level</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Last time;</td>
+</tr>
+<tr>
+<td>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>byte</td>
+<td width=5>&nbsp;</td>
+<td width=55%>Current state;</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+
+And after those you get another set of structures (one for each class) 
+like this:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+
+<table width=400 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#fafafa >
+<table width=400 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=28%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>rate group id</td>
+</tr>
+<tr>
+<td width=28%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>count of pairs in group</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#fafafa >
+
+<table width=400 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>family/subtype pair #1</td>
+</tr>
+<tr>
+<td>&nbsp;....</td>
+<td width=5>&nbsp;</td>
+<td>....</td>
+<td width=5>&nbsp;</td>
+<td width=55%>....</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>family/subtype pair #n</td>
+</tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td></tr>
+</table>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+The rest of the structure is just <font color=red>count</font> word pairs, a SNAC family and SNAC 
+subtype for each SNAC that will use the rate information from this class.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+If the number of classes received is zero you should not reply. If it is
+greater than zero, then you should reply with <a href="snac_01_08.html">
+SNAC(01,08)</a> - "rate acknowledge" which is just a list of words with 
+the Class ID of each class you received.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Now for some more explanations about the protocol. For each rate class, ICQ
+can be in one of three states: <font color=blue>"limited"</font> (state 1), in 
+which no data is sent; <font color=blue>"alert"</font> (state 2), which is when 
+you're sending too fast, but you aren't yet limited; and <font color=blue>"clear"
+</font> (state 3), when everything is cool. Every time a packet is sent (assuming 
+you aren't being "limited"), ICQ updates a "Last Time" value to keep track of 
+the last sent time (as with the state value, there is a separate time for each 
+rate class).<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+It also looks up the time since the previous packet was sent and uses that
+to keep a running average of time between packets (I refer to this as the
+rate level). This level is calculated using a window size which specifies
+how many of the previous times to take into account, as follows:<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<font color=blue>
+NewLevel = (Window - 1)/Window * OldLevel + 1/Window * CurrentTimeDiff
+</font><br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+There is also a Maximum Level at which this value will be capped. This formula 
+is for both server and client because they both should calculate current level.
+You can check if your calculations is ok - just send <a href="snac_01_06.html">
+SNAC(01,06)</a> in the middle of a session and compare server value from 
+<a href="snac_01_07.html">SNAC(01,07)</a> with yours.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Once the new level has been calculated, ICQ updates your state as follows:
+if your level is less than the Limit Level your state will be set to 1
+("limited"); if it's greater than the Limit Level, but less than the Alert
+Level, your state will be set to 2 ("alert"); if it's greater than the Alert
+Level your state will be 3 ("clear"). If your state was already set to 1,
+the calculation is slightly different. It only compares your level against
+the Clear Level value - if it's greater than that, your state becomes 3
+("clear"), otherwise it remains at 1 ("limited"). And one more thing - icq 
+often receive SNAC(01,07) with state=114 - this is ok, this mean that you 
+not limited.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Incidentally, this calculation happens before your packet is actually sent, so
+if your state changes to "limited" at this point, the packet won't be sent.
+If your state is not "clear", ICQ will also start a timer for some time in
+the future (the actual duration is rather complicated so I won't go into
+that now) so that your state can be recalculated, giving you a chance to get
+back to "clear".<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+Now that you know the basic protocol, some of the SNAC parameters will make
+more sense. The Window Size is the Window mentioned in calculating the
+running average time between packets (the level). The Clear, Alert and Limit
+Levels are used in calculating the rate state. Disconnect level is the level 
+at which the ICQ server will disconnect you so it doesn't used by the client. 
+The Current level is what the level is initially set to you when SNAC 1/07 is
+received. The Max Level is what the level is capped at when calculating the
+running average.<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+The Last Time is a duration in milliseconds which is used to set the initial
+value of the last sent time (the time is set to the specified duration into
+the past, i.e. 1000 milliseconds means 1 second ago). The Start State 
+specifies the initial rate state, and although the state is immediately
+recalculated, the current state does effect that calculation (as explained
+above).<br><br>
+
+</td>
+<td width=5></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

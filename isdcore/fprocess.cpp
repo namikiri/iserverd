@@ -38,19 +38,19 @@ void process_defrag()
 {
    struct defrag_pack dpack;
    usersdb_connect();			/* connect to users database */
-  
+
    for(;;)
    {
       defrag_receive_pipe(dpack);
-     
+
       switch(dpack.mtype)
       {
          case MESS_DEFRAG:   DEBUG(50, ("Received MESS_DEFRAG (for %lu [%d])...\n", dpack.uin_num, dpack.seq));
                              db_defrag_check(dpack.uin_num, dpack.seq); break;
          case MESS_FRGCHECK: db_defrag_check(); break;
-          
+
          default: LOG_SYS(0, ("Unknown message from defragment pipe...\n"));
-                  break;  
+                  break;
       }
    }
    return;

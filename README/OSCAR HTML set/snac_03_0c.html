@@ -1,0 +1,192 @@
+<html>
+<head>
+<title>SNAC(03,0C) user moved offline</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(03,0C)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_USER_OFFLINE &nbsp;</font></b>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td>
+Server send this when user from your contact list goes offline. See also
+<a href="info_block.html">additional information</a> about online
+userinfo block. Complete snac list for this service 
+<a href="families.html#f0003">here</a>.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+
+ <table width=636 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 03</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=58%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 0C</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+<table width=636 cellSpacing=2 cellPadding=0 align=center border=0><tr><td>
+<table width=632 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#c9c9e9>&nbsp;Following user info may be repeated more then once
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+   <table width=628 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=169>&nbsp;xx</td>
+   <td width=5>&nbsp;</td>
+   <td>char</td>
+   <td width=5>&nbsp;</td>
+   <td width=58%>uin string length</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>string</td>
+   <td>&nbsp;</td>
+   <td>uin string</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>warning level (unused in ICQ)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>Number of TLV in info-tlvlist</td>
+   </tr>
+   </table>
+
+ <!-- TLV 0x01 -->
+ <table width=630 cellSpacing=0 cellPadding=0 align=center border=0 >
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=600 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0 >
+   <tr>
+   <td width=147>&nbsp;00 01</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x01) - user class</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>TLV.Length</td>
+   </tr>
+   </table>
+  </td></tr>
+  <tr><td bgcolor=#f9f9f9>
+   <table width=600 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=147>&nbsp;xx xx xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>dword</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%><a href="lists.html#user_class">User class</a></td>
+   </tr>
+   </table>
+
+</td></tr></table>
+</td></tr></table>
+</td><td width=5></td></tr>
+<tr><td height=5 colspan=3>
+</td></tr></table>
+</td></tr></table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 3F 3A 00 1D 00 03  00 0C 00 00 82 99 4A AC *.?:..........J.
+  08 33 32 37 31 34 39 34  34 00 00 00 01 00 01 00 .32714944.......
+  02 00 00                                         ...
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

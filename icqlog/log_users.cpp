@@ -63,12 +63,12 @@ void init_syslog_logs( void )
 {
    int params = 0;
    closelog();
-  
+
    /* if user want to log process pid */
    if (lp_pid_in_logs()) params |= LOG_PID;
-  
+
    /* now time to open syslog facility... :) */
-   openlog(SYSLOG_SIDENT, params, LOG_LOCAL0); 
+   openlog(SYSLOG_SIDENT, params, LOG_LOCAL0);
 }
 
 /**************************************************************************/
@@ -76,7 +76,7 @@ void init_syslog_logs( void )
 /**************************************************************************/
 int usrDebug1( char *format_str, ... )
 {
-   va_list ap;  
+   va_list ap;
    int old_errno = errno;
 
    if( stdout_logging )
@@ -89,12 +89,12 @@ int usrDebug1( char *format_str, ... )
       return( 0 );
    }
    else
-   {  
+   {
       va_start( ap, format_str );
       vsyslog( LOG_INFO , format_str, ap );
       va_end( ap );
    }
-  
+
    return(0);
 
 }
@@ -142,7 +142,7 @@ BOOL usrtext( char *format_str, ... )
    va_list ap;
    pstring msgbuf;
 
-   va_start( ap, format_str ); 
+   va_start( ap, format_str );
    vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
    va_end( ap );
 
@@ -150,5 +150,5 @@ BOOL usrtext( char *format_str, ... )
 
    return( True );
 
-} 
+}
 

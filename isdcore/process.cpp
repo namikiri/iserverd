@@ -38,7 +38,7 @@ extern unsigned long increm_num;
 /* Determine who we are and do specific work 				  */
 /**************************************************************************/
 void process_server()
-{ 
+{
    while(1)
    {
       set_ps_display(process_role, "");
@@ -70,13 +70,13 @@ void process_packet()
    parse_config_file(lp_v7_proto_config(), CONFIG_TYPE_AIM);
    init_all_protocols();
    init_random();
-  
+
    for(;;)
    {
       pipe_receive_packet(ppacket);	/* receive packet from pipe  */
       handle_icq_packet(ppacket);	/* handle packet 	     */
    }
-  
+
    return;
 }
 
@@ -112,12 +112,12 @@ void init_childs_list()
 void child_insert(pid_t child_pid, int role)
 {
    cl_last = (child_record *)calloc(1, sizeof(*cl_last));
-  
+
    DEBUG(100,("Insert child: %d (role: %d)\n",child_pid, role));
-  
+
    cl_last->child.child_pid  = child_pid;
    cl_last->child.child_role = role;
-  
+
    if (cl_begin == NULL) 		/* list is empty */
    {
      cl_last->prior = NULL;
@@ -131,7 +131,7 @@ void child_insert(pid_t child_pid, int role)
      cl_begin->next = cl_list;
      cl_begin->next->prior = cl_begin;
      cl_begin->prior = NULL;
-     
+
    }
 }
 
@@ -151,22 +151,22 @@ void child_delete(pid_t child_pid)
          /* delete from middle of list */
          if ((cl_list->prior != NULL) & (cl_list->next != NULL))
          {
-            cl_list->prior->next = cl_list->next; 
- 	    cl_list->next->prior = cl_list->prior; 
+            cl_list->prior->next = cl_list->next;
+ 	    cl_list->next->prior = cl_list->prior;
 	    ltemp = cl_list;
 	    cl_list = cl_list->next;
 	    free(ltemp);
 	    return;
          }
-      
+
          /* list contain only one record */
          if ((cl_list->prior == NULL) & (cl_list->next == NULL))
          {
             cl_begin = NULL;
  	    free(cl_list);
 	    return;
-         }      
-      
+         }
+
          /* delete record from end of the list */
          if (cl_list->next == NULL)
          {
@@ -177,7 +177,7 @@ void child_delete(pid_t child_pid)
 
          /* delete record from begin of the list */
          if (cl_list->prior == NULL)
-         { 
+         {
             cl_begin = cl_list->next;
  	    cl_list->next->prior = NULL;
 	    free(cl_list);
@@ -185,7 +185,7 @@ void child_delete(pid_t child_pid)
          }
       }
       cl_list = cl_list->next;
-   }    
+   }
 }
 
 
@@ -197,7 +197,7 @@ int child_lookup(pid_t child_pid)
    cl_list = cl_begin;
    while(cl_list)
    {
-     if (cl_list->child.child_pid == child_pid) 
+     if (cl_list->child.child_pid == child_pid)
              return (cl_list->child.child_role);
      cl_list = cl_list->next;
    }
@@ -213,7 +213,7 @@ int childs_num(int role)
 {
    int child_num = 0;
    cl_list = cl_begin;
-  
+
    while(cl_list)
    {
       if (role == -1)	/* user want total number of childs */
@@ -237,7 +237,7 @@ int geteppid()
 {
     int child_pid = 0;
     cl_list = cl_begin;
-  
+
     while(cl_list)
     {
        if (cl_list->child.child_role == ROLE_EPACKET)
@@ -258,7 +258,7 @@ void check_packet_processors()
 {
    int cnum = childs_num(ROLE_PACKET);
    int conf_num = lp_min_childs();
- 
+
    if (cnum < conf_num)
    {
       fork_packet_processors(conf_num-cnum);
@@ -273,22 +273,22 @@ void check_packet_processors()
 /**************************************************************************/
 void check_event_processors()
 {
-   if ((childs_num(ROLE_EPACKET) == 0) && 
+   if ((childs_num(ROLE_EPACKET) == 0) &&
        (process_role == ROLE_SOCKET))
    {
       fork_epacket_processor();
       childs_check = 0;
       reload_in_progress = False;
    }
-   
-   if ((childs_num(ROLE_EUSER) == 0) && 
+
+   if ((childs_num(ROLE_EUSER) == 0) &&
        (process_role == ROLE_SOCKET))
    {
       fork_euser_processor();
       childs_check = 0;
       reload_in_progress = False;
    }
-   
+
    if ((childs_num(ROLE_ETIMER) == 0) &&
        (process_role == ROLE_SOCKET))
    {
@@ -369,7 +369,7 @@ void Server_cleanup()
    struct shmid_ds sm;
    memset(&sm, 0, sizeof(sm));
    memset(&ss, 0, sizeof(ss));
-   
+
    /* do it only if we are parent */
    if (process_role == ROLE_SOCKET)
    {
@@ -441,23 +441,23 @@ void handle_wwp_mess(Packet &pack)
    unsigned  long from_ip;
    unsigned short str_len;
    int i;
-   
+
    char email[64];
    char name[32];
    char mess[450];
    char mess1[550];
    char mess2[550];
    pack.reset();
-   
+
    /* extract data from packet */
    pack >> signature >> from_ip >> tuin >> str_len;
-   
-   if (signature != 0x01020709) 
+
+   if (signature != 0x01020709)
    {
-      DEBUG(100, ("Wrong signature in wwp packet...\n"));  
+      DEBUG(100, ("Wrong signature in wwp packet...\n"));
    }
-   
-   if (str_len > sizeof(email)+1) 
+
+   if (str_len > sizeof(email)+1)
    {
       DEBUG(10, ("WWP Email string len overflow...\n"));
       return;
@@ -481,13 +481,13 @@ void handle_wwp_mess(Packet &pack)
    }
 
    for (i=0; i<str_len; i++) pack >> mess[i];
-   
-   snprintf(mess1, sizeof(mess1)+1, "Sender IP: %s\x0d\x0a", 
+
+   snprintf(mess1, sizeof(mess1)+1, "Sender IP: %s\x0d\x0a",
             inet_ntoa(icqToIp(from_ip)));
 
    snprintf(mess2, sizeof(mess2)-1, "%s%s", mess1, mess);
-   
-   /* now we should generate non-standart v3-packet 
+
+   /* now we should generate non-standart v3-packet
       and send it to packet-processor thru pipe */
    reply_pack.clearPacket();
    reply_pack << (unsigned short)V3_PROTO
@@ -505,7 +505,7 @@ void handle_wwp_mess(Packet &pack)
 	      << mess2;
 
    increm_num++;
-   
+
    reply_pack.from_local = 1;
    spipe_send_packet(reply_pack);
 }

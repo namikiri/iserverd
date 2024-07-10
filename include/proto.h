@@ -422,7 +422,7 @@ BOOL systext( char *format_str, ... );
 
 /* prototypes from  icqlog/log_usr.c */
 
-BOOL usr_interactive(void); 
+BOOL usr_interactive(void);
 void setup_usrlogging( char *pname, BOOL interactive );
 int usrDebug1( char *format_str, ... );
 void usrbufr_print( void );
@@ -477,7 +477,7 @@ time_t longToTime(unsigned long ltime);
 char *time2str(time_t stime);
 char *time2str1(time_t stime);
 
-/* prototypes from system/time.cpp */ 
+/* prototypes from system/time.cpp */
 
 void GetTimeOfDay(struct timeval *tval);
 int tm_diff(struct tm *a, struct tm *b);
@@ -492,7 +492,7 @@ char *timestr();
 char *timestring(BOOL hires);
 time_t get_create_time(struct stat  *st,BOOL fake_dirs);
 
-/* prototypes from system/util_file.cpp */ 
+/* prototypes from system/util_file.cpp */
 
 off_t get_file_size(char *file_name);
 off_t get_file_size(int fd);
@@ -500,11 +500,11 @@ BOOL file_modified_date(const char *filename, time_t *lastmodified);
 BOOL file_modified(const char *filename, time_t *lastmodified);
 char *file_load(char *fname, size_t *size);
 
-/* prototypes from config/parse.cpp */ 
+/* prototypes from config/parse.cpp */
 BOOL pm_process( char *FileName, BOOL (*sfunc)(char *),
 	                 BOOL (*pfunc)(char *, char *) );
 
-/* prototypes from system/daemon.cpp */ 
+/* prototypes from system/daemon.cpp */
 pid_t pidfile_pid();
 BOOL write_pid();
 int  become_daemon(void);

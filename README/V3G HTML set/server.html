@@ -1,0 +1,354 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html">
+<title>ICQ Corp proto description - (version 1.0.49)</title>
+</head>
+<body vlink="#800080" link="#000080" alink="#FF0000"> 
+<u>
+<a name="top"></a>
+        <a href="#35">Server packets overview </a>      
+                </u><ul type="disc"><u>
+<li>    <a href="#35">Server reply packet  (command <font color="#0000ff">000a</font>)</a>      
+</li><li>    <a href="#36">Server login reply  (command <font color="#0000ff">005a</font>)</a>       
+</li><li>    <a href="#37">User online packet  (command <font color="#0000ff">006e</font>)</a>       
+</li><li>    <a href="#38">End of contact list (command <font color="#0000ff">021c</font>)</a>       
+</li><li>    <a href="#39">User gone offline (command <font color="#0000ff">0078</font>)</a> 
+</li><li>    <a href="#40">User changed his status (command <font color="#0000ff">01a4</font>)</a>   
+</li><li>    <a href="#41">Login error (command <font color="#0000ff">0370</font>)</a>       
+</li><li>    <a href="#42">Password error (command <font color="#0000ff">0064</font>)</a>    
+</li><li>    <a href="#43">Search: user found (command <font color="#0000ff">008c</font>)</a>        
+</li><li>    <a href="#44">End of search (command <font color="#0000ff">00a0</font>)</a>
+</li><li>    <a href="#45">Registration ok (command <font color="#0000ff">0384</font>)</a>   
+</li><li>    <a href="#46">User_notes (command <font color="#0000ff">0352</font>)</a>
+</li><li>    <a href="#47">Basic info packet (command <font color="#0000ff">02e4</font>)</a> 
+</li><li>    <a href="#48">Server busy packet (command <font color="#0000ff">00fa</font>)</a>        
+</li><li>    <a href="#49">Set user notes ok (command <font color="#0000ff">02a8</font>)</a> 
+</li><li>    <a href="#50">Set user basic info ok (command <font color="#0000ff">01e0</font>)</a>    
+</li><li>    <a href="#51">Set user home info ok (command <font color="#0000ff">0280</font>)</a>     
+</li><li>    <a href="#52">Set user work info ok (command <font color="#0000ff">026c</font>)</a>     
+</li><li>    <a href="#53">Set new password ok (command <font color="#0000ff">0140</font>)</a>       
+</li></u><li><u>    <a href="#54">Set auth mode ok (command <font color="#0000ff">01f4</font>)</a>  
+</u>
+</li></ul>
+<pre> 
+<a name="35"></a><b><u>Server packets overview</u></b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+
+<a name="35"></a><b>Server reply packet (command <font color="#0000ff">000a</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 0a 00 01 00 00 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 0a</font>  - command code (server and client have the same code)
+<font color="#0000ff">00 09</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 0a</font>      - (seq2 of replyed packet)
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This type of packet used to confirm receiving client packet. It should have 
+seq1 = seq1 of replied server packet. If client after sending packet to server don't 
+receive ack packet it send it again.
+
+<a name="36"></a><b>Server login reply (command <font color="#0000ff">005a</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 5a 00 01 00 10 8f e4 5e 00 00 00 00 00 7f 00 00 00 00 00 00 00 19 00 00 
+00 02 00 00 00 01 00 fa 00 00 00 2d 00 05 00 0a 00 05 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 5a</font>      - command code
+<font color="#0000ff">00 01</font>      - sequence number (seq1)
+<font color="#0000ff">00 10</font>      - seq2 of user login packet
+<font color="#0000ff">8f e4 5e 00</font>        - uin 
+<font color="#0000ff">00 00 00 00</font>        - zero field
+<font color="#0000ff">7f 00 00 00</font>     - ip addr (127.0.0.1)
+<font color="#0000ff">00 00</font>              - unknown
+<font color="#0000ff">00 00 19 00</font>        - unknown
+<font color="#0000ff">00 00 02 00</font>        - unknown
+<font color="#0000ff">00 00 00 01</font>        - unknown
+<font color="#0000ff">fa 00 00 00</font>        - unknown
+<font color="#0000ff">2d 00 05 00</font>        - unknown
+<font color="#0000ff">0a 00 05 00</font>        - unknown
+
+Note: This type of packet used to confirm receiving client logon packet.
+
+<a name="37"></a><b>User online packet (command <font color="#0000ff">006e</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 6e 00 01 00 00 00 8f e4 5e 00 00 00 00 00 f2 03 00 00 7f 00 00 00 00 2e 06 
+00 00 7f 00 00 00 04 00 00 00 00 02 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 6e</font>      - command code 
+<font color="#0000ff">00 01</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 00</font>      - zero
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 00 03 f2</font>        - event user UIN
+<font color="#0000ff">7f 00 00 00</font>        - user IP
+<font color="#0000ff">00 00 06 2e</font>        - user port
+<font color="#0000ff">7f 00 00 00</font>        - user REAL IP
+<font color="#0000ff">04</font>              - gap
+<font color="#0000ff">00 00 00 00</font>        - user status
+<font color="#0000ff">00 00 00 02</font>        - unknown field
+
+Note: This packet used by server to alert client about new connected user. 
+
+<a name="38"></a><b>End of contact list (command <font color="#0000ff">021c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 1c 02 07 00 00 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">02 1ñ</font>      - command code 
+<font color="#0000ff">00 07</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 06</font>      - seq2 of "contact list" packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server inform client that all his contact list processed. 
+
+<a name="39"></a><b>User gone offline (command <font color="#0000ff">0078</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 78 00 09 00 00 00 8f e4 5e 00 00 00 00 00 06 04 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 78</font>      - command code 
+<font color="#0000ff">00 09</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 00 </font>     - zero
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 00 04 06</font>        - event user UIN
+
+Note: This packet used by server inform client that user from contact list gone offline. 
+
+<a name="40"></a><b>User changed his status (command <font color="#0000ff">01a4</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 a4 01 09 00 00 00 8f e4 5e 00 00 00 00 00 f2 03 00 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">01 a4</font>      - command code 
+<font color="#0000ff">00 09</font>   - sequence number of packet (seq1)
+<font color="#0000ff">00 00</font>      - zero
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 00 03 f2</font>        - event user UIN
+<font color="#0000ff">00 00 00 00</font>        - user status
+
+Note: This packet used by server to alert client that user from contact list changed his status. 
+
+<a name="41"></a><b>Login error (command <font color="#0000ff">0370</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 70 03 0a 00 00 00 8f e4 5e 00 00 00 00 00 06 00 ce ce ce ce ce 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">03 70</font>      - command code 
+<font color="#0000ff">00 09</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 02</font>      - seq2 of login packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 06</font>              - length of error message
+<font color="#0000ff">ce .. ce 00</font>        - error message string with 00 at the end
+
+Note: This packet used by server inform client that login can't be finished. 
+Packet contain message explaining error. 
+
+<a name="42"></a><b>Password error (command <font color="#0000ff">0064</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 64 00 0a 00 00 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 63</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 02</font>      - seq2 of login packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server inform client that incorrect password was sent during logon. 
+
+<a name="43"></a><b>Search: user found (command <font color="#0000ff">008c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 8c 00 0b 00 00 00 8f e4 5e 00 00 00 00 00 0b 00 50 55 50 4B 49 4E 5F 56 41 
+53 00 06 00 56 41 53 41 00 50 55 50 4B 49 4E 00 16 00 50 55 50 4B 49 4E 40 45 4D 41 
+49 4C 2E 4B 48 53 54 55 2E 52 55 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 8c</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of "begin search" client packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">0b 00</font>              - NickName length
+<font color="#0000ff">xx .. xx 00</font>        - NickName string
+<font color="#0000ff">06 00</font>              - FName length
+<font color="#0000ff">xx .. xx 00</font>        - FName string
+<font color="#0000ff">07 00</font>              - LName length
+<font color="#0000ff">xx .. xx 00</font>        - LName string
+<font color="#0000ff">16 00</font>              - Email length
+<font color="#0000ff">xx .. xx 00</font>     - Email string
+<font color="#0000ff">00</font>              - auth mode
+
+Note: This packet used by server to deliver found user basic to client. 
+
+<a name="44"></a><b>End of search (command <font color="#0000ff">00a0</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 a0 00 0a 00 00 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 a0</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of search packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that search is finished. 
+
+<a name="45"></a><b>Registration ok (command <font color="#0000ff">0384</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 84 03 0a 00 00 00 8f e4 5e 00 00 00 00 00 10 00 52 65 67 69 73 74 72 61 74
+ 69 6F 6E 20 4F 4B 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">03 84</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 14</font>      - seq2 of registration form packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 10</font>              - message length
+<font color="#0000ff">52 .. 4b 00</font>        - message ("Registration ok")
+
+Note: This packet used by server to inform client that registration request sent successfully. 
+
+<a name="46"></a><b> User_notes (command <font color="#0000ff">0352</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 52 03 0a 00 00 00 8f e4 5e 00 00 00 00 00 1f 00 42 61 6E 7A 61 69 2E 2E 2E 20 54 
+68 69 73 20 69 73 20 6E 65 77 20 6E 6F 74 65 73 2E 2E 2E 00 a3 fb 4c 09 ea fb 4c 09 7f 00 
+00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">03 52</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 10</font>      - seq2 of notes request packet
+<font color="#0000ff">00 5e e4 8f</font>     - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">00 1F</font>              - notes length
+<font color="#0000ff">42 .. 2e 00</font>        - notes string
+<font color="#0000ff">09 4c fb a3</font>        - timestamp: last notes update time and date
+<font color="#0000ff">09 4c fb ea</font>        - timestamp: last login time and date
+
+Note: This packet used by server to deliver to client requested user notes. 
+
+<a name="47"></a><b>Basic info packet (command <font color="#0000ff">02e4</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 e4 02 0a 00 00 00 8f e4 5e 00 00 00 00 00 0b 00 50 55 50 4B 49 4E 5F 56 41 53 00 06 
+00 56 41 53 41 00 50 55 50 4B 49 4E 00 16 00 50 55 50 4B 49 4E 40 45 4D 41 49 4C 2E 4B 48 53 
+54 55 2E 52 55 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">02 e4</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 17</font>      - seq2 of info request packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+<font color="#0000ff">0b 00</font>              - NickName length
+<font color="#0000ff">xx .. xx 00</font>        - NickName string
+<font color="#0000ff">06 00</font>              - FName length
+<font color="#0000ff">xx .. xx 00</font>        - FName string
+<font color="#0000ff">07 00</font>              - LName length
+<font color="#0000ff">xx .. xx 00</font>        - LName string
+<font color="#0000ff">16 00</font>              - Email length
+<font color="#0000ff">xx .. xx 00</font>        - Email string
+<font color="#0000ff">00</font>                 - auth mode
+
+Note: This packet used by server to deliver to client first part (basic) requested user info. 
+
+<a name="48"></a><b>Server busy packet (command <font color="#0000ff">00fa</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 fa 00 0a 00 00 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">00 fa</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of problem packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation can't be finished, 
+and it should try again in few minutes. 
+
+<a name="49"></a><b>Set user notes ok (command <font color="#0000ff">02a8</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 a8 02 0a 00 11 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">02 a8</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of setnotes packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation finished successfully. 
+
+<a name="50"></a><b>Set user basic info ok (command <font color="#0000ff">01e0</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 e0 01 0a 00 11 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">01 e0</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of basic setinfo packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation finished successfully. 
+
+<a name="51"></a><b>Set user home info ok (command <font color="#0000ff">0280</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 80 02 0a 00 11 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">02 80</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of home setinfo packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation finished successfully. 
+
+<a name="52"></a><b>Set user work info ok (command <font color="#0000ff">026c</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 6c 02 0a 00 11 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">02 6c</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of home setinfo packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation finished successfully. 
+
+
+<a name="53"></a><b>Set new password ok (command <font color="#0000ff">0140</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 40 01 0a 00 11 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">01 40</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of set_password packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00</font>        - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation finished successfully. 
+
+<a name="54"></a><b>Set auth mode ok (command <font color="#0000ff">01f4</font>)</b> <a href="#top"><img src="b.jpg" width="10" height="10" border="0"></a>
+<font color="#0000ff">
+/* 03 00 f4 01 0a 00 11 00 8f e4 5e 00 00 00 00 00 */
+</font>
+<font color="#0000ff">00 03</font>      - version number
+<font color="#ff0000">01 f4</font>      - command code 
+<font color="#0000ff">00 0a</font>      - sequence number of packet (seq1)
+<font color="#0000ff">00 11</font>      - seq2 of home setinfo packet
+<font color="#0000ff">00 5e e4 8f</font>        - intrAnet client UIN number
+<font color="#0000ff">00 00 00 00&gt;</font>       - internet client UIN number (not used - reserved)
+
+Note: This packet used by server to inform client that operation finished successfully. 
+
+
+</pre></body></html>

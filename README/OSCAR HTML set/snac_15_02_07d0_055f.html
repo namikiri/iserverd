@@ -1,0 +1,1107 @@
+<html>
+<head>
+<title>SNAC(15,02)/07D0/055F white pages search tlv-based request</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,02)/07D0/055F&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">CLI_WHITE_PAGES_SEARCH2&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is client tlv-based white pages search request used by ICQ2001+. 
+Server should respond with 1 or more packets. Last reply packet allways 
+<a href="snac_15_03_07da_01ae.html">SNAC(15,03)/07DA/01AE</a>, other reply packets 
+<a href="snac_15_03_07da_01a4.html">SNAC(15,03)/07DA/01A4</a>. See 
+also <a href="snac_15_xx_tlvs.html">list of TLVs</a> that modern clients use in 
+TLV-based requests.<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 15</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC family</td>
+</tr>
+<tr>
+<td>&nbsp;00 02</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC subtype</td>
+</tr>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC flags</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword</td>
+<td width=5>&nbsp;</td>
+<td width=55%>SNAC request-id</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td  bgcolor=#E9E9E9 >
+
+<table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;00 01</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Type(1) - encapsulated META_DATA</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=55%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<table width=580 bgcolor=darkred cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td  bgcolor=#E9E9E9 >
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data chunk size (TLV.Length-2)</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx xx xx</td>
+<td width=5>&nbsp;</td>
+<td>dword (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request owner uin</td>
+</tr>
+<tr>
+<td>&nbsp;D0 07</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data type: META_DATA_REQ</td>
+</tr>
+<tr>
+<td>&nbsp;02 00</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>request sequence number</td>
+</tr>
+<tr>
+<td>&nbsp;5F 05</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=55%>data subtype: CLI_WHITE_PAGES_SEARCH2</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+<table width=580 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td height=8 colspan=3></td></tr>
+<tr><td width=20> </td>
+<td>
+
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;90 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0190) - City to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>City string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>city name string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;9A 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x019A) - State to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>State string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>State abbr string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;AE 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01AE) - Company to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Company string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Company name string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;B8 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01B8) - Department to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Department string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Department name string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;C2 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01C2) - Position to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Position string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Position name string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;68 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0168) - Age range to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Min age to search</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Max age to search</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;7C 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x017C) - Gender to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>byte</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Gender</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;86 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0186) - Language to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Language code to search</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;A4 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01A4) - Country to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Country code to search</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;CC 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01CC) - Ocupation code to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Ocupation code</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;D6 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01D6) - Past info to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Past category</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Past keywords string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Past keywords string ("," - separator)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;EA 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01EA) - Interests info to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Interests category</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Interests keywords string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Interests keywords string ("," - separator)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;FE 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x01FE) - Affilations info to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Affilations category</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Affilations keywords string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Affilations keywords string ("," - separator)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;12 02</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0212) - Homepage info to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Homepage category</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Homepage keywords string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Homepage keywords string ("," - separator)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;40 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0140) - Firstname to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Firstname string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Firstname string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;4A 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x014A) - Lastname to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Lastname string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Lastname string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;54 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0154) - Nickname search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Nickname string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Nickname string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;26 02</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0226) - Keyword to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Keywords string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Keywords string ("," - separator)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;5E 01</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0015E) - Email to search</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Email string length</td>
+</tr>
+<tr>
+<td width=19%>&nbsp;xx .. xx 00</td>
+<td width=5>&nbsp;</td>
+<td>string (asciiz)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>Email string</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+<br>
+<!-- tlv block start -->
+<table width=550 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0><tr><td bgcolor=#f9f9f9>
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;30 02</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Type(0x0230) - Search online/offline flag</td>
+</tr>
+<tr>
+<td>&nbsp;xx xx</td>
+<td width=5>&nbsp;</td>
+<td>word (LE)</td>
+<td width=5>&nbsp;</td>
+<td width=56%>TLV.Length</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td bgcolor=#f9f9f9>
+
+<table width=550 cellSpacing=0 cellPadding=0 align=center border=0>
+<tr>
+<td width=19%>&nbsp;xx</td>
+<td width=5>&nbsp;</td>
+<td>byte</td>
+<td width=5>&nbsp;</td>
+<td width=56%>flag: (1 - search online, 0 - search all)</td>
+</tr>
+</table> 
+</td></tr>
+</table>
+</td></tr></table>
+<!-- tlv block end -->
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+
+</td><td width=5> </td>
+</tr>
+<tr><td height=5 colspan=3> </td></tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td  bgcolor=#E9E9E9 >
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 1E 90 01 14 00 15 00 02 00 00 00 0E 00 02 *...............
+  00 01 01 06 04 01 8F E4 5E 00 D0 07 11 00 5F 05 ........^....._.
+  90 01 07 00 05 00 43 69 74 79 00 AE 01 0A 00 08 ......City......
+  00 43 6F 6D 70 61 6E 79 00 B8 01 0D 00 0B 00 44 .Company.......D
+  65 70 61 72 74 6D 65 6E 74 00 C2 01 0B 00 09 00 epartment.......
+  50 6F 73 69 74 69 6F 6E 00 68 01 04 00 1E 00 27 Position.h.....'
+  00 7C 01 01 00 02 86 01 02 00 26 00 A4 01 02 00 ..........&.....
+  07 00 CC 01 02 00 03 00 D6 01 10 00 2D 01 0C 00 ............-...
+  50 61 73 74 4B 65 79 77 6F 72 64 00 EA 01 11 00 PastKeyword.....
+  64 00 0D 00 41 72 63 68 69 74 65 63 74 75 72 65 d...Architecture
+  00 FE 01 0F 00 CA 00 0B 00 4F 72 67 4B 65 79 77 .........OrgKeyw
+  6F 72 64 00 12 02 04 00 2B 0B 00 00 40 01 0C 00 ord.....+...@...
+  0A 00 46 69 72 73 74 4E 61 6D 65 00 4A 01 0B 00 ..FirstName.J...
+  09 00 4C 61 73 74 4E 61 6D 65 00 54 01 0B 00 09 ..LastName.T....
+  00 4E 69 63 6B 4E 61 6D 65 00 26 02 11 00 0F 00 .NickName.&.....
+  47 65 6E 65 72 61 6C 4B 65 79 77 6F 72 64 00 5E GeneralKeyword.^
+  01 12 00 10 00 45 6D 61 69 6C 40 65 6D 61 69 6C .....Email@email
+  2E 6F 72 67 00 30 02 01 00 01                   .org.0....
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

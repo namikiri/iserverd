@@ -1,0 +1,479 @@
+#**************************************************************************
+#									  *
+# Copyright (c) 2000-2005 by Alexandr V.Shutko, Khabarovsk, Russia	  *
+# All rights reserved.							  *
+#                                                                         *
+# Redistribution and use in source and binary forms, with or without	  *
+# modification, are permitted provided that the following conditions	  *
+# are met:								  *
+# 1. Redistributions of source code must retain the above copyright	  *
+#    notice, this list of conditions and the following disclaimer.	  *
+# 2. Redistributions in binary form must reproduce the above copyright	  *
+#    notice, this list of conditions and the following disclaimer in 	  *
+#    the documentation and/or other materials provided with the 	  *
+#    distribution.							  *
+#                                                                         *
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND  *
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE   *
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 	  *
+# PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS   *
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, 	  *
+# OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT    *
+# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 	  *
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,   *
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE    *
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 	  *
+# EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.			  *
+#									  *
+# This is a main project Makefile 					  *
+#									  *
+#**************************************************************************
+
+prefix          = $(DESTDIR)/usr/local
+SERVROOT        = $(DESTDIR)/usr/local
+
+exec_prefix     = /usr/local
+libexecdir      = ${exec_prefix}/libexec
+libdir          = ${exec_prefix}/lib
+infodir         = ${prefix}/share/info
+mandir          = ${prefix}/share/man
+includedir      = ${prefix}/include
+
+VAR_DIR         = $(DESTDIR)/var/run/iserverd
+BIN_DIR         = $(DESTDIR)/usr/bin
+SBIN_DIR        = $(DESTDIR)/usr/sbin
+ETC_DIR         = $(DESTDIR)/etc/iserverd
+LOG_DIR         = $(DESTDIR)/var/log/iserverd
+
+SHELL           = /bin/sh
+
+INSTALL         = /usr/bin/install -c
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DATA    = ${INSTALL} -m 644
+INSTALL_SCRIPT  = ${INSTALL}
+transform       = s,x,x,
+
+YACC            = bison -y
+LEX	        = flex
+
+CC              = gcc
+CXX             = g++
+CFLAGS          = -I. -Wno-write-strings -DHAVE_CONFIG_H -g -O2 -Iinclude -I/usr/include -I/usr/local/include -I/usr/include/postgresql -I/usr/include/postgresql/libpq  -DVAR_DIR=/var/run/iserverd -DBIN_DIR=/usr/bin -DETC_DIR=/etc/iserverd -DLOG_DIR=/var/log/iserverd
+CXXFLAGS        = -I. -Wno-write-strings -DHAVE_CONFIG_H -g -O2 -Iinclude -I/usr/include -I/usr/local/include -I/usr/include/postgresql -I/usr/include/postgresql/libpq  -DVAR_DIR=/var/run/iserverd -DBIN_DIR=/usr/bin -DETC_DIR=/etc/iserverd -DLOG_DIR=/var/log/iserverd
+CLFLAGS         = -I. -Wno-write-strings -DHAVE_CONFIG_H -g -O2 -Iinclude -I/usr/include -I/usr/local/include -I/usr/include/postgresql -I/usr/include/postgresql/libpq  -DVAR_DIR=/var/run/iserverd -DBIN_DIR=/usr/bin -DETC_DIR=/etc/iserverd -DLOG_DIR=/var/log/iserverd 
+
+# C++ compiler
+
+LDFLAGS         =  -L/usr/lib -L/usr/local/lib
+LINKER          = g++ $(CLFLAGS) $(LDFLAGS) 
+LOADLIBES       = -L/usr/lib -lpq -lm  -lfl
+GDLIBS		= 
+
+mkinstalldirs   = $(SHELL) mkinstalldirs
+
+BPFX            = bin
+
+SUBDIRS         = data script man
+
+ISERVER_BIN     = iserverd
+DBCONV_BIN      = iserver_db_convert
+USR_CNT	        = iserver_users_cnt.cgi
+WEBPAGER        = iserver_webpager
+CHECKER	        = iserver_db_check
+ACHK	        = iserver_chk_actions
+ICHK		    = iserver_chk_aim_cfg
+ONLINE_CNT      = iserver_online_cnt.cgi
+MKTEMP          = mktemp
+STATUS		    = iserver_server_status
+BROADCAST       = iserver_broadcast
+DISCONNECT	    = iserver_disconnect
+
+MKTMP_FLAG      = yes
+
+ALL_BIN	     = $(DBCONV_BIN) \
+	       $(USR_CNT) \
+	       $(ONLINE_CNT) \
+	       $(CHECKER) \
+	       $(MKTEMP) \
+	       $(WEBPAGER) \
+	       $(STATUS) \
+	       $(BROADCAST) \
+	       $(DISCONNECT)
+
+PALL_BIN     = $(BPFX)/$(DBCONV_BIN) \
+	       $(BPFX)/$(USR_CNT) \
+	       $(BPFX)/$(ONLINE_CNT) \
+	       $(BPFX)/$(WEBPAGER) \
+	       $(BPFX)/$(MKTEMP) \
+	       $(BPFX)/$(CHECKER) \
+	       $(BPFX)/$(STATUS) \
+	       $(BPFX)/$(BROADCAST) \
+	       $(BPFX)/$(DISCONNECT)
+
+SALL_BIN     = $(ISERVER_BIN)
+SPALL_BIN    = $(BPFX)/$(ISERVER_BIN)
+
+SYSTEM_OBJ = system/daemon.o \
+	     system/lock.o \
+	     system/signals.o \
+	     system/slprintf.o \
+	     system/buffer.o \
+	     system/talloc.o \
+	     system/time.o \
+	     system/icqtime.o \
+	     system/util.o \
+	     system/md5.o \
+	     system/util_file.o \
+	     system/util_pipe.o \
+	     system/util_str.o \
+	     system/util_shm.o \
+	     system/translate.o \
+	     system/ps_status.o \
+	     system/ms_fnmatch.o
+
+LOG_OBJ    = icqlog/log_alarm.o \
+	     icqlog/log_debug.o \
+	     icqlog/log_system.o \
+	     icqlog/log_users.o
+
+CONFIG_OBJ = config/loadparm.o \
+	     config/parse.o \
+	     config/actions/print_tree.o \
+	     config/actions/parse_tree.o \
+	     config/actions/actions_publ.o \
+	     config/actions/y.tab.o \
+	     config/actions/lex.yy.o
+
+MESSAG_OBJ = isdcore/process.o \
+	     isdcore/fprocess.o \
+	     isdcore/process_init.o \
+	     isdcore/broadcast.o \
+	     isdcore/packet.o \
+	     isdcore/sockets-p.o \
+	     isdcore/sockets-ep.o \
+	     isdcore/sockets-kq.o \
+	     isdcore/sprocess.o \
+	     isdcore/handle.o \
+	     isdcore/public.o
+
+SRV_MAIN   = isdcore/main.o
+
+NETLIB_OBJ = netlib/udpserver.o \
+	     netlib/tcpserver.o \
+	     netlib/interface.o \
+	     netlib/network.o \
+	     netlib/icq_addr.o
+
+EVENTS_OBJ = event/epacket.o \
+	     event/euser.o \
+	     event/etimer.o \
+	     event/scheduler.o \
+	     pactions/actions.o
+
+DBASE_OBJ  = database/online_db.o \
+	     database/userinfo_db.o \
+	     database/contacts_db.o \
+	     database/messages_db.o \
+	     database/defrag_db.o \
+	     database/cookies_db.o \
+	     database/error_db.o \
+	     database/init_db.o \
+	     database/ssi_db.o
+
+PROTO3_OBJ = isdcore/v3_proto/proto_handler.o \
+	     isdcore/v3_proto/make_packet.o \
+	     isdcore/v3_proto/search.o \
+	     isdcore/v3_proto/messages.o \
+	     isdcore/v3_proto/fragment.o \
+	     isdcore/v3_proto/register.o
+
+PROTO5_OBJ = isdcore/v5_proto/proto_handler.o \
+	     isdcore/v5_proto/make_packet.o \
+	     isdcore/v5_proto/meta_user.o \
+	     isdcore/v5_proto/make_meta.o \
+	     isdcore/v5_proto/search.o \
+	     isdcore/v5_proto/messages.o \
+	     isdcore/v5_proto/register.o \
+	     isdcore/v5_proto/v5crypt.o
+
+PROTO7_OBJ = isdcore/v7_proto/proto_handler.o \
+	     isdcore/v7_proto/capabilities.o \
+	     isdcore/v7_proto/make_packet.o \
+	     isdcore/v7_proto/aim_util.o \
+	     isdcore/v7_proto/snac.o \
+	     isdcore/v7_proto/flap.o \
+	     isdcore/v7_proto/tlv.o \
+	     isdcore/v7_proto/snac_families/sn01_generic.o \
+	     isdcore/v7_proto/snac_families/sn02_location.o \
+	     isdcore/v7_proto/snac_families/sn03_buddylist.o \
+	     isdcore/v7_proto/snac_families/sn04_messaging.o \
+	     isdcore/v7_proto/snac_families/sn05_advert.o \
+	     isdcore/v7_proto/snac_families/sn06_invitation.o \
+	     isdcore/v7_proto/snac_families/sn07_admin.o \
+	     isdcore/v7_proto/snac_families/sn08_popup.o \
+	     isdcore/v7_proto/snac_families/sn09_bos.o \
+	     isdcore/v7_proto/snac_families/sn0A_search.o \
+	     isdcore/v7_proto/snac_families/sn0B_stats.o \
+	     isdcore/v7_proto/snac_families/sn0C_translate.o \
+	     isdcore/v7_proto/snac_families/sn0D_chatnvg.o \
+	     isdcore/v7_proto/snac_families/sn0E_chat.o \
+	     isdcore/v7_proto/snac_families/sn13_icq_contacts.o \
+	     isdcore/v7_proto/snac_families/sn15_ext_messages.o \
+	     isdcore/v7_proto/snac_families/sn17_registration.o
+
+PROTOS_OBJ     = isdcore/sys_proto/proto_handler.o
+ 
+MKTEMP_OBJ     = utils/mktemp.o
+
+CONST_OBJ      = $(SYSTEM_OBJ) \
+	         $(NETLIB_OBJ) \
+	         $(PROTO3_OBJ) \
+	         $(PROTO5_OBJ) \
+	         $(PROTO7_OBJ) \
+	         $(PROTOS_OBJ) \
+	         $(CONFIG_OBJ) \
+	         $(MESSAG_OBJ) \
+	         $(EVENTS_OBJ) \
+	         $(DBASE_OBJ) \
+	         $(LOG_OBJ)
+
+CUTILS_OBJ     = $(NETLIB_OBJ) \
+	         $(LOG_OBJ) \
+		 isdcore/public.o \
+		 isdcore/packet.o \
+		 config/loadparm.o \
+		 config/parse.o \
+		 system/lock.o \
+		 system/slprintf.o \
+		 system/buffer.o \
+		 system/talloc.o \
+		 system/time.o \
+		 system/icqtime.o \
+		 system/util.o \
+		 system/md5.o \
+		 system/util_file.o \
+		 system/util_str.o \
+		 system/translate.o \
+		 system/ps_status.o \
+		 system/ms_fnmatch.o
+
+STATUS_OBJ     = utils/server_status.o \
+                 $(CUTILS_OBJ)
+
+BROADCAST_OBJ  = utils/broadcast.o \
+                 $(CUTILS_OBJ)
+
+DISCONNECT_OBJ = utils/disconnect.o \
+                 $(CUTILS_OBJ)
+
+ISERV_OBJ      = $(CONST_OBJ) \
+	         $(SRV_MAIN)
+
+DBCONV_OBJ     = utils/db_convert.o \
+	         utils/translate.o
+
+ACHK_OBJ       = utils/chk_actions.o \
+	         $(CONST_OBJ)
+
+ICHK_OBJ       = utils/chk_aim_cfg.o \
+	         $(CONST_OBJ)
+
+USR_CNT_OBJ    = utils/users_cnt.o
+
+CHECKER_OBJ    = utils/db_check.o \
+		 database/init_db.o \
+		 database/uerror_db.o \
+	         $(CUTILS_OBJ)
+
+ONLINE_CNT_OBJ = utils/online_cnt.o
+
+WEBPAGER_OBJ   = utils/webpager.o \
+	         $(CONST_OBJ)
+
+LDADD	       =
+
+YACC_CPP       = config/actions/y.tab.c
+YACC_H	       = config/actions/y.tab.h
+LEX_CPP	       = config/actions/lex.yy.c
+
+
+.SUFFIXES:  .o .cpp .c
+
+
+# target to make object files
+.cpp.o: 
+	     $(CXX) $(CXXFLAGS) -c $< -o $@
+.c.o: 
+	     $(CC) $(CFLAGS) -c $< -o $@	     
+.cc.o: 
+	     $(CXXCOMPILE) -c $<
+
+# target for making everything
+.PHONY : all
+all: lex_yacc $(BPFX) $(BPFX)/$(MKTEMP) $(BPFX)/iserverd $(BPFX)/db_convert $(BPFX)/webpager cgi $(BPFX)/$(CHECKER) $(BPFX)/$(STATUS) $(BPFX)/$(BROADCAST) $(BPFX)/$(DISCONNECT)
+
+lex_yacc:    $(YACC_CPP) $(YACC_H) $(LEX_CPP)
+
+# target to generate cpp files with lex & yacc
+$(YACC_CPP) $(YACC_H): config/actions/actions.y
+	     ${YACC} -d config/actions/actions.y
+	     mv y.tab.h config/actions/y.tab.h
+	     mv y.tab.c config/actions/y.tab.c
+
+$(LEX_CPP):  config/actions/actions.l
+	     ${LEX} config/actions/actions.l
+	     mv lex.yy.c config/actions/lex.yy.c
+
+
+# directory for binary files
+$(BPFX) :
+	  mkdir bin
+
+# iserver daemon target
+$(BPFX)/iserverd :    $(ISERV_OBJ)
+	  $(LINKER) -o $(BPFX)/$(ISERVER_BIN) $(ISERV_OBJ) \
+	  $(LDFLAGS) $(LOADLIBES) $(GDLIBS)
+# database converter target
+$(BPFX)/db_convert :  $(DBCONV_OBJ)
+	  $(LINKER) $(DBCONV_OBJ) \
+	  -o $(BPFX)/$(DBCONV_BIN) $(LDFLAGS) $(LOADLIBES)
+
+# cgi programs target list
+.PHONY : cgi
+cgi: $(BPFX)/online_cnt.cgi $(BPFX)/users_cnt.cgi
+# cgi that return number of online users
+$(BPFX)/online_cnt.cgi:   $(ONLINE_CNT_OBJ)
+	  $(LINKER) $(ONLINE_CNT_OBJ) -o $(BPFX)/$(ONLINE_CNT) $(LDFLAGS) $(LOADLIBES)
+# cgi that return total number of users
+$(BPFX)/users_cnt.cgi:    $(USR_CNT_OBJ)
+	  $(LINKER) $(USR_CNT_OBJ) -o $(BPFX)/$(USR_CNT) $(LDFLAGS) $(LOADLIBES)
+# utility to send wwp messages target
+$(BPFX)/webpager:   $(WEBPAGER_OBJ)
+	  $(LINKER) $(WEBPAGER_OBJ) -o $(BPFX)/$(WEBPAGER) $(LDFLAGS) $(LOADLIBES) \
+	  $(GDLIBS)
+
+# utility to get server status information
+$(BPFX)/$(STATUS):  $(STATUS_OBJ)
+	  $(LINKER) $(STATUS_OBJ) -o $(BPFX)/$(STATUS) $(LDFLAGS) $(LOADLIBES)
+
+# utility to send server broadcast
+$(BPFX)/$(BROADCAST):  $(BROADCAST_OBJ)
+	  $(LINKER) $(BROADCAST_OBJ) -o $(BPFX)/$(BROADCAST) $(LDFLAGS) $(LOADLIBES)
+
+# utility to disconnect users
+$(BPFX)/$(DISCONNECT):  $(DISCONNECT_OBJ)
+	  $(LINKER) $(DISCONNECT_OBJ) -o $(BPFX)/$(DISCONNECT) $(LDFLAGS) $(LOADLIBES)
+
+$(BPFX)/$(CHECKER): $(CHECKER_OBJ)
+	  $(LINKER) $(CHECKER_OBJ) -o $(BPFX)/$(CHECKER) $(LDFLAGS) $(LOADLIBES)
+
+$(BPFX)/$(ACHK): $(ACHK_OBJ)
+	  $(LINKER) $(ACHK_OBJ) -o $(BPFX)/$(ACHK) $(LDFLAGS) $(LOADLIBES)
+
+$(BPFX)/$(ICHK): $(ICHK_OBJ)
+	  $(LINKER) $(ICHK_OBJ) -o $(BPFX)/$(ICHK) $(LDFLAGS) $(LOADLIBES)
+
+$(BPFX)/$(MKTEMP): $(MKTEMP_OBJ)
+	  $(LINKER) $(MKTEMP_OBJ) -o $(BPFX)/mktemp $(LDFLAGS) $(LOADLIBES)
+
+# target for removing all object files
+.PHONY : clean
+clean:   clean-recursive clean_main
+	 @echo " Project clean...";
+
+.PHONY : clean_main
+clean_main:
+	 rm -rf core *.o */*~ *~ */*.o */*.so */*/*.o */*/*.so */*/*/*.o */*/*/*.so
+	 @list='$(ALL_BIN)'; for p in $$list; do \
+	  if test -f $(BPFX)/$$p; then \
+	    echo "  Deleting $(BPFX)/$$p"; \
+	    rm -f $(BPFX)/$$p; \
+	  else :; fi; \
+	done
+	@list='$(SALL_BIN)'; for p in $$list; do \
+	  if test -f $(BPFX)/$$p; then \
+	    echo "  Deleting $(BPFX)/$$p"; \
+	    rm -f $(BPFX)/$$p; \
+	  else :; fi; \
+	done
+	rm -rf $(BPFX)
+
+
+.PHONY : distclean
+distclean: clean distclean-recursive
+	 rm -rf autom4te.cache
+	 rm -f config.cache config.status config.log 
+	 rm -f include/config.h Makefile libtool
+	 rm -f include/defaults.h
+	 rm -f include/mystdint.h
+
+.PHONY : all-recursive install-recursive 
+.PHONY : uninstall-recursive clean-recursive
+.PHONY : distclean-recursive
+
+all-recursive install-recursive \
+uninstall-recursive clean-recursive \
+distclean-recursive:
+	@set fnord $(MAKEFLAGS); amf=$$2; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  target=`echo $@ | sed s/-recursive//`; \
+	  echo "Making $$target in $$subdir"; \
+	  (cd $$subdir && $(MAKE) $$target) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	done && test -z "$$fail"
+
+.PHONY : install install-bin install-recursive
+install: install-bin install-recursive
+	 @echo ""
+	 @echo "-----------------------------------------------"
+	 @echo "You just compiled and installed IServerd server"
+	 @echo "Thank you for choosing it."
+	 @echo ""
+
+$(LOG_DIR):
+	$(mkinstalldirs) $(LOG_DIR);
+
+$(VAR_DIR):
+	$(mkinstalldirs) $(VAR_DIR);
+
+$(BIN_DIR): $(VAR_DIR) $(LOG_DIR)
+	$(mkinstalldirs) $(BIN_DIR);
+
+$(SBIN_DIR): $(BIN_DIR)
+	$(mkinstalldirs) $(SBIN_DIR);
+
+install-bin: $(PALL_BIN) $(SPALL_BIN) $(BIN_DIR) $(SBIN_DIR)
+	@list='$(ALL_BIN)'; for p in $$list; do \
+	  if test -f $(BPFX)/$$p; then \
+	    if test "$(BPFX)/$$p" != "$(BPFX)/$(MKTEMP)"; then \
+	       echo "  $(INSTALL_PROGRAM) -s $(BPFX)/$$p $(BIN_DIR)/`echo $$p|sed '$(transform)'`"; \
+	       $(INSTALL_PROGRAM) -s $(BPFX)/$$p $(BIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	    else \
+	       if test "$(MKTMP_FLAG)" != "yes"; then \
+	          echo "  $(INSTALL_PROGRAM) -s $(BPFX)/$$p $(BIN_DIR)/`echo $$p|sed '$(transform)'`"; \
+	          $(INSTALL_PROGRAM) -s $(BPFX)/$$p $(BIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	       else :; fi; \
+	    fi; \
+	  else :; fi; \
+	done
+	@list='$(SALL_BIN)'; for p in $$list; do \
+	  if test -f $(BPFX)/$$p; then \
+	    echo "  $(INSTALL_PROGRAM) -s $(BPFX)/$$p $(SBIN_DIR)/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_PROGRAM) -s $(BPFX)/$$p $(SBIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+
+uninstall: uninstall-bin uninstall-recursive
+	   rm -df $(LOG_DIR)
+	   rm -df $(BIN_DIR)
+	   rm -df $(VAR_DIR)
+	   rm -df $(SERVROOT)
+
+uninstall-bin:
+	list='$(ALL_BIN)'; for p in $$list; do \
+	  rm -f $(BIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	done
+	list='$(SALL_BIN)'; for p in $$list; do \
+	  rm -f $(BIN_DIR)/`echo $$p|sed '$(transform)'`; \
+	done

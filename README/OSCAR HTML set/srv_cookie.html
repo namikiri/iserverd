@@ -1,0 +1,261 @@
+<html>
+<head>
+<title>SRV_COOKIE: server authorization response</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SRV_COOKIE&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+This is the server reply for for <a href="cli_ident.html">cli_ident</a> packet. 
+It contain BOS address / authorization cookie. It always come from FLAP channel 
+0x04. See also channel 0x01 authorization <a href="login.html" target="_top">sequence</a> info.
+<br><br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <!-- TLV 0x01 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 01</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x01) - screen name (uin)</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>Screen name (uin)</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x05 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 05</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x05) - BOS server address</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>string</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>BOS server address string</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x06 -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+<table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 align=center border=0>  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;00 06</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Type(0x06) - authorization cookie</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td>word</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>TLV.Length</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  <tr><td  bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=20%>&nbsp;xx ..</td>
+   <td width=5>&nbsp;</td>
+   <td>array</td>
+   <td width=5>&nbsp;</td>
+   <td width=60%>authorization cookie</td>
+   </tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td></tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+ <!-- TLV 0x?? -->
+ <table width=640 cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr><td height=8 colspan=3></td></tr>
+ <tr><td width=20> </td>
+ <td>
+
+  <table width=610 bgcolor=darkgreen cellSpacing=0 cellPadding=0 border=0><tr><td>
+  <table width=100% cellSpacing=2 cellPadding=0 align=center border=0>
+   <tr><td bgcolor=#f9f9f9 >
+
+   <table width=610 cellSpacing=0 cellPadding=0 align=center border=0 >
+    <tr><td>&nbsp;may contain other tlv from the <a href="tlv_tags.html">following
+     list</a></td></tr>
+   </table>
+
+  </td></tr>
+  </table>
+</td></tr></table>
+
+ </td><td width=5> </td>
+ </tr>
+ <tr><td height=5 colspan=3> </td></tr>
+ </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td  bgcolor=#E9E9E9 >
+<font size=3><pre style="font-size: 13px">
+
+  2A 04 62 BF 01 21 00 01  00 06 37 37 37 37 37 37 *.b..!....777777
+  00 05 00 0F 31 30 2E 31  30 2E 31 30 2E 39 3A 35 ....10.10.10.9:5
+  31 39 30 00 06 01 00 37  37 37 37 37 37 39 63 64 190....7777779cd
+  42 63 66 39 61 32 36 38  35 63 44 32 66 4E 39 66 Bcf9a2685cD2fN9f
+  42 61 61 66 42 61 63 31  43 31 36 54 63 44 66 39 BaafBac1C16TcDf9
+  37 44 37 31 37 61 44 30  44 66 35 30 33 45 31 63 7D717aD0Df503E1c
+  37 31 31 65 44 41 41 41  41 41 41 41 41 41 41 41 711eDAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41 41  41 41 41 41 41 41 41 41 AAAAAAAAAAAAAAAA
+  41 41 41 41 41 41 41                             AAAAAAA
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

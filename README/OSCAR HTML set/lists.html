@@ -1,0 +1,970 @@
+<html>
+<head>
+<title>Miscellaneous OSCAR protocol information</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td   {font-size: 16px;}
+ .corr {color:red;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#4040FF >
+
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">&nbsp;Miscellaneous OSCAR protocol information&nbsp;</font></b></td>
+<td width=40% align=right><b><font color="white">&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0><tr><td><br>
+<table width=640 cellSpacing=0 cellPadding=0 border=0 bgcolor=#E9E9E9>
+<tr><td bgcolor=white>
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=4%>&nbsp;1.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0001">Message types list (ICQ only messages)</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;2.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0002">Message flags list (ICQ only messages)</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;3.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0003">User classes bitmasks</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;4.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0004">User status bitmasks</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;5.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0005">Direct connection types list</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;6.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0006">Direct connection protocol version</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;7.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0007">Random chat groups list</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;8.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="capabilities.html">Known CLSID (capabilities) list with descriptions</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;9.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="snac_15_xx_tlvs.html">Known TLVs used in SNAC(15,xx) tlv-based requests</a></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;10.&nbsp;</td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;&nbsp;<a href="#m0008">Marital status codes list</a></td>
+</tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="msg_types"></a>Message types and flags&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name="m0001"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<b>Message types</b>. Each OSCAR message has type. It can be just plain message,  
+url message, contact list, wwp, email express or another. Only one byte used for 
+message type. Here is the list of known message types:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x01</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;MTYPE_PLAIN&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;Plain text (simple) message</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x02</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_CHAT&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Chat request message</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x03</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_FILEREQ&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;File request / file ok message</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x04</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_URL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;URL message (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x06</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTHREQ&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Authorization request message (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x07</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTHDENY&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Authorization denied message (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x08</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTHOK&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Authorization given message (empty)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x09</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_SERVER&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Message from OSCAR server (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0C</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_ADDED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;"You-were-added" message (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0D</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_WWP&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Web pager message (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0E</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_EEXPRESS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Email express message (0xFE formatted)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x13</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_CONTACTS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Contact list message</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x1A</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_PLUGIN&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Plugin message described by text string</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0xE8</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTOAWAY&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Auto away message </td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0xE9</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTOBUSY&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Auto occupied message </td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0xEA</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTONA&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Auto not available message </td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0xEB</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTODND&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Auto do not disturb message </td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0xEC</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTYPE_AUTOFFC&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Auto free for chat message </td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br><br>
+
+<a name="m0002"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a name="msg_flags"></a><b>Message flags</b>. Message flag used to indicate additional message properties. 
+like auto message, multiple recipients message, etc. Message flag field occupy 1 
+byte. Here is the list of known message flag codes:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x01</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;MFLAG_NORMAL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;Normal message</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x03</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MFLAG_AUTO&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Auto-message flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x80</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MFLG_MULTI&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;This is multiple recipients message</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="user_class"></a>User classes&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name="m0003"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+AOL users are divided into several classes. User class field is a 2 byte bitmask. 
+For example ICQ non-commercial account with away status has user-class=0x0070 
+(CLASS_FREE | CLASS_AWAY | CLASS_ICQ = 0x0070). Here is the list of known bit 
+values in user class bitmask:
+<br><br> 
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;CLASS_UNCONFIRMED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;AOL unconfirmed user flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_ADMINISTRATOR&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;AOL administrator flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_AOL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;AOL staff user flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0008</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_COMMERCIAL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;AOL commercial account flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0010</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_FREE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;ICQ non-commercial account flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0020</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_AWAY&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Away status flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0040</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_ICQ&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;ICQ user sign</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0080</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_WIRELESS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;AOL wireless user</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0100</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_UNKNOWN100&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Unknown bit</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0200</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_UNKNOWN200&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Unknown bit</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0400</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_UNKNOWN400&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Unknown bit</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0800</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;CLASS_UNKNOWN800&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Unknown bit</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;<a name="user_status"></a>User status&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name="m0004"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ service presence notifications use user status field which consist of 
+two parts. First is a various flags (birthday flag, webaware flag, etc). 
+Second is a user status (online, away, busy, etc) flags. Each part is a two 
+bytes long. Here is the list of masks for both parts:<br><br> 
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;STATUS_WEBAWARE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;Status webaware flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_SHOWIP&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status show ip flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0008</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_BIRTHDAY&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User birthday flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0020</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_WEBFRONT&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User active webfront flag</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0100</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_DCDISABLED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Direct connection not supported</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x1000</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_DCAUTH&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Direct connection upon authorization</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x2000</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_DCCONT&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;DC only with contact users</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0000</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;STATUS_ONLINE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;Status is online</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_AWAY&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status is away</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_DND&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status is no not disturb (DND)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_NA&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status is not available (N/A)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0010</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_OCCUPIED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status is occupied (BISY)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0020</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_FREE4CHAT&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status is free for chat</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0100</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;STATUS_INVISIBLE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Status is invisible</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;
+<a name="dc_type"></a>Direct connection type
+&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name="m0005"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ clients can send messages and files using peer-to-peer connection called 
+"direct connection" (DC). Each ICQ client may have different internet connection: 
+direct, proxy, firewall or other and to establish DC one client should know 
+connection type of another client. This connection type also used by direct 
+connections and called "DC type". Here is the list of values:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0000</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DC_DISABLED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;Direct connection disabled / auth required</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;DC_HTTPS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Direct connection thru firewall or https proxy</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;DC_SOCKS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Direct connection thru socks4/5 proxy server</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;DC_NORMAL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Normal direct connection (without proxy/firewall)</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0006</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;DC_WEB&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Web client - no direct connection</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;
+<a name="dc_proto"></a>Direct connection protocol version
+&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name="m0006"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ clients can send messages and files using peer-to-peer connection called 
+"direct connection" (DC). Here is the list of direct connection
+protocol versions:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0 >
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DCP_ICQ98&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;ICQ98</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0006</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DCP_ICQ99&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;ICQ99</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0007</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DCP_ICQ2000&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;ICQ2000</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0008</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DCP_ICQ2001&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;ICQ2001</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0009</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DCP_ICQLITE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;ICQ Lite</td>
+</tr>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x000A</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;DCP_ICQ2003B&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;ICQ2003B</td>
+</tr>
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;
+<a name="rand_groups"></a>Random chat groups
+&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name='m0007'>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+ICQ service has ability to search a random user in specific group and each 
+ICQ client may choose group where another client can find it. Here is the 
+list of groups and their codes:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;RND_GENERAL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;General chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_ROMANCE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Romance random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0003</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_GAMES&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Games random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_STUDENTS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Students random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0006</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_20SOMETHING&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;20 something random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0007</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_30SOMETHING&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;30 something random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0008</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_40SOMETHING&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;40 something random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0009</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_50PLUS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;50+ random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000A</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_SWOMEN&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Seeking women random chat group</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000B</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;RND_SMAN&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Seeking man random chat group</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+<br>
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;
+<a name="motd_type"></a>Motd types list
+&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+ICQ/AIM services use special <a href="snac_01_13.html">SNAC(01,13)</a> for 
+motd (message of the day) notices during login. Here is the list of known motd 
+types:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=50 valign=top>&nbsp;&nbsp;<b>0x0001</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;MTD_MDT_UPGRAGE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=350 valign=top>&nbsp;&nbsp;Mandatory upgrade needed notice</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0002</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTD_ADV_UPGRAGE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Advisable upgrade notice</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0003</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTD_SYS_BULLETIN&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;AIM/ICQ service system announcements</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0004</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTD_NORMAL&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Standart notice</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0006</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MTD_NEWS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;Some news from AOL service</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 bgcolor="#4040FF" border=0>
+<tr>
+<td><b><font size=2 color="white">&nbsp;
+<a name="marital"></a>Marital status code list
+&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+
+<tr><td bgcolor=#E9E9E9>
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td colspan=3 height=5></td></tr>
+<tr><td width=5>&nbsp;</td>
+<td>
+
+<a name="m0008"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+There was some new fields added to ICQ client data. One of them is marital status 
+field. Here is the marital status code list:<br><br>
+
+<table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+<tr><td width=20></td>
+<td>
+<table width=570 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0>
+<tr><td bgcolor=#E5E5E5>
+
+<table width=570 cellSpacing=1 cellPadding=1 border=0>
+<tr>
+<td bgcolor=#f9f9f9 width=100 valign=top>&nbsp;&nbsp;<b>0x0000 (00)</b></td>
+<td bgcolor=#f9f9f9 width=1 valign=top>&nbsp;&nbsp;MARITAL_NONE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 width=300 valign=top>&nbsp;&nbsp;Marital status not specified</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000A (10)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_SINGLE&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is single</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000B (11)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_LONGRS&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is in a long-term relationship</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x000C (12)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_ENGAGED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is engaged</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0014 (20)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_MARRIED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is married</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x001E (30)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_DIVORCED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is divorced</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x001F (31)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_SEPARATED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is separated</td>
+</tr>
+
+<tr>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;<b>0x0028 (40)</b></td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;MARITAL_WIDOWED&nbsp;&nbsp;</td>
+<td bgcolor=#f9f9f9 valign=top>&nbsp;&nbsp;User is widowed</td>
+</tr>
+
+</table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+</td>
+<td width=15></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
+

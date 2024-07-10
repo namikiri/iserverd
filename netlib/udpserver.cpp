@@ -44,7 +44,7 @@ void udp_receive_packet(Packet &pack)
    socklen_t caddr_len = sizeof(client_addr);
 
    /* Here we receiving client data */
-   pack.sizeVal = recvfrom(msockfd, pack.buff, MAX_PACKET_SIZE, 0, 
+   pack.sizeVal = recvfrom(msockfd, pack.buff, MAX_PACKET_SIZE, 0,
                           (sockaddr *)&client_addr, &caddr_len);
 
    /* sanity check, also we don't care about REFUSED, INTR & BLOCK errors */
@@ -57,7 +57,7 @@ void udp_receive_packet(Packet &pack)
       LOG_SYS(0, ("READSOCK: error code: [%s]\n", strerror(errno)));
       exit(EXIT_ERROR_FATAL);
    }
- 
+
    /* fill packet with system data */
    pack.from_ip      = client_addr.sin_addr;
    pack.from_port    = ntohs(client_addr.sin_port);
@@ -69,7 +69,7 @@ void udp_receive_packet(Packet &pack)
    pack.from_local   = 0;
    pack.flap_channel = 0;
    pack.asciiz       = 1;
-   
+
 }
 
 
@@ -84,23 +84,23 @@ BOOL udp_recv_pack(Packet &pack)
    /* clear structure */
    memset(&client_addr, 0, sizeof(struct sockaddr_in));
    socklen_t caddr_len = sizeof(client_addr);
- 
+
    pack.clearPacket();
 
    /* Here we receiving client data */
-   pack.sizeVal = recvfrom(msockfd, pack.buff, MAX_PACKET_SIZE, 0, 
+   pack.sizeVal = recvfrom(msockfd, pack.buff, MAX_PACKET_SIZE, 0,
                           (sockaddr *)&client_addr, &caddr_len);
 
    /* sanity check, also we don't care about REFUSED, INTR & BLOCK errors */
-   if (pack.sizeVal == -1) 
+   if (pack.sizeVal == -1)
    {
       return (False);
    }
- 
+
    /* fill packet with client addr */
    pack.from_ip   = client_addr.sin_addr;
    pack.from_port = ntohs(client_addr.sin_port);
- 
+
    return (True);
 }
 
@@ -112,17 +112,17 @@ BOOL udp_recv_pack(Packet &pack)
 void udp_send_direct_packet(Packet &pack)
 {
    struct sockaddr_in cli_addr;
- 
+
    cli_addr.sin_addr = pack.from_ip;
    cli_addr.sin_port = htons(pack.from_port);
    cli_addr.sin_family = AF_INET;
- 
+
    if (sendto(msockfd, pack.buff, pack.sizeVal, 0,
              (sockaddr *)&cli_addr, sizeof(struct sockaddr_in)) == -1)
    {
-      if (errno == EACCES) 
+      if (errno == EACCES)
           { LOG_ALARM(0, ("WARNING: broadcast address [ %s ]\n", inet_ntoa(cli_addr.sin_addr) ));}
-      if (errno == EHOSTUNREACH) 
+      if (errno == EHOSTUNREACH)
           { LOG_ALARM(0, ("WARNING: address unreachable [ %s ]\n", inet_ntoa(cli_addr.sin_addr) ));}
    }
 }
@@ -136,7 +136,7 @@ int udpserver_start(int sock_port, int log=3)
    struct sockaddr_in i_server;
    int bindcnt = 0;
    BOOL bindFailed = True;
-  
+
    old_sock_port = sock_port;
 
    if ((msockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
@@ -149,12 +149,12 @@ int udpserver_start(int sock_port, int log=3)
    i_server.sin_family = AF_INET;
    i_server.sin_addr = bind_interface;
    i_server.sin_port = htons(sock_port);
-   
+
    bindcnt = 0;
 
    while (bindcnt < MAX_BIND_TRY)
    {
-     if (bind(msockfd, (struct sockaddr *)&i_server, 
+     if (bind(msockfd, (struct sockaddr *)&i_server,
 	      sizeof(struct sockaddr)) < 0)
      {
         bindFailed = True;
@@ -165,19 +165,19 @@ int udpserver_start(int sock_port, int log=3)
      {
         bindFailed = False;
         break;
-     }			
+     }
    }
-  		
+
    if (bindFailed)
    {
       LOG_SYS(0, ("ERROR: Can't bind main socket, exiting...\n"));
       LOG_SYS(log, ("       problem: \"%s\"\n",   strerror(errno)));
-      LOG_SYS(log, ("       bind addr: [%s], bind port [%d]\n", 
-			  inet_ntoa(bind_interface),  sock_port)); 
+      LOG_SYS(log, ("       bind addr: [%s], bind port [%d]\n",
+			  inet_ntoa(bind_interface),  sock_port));
       exit(EXIT_ERROR_ANOTHER_PROCESS);
    }
 
-   LOG_SYS(log, ("Init: UDP server (S/ICQ) started on [%s:%d]\n", 
+   LOG_SYS(log, ("Init: UDP server (S/ICQ) started on [%s:%d]\n",
                 inet_ntoa(i_server.sin_addr), sock_port));
 
    return(msockfd);
@@ -227,7 +227,7 @@ void wwp_receive_packet(Packet &pack)
    pack.clearPacket();
 
    /* Here we receiving client data */
-   pack.sizeVal = recvfrom(wwpsockfd, pack.buff, MAX_PACKET_SIZE, 0, 
+   pack.sizeVal = recvfrom(wwpsockfd, pack.buff, MAX_PACKET_SIZE, 0,
                           (sockaddr *)&client_addr, &caddr_len);
 
    /* sanity check, also we don't care about REFUSED, INTR & BLOCK errors */
@@ -239,7 +239,7 @@ void wwp_receive_packet(Packet &pack)
       DEBUG(0, ("WWPSOCK: error code: [%s]\n", strerror(errno)));
       pack.sizeVal = 0;
    }
- 
+
    /* fill packet with client addr */
    pack.from_ip   = icqToIp(0);
    pack.from_port = 0;

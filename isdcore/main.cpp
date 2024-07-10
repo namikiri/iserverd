@@ -31,8 +31,8 @@
 
 #include "includes.h"
 
-extern pstring debugf; 
-extern pstring systemf; 
+extern pstring debugf;
+extern pstring systemf;
 extern pstring alarmf;
 extern pstring usersf;
 extern BOOL append_log;
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
    real_argc = argc;
    real_argv = argv;
-  
+
    /* First of all we need to switch to server root */
    switch_to_server_root(argv[0]);
 
@@ -57,10 +57,10 @@ int main(int argc, char **argv)
    process_command_line_opt(argc, argv);
    slprintf(configf, sizeof(configf)-1, lp_config_file());
 
-   /* Global parameters initialization */ 
+   /* Global parameters initialization */
    slprintf(debugf,  sizeof(debugf),  lp_dbglog_path());
-   umask(022); append_log = lp_append_logs(); reopen_logs(); 
-   
+   umask(022); append_log = lp_append_logs(); reopen_logs();
+
    /* Load configuration file */
    if (!lp_load(configf,False,False,True))
    {
@@ -70,22 +70,22 @@ int main(int argc, char **argv)
 
    /* Open log files */
    init_syslog_logs();
-   
+
    spid = pidfile_pid();
-   
-   if (spid != 0) 
+
+   if (spid != 0)
    {
       LOG_SYS(0,("ERROR: IServerd running. Pidfile & process %d exists\n", (int)spid));
       exit(EXIT_ERROR_ANOTHER_PROCESS);
    }
-   
+
    LOG_SYS(0,("\n"));
    LOG_SYS(0,("Init: IServerd started: [Ver: %s]\n", Iversion));
    rvs_order = setup_byteorder();
    random_check();
- 
+
    server_started = time(NULL);
-  
+
    TimeInit();
    init_random();
 
@@ -97,14 +97,14 @@ int main(int argc, char **argv)
    euser_pipe_init();     /* pipe from PP's to EUP for event signals */
    defrag_pipe_init();	  /* pipe from PP's to FP 		     */
    actions_pipe_init();	  /* pipe from PP's to AP 		     */
-   
-   /* Selecting server mode. If we are daemon - fork(), 
-   close all files write pid file and detach from control 
+
+   /* Selecting server mode. If we are daemon - fork(),
+   close all files write pid file and detach from control
    terminal */
 
    switch (lp_server_mode())
    {
-      case MOD_STANDALONE: setup_syslogging("", True);   
+      case MOD_STANDALONE: setup_syslogging("", True);
                            setup_alrlogging("", True);
 			   setup_usrlogging("", True);
 			   setup_logging("", True);
@@ -121,47 +121,47 @@ int main(int argc, char **argv)
    Bind interface line in config file this function setup a first
    interface of the machine */
    init_bindinterface();
-  
+
    /* Init signals and connect handlers */
    if ( Signals_Init() != True )
    {
       LOG_SYS(0, ("FATAL ERROR: Signals handling problem, exiting\n"));
       exit(EXIT_CONFIG);
    }
-  
+
    /* Register parent exit() cleaning up function */
-   if (atexit((void(*)(void))Server_cleanup) != 0) 
+   if (atexit((void(*)(void))Server_cleanup) != 0)
    {
       LOG_SYS(0, ("WARNING: Can't set cleanup function\n"));
    }
 
    init_translate();      /* load translation table */
 
-   /* IPC Initialization (semaphores, shared memory, pipes) */  
+   /* IPC Initialization (semaphores, shared memory, pipes) */
    ipc_objects_init();
    LOG_SYS(10, ("Init: IPC objects init success\n"));
-   
+
    udpserver_start(lp_udp_port(), 3);
 
    aimsockfd = -1; msnsockfd = -1;
-   
+
    if (lp_aim_port() > 0) aim_tcp_server_start(lp_aim_port());
    if (lp_msn_port() > 0) msn_tcp_server_start(lp_msn_port());
-   
+
    wwp_socket_init();
    LOG_SYS(10, ("Init: WWP socket initialized successfully\n"));
 
-   /* check if we should start without database */  
+   /* check if we should start without database */
    if (lp_degradated_mode()) wait_for_database();
-   
+
    /* Now we should check database and fix it if need */
-   if (check_and_fix_database(lp_db_users(), lp_db_user(), 
+   if (check_and_fix_database(lp_db_users(), lp_db_user(),
        lp_db_pass(), lp_db_addr(), lp_db_port()) != True)
    {
       LOG_SYS(0, ("ERROR: Database problem... Exiting...\n"));
       exit(EXIT_ERROR_DB_STRUCTURE);
    }
-  
+
    LOG_SYS(10, ("Init: Starting packet/event processors\n"));
 
    fork_childs();

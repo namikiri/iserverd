@@ -81,7 +81,7 @@ bool ITranslator::setTranslationMap(const char *szMapFileName)
    while((!finished) && (c<512))
    {
       for (int i=0; i<80; i++)
-      { 	    
+      {
         if (fread(&buffer[i], 1, 1, fhdl) == 0) finished = 1;
         if (buffer[i] == 0x0a) {buffer[i] = 0; break;}
       }
@@ -96,10 +96,10 @@ bool ITranslator::setTranslationMap(const char *szMapFileName)
         fclose(fhdl);
 	return false;
       }
-	   
+
       for (int j = 0; j<8; j++)temp_table[c++] = (unsigned char) inputs[j];
    }
-   
+
    fclose(fhdl);
 
    if(c==512)
@@ -109,8 +109,8 @@ bool ITranslator::setTranslationMap(const char *szMapFileName)
          serverToClientTab[c] = temp_table[c];
          clientToServerTab[c] = temp_table[c | 256];
       }
-   } 
-   else 
+   }
+   else
    {
       /* "Translation file corrupted." */
       printf("Translation file corrupted....\n");
@@ -122,7 +122,7 @@ bool ITranslator::setTranslationMap(const char *szMapFileName)
    memset(m_szMapFileName, 0, 255);
    snprintf(m_szMapFileName, 255, szMapFileName);
    printf("Translation map initialization complete...\n");
-      
+
    return true;
 }
 

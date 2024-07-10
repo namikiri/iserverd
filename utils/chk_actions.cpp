@@ -36,13 +36,13 @@
 /**************************************************************************/
 int main(int argc, char **argv)
 {
-   if (argc < 2) 
+   if (argc < 2)
    {
       printf("Usage: chk_actions config-filename\n");
       exit(0);
    }
    parse_config_file(argv[1], CONFIG_TYPE_ACTIONS);
-   print_parse_tree(); 
+   print_parse_tree();
    printf("\n--------------------------------------------------------------\n");
    print_parse_stats();
 }

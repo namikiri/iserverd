@@ -47,51 +47,51 @@ void process_socket()
 {
    int i;
    unsigned short udata_index = 0;
-   
+
    pack_processed = 0;		/* number of packets processed by server  */
    Packet upacket;		/* udp socket processor receiver packet   */
    Packet wpacket;		/* unix wwp socket receiver packet	  */
    Packet tpacket;		/* tcp socket receiver packet		  */
-   
+
    flap_init();
    watchdog_init();
    poll_table_init();
    kernel_queue_init();
 
    LOG_SYS(10, ("Init: Ready to serve requests on sockets [epoll]\n"));
-   
+
    while(1)
    {
       nsockets = epoll_wait(kernq, sock_kev, KQNEVENTS, -1);
       curr_time = (unsigned long)time(NULL);
-      
+
       if ((nsockets <= 0) && (errno != EINTR))
-      { 
+      {
          LOG_SYS(0, ("Error: epoll_wait problem: %s\n", strerror(errno)));
       }
 
       while (tog_process(upacket) > 0) {}; /* tog needs special handling */
-      
+
       for(i=0; i<nsockets; i++)
       {
          udata_index = (unsigned short)sock_kev[i].data.fd;
-	 
+
          /* socket errors handler */
          if(sock_kev[i].events & EPOLLERR)
 	 {
 	    if (udata_index >= RES_SLOTS)
 	    {
-	       DEBUG(10, ("[ep] Closing socket (%d/%d) on error (fd=%d)\n", 
+	       DEBUG(10, ("[ep] Closing socket (%d/%d) on error (fd=%d)\n",
 	                   udata_index, tcp_sock_count, sock_fds[udata_index].fd));
                close_socket_index(udata_index, sock_inf[udata_index].rnd_id);
-    
+
             }
             else
 	    {
 	       LOG_SYS(0, ("[ep] Sys-socket error (!) Closing socket %d\n", udata_index));
 	       close(sock_fds[i].fd);
 	    }
-	    
+
 	    continue;
 	 }
 
@@ -107,14 +107,14 @@ void process_socket()
 
       /* check for tog packets again */
       while (tog_process(upacket) > 0) {};
-      
+
       if ((curr_time - old_time) > 0)
       {
          watchdog_check();
          check_sockets_timeout();
          prchilds_check();
          if (process_role != ROLE_SOCKET) return;
-         old_time = curr_time;	 
+         old_time = curr_time;
       }
    }
 }
@@ -126,24 +126,24 @@ void process_socket()
 void close_socket_index_r(int index, unsigned long rnd_id)
 {
    if ((index + 1) >  tcp_sock_count) return;
-   if (rnd_id != sock_inf[index].rnd_id) return;   
+   if (rnd_id != sock_inf[index].rnd_id) return;
 
-   DEBUG(100, ("Removing socket: [%s:%d],[i=%d/%d],[rnd=%lu],[ssec=%d]\n", 
-	     inet_ntoa(sock_inf[index].cli_addr.sin_addr), ntohs(sock_inf[index].cli_addr.sin_port), 
+   DEBUG(100, ("Removing socket: [%s:%d],[i=%d/%d],[rnd=%lu],[ssec=%d]\n",
+	     inet_ntoa(sock_inf[index].cli_addr.sin_addr), ntohs(sock_inf[index].cli_addr.sin_port),
 	     index, tcp_sock_count, sock_inf[index].rnd_id, sock_inf[index].aim_srv_seq));
 
    tcp_sock_count--;
-   
+
    /* we should delete it by hands - this fd may be cloned by fork */
    epoll_ctl(kernq, EPOLL_CTL_DEL, sock_fds[index].fd, &ev);
    close(sock_fds[index].fd);
 
-   /* delete socket from index */   
-   if ((index) != tcp_sock_count) 
+   /* delete socket from index */
+   if ((index) != tcp_sock_count)
    {
       sock_fds[index] = sock_fds[tcp_sock_count];
       sock_inf[index] = sock_inf[tcp_sock_count];
-      
+
       /* now we should update epoll event object */
       ev.events = EPOLLIN | EPOLLERR;
       ev.data.fd = index;
@@ -153,7 +153,7 @@ void close_socket_index_r(int index, unsigned long rnd_id)
          DEBUG(10, ("Error: epoll_ctl mod - %s\n", strerror(errno)));
 	 return;
       }
-      
+
       /* correct unprocessed events data */
       for(int i=0; i<nsockets; i++)
       {
@@ -166,7 +166,7 @@ void close_socket_index_r(int index, unsigned long rnd_id)
 
   /* it is the last index - we can remove last and dec counter */
   sock_fds[tcp_sock_count].fd = -1;
-      
+
 }
 
 
@@ -192,7 +192,7 @@ void kernel_queue_init()
          ev.events = EPOLLIN | EPOLLERR;
          ev.data.fd = i;
 
-         if (epoll_ctl(kernq, EPOLL_CTL_ADD, sock_fds[i].fd, &ev) < 0) 
+         if (epoll_ctl(kernq, EPOLL_CTL_ADD, sock_fds[i].fd, &ev) < 0)
          {
             DEBUG(10, ("Error: epoll_ctl can't init socket %s\n", strerror(errno)));
 	    return;
@@ -212,7 +212,7 @@ void accept_add_object(int index)
       ev.events = EPOLLIN | EPOLLERR;
       ev.data.fd = index;
 
-      if (epoll_ctl(kernq, EPOLL_CTL_ADD, sock_fds[index].fd, &ev) < 0) 
+      if (epoll_ctl(kernq, EPOLL_CTL_ADD, sock_fds[index].fd, &ev) < 0)
       {
          DEBUG(10, ("Error: epoll_ctl can't add socket %s\n", strerror(errno)));
 	 return;

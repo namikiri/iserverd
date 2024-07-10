@@ -1,0 +1,145 @@
+<html>
+<head>
+<title>SNAC(04,0C) server message ack</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(04,0C)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">SRV_MSG_ACK &nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+<br>
+<P>This is the server ack for client message sent via 
+<a href="snac_04_06.html">SNAC(04,06)</a>. Server send it only if client 
+requested it via empty TLV(3) in message snac. This ack mean that server
+accepted message for delivery.</P>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 >
+
+ <table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+ <tr>
+ <td width=169>&nbsp;00 04</td>
+ <td width=5>&nbsp;</td>
+ <td>word</td>
+ <td width=5>&nbsp;</td>
+ <td width=55%>SNAC family</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 0C</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC subtype</td>
+ </tr>
+ <tr>
+ <td>&nbsp;00 00</td>
+ <td>&nbsp;</td>
+ <td>word</td>
+ <td>&nbsp;</td>
+ <td>SNAC flags</td>
+ </tr>
+ <tr>
+ <td>&nbsp;xx xx xx xx</td>
+ <td>&nbsp;</td>
+ <td>dword</td>
+ <td>&nbsp;</td>
+ <td>SNAC request-id</td>
+ </tr>
+ </table>
+
+</td></tr>
+<tr><td bgcolor=#E9E9E9>
+
+   <table width=100% cellSpacing=0 cellPadding=0 align=center border=0>
+   <tr>
+   <td width=169>&nbsp;xx xx xx xx <br>
+       &nbsp;xx xx xx xx</td>
+   <td width=5>&nbsp;</td>
+   <td valign=top>msgid</td>
+   <td width=5>&nbsp;</td>
+   <td width=55% valign=top>client message id cookie (8 bytes)</td>
+   </tr>
+
+   <tr>
+   <td>&nbsp;00 02</td>
+   <td>&nbsp;</td>
+   <td>word</td>
+   <td>&nbsp;</td>
+   <td>message channel</td>
+   </tr>
+
+   <tr>
+   <td>&nbsp;xx</td>
+   <td>&nbsp;</td>
+   <td>char</td>
+   <td>&nbsp;</td>
+   <td>sender uin string len</td>
+   </tr>
+   <tr>
+   <td>&nbsp;xx ..</td>
+   <td>&nbsp;</td>
+   <td>string</td>
+   <td>&nbsp;</td>
+   <td>sender uin string</td>
+   </tr>
+   </table>
+
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<br>Example SNAC dump with flap header:
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9>
+<font size=3><pre style="font-size: 13px">
+
+  2A 02 39 37 00 1D 00 04  00 0C 00 00 00 0C 00 06 *.97............
+  AB A5 F5 29 29 1D 00 00  00 02 08 35 32 39 34 33 ...))......52943
+  31 32 37                                         127
+
+</pre></font>
+</td></tr></table>
+</td></tr></table>
+
+<br>
+
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>

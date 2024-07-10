@@ -78,7 +78,7 @@ void *talloc(TALLOC_CTX *t, size_t size)
 void talloc_destroy(TALLOC_CTX *t)
 {
    struct talloc_chunk *c;
-	
+
    while (t->list)
    {
       c = t->list->next;

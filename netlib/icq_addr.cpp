@@ -46,19 +46,19 @@
 unsigned long ipToIcq(struct in_addr ltemp)
 {
   unsigned long l;
-  
+
   l = (unsigned long)ltemp.s_addr;
   l = htonl(l);
-  
+
   return (l << 24) | ((l & 0xff00) << 8) | ((l & 0xff0000) >> 8) | (l >> 24);
 }
 
 unsigned long ipToIcq2(struct in_addr ltemp)
 {
   unsigned long l;
-  
+
   l = (unsigned long)ltemp.s_addr;
-  
+
   return (l << 24) | ((l & 0xff00) << 8) | ((l & 0xff0000) >> 8) | (l >> 24);
 }
 
@@ -72,28 +72,28 @@ unsigned long ipToIcq2(struct in_addr ltemp)
 /* host via ntohl(). 							  */
 /**************************************************************************/
 struct in_addr icqToIp(unsigned long l)
-{ 
+{
   struct in_addr atemp;
-  
-  atemp.s_addr = (u_int32_t)(ntohl((l << 24) | ((l & 0xff00) << 8) | 
+
+  atemp.s_addr = (u_int32_t)(ntohl((l << 24) | ((l & 0xff00) << 8) |
 			          ((l & 0xff0000) >> 8) | (l >> 24)));
 
-  return atemp;  
+  return atemp;
 }
 
 
 struct in_addr icqToIp2(unsigned long l)
-{ 
+{
   unsigned long  ltemp;
   struct in_addr atemp;
-  
-  ltemp = ((l << 24) | ((l & 0xff00) << 8) | 
-			    ((l & 0xff0000) >> 8) | 
+
+  ltemp = ((l << 24) | ((l & 0xff00) << 8) |
+			    ((l & 0xff0000) >> 8) |
 			    (l >> 24));
 
   atemp.s_addr = (u_int32_t)ltemp;
-  
+
   return atemp;
-  
+
 }
 

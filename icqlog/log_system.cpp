@@ -62,7 +62,7 @@ void setup_syslogging( char *pname, BOOL interactive )
 /**************************************************************************/
 int sysDebug1( char *format_str, ... )
 {
-   va_list ap;  
+   va_list ap;
    int old_errno = errno;
 
    if( stdout_logging )
@@ -73,7 +73,7 @@ int sysDebug1( char *format_str, ... )
       errno = old_errno;
       return( 0 );
    }
-  
+
    va_start( ap, format_str );
    vsyslog(LOG_NOTICE, format_str, ap );
    va_end( ap );
@@ -127,7 +127,7 @@ BOOL systext( char *format_str, ... )
    va_list ap;
    pstring msgbuf;
 
-   va_start( ap, format_str ); 
+   va_start( ap, format_str );
    vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
    va_end( ap );
 

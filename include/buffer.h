@@ -38,7 +38,7 @@ class Buffer
  public:
    Buffer(void);
    virtual ~Buffer(void);
-   
+
    void setup_aim(void) { network_order(); no_null_terminated(); };
    void network_order(void) { net_order = 1; };
    void intel_order(void) { net_order = 0; };
@@ -54,7 +54,7 @@ class Buffer
    void put_le_short(unsigned short x, char *p);
    void put_le_int(unsigned int x, char *p);
    void put_le_long(unsigned long x, char *p);
-   
+
    unsigned short asciiz;
    unsigned short net_order;
 

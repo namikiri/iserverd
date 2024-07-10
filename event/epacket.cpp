@@ -46,12 +46,12 @@ void process_epacket()
 
    ppacket = (struct indirect_pack *)calloc(1, sizeof(struct indirect_pack));
    if (!ppacket) return;
-  
+
    LOG_SYS(10, ("Init: EPacket processor initialization success\n"));
-  
+
    init_packets_list();
    usersdb_connect();
-      
+
    /* we should create fd matrix for poll function */
    evnt_fds[SOUT].fd 	  = outgoing_pipe_fd[P_READ];
    evnt_fds[SOUT].events  = POLLIN;
@@ -67,15 +67,15 @@ void process_epacket()
       /* block on sockets array for infinity time */
       if (poll(evnt_fds, 2, -1) < 1)
       {
-         if (errno != EINTR) 
+         if (errno != EINTR)
          {
             LOG_SYS(10, ("We have problem with poll(): %s\n", strerror(errno)));
 	    exit(EXIT_ERROR_FATAL);
          }
       }
-    
+
       /* check if we have outgoing packet in pipe  */
-      if (isready_data2(SOUT)) 
+      if (isready_data2(SOUT))
       {
   	  epacket_receive_packet(*ppacket);	/* receive packet from pipe 	*/
 	  epacket_process_packet(*ppacket);	/* send it & add to list 	*/
@@ -104,16 +104,16 @@ void epacket_process_packet(indirect_pack &inpack)
    /* using shm_index to speedup search */
    user = shm_iget_user(inpack.to_uin, inpack.shm_index);
    if (user == NULL) return;
-   
+
    memcpy(arpack.buff, inpack.buff, inpack.sizeVal);
-   
+
    arpack.sizeVal   = inpack.sizeVal;
    arpack.from_ip   = inpack.to_ip;
    arpack.from_port = inpack.to_port;
-   
+
    /* OK :) So here we should check protocol version, find sseq1 in shared */
    /* memory, increment it, generate timestamp, calculate checkcode for v5 */
-   proto_ver = inpack.ack_stamp;   
+   proto_ver = inpack.ack_stamp;
    inpack.ack_stamp = generate_ack_number(inpack.to_uin, user->servseq, 0);
 
    switch (proto_ver)
@@ -145,8 +145,8 @@ void epacket_process_packet(indirect_pack &inpack)
 /**************************************************************************/
 void epacket_process_event(event_pack &inpack)
 {
-    DEBUG(200, ("EPACKET EVENT: mtype: %lu, uin: %lu, stamp: %lu, ttl: %d\n", 
-	     inpack.mtype, inpack.uin_number, inpack.ack_stamp, 
+    DEBUG(200, ("EPACKET EVENT: mtype: %lu, uin: %lu, stamp: %lu, ttl: %d\n",
+	     inpack.mtype, inpack.uin_number, inpack.ack_stamp,
 	     inpack.ttl));
 
     switch (inpack.mtype)
@@ -185,9 +185,9 @@ void add_packet_to_list(indirect_pack &inpack, struct online_user *user)
    struct usr_queue_s *uqueue_new = NULL;
 
    DEBUG(200,("Ins pack: to:%lu, size:%d, stamp:%lu, retry_num:%d timeout:%d\n",
-              inpack.to_uin, inpack.sizeVal, inpack.ack_stamp, 
+              inpack.to_uin, inpack.sizeVal, inpack.ack_stamp,
   	      inpack.retry_num, inpack.time_out));
-  
+
    /* First we should find user in usr_queue */
    while (uqueue)
    {
@@ -195,12 +195,12 @@ void add_packet_to_list(indirect_pack &inpack, struct online_user *user)
       uqueue = uqueue->next;
    }
 
-   /* check if we should add this user to queue list */   
+   /* check if we should add this user to queue list */
    if (!uqueue)
    {
       uqueue_new = create_user_queue(user, inpack);
       if (!uqueue_new) return;
-         
+
       if (uqueue_last)
       {
          /* usr queue is not empty  */
@@ -228,7 +228,7 @@ void add_packet_to_list(indirect_pack &inpack, struct online_user *user)
 	 /* uqueue record, we should just change it          */
 	 if (uqueue->pqueue)
 	    delete_user_pqueue(uqueue);
-	 
+
 	 uqueue->uin      = user->uin;
 	 uqueue->usid     = user->usid;
 	 uqueue->ishm     = user->shm_index;
@@ -237,7 +237,7 @@ void add_packet_to_list(indirect_pack &inpack, struct online_user *user)
 	 uqueue->time_out = inpack.time_out;
       }
    }
-   
+
    /* Now we have user queue root record with correct usid   */
    /* And we can add new packet to this user queue           */
    user_queue_add_packet(uqueue, inpack);
@@ -261,7 +261,7 @@ void remove_packet_from_list(unsigned long ack_uin, unsigned long ack_stamp)
    if (uqueue)
    {
       user_queue_del_packet(uqueue, ack_stamp);
-   
+
       /* check if uqueue is empty and delete it */
       if (!uqueue->pqueue) delete_user_queue(uqueue);
    }
@@ -280,7 +280,7 @@ void check_ack_list()
    {
       cuqueue = uqueue;
       uqueue = uqueue->next;
-      
+
       user_pqueue_check(cuqueue);
       if (!cuqueue->pqueue) delete_user_queue(cuqueue);
    }
@@ -293,7 +293,7 @@ void check_ack_list()
 struct usr_queue_s *create_user_queue(struct online_user *user, indirect_pack &inpack)
 {
    struct usr_queue_s *uqueue_new = NULL;
-   
+
    uqueue_new = (struct usr_queue_s *)calloc(1, sizeof(struct usr_queue_s));
    if (uqueue_new == NULL) return(NULL);
 
@@ -306,7 +306,7 @@ struct usr_queue_s *create_user_queue(struct online_user *user, indirect_pack &i
    uqueue_new->time_out = inpack.time_out;
    uqueue_new->ip       = user->ip;
    uqueue_new->port     = user->udp_port;
-   
+
    return(uqueue_new);
 }
 
@@ -321,7 +321,7 @@ void delete_user_queue(struct usr_queue_s *uqueue)
       uqueue->next->prev = uqueue->prev;
    else
       uqueue_last = uqueue->prev;
-      
+
    if (uqueue->prev)
       uqueue->prev->next = uqueue->next;
    else
@@ -340,16 +340,16 @@ void delete_user_pqueue(struct usr_queue_s *uqueue)
 {
    struct ipack_s *pqueue = uqueue->pqueue;
    struct ipack_s *cpqueue = NULL;
-   
+
    while (pqueue)
    {
-      cpqueue = pqueue;      
+      cpqueue = pqueue;
       pqueue  = pqueue->next;
-      
+
       free(cpqueue->buff);
       free(cpqueue);
    }
-   
+
    uqueue->pqueue = NULL;
 }
 
@@ -360,28 +360,28 @@ void delete_user_pqueue(struct usr_queue_s *uqueue)
 void user_queue_add_packet(struct usr_queue_s *uqueue, indirect_pack &inpack)
 {
    struct ipack_s *pqueue_record = NULL;
-   
+
    pqueue_record = (struct ipack_s *)calloc(1, sizeof(struct ipack_s));
    if (!pqueue_record) return;
-   
+
    pqueue_record->buff = (char *)calloc(1, inpack.sizeVal);
-   
-   if (!pqueue_record->buff) 
+
+   if (!pqueue_record->buff)
    {
       free(pqueue_record);
       return;
    }
-   
+
    pqueue_record->sizeVal   = inpack.sizeVal;
    pqueue_record->retry_num = inpack.retry_num;
    pqueue_record->ack_stamp = inpack.ack_stamp;
    pqueue_record->ctime_out = uqueue->time_out;
    memcpy(pqueue_record->buff, inpack.buff, pqueue_record->sizeVal);
-   
+
    /* now link new packet to pqueue */
    if (uqueue->pqueue)
       uqueue->pqueue->prev = pqueue_record;
-   
+
    pqueue_record->next  = uqueue->pqueue;
    pqueue_record->prev  = NULL;
    uqueue->pqueue       = pqueue_record;
@@ -395,16 +395,16 @@ void user_queue_del_packet(struct usr_queue_s *uqueue, unsigned long ack_stamp)
 {
    struct ipack_s *pqueue = uqueue->pqueue;
    struct ipack_s *cpqueue = NULL;
-   
+
    while(pqueue)
-   { 
+   {
       cpqueue = pqueue;
       pqueue = pqueue->next;
-      
+
       if (cpqueue->ack_stamp == ack_stamp)
       {
          DEBUG(200, ("Del pack: uin=%lu, stamp=%lu\n", uqueue->uin, cpqueue->ack_stamp));
-      
+
          /* remove packet from queue */
 	 if (cpqueue->next)
 	    cpqueue->next->prev = cpqueue->prev;
@@ -413,7 +413,7 @@ void user_queue_del_packet(struct usr_queue_s *uqueue, unsigned long ack_stamp)
 	    cpqueue->prev->next = cpqueue->next;
 	 else
 	    uqueue->pqueue = cpqueue->next;
-	 
+
 	 /* free allocated memory */
 	 free(cpqueue->buff);
 	 free(cpqueue);
@@ -429,36 +429,36 @@ void user_pqueue_check(struct usr_queue_s *uqueue)
 {
    struct ipack_s *pqueue = uqueue->pqueue;
    struct ipack_s *qpack  = NULL;
-   
+
    while (pqueue)
    {
       qpack = pqueue;
       pqueue = pqueue->next;
-      
+
       /* Check packet and retransmit on timeout */
-      if (((qpack->ctime_out) == 0) & 
-          ((qpack->retry_num) != 0)) 
+      if (((qpack->ctime_out) == 0) &
+          ((qpack->retry_num) != 0))
       {
          DEBUG(200, ("Timeout. Resending pack [stamp=%lu]\n",  qpack->ack_stamp));
-					   
+
          memcpy(arpack.buff, qpack->buff, qpack->sizeVal);
-	 
+
          arpack.sizeVal    = qpack->sizeVal;
          arpack.from_ip    = uqueue->ip;
          arpack.from_port  = uqueue->port;
-       
+
          udp_send_direct_packet(arpack);
-       
+
          qpack->retry_num--;
          qpack->ctime_out = uqueue->time_out;
       }
-      
+
       /* Check if packet expired and delete it */
-      if (((qpack->ctime_out) == 0) & 
-          ((qpack->retry_num) == 0)) 
+      if (((qpack->ctime_out) == 0) &
+          ((qpack->retry_num) == 0))
       {
          packet_expire(uqueue, qpack);
-	 
+
          /* remove packet from queue */
 	 if (qpack->next)
 	    qpack->next->prev = qpack->prev;
@@ -467,11 +467,11 @@ void user_pqueue_check(struct usr_queue_s *uqueue)
 	    qpack->prev->next = qpack->next;
 	 else
 	    uqueue->pqueue = qpack->next;
-	 
+
 	 /* free allocated memory */
 	 free(qpack->buff);
 	 free(qpack);
-	 
+
 	 continue;
       }
 
@@ -490,14 +490,14 @@ void packet_expire(struct usr_queue_s *uqueue, struct ipack_s *pack)
                uqueue->uin, pack->ack_stamp));
 }
 
-          
+
 /**************************************************************************/
 /* This func generate unique unsigned long number to identify packet	  */
 /* and its ack packet. We get pack sequence numbers (two, but second 	  */
 /* can be zero) recipient uin number, we should reproduce same number 	  */
 /* from ack packet (any version) 					  */
 /**************************************************************************/
-unsigned long generate_ack_number(unsigned long puin, 
+unsigned long generate_ack_number(unsigned long puin,
 	      unsigned long pseq1, unsigned long pseq2)
 {
    /* I simply sum them, but may be there are better algs exists  */
@@ -515,13 +515,13 @@ unsigned long generate_ack_number(unsigned long puin,
 void process_ack_event(unsigned long puin, unsigned long pstamp)
 {
    struct event_pack pmessage;
-  
+
    pmessage.mtype      = MESS_ACK;
    pmessage.uin_number = puin;
    pmessage.ack_stamp  = pstamp;
    pmessage.ttl	       = 0;
    pmessage.ip         = 0;
-  
+
    epacket_send_event(pmessage);
 }
 

@@ -1,0 +1,394 @@
+<html>
+<head>
+<title>SNAC(15,xx) - list of the TLVs</title>
+<style type="text/css">
+  body {background-color: white; font-size: 13px;}
+  td {font-size: 16px;}
+</style>
+</head>
+
+<body bgcolor=white>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#4040FF >
+<table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td><b><font color="white">SNAC(15,xx)&nbsp;</font></b></td>
+<td width=70% align=right><b><font color="white">TLV_LIST&nbsp;</font></b></td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr></table>
+<table width=640 cellSpacing=0 cellPadding=0 border=0>
+<tr>
+<td>
+
+<br>
+There was some changes in ICQ service protocol in family 0x15 since ICQ2001 client. 
+First came changes in search sequence - search became tlv-based. Then was changed 
+info-update sequence in ICQLite. Here is the list of TLVs used in tlv-based requests:
+<br><br>
+
+</td></tr>
+</table>
+
+<!-- tlvlist block started -->
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td bgcolor=white>
+
+<table width=100% cellSpacing=1 cellPadding=1 align=center border=0>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=12%><b>&nbsp;<font size=2>&nbsp;310&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top width=12%><b>&nbsp;<font size=2>&nbsp;0x0136&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top width=12%>&nbsp;<font size=2>&nbsp;uint32&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User uin</td>
+<td bgcolor=#f0f0f0 width=16 valign=middle align=center><img src="pictures/search.gif" width=16 height=16 alt="Used in search requests only"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top width=12%><b>&nbsp;<font size=2>&nbsp;320&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top width=12%><b>&nbsp;<font size=2>&nbsp;0x0140&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top width=12%>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User firstname</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;330&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x014A&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User lastname</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;340&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0154&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User nickname</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;350&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x015E&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;ecombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User email</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;360&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0168&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;acombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Age range to search</td>
+<td bgcolor=#f0f0f0 width=16 valign=middle align=center><img src="pictures/search.gif" width=16 height=16 alt="Used in search requests only"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;370&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0172&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint16&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User age</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;380&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x017C&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint8&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User gender</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;390&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0186&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint16&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User spoken language</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;400&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0190&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home city name</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;410&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x019A&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home state abbr</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;420&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01A4&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint16&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home country code</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;430&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01AE&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work company name</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;440&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01B8&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work department name</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;450&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01C2&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work position (title)</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;460&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01CC&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint16&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work ocupation code</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;470&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01D6&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;icombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User affilations node</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;490&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01EA&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;icombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User interests node</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;510&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x01FE&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;icombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User past info node</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;530&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0212&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;icombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User homepage category/keywords</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;531&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0213&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;hcombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User homepage url</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;550&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0226&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Whitepages search keywords string</td>
+<td bgcolor=#f0f0f0 width=16 valign=middle align=center><img src="pictures/search.gif" width=16 height=16 alt="Used in search requests only"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;560&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0230&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint8&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;Search only online users flag</td>
+<td bgcolor=#f0f0f0 width=16 valign=middle align=center><img src="pictures/search.gif" width=16 height=16 alt="Used in search requests only"></td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;570&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x023A&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;bcombo&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User birthday info (year, month, day)</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;600&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0258&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User notes (about) text</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;610&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0262&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home street address</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;620&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x026C&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint32&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home zip code</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;630&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0276&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home phone number</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;640&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0280&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home fax number</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;650&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x028A&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User home cellular phone number</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;660&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0294&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work street address</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;670&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x029E&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work city name</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;680&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02A8&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work state name</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;690&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02B2&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint16&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work country code</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;700&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02BC&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint32&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work zip code</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;710&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02C6&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work phone number</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;720&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02D0&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work fax number</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;730&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02DA&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User work webpage url</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;760&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x02F8&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint8&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User 'show web status' permissions</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;780&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x030C&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint8&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User authorization permissions</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;790&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0316&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint8&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User GMT offset</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;800&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0320&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User originally from city</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;810&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x032A&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;sstring&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User originally from state</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+<tr>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;820&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top><b>&nbsp;<font size=2>&nbsp;0x0334&nbsp;&nbsp;</b></font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;<font size=2>&nbsp;uint16&nbsp;&nbsp;</font></td>
+<td bgcolor=#f0f0f0 valign=top>&nbsp;User originally from country (code)</td>
+<td bgcolor=#f0f0f0 valign=top width=2%>&nbsp;<b>&nbsp;</b>&nbsp;</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</td></tr>
+</table>
+<!-- tlvlist block stopped  -->
+
+<br>
+
+<table width=640 bgcolor=darkblue cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr>
+<td bgcolor=#E9E9E9><br>
+
+&nbsp;&nbsp;<b>sstring</b>  -  uint16 value (length) and then asciiz string<br>
+&nbsp;&nbsp;<b>ecombo</b>  -  sstring and uint8 value (email permission)<br>
+&nbsp;&nbsp;<b>acombo</b>  -  two uint16 values (min age & max age)<br>
+&nbsp;&nbsp;<b>icombo</b>  -  uint16 value (category) and then sstring (keywords)<br>
+&nbsp;&nbsp;<b>bcombo</b>  -  uint16 value (year), uint16 - month, uint16 - day<br>
+&nbsp;&nbsp;<b>hcombo</b>  -  uint16 value (category ?) and then sstring<br><br>
+
+</td></tr></table>
+</td></tr></table>
+
+<br>
+<table width=640 bgcolor=darkgray cellSpacing=0 cellPadding=0 border=0><tr><td>
+<table width=100% cellSpacing=2 cellPadding=0 border=0><tr><td  bgcolor=#E9E9E9 ><table width=100% cellSpacing=0 cellPadding=0 border=0>
+<tr><td align=center valign=middle><b><font color=black size=2>&nbsp;
+
+<a href="index.html" target="_top">Main</a> | 
+<a href="basic.html" target="_top">Basic</a> | 
+<a href="login.html" target="_top">Login</a> | 
+<a href="families.html" target="_top">Snaclist</a> | 
+<a href="sequences.html" target="_top">Sequences</a> | 
+<a href="lists.html" target="_top">Misc</a> | 
+<a href="changes.html" target="_top">Changes</a> | 
+<a href="credits.html" target="_top">Credits</a> | 
+<a href="terms.html" target="_top">Terms</a>
+
+&nbsp;</font></b></td></tr></table>
+</td></tr></table>
+</td></tr></table>
+
+<!--#include virtual="_bottom.htxt" -->
+
+</body>
+</html>
