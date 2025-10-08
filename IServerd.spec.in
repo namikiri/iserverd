@@ -109,17 +109,17 @@ fi
 /etc/logrotate.d/iserverd
 %attr(755,root,root) /etc/rc.d/init.d/iserverd
 %{_mandir}/man?/*
-%attr(755,root,root) %{_bindir}/broadcast
-%attr(550,postgres,postgres) %{_bindir}/convert_db.sh
-%attr(550,postgres,postgres) %{_bindir}/db_manage.sh
-%attr(755,root,root) %{_bindir}/db_check
-%attr(755,root,root) %{_bindir}/db_convert
-%attr(755,root,root) %{_bindir}/disconnect
-%attr(755,root,root) %{_bindir}/online_cnt.cgi
-%attr(755,root,root) %{_bindir}/post_mess.cgi
-%attr(755,root,root) %{_bindir}/server_status
-%attr(755,root,root) %{_bindir}/users_cnt.cgi
-%attr(755,root,root) %{_bindir}/webpager
+%attr(755,root,root) %{_bindir}/iserver_broadcast
+%attr(550,postgres,postgres) %{_bindir}/iserver_convert_db.sh
+%attr(550,postgres,postgres) %{_bindir}/iserver_db_manage.sh
+%attr(755,root,root) %{_bindir}/iserver_db_check
+%attr(755,root,root) %{_bindir}/iserver_db_convert
+%attr(755,root,root) %{_bindir}/iserver_disconnect
+%attr(755,root,root) %{_bindir}/iserver_online_cnt.cgi
+%attr(755,root,root) %{_bindir}/iserver_post_mess.cgi
+%attr(755,root,root) %{_bindir}/iserver_server_status
+%attr(755,root,root) %{_bindir}/iserver_users_cnt.cgi
+%attr(755,root,root) %{_bindir}/iserver_webpager
 %attr(755,root,root) %{_sbindir}/iserverd
 %attr(-,iserverd,iserverd) %config %{_sysconfdir}/%{_with_name}
 %attr(-,iserverd,iserverd) %dir %{_localstatedir}/log/%{_with_name}
@@ -159,5 +159,4 @@ fi
 
 * Sun Nov 20 2000 Andy Shevchenko <andy@smcl.donetsk.ua>
 - build rpm package
-
 

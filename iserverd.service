@@ -6,9 +6,9 @@ After=postgresql.service
 
 [Service]
 Type=simple
-User=iserver
-WorkingDirectory=/etc/iserver
-ExecStart=/sbin/iserverd
+User=iserverd
+WorkingDirectory=/etc/iserverd
+ExecStart=/usr/bin/iserverd -d /tmp/iserverd_debug.log
 #Restart=on-abnormal
 
 [Install]

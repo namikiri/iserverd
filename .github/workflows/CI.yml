@@ -1,0 +1,76 @@
+name: Iserverd compilable on Ubuntu with PostgreSQL
+
+on: [push, pull_request]
+
+jobs:
+  linux:
+
+    runs-on: ubuntu-latest
+
+    name: "CI"
+    strategy:
+      fail-fast: true
+      matrix:
+        pg: ["14", "15", "16", "17", "18"]
+
+    steps:
+
+    - name: 'Check Out'
+      uses: actions/checkout@v4
+
+    - name: 'Raise Priority for apt.postgresql.org'
+      run: |
+        cat << EOF >> ./pgdg.pref
+        Package: *
+        Pin: release o=apt.postgresql.org
+        Pin-Priority: 600
+        EOF
+        sudo mv ./pgdg.pref /etc/apt/preferences.d/
+        sudo apt update
+    - name: 'Install PostgreSQL'
+      run: |
+        sudo apt-get purge postgresql-*
+        sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg-snapshot main ${{ matrix.pg }}" > /etc/apt/sources.list.d/pgdg.list'
+        curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
+        sudo apt-get update
+        sudo apt-get -y install postgresql-${{ matrix.pg }} postgresql-server-dev-${{ matrix.pg }} postgresql-client-${{ matrix.pg }} libpq-dev
+
+    - name: 'Start & prepare PostgreSQL'
+      run: |
+        export PGVER=${{ matrix.pg }}
+        export PGDATA=/var/lib/postgresql/$PGVER/main
+        export PGETC=/etc/postgresql/$PGVER/main
+        export PGBIN=/usr/lib/postgresql/$PGVER/bin
+        sudo chmod -R 755 /home/`whoami`
+        sudo cp ./GitHubActions/pg_hba.conf $PGETC/pg_hba.conf
+        sudo systemctl stop postgresql
+        sudo pg_ctlcluster $PGVER main start
+        sudo pg_lsclusters
+        echo "CREATE USER \"iserverd\" PASSWORD 'password'; CREATE DATABASE \"Пробная ICQ\" OWNER \"iserverd\";" | sudo -u postgres psql -d postgres -e;
+
+    - name: 'Prepare systemd unit & iserverd user'
+      run: |
+        sudo useradd iserverd
+        sudo mkdir /etc/iserverd
+        sudo chown iserverd:iserverd -Rv /etc/iserverd
+        sudo cp ./iserverd.service /lib/systemd/system/
+        sudo systemctl daemon-reload
+        sudo systemctl status iserverd || true
+
+    - name: 'Configure & build'
+      run: |
+        ./configure --with-debug;
+        make all;
+
+    - name: 'Install'
+      run: |
+        sudo make install;
+
+    - name: 'Run Iserverd'
+      run: |
+        sudo systemctl start iserverd
+        sudo systemctl status iserverd || true
+        echo 'Journal of Iserverd'
+        journalctl -u iserverd
+        echo 'Logs of Iserverd'
+        ls -la  /var/log/iserverd 

@@ -101,15 +101,14 @@ void reopen_logs( void )
 
          if (dbgf == NULL)
          {
-	    LOG_SYS(0, ("FATAL ERROR: Can't open (create) debug logfile: \"%s\"\n", debugf));
-	    exit(EXIT_ERROR_LOG_CREATE);
+             LOG_SYS(0, ("FATAL ERROR: Can't open (create) debug logfile: \"%s\"\n", debugf));
+             exit(EXIT_ERROR_LOG_CREATE);
          }
 
          fchmod(fileno(dbgf), lp_lperms());
          force_check_log_size();
          if( dbgf ) setbuf( dbgf, NULL );
          (void)umask( lp_umask() );
-
       }
    }
    else
